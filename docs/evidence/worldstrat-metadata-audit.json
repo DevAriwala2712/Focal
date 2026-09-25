@@ -1,0 +1,14 @@
+{
+  "checked_date": "2026-09-26",
+  "source_url": "https://zenodo.org/records/6810792/files/metadata.csv?download=1",
+  "local_path": "docs/evidence/worldstrat-metadata.csv",
+  "md5": "dfeb3348e79b719bf03c230d5d258839",
+  "published_md5_matches": true,
+  "rows": 62848,
+  "distinct_first_column_aoi_identifiers": 3928,
+  "country_columns": [],
+  "india_aoi_count": null,
+  "south_asia_aoi_count": null,
+  "method": "Python csv.DictReader; distinct values of the unnamed first column; no country classification performed",
+  "note": "Downloaded CSV is ignored by Git; reretrieve from the source URL and verify the checksum. Counts describe metadata identifiers, not verified usable image pairs."
+}

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.firecrawl/
+data/
+models/
+checkpoints/
+docs/evidence/worldstrat-metadata.csv
+*.safetensor
+*.safetensors
+*.tar.gz
+.env
+.env.*
+!.env.example
