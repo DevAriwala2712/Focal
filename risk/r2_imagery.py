@@ -13,6 +13,8 @@ def summarize_scl(scl, cloud_classes, shadow_classes, invalid_classes):
     scl = np.asarray(scl)
     if scl.size == 0:
         raise ValueError('Empty AOI')
+    if not np.isin(scl, np.arange(12)).all():
+        raise ValueError('SCL contains values outside the documented 0..11 classes')
     valid = ~np.isin(scl, invalid_classes)
     clouds = np.isin(scl, cloud_classes) & valid
     shadows = np.isin(scl, shadow_classes) & valid

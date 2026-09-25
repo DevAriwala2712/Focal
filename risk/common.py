@@ -100,7 +100,8 @@ def retry_tiles(operation, initial: int, minimum: int, oom_type, cleanup=lambda:
     while True:
         try:
             return operation(size), size, failed
-        except oom_type:
+        except oom_type as exc:
+            exc.__traceback__ = None
             failed.append(size)
             cleanup()
             if size <= minimum:

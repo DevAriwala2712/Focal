@@ -11,6 +11,11 @@ network:
 model:
   repository: tacofoundation/SEN2SR
   revision: 469e9b3a049f9320ba66b3a39b9655dbd31480b3
+  sha256:
+    mlm.json: 419d562511737b0e465a34983d634944f6e84f97ad9207a86dd94d8e430ca606
+    load.py: 4b6c836b1f73078c62c84d4374b2d8daee5345f6239f64e0b6be29432383bac6
+    model.safetensor: 479aa796d5068d0b1206118ccbca27bd3223df0214db1a9b31a1e18349ed1c7e
+    hard_constraint.safetensor: fbad981519066387c413ead1d6af7ef3e0d2947c34147ba90163fc79ae539239
   variant: SEN2SRLite/NonReference_RGBN_x4
   base_url: https://huggingface.co/tacofoundation/SEN2SR/resolve/469e9b3a049f9320ba66b3a39b9655dbd31480b3/SEN2SRLite/NonReference_RGBN_x4
   bands: [B04, B03, B02, B08]
@@ -55,7 +60,16 @@ labels:
   notebook_url: https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/processing/processing_colombia.ipynb
   l4s_training_share: https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm
   l4s_download_url: https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download
+  sample_crs: EPSG:32618
+  sample_pixels: 128
+  sample_resolution_m: 10
+  sample_pre_days: 360
+  sample_post_days: 90
+  sample_max_candidates: 8
+  sample_max_cloud_shadow_pct: 10
+  sample_min_coverage_pct: 99
 training:
+  min_pairs: 3
   pair_manifest: data/worldstrat/pairs.json
   steps: 50
   learning_rate: 0.00001
