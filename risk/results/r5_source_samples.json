@@ -1,0 +1,933 @@
+{
+  "status": "INSPECTED_NOT_PREPARED",
+  "release": "https://zenodo.org/records/15382551",
+  "scope": "Original source members only; not training-ready. ZIP CRC32 and file SHA256 verified, full archive checksum not verified.",
+  "samples": [
+    {
+      "aoi": "Landcover-746405",
+      "metadata": {
+        "tile": "Landcover-746405",
+        "n": "1",
+        "bounds": "[69.08638101299263, 23.79474708047549, 69.10189653002371, 23.809023037230702]",
+        "lowres_date": "2021-10-10",
+        "highres_date": "2021-10-10",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "69.09413877150817",
+        "lat": "23.80188505885309",
+        "LCCS": "180",
+        "SMOD": "11",
+        "IPCC Class": "Wetland",
+        "LCCS class": "Shrub or herbaceous cover, flooded, fresh/saline/brakish water",
+        "SMOD Class": "Rural: Very Low Dens",
+        "source": "Landcover",
+        "joint_class": "Landcover/Wetland/11"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+      "member": "hr_dataset/Landcover-746405/Landcover-746405_ps.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-746405\\Landcover-746405_ps.tiff",
+      "sha256": "f4e9ec0b243488edf85b48ae809e4dd61cbae68848daa346a690a39bf3395e57",
+      "zip_crc32": 4120808032,
+      "bytes": 8893956,
+      "raster": {
+        "shape": [
+          4,
+          1054,
+          1054
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "min": 0.0,
+        "max": 1008.0,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-769378",
+      "metadata": {
+        "tile": "Landcover-769378",
+        "n": "1",
+        "bounds": "[77.74346156428307, 13.004958175512426, 77.75803702681104, 13.01925023382535]",
+        "lowres_date": "2019-01-19",
+        "highres_date": "2019-01-19",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "77.75074929554705",
+        "lat": "13.012104204668889",
+        "LCCS": "190",
+        "SMOD": "21",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Suburban",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/21"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+      "member": "hr_dataset/Landcover-769378/Landcover-769378_ps.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-769378\\Landcover-769378_ps.tiff",
+      "sha256": "edcfef3ba622ab6b1b6f4c8fc66352e4e6cc00b37b77e988b78365c996521ca9",
+      "zip_crc32": 1824405436,
+      "bytes": 8893956,
+      "raster": {
+        "shape": [
+          4,
+          1054,
+          1054
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "min": 0.0,
+        "max": 7953.0,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-775055",
+      "metadata": {
+        "tile": "Landcover-775055",
+        "n": "1",
+        "bounds": "[75.73000629942004, 29.135926083899353, 75.74625570026984, 29.150191380947735]",
+        "lowres_date": "2021-02-06",
+        "highres_date": "2021-02-06",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "75.73813099984494",
+        "lat": "29.143058732423544",
+        "LCCS": "190",
+        "SMOD": "30",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Centre",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/30"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+      "member": "hr_dataset/Landcover-775055/Landcover-775055_ps.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-775055\\Landcover-775055_ps.tiff",
+      "sha256": "2f8d00d8898cb4ef4466ccb441fc3a3cc159778bca8fa75504962e4a6c46ef24",
+      "zip_crc32": 879170786,
+      "bytes": 8893956,
+      "raster": {
+        "shape": [
+          4,
+          1054,
+          1054
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "min": 0.0,
+        "max": 16720.0,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-746405",
+      "metadata": {
+        "tile": "Landcover-746405",
+        "n": "1",
+        "bounds": "[69.08638101299263, 23.79474708047549, 69.10189653002371, 23.809023037230702]",
+        "lowres_date": "2021-10-10",
+        "highres_date": "2021-10-10",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "69.09413877150817",
+        "lat": "23.80188505885309",
+        "LCCS": "180",
+        "SMOD": "11",
+        "IPCC Class": "Wetland",
+        "LCCS class": "Shrub or herbaceous cover, flooded, fresh/saline/brakish water",
+        "SMOD Class": "Rural: Very Low Dens",
+        "source": "Landcover",
+        "joint_class": "Landcover/Wetland/11"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-746405/L2A/Landcover-746405-1-L2A_data.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-746405\\Landcover-746405-1-L2A_data.tiff",
+      "sha256": "2d04fd2b5d74b3adadc4d8fc6a5b2903e06f758c484c0b005aa4997a7f5ca817",
+      "zip_crc32": 3102607252,
+      "bytes": 1199680,
+      "raster": {
+        "shape": [
+          12,
+          158,
+          158
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.819947488023001e-05,
+          0.0,
+          69.08638101299263,
+          0.0,
+          -9.035415667856529e-05,
+          23.809023037230702,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          4,
+          3,
+          2,
+          8
+        ],
+        "min": 0.020999999716877937,
+        "max": 0.08820000290870667,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-746405",
+      "metadata": {
+        "tile": "Landcover-746405",
+        "n": "1",
+        "bounds": "[69.08638101299263, 23.79474708047549, 69.10189653002371, 23.809023037230702]",
+        "lowres_date": "2021-10-10",
+        "highres_date": "2021-10-10",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "69.09413877150817",
+        "lat": "23.80188505885309",
+        "LCCS": "180",
+        "SMOD": "11",
+        "IPCC Class": "Wetland",
+        "LCCS class": "Shrub or herbaceous cover, flooded, fresh/saline/brakish water",
+        "SMOD Class": "Rural: Very Low Dens",
+        "source": "Landcover",
+        "joint_class": "Landcover/Wetland/11"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-746405/L2A/Landcover-746405-1-SCL.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-746405\\Landcover-746405-1-SCL.tiff",
+      "sha256": "7cfc9dc5880ed49b9cb33faa282a9502d2ea3fc27a7c7b6c8b3ef85091aba677",
+      "zip_crc32": 3771350756,
+      "bytes": 100318,
+      "raster": {
+        "shape": [
+          1,
+          158,
+          158
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.819947488023001e-05,
+          0.0,
+          69.08638101299263,
+          0.0,
+          -9.035415667856529e-05,
+          23.809023037230702,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 6.0,
+        "max": 6.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-746405",
+      "metadata": {
+        "tile": "Landcover-746405",
+        "n": "1",
+        "bounds": "[69.08638101299263, 23.79474708047549, 69.10189653002371, 23.809023037230702]",
+        "lowres_date": "2021-10-10",
+        "highres_date": "2021-10-10",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "69.09413877150817",
+        "lat": "23.80188505885309",
+        "LCCS": "180",
+        "SMOD": "11",
+        "IPCC Class": "Wetland",
+        "LCCS class": "Shrub or herbaceous cover, flooded, fresh/saline/brakish water",
+        "SMOD Class": "Rural: Very Low Dens",
+        "source": "Landcover",
+        "joint_class": "Landcover/Wetland/11"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-746405/L2A/Landcover-746405-1-dataMask.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-746405\\Landcover-746405-1-dataMask.tiff",
+      "sha256": "c21023d17c2feca18d1923c2802e3ae5baa4b00f116beef15d7230d082b84b88",
+      "zip_crc32": 2117264942,
+      "bytes": 100318,
+      "raster": {
+        "shape": [
+          1,
+          158,
+          158
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.819947488023001e-05,
+          0.0,
+          69.08638101299263,
+          0.0,
+          -9.035415667856529e-05,
+          23.809023037230702,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-769378",
+      "metadata": {
+        "tile": "Landcover-769378",
+        "n": "1",
+        "bounds": "[77.74346156428307, 13.004958175512426, 77.75803702681104, 13.01925023382535]",
+        "lowres_date": "2019-01-19",
+        "highres_date": "2019-01-19",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "77.75074929554705",
+        "lat": "13.012104204668889",
+        "LCCS": "190",
+        "SMOD": "21",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Suburban",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/21"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-769378/L2A/Landcover-769378-1-L2A_data.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-769378\\Landcover-769378-1-L2A_data.tiff",
+      "sha256": "6db9002b4cb78f3299ca8749940358622c0ce15569264172cec783c24a2c1c2a",
+      "zip_crc32": 3963767417,
+      "bytes": 1207180,
+      "raster": {
+        "shape": [
+          12,
+          160,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.283734094249776e-05,
+          0.0,
+          77.74346156428307,
+          0.0,
+          -8.932536445577233e-05,
+          13.01925023382535,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          4,
+          3,
+          2,
+          8
+        ],
+        "min": 0.0020000000949949026,
+        "max": 0.6812000274658203,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-769378",
+      "metadata": {
+        "tile": "Landcover-769378",
+        "n": "1",
+        "bounds": "[77.74346156428307, 13.004958175512426, 77.75803702681104, 13.01925023382535]",
+        "lowres_date": "2019-01-19",
+        "highres_date": "2019-01-19",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "77.75074929554705",
+        "lat": "13.012104204668889",
+        "LCCS": "190",
+        "SMOD": "21",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Suburban",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/21"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-769378/L2A/Landcover-769378-1-SCL.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-769378\\Landcover-769378-1-SCL.tiff",
+      "sha256": "60a1f4a2953f65a99112452986d779d211684abaad4c673f0942ae3d91d400c7",
+      "zip_crc32": 2314548388,
+      "bytes": 100936,
+      "raster": {
+        "shape": [
+          1,
+          160,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.283734094249776e-05,
+          0.0,
+          77.74346156428307,
+          0.0,
+          -8.932536445577233e-05,
+          13.01925023382535,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 2.0,
+        "max": 8.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-769378",
+      "metadata": {
+        "tile": "Landcover-769378",
+        "n": "1",
+        "bounds": "[77.74346156428307, 13.004958175512426, 77.75803702681104, 13.01925023382535]",
+        "lowres_date": "2019-01-19",
+        "highres_date": "2019-01-19",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "77.75074929554705",
+        "lat": "13.012104204668889",
+        "LCCS": "190",
+        "SMOD": "21",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Suburban",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/21"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-769378/L2A/Landcover-769378-1-dataMask.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-769378\\Landcover-769378-1-dataMask.tiff",
+      "sha256": "4c234af73f047261de7614419151cd9634ed4493e0997c666142e33ba1abd672",
+      "zip_crc32": 1309768794,
+      "bytes": 100936,
+      "raster": {
+        "shape": [
+          1,
+          160,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          9.283734094249776e-05,
+          0.0,
+          77.74346156428307,
+          0.0,
+          -8.932536445577233e-05,
+          13.01925023382535,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-775055",
+      "metadata": {
+        "tile": "Landcover-775055",
+        "n": "1",
+        "bounds": "[75.73000629942004, 29.135926083899353, 75.74625570026984, 29.150191380947735]",
+        "lowres_date": "2021-02-06",
+        "highres_date": "2021-02-06",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "75.73813099984494",
+        "lat": "29.143058732423544",
+        "LCCS": "190",
+        "SMOD": "30",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Centre",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/30"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-775055/L2A/Landcover-775055-1-L2A_data.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-775055\\Landcover-775055-1-L2A_data.tiff",
+      "sha256": "afe2ba9d834b22fb2139c2a3131b11c6495f2adef9b2da752a32f1bfb9d89526",
+      "zip_crc32": 568073414,
+      "bytes": 1199638,
+      "raster": {
+        "shape": [
+          12,
+          159,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          0.00010349936847007346,
+          0.0,
+          75.73000629942004,
+          0.0,
+          -8.971884936089502e-05,
+          29.150191380947735,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "selected_bands": [
+          4,
+          3,
+          2,
+          8
+        ],
+        "min": 0.013700000010430813,
+        "max": 0.5360999703407288,
+        "scales": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "offsets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-775055",
+      "metadata": {
+        "tile": "Landcover-775055",
+        "n": "1",
+        "bounds": "[75.73000629942004, 29.135926083899353, 75.74625570026984, 29.150191380947735]",
+        "lowres_date": "2021-02-06",
+        "highres_date": "2021-02-06",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "75.73813099984494",
+        "lat": "29.143058732423544",
+        "LCCS": "190",
+        "SMOD": "30",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Centre",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/30"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-775055/L2A/Landcover-775055-1-SCL.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-775055\\Landcover-775055-1-SCL.tiff",
+      "sha256": "9e46a70ad34b687fd2e35b3f7cc9e0c9ef8ea9bafde23327202fc199b5a9660d",
+      "zip_crc32": 1584447297,
+      "bytes": 100308,
+      "raster": {
+        "shape": [
+          1,
+          159,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          0.00010349936847007346,
+          0.0,
+          75.73000629942004,
+          0.0,
+          -8.971884936089502e-05,
+          29.150191380947735,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 2.0,
+        "max": 9.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    },
+    {
+      "aoi": "Landcover-775055",
+      "metadata": {
+        "tile": "Landcover-775055",
+        "n": "1",
+        "bounds": "[75.73000629942004, 29.135926083899353, 75.74625570026984, 29.150191380947735]",
+        "lowres_date": "2021-02-06",
+        "highres_date": "2021-02-06",
+        "area": "2.5",
+        "cloud_cover": "0.0",
+        "delta": "0",
+        "lon": "75.73813099984494",
+        "lat": "29.143058732423544",
+        "LCCS": "190",
+        "SMOD": "30",
+        "IPCC Class": "Settlement",
+        "LCCS class": "Urban areas",
+        "SMOD Class": "Urban: Centre",
+        "source": "Landcover",
+        "joint_class": "Landcover/Settlement/30"
+      },
+      "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+      "member": "lr_dataset/Landcover-775055/L2A/Landcover-775055-1-dataMask.tiff",
+      "original_file": "data\\risk-cache\\worldstrat-zip\\originals\\Landcover-775055\\Landcover-775055-1-dataMask.tiff",
+      "sha256": "cec33e60c3e7561617d2579e67cdf30e723764829edc464d83ea77e0f5dc409a",
+      "zip_crc32": 1005220964,
+      "bytes": 100308,
+      "raster": {
+        "shape": [
+          1,
+          159,
+          157
+        ],
+        "crs": "EPSG:4326",
+        "transform": [
+          0.00010349936847007346,
+          0.0,
+          75.73000629942004,
+          0.0,
+          -8.971884936089502e-05,
+          29.150191380947735,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "band_descriptions": [
+          null
+        ],
+        "selected_bands": [
+          1
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ]
+      }
+    }
+  ],
+  "candidate_summary": [
+    {
+      "aoi": "Landcover-746405",
+      "date": "2021-10-10",
+      "metadata_cloud_pct": 0.0,
+      "lr_bounds_match_metadata": true,
+      "scl_counts": {
+        "6.0": 24964
+      },
+      "hr_missing_geotransform": true
+    },
+    {
+      "aoi": "Landcover-769378",
+      "date": "2019-01-19",
+      "metadata_cloud_pct": 0.0,
+      "lr_bounds_match_metadata": true,
+      "scl_counts": {
+        "2.0": 71,
+        "4.0": 9919,
+        "5.0": 14895,
+        "7.0": 223,
+        "8.0": 12
+      },
+      "hr_missing_geotransform": true
+    },
+    {
+      "aoi": "Landcover-775055",
+      "date": "2021-02-06",
+      "metadata_cloud_pct": 0.0,
+      "lr_bounds_match_metadata": true,
+      "scl_counts": {
+        "2.0": 156,
+        "4.0": 940,
+        "5.0": 21490,
+        "6.0": 98,
+        "7.0": 2247,
+        "8.0": 24,
+        "9.0": 8
+      },
+      "hr_missing_geotransform": true
+    }
+  ],
+  "metadata_sha256": "36f72dc43290ff79b6722e2654e605a41f32f1a7feb7807f0dbcbc7286214bdb",
+  "split_sha256": "67a38f84fb122627bf8c89de6ca92004af22f30f001aa46fbe1da432c78a9a0b",
+  "remaining": [
+    "Restore HR geotransform from verified source bounds, explicitly record reconstruction.",
+    "Check local cloud/nodata masks; metadata zero cloud does not establish clear crops.",
+    "Document empirical radiometric harmonization or recover physical calibration; DN is not reflectance.",
+    "Prepare exact x4 four-band COG pairs and run in authenticated Colab."
+  ]
+}

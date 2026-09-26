@@ -1,0 +1,24 @@
+{
+  "revision": "39fe2232b2e9f1efe845795e6c3415026373fde3",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/worldstrat/worldstrat/39fe2232b2e9f1efe845795e6c3415026373fde3/dataset_generation/SPOTDownloader.py",
+      "sha256": "967857ab8d9b8bd00bd1588b68f12d94d500eb08ce4c5dce4192e925cfb5d517"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/worldstrat/worldstrat/39fe2232b2e9f1efe845795e6c3415026373fde3/dataset_generation/SentinelDownloader.py",
+      "sha256": "cbc71482b8dc8a3069e7decfd026d6479741a013148cbb8820e0510ec481cc37"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/worldstrat/worldstrat/39fe2232b2e9f1efe845795e6c3415026373fde3/src/datasets.py",
+      "sha256": "d978763156bc56c791f4683c2d773d6b3452b18b50014d9d84cbcd8c4e434982"
+    }
+  ],
+  "observations": [
+    "SPOTDownloader requests RGBN in DN units, with [B2,B1,B0,B3] channel order.",
+    "SPOTDownloader.save_image_data_to_tiff writes transform=None.",
+    "Metadata bounds must be traced before restoring HR georeferencing.",
+    "L2A documented band indices (1-based) for RGBN are [4,3,2,8].",
+    "Benchmark DN normalization is not a physical conversion to Sentinel-2 reflectance."
+  ]
+}

@@ -34,3 +34,7 @@ Use `notebooks/colab_finetune.ipynb`, upload the project and these prepared pair
 Required evidence: `risk/results/r5.json`, all 50 losses, first/last five-step means, nonzero finite gradients, changed weights, checkpoint hash and reload agreement, GPU/runtime details, pair manifest hash and AOI IDs. A lower training loss only validates the smoke test; it says nothing about held-out SR fidelity or landslide accuracy.
 
 Known limitation: upstream hard-constraint weights have a fixed 512x512 output shape. The OOM handler halves tile size, but 64px inputs currently fail shape validation. Do not silently resize or remove the constraint to force a pass; this requires a separately justified adapter and new measurements before Phase 1.
+
+## Verified source issues from selective retrieval
+
+See risk/results/r5_source_samples.json and worldstrat_preparation_sources.json. Three genuine training AOIs from publisher release 15382551 are cached under data/risk-cache/worldstrat-zip/originals. HR four-band files omit geotransforms; source code exports SPOT DN. LR bounds match metadata, but LR grids are EPSG:4326 with nominal rather than exact metric 10m sampling. Original files must remain unchanged; any reconstructed bounds or empirical radiometric fit must be explicit in prepared-file provenance. The current samples include an all-water AOI and cloud/shadow pixels despite zero metadata cloud cover, so they are not automatically approved training pairs.
