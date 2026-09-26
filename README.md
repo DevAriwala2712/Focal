@@ -24,7 +24,7 @@ All probes accept `--config configs/phase0.yaml`. Paths resolve relative to the 
 
 The direct dependency pins are in requirements-phase0.txt. To reproduce the exact tested Windows package set, install requirements-lock-windows.txt with `--extra-index-url https://download.pytorch.org/whl/cu126`. The CUDA wheel is a substantial download. Colab is a separate environment whose actual packages must be recorded; use [the notebook](notebooks/colab_finetune.ipynb).
 
-R2 reads the full year's SCL windows. R3 downloads metadata and country polygons, not the full WorldStrat archives. R4 downloads one actual temporal/label access-proof crop and checks the original Landslide4Sense share plus a pinned IBM-NASA image/mask mirror. Model/data caches and checkpoints are ignored by Git. R5 intentionally stops locally: it requires genuine prepared WorldStrat pairs and Colab. Follow the [data contract](docs/r5_data_contract.md).
+R2 reads the full year's SCL windows. R3 downloads metadata and country polygons, not the full WorldStrat archives. R4 downloads one actual temporal/label access-proof crop and checks the original Landslide4Sense share plus a pinned IBM-NASA image/mask mirror. Model/data caches and checkpoints are ignored by Git. Prepare real pairs with `python -m risk.worldstrat_prepare`. R5 intentionally stops locally: it requires genuine prepared WorldStrat pairs and Colab. Follow the [data contract](docs/r5_data_contract.md).
 
 ## How to reproduce the Wayanad demo
 

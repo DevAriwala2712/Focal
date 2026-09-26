@@ -1,0 +1,400 @@
+{
+  "status": "PASS",
+  "prepared": 3,
+  "checked": [
+    {
+      "aoi": "Amnesty POI-6-1-1",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-1-1/L2A/Amnesty POI-6-1-1-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-1-2",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-1-2/L2A/Amnesty POI-6-1-2-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-1-3",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-1-3/L2A/Amnesty POI-6-1-3-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-2-1",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-2-1/L2A/Amnesty POI-6-2-1-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-2-3",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-2-3/L2A/Amnesty POI-6-2-3-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-3-2",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-3-2/L2A/Amnesty POI-6-3-2-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Amnesty POI-6-3-3",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-3-3/L2A/Amnesty POI-6-3-3-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Landcover-118968",
+      "status": "PREPARED"
+    },
+    {
+      "aoi": "Landcover-128758",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-138647",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-1417431",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-151915",
+      "status": "PREPARED"
+    },
+    {
+      "aoi": "Landcover-1534788",
+      "status": "PREPARED"
+    }
+  ],
+  "manifest_sha256": "7615855dfe2d31b48e0f146d2e26e6f5a825cf6649994c974ec8e6bc06065981",
+  "manifest": {
+    "dataset": "WorldStrat",
+    "pairs": [
+      {
+        "aoi_id": "Landcover-118968",
+        "split": "train",
+        "lr": "Landcover-118968_lr.tif",
+        "hr": "Landcover-118968_hr.tif",
+        "lr_sha256": "b592958463aecd410bfd87f069bec9eabeaa92cee998fed032e00be3623d1c24",
+        "hr_sha256": "977b62cd3d24bb085f95374d8a7b73b57b4cc8801b4f367f2090dc31aee01f6d",
+        "lr_scale": 1,
+        "lr_offset": 0,
+        "hr_scale": 1,
+        "hr_offset": 0,
+        "source_urls": [
+          "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+          "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1"
+        ],
+        "originals": [
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-118968/L2A/Landcover-118968-1-SCL.tiff",
+            "sha256": "d3189e3aebc55fcdbd48724fff8bb2d2f82e1dca5d9af11b2c09b27d531684a5",
+            "bytes": 100942,
+            "crc32": 2116881655,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-118968/L2A/Landcover-118968-1-dataMask.tiff",
+            "sha256": "fd2d514af1fdc5b98b19ab3a909824eb142b87fa6e825085f751c412f2fe4d71",
+            "bytes": 100942,
+            "crc32": 3037434775,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-118968/L2A/Landcover-118968-1-L2A_data.tiff",
+            "sha256": "c53f437ea929c93b2ff86c5b48bf4a89b0c5e52a7769a11937e6ca5d083f27b1",
+            "bytes": 1207162,
+            "crc32": 2212863847,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+            "member": "hr_dataset/Landcover-118968/Landcover-118968_ps.tiff",
+            "sha256": "5b03e8b9a1f1e1d1b32d1b8d70ae87c458a64defd624eb779215e6b8fb230df1",
+            "bytes": 8893956,
+            "crc32": 855282972,
+            "full_archive_checksum_verified": false
+          }
+        ],
+        "metadata": {
+          "tile": "Landcover-118968",
+          "n": "1",
+          "bounds": "[16.735602556198703, -19.02730567918573, 16.750621069140532, -19.01302159016447]",
+          "lowres_date": "2021-07-15",
+          "highres_date": "2021-07-15",
+          "area": "2.5",
+          "cloud_cover": "0.0",
+          "delta": "0",
+          "lon": "16.743111812669618",
+          "lat": "-19.0201636346751",
+          "LCCS": "100",
+          "SMOD": "11",
+          "IPCC Class": "Forest",
+          "LCCS class": "Mosaic tree and shrub (>50%) / herbaceous cover (<50%)",
+          "SMOD Class": "Rural: Very Low Dens",
+          "source": "Landcover",
+          "joint_class": "Landcover/Forest/11"
+        },
+        "crop_row_col": [
+          14,
+          16
+        ],
+        "hr_transform_reconstruction": "Published WGS84 bounds; verified against LR bounds; north-up raster",
+        "radiometry": {
+          "method": "Per-band affine fit from averaged HR DN to paired LR reflectance",
+          "physical_hr_reflectance": false,
+          "coefficients": [
+            {
+              "gain": 0.00011199590609776138,
+              "offset": 0.020043214208580653,
+              "correlation": 0.9111191411190384,
+              "coarse_rmse": 0.009024651391867174
+            },
+            {
+              "gain": 0.00011387989602963089,
+              "offset": 0.010360728368771457,
+              "correlation": 0.9032740580461825,
+              "coarse_rmse": 0.006968711356833692
+            },
+            {
+              "gain": 0.00012007959273434219,
+              "offset": 0.0006191528248646171,
+              "correlation": 0.8649220018439086,
+              "coarse_rmse": 0.005844009535336498
+            },
+            {
+              "gain": 8.750823898379012e-05,
+              "offset": 0.07390618844837196,
+              "correlation": 0.8815809096164272,
+              "coarse_rmse": 0.010494369591899215
+            }
+          ]
+        },
+        "resolution": "Native geographic ~10m LR and exact x4 subdivision; not exact metric 2.5m",
+        "use": "Training smoke test only; no validation or accuracy claim"
+      },
+      {
+        "aoi_id": "Landcover-151915",
+        "split": "train",
+        "lr": "Landcover-151915_lr.tif",
+        "hr": "Landcover-151915_hr.tif",
+        "lr_sha256": "2c724c51cfc7e9d8d4591cac678ed033155d256d55e98b073468d0a66ae9214a",
+        "hr_sha256": "495cef62625212d9489dc2621f67f255186bac195934788e3a1f4b07d8321458",
+        "lr_scale": 1,
+        "lr_offset": 0,
+        "hr_scale": 1,
+        "hr_offset": 0,
+        "source_urls": [
+          "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+          "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1"
+        ],
+        "originals": [
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-151915/L2A/Landcover-151915-1-SCL.tiff",
+            "sha256": "5617a74b551610c54ed26d067f3d898eefd81eb66672c6bb33197fac25658109",
+            "bytes": 100296,
+            "crc32": 3396555803,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-151915/L2A/Landcover-151915-1-dataMask.tiff",
+            "sha256": "369c3a6bfa0f46fdd754b2adccad960ed09f70b0ef92417aba5ee343183129f9",
+            "bytes": 100296,
+            "crc32": 2265772886,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-151915/L2A/Landcover-151915-1-L2A_data.tiff",
+            "sha256": "b3a248520f12776e638e09e5ff41beb1727cb774f2c6b4b77d00b30308fa2b03",
+            "bytes": 1199476,
+            "crc32": 388173122,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+            "member": "hr_dataset/Landcover-151915/Landcover-151915_ps.tiff",
+            "sha256": "c7e2aee1242a97d7388e49c27f972b3dc24fd19fb6ac59eb3f93016d628766c3",
+            "bytes": 8893956,
+            "crc32": 481548152,
+            "full_archive_checksum_verified": false
+          }
+        ],
+        "metadata": {
+          "tile": "Landcover-151915",
+          "n": "1",
+          "bounds": "[56.150583057188264, 64.41400615656003, 56.18339083770767, 64.42818883132185]",
+          "lowres_date": "2021-07-13",
+          "highres_date": "2021-07-13",
+          "area": "2.5",
+          "cloud_cover": "0.0",
+          "delta": "0",
+          "lon": "56.16698694744797",
+          "lat": "64.42109749394095",
+          "LCCS": "100",
+          "SMOD": "11",
+          "IPCC Class": "Forest",
+          "LCCS class": "Mosaic tree and shrub (>50%) / herbaceous cover (<50%)",
+          "SMOD Class": "Rural: Very Low Dens",
+          "source": "Landcover",
+          "joint_class": "Landcover/Forest/11"
+        },
+        "crop_row_col": [
+          14,
+          16
+        ],
+        "hr_transform_reconstruction": "Published WGS84 bounds; verified against LR bounds; north-up raster",
+        "radiometry": {
+          "method": "Per-band affine fit from averaged HR DN to paired LR reflectance",
+          "physical_hr_reflectance": false,
+          "coefficients": [
+            {
+              "gain": 0.00016533459271674455,
+              "offset": 0.0009151215057060974,
+              "correlation": 0.974265229411267,
+              "coarse_rmse": 0.003946047243112158
+            },
+            {
+              "gain": 0.0001801936842180327,
+              "offset": 0.0037497104862321998,
+              "correlation": 0.9512379780126916,
+              "coarse_rmse": 0.005321251351859128
+            },
+            {
+              "gain": 0.00016857590885412265,
+              "offset": -0.004800123236939073,
+              "correlation": 0.9274577186335521,
+              "coarse_rmse": 0.003212308684608307
+            },
+            {
+              "gain": 0.00016427932499758898,
+              "offset": 0.06608908228305517,
+              "correlation": 0.9501596210871841,
+              "coarse_rmse": 0.026639031112530152
+            }
+          ]
+        },
+        "resolution": "Native geographic ~10m LR and exact x4 subdivision; not exact metric 2.5m",
+        "use": "Training smoke test only; no validation or accuracy claim"
+      },
+      {
+        "aoi_id": "Landcover-1534788",
+        "split": "train",
+        "lr": "Landcover-1534788_lr.tif",
+        "hr": "Landcover-1534788_hr.tif",
+        "lr_sha256": "6b8fce1737fa00fc3c46fcae80f177a164935f6fbea0c22a41dd2250d9d28167",
+        "hr_sha256": "9a7bce56982ead2ad63322210bdeea52660b4dca00fd27c099fef018ba1419f6",
+        "lr_scale": 1,
+        "lr_offset": 0,
+        "hr_scale": 1,
+        "hr_offset": 0,
+        "source_urls": [
+          "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+          "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1"
+        ],
+        "originals": [
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-1534788/L2A/Landcover-1534788-1-SCL.tiff",
+            "sha256": "b5db07d965534d7ebd81761e678e340ab0dfda9702bb5059adda24e6ee8d4485",
+            "bytes": 100318,
+            "crc32": 1531234475,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-1534788/L2A/Landcover-1534788-1-dataMask.tiff",
+            "sha256": "52caa43e99c137084ff2ce3a9ffb65d2cd9fa42f6fe43ac142933a5a17e09882",
+            "bytes": 100318,
+            "crc32": 3130080086,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+            "member": "lr_dataset/Landcover-1534788/L2A/Landcover-1534788-1-L2A_data.tiff",
+            "sha256": "cae7b2c5ff21b1d0fa116dad0fafd28cc1e4e9c4d01ea64d12d802340b0bd0ea",
+            "bytes": 1199680,
+            "crc32": 2311147056,
+            "full_archive_checksum_verified": false
+          },
+          {
+            "archive_url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+            "member": "hr_dataset/Landcover-1534788/Landcover-1534788_ps.tiff",
+            "sha256": "626a3f33bd63c2b106bfd11d79cf9f503ddf72695317e529d6c43a2e42de15fb",
+            "bytes": 8893956,
+            "crc32": 3843512900,
+            "full_archive_checksum_verified": false
+          }
+        ],
+        "metadata": {
+          "tile": "Landcover-1534788",
+          "n": "1",
+          "bounds": "[13.72575817319255, -0.7101001437634601, 13.739962846865415, -0.6958008284073744]",
+          "lowres_date": "2021-01-15",
+          "highres_date": "2021-01-15",
+          "area": "2.5",
+          "cloud_cover": "0.0",
+          "delta": "0",
+          "lon": "13.732860510028983",
+          "lat": "-0.7029504860854172",
+          "LCCS": "50",
+          "SMOD": "11",
+          "IPCC Class": "Forest",
+          "LCCS class": "Tree cover, broadleaved, evergreen, closed to open (>15%)",
+          "SMOD Class": "Rural: Very Low Dens",
+          "source": "Landcover",
+          "joint_class": "Landcover/Forest/11"
+        },
+        "crop_row_col": [
+          15,
+          15
+        ],
+        "hr_transform_reconstruction": "Published WGS84 bounds; verified against LR bounds; north-up raster",
+        "radiometry": {
+          "method": "Per-band affine fit from averaged HR DN to paired LR reflectance",
+          "physical_hr_reflectance": false,
+          "coefficients": [
+            {
+              "gain": 0.00020701691009716776,
+              "offset": -0.059295605380330706,
+              "correlation": 0.8374643118171605,
+              "coarse_rmse": 0.0048978145321931345
+            },
+            {
+              "gain": 0.00011584433777990487,
+              "offset": -0.028479250314782538,
+              "correlation": 0.545388612125027,
+              "coarse_rmse": 0.0055924395376989134
+            },
+            {
+              "gain": 7.871589380680412e-05,
+              "offset": -0.035658203207058384,
+              "correlation": 0.5419667213357079,
+              "coarse_rmse": 0.0034419956015132726
+            },
+            {
+              "gain": 0.0002634521181740226,
+              "offset": -0.08152405988773512,
+              "correlation": 0.7209653984370002,
+              "coarse_rmse": 0.03303921529473495
+            }
+          ]
+        },
+        "resolution": "Native geographic ~10m LR and exact x4 subdivision; not exact metric 2.5m",
+        "use": "Training smoke test only; no validation or accuracy claim"
+      }
+    ],
+    "smoke_only": true,
+    "metadata_sha256": "36f72dc43290ff79b6722e2654e605a41f32f1a7feb7807f0dbcbc7286214bdb",
+    "split_sha256": "67a38f84fb122627bf8c89de6ca92004af22f30f001aa46fbe1da432c78a9a0b"
+  },
+  "scope": "Empirically harmonized real WorldStrat pairs for optimizer smoke test only",
+  "risk": "worldstrat_preparation",
+  "started_utc": "2026-09-26T12:18:18.401402+00:00",
+  "finished_utc": "2026-09-26T12:18:23.650096+00:00",
+  "config_sha256": "a9ef6f44ff1eb7ac2aadbe2478e9a56029ca54da2381586f73ce9149ff7f3e5d"
+}

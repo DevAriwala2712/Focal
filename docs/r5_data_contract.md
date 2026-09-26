@@ -38,3 +38,9 @@ Known limitation: upstream hard-constraint weights have a fixed 512x512 output s
 ## Verified source issues from selective retrieval
 
 See risk/results/r5_source_samples.json and worldstrat_preparation_sources.json. Three genuine training AOIs from publisher release 15382551 are cached under data/risk-cache/worldstrat-zip/originals. HR four-band files omit geotransforms; source code exports SPOT DN. LR bounds match metadata, but LR grids are EPSG:4326 with nominal rather than exact metric 10m sampling. Original files must remain unchanged; any reconstructed bounds or empirical radiometric fit must be explicit in prepared-file provenance. The current samples include an all-water AOI and cloud/shadow pixels despite zero metadata cloud cover, so they are not automatically approved training pairs.
+
+## Implemented preparation path
+
+Run `python -m risk.worldstrat_prepare` using configs/phase0.yaml. It selectively downloads publisher ZIP members, verifies CRC32 and records SHA256, confirms train membership and dates, selects a fully valid 128px land crop using SCL/dataMask, reconstructs the documented HR bounds, and writes four-band COGs. Full-archive checksums are not verified by selective retrieval. Empirical per-band positive affine fits harmonize area-averaged HR DN to the paired LR values, with configured correlation rejection; these are smoke-only targets, not physically calibrated HR reflectance. The manifest stores all coefficients, source hashes and reconstruction notes. Input geographic CRS is preserved, with an exact x4 affine subdivision and nominal ~10m/~2.5m sampling.
+
+The previous requirement to record true reflectance encoding remains applicable to physically calibrated products; this explicit empirical path records that no such HR calibration is claimed. No prepared target is an upsampled LR surrogate. Holdout evaluation must be separately designed before accepting smoke-test weights for the demo.

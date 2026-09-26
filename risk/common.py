@@ -24,7 +24,16 @@ def write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + '.tmp')
     temp.write_text(json.dumps(value, indent=2, allow_nan=False) + '\n', encoding='utf-8')
-    temp.replace(path)
+    # Windows sync/indexing can briefly hold the destination open. Preserve
+    # atomic replacement and the original error if the lock does not clear.
+    for attempt in range(4):
+        try:
+            temp.replace(path)
+            break
+        except PermissionError:
+            if attempt == 3:
+                raise
+            time.sleep(.1 * 2 ** attempt)
 
 
 def retry(operation, policy: dict, label: str):

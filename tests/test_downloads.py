@@ -5,6 +5,23 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import pytest
 
 
+def test_result_write_retries_transient_windows_lock(tmp_path, monkeypatch):
+    from pathlib import Path
+    from risk.common import write_json
+    original = Path.replace
+    attempts = []
+    def locked_once(self, target):
+        attempts.append(target)
+        if len(attempts) == 1:
+            raise PermissionError('OneDrive sharing violation')
+        return original(self, target)
+    monkeypatch.setattr(Path, 'replace', locked_once)
+    path = tmp_path / 'result.json'
+    write_json(path, {'status': 'PASS'})
+    import json
+    assert json.loads(path.read_text()) == {'status': 'PASS'}
+
+
 def test_download_retries_rejects_oversize_and_checks_cache(tmp_path):
     from risk.common import download
     class Handler(BaseHTTPRequestHandler):
