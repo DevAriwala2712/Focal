@@ -96,3 +96,8 @@ Use those figures as attributed contextual reference totals. They are not Sentin
 
 Verified: supplied statement copy, local environment, primary repository/record contents and small WorldStrat metadata download.
 Not yet verified: GPU inference/fine-tuning, large data/weight downloads, regional AOI counts, clear Wayanad scene dates, Colab execution, evaluation scores and finale date.
+
+### Phase 0 continuation: verified alternate access
+
+- Landslide4Sense redistribution: https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense at revision 4b291891badf301b5c75c2153f0f8fe00eeb1435. Actual training image/mask downloaded and inspected; see R4 hashes. Original IARAI host still fails DNS. Single-date binary segmentation, not temporal damage labels.
+- Publisher WorldStrat ZIP release: https://zenodo.org/records/15382551. HTTP byte ranges supported in the HR ZIP probe. This release is separate from the earlier R3 tarball inventory; do not mix archive sizes or metadata hashes.

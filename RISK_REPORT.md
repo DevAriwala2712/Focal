@@ -10,7 +10,7 @@ The five scripts are implemented and have been invoked. R1/R2/R3 and the accessi
 | R1 model fits | FAIL overall; native 128 input passes | RTX 4050 Laptop, 6140.5 MiB; FP32 128x128 -> 512x512: median **0.1208 s/tile**, peak allocated **100.48 MiB**, peak reserved **128 MiB**. Direct 512 and 64 input tiles fail fixed-mask shape checks | Native 128 inference is viable; arbitrary tile sizes and required 64px OOM fallback need a justified adapter before the production SR component |
 | R2 imagery | PASS for configured availability test | **147 STAC items, 73 acquisition groups**, all SCL reads succeeded. **12 distinct clear pre-event dates**. First clear post-event date: **2024-12-06**, **0.0664%** AOI cloud/shadow | Clear imagery exists, but that post-date is **129 days after the event**; this selection cannot support an immediate-response claim |
 | R3 paired-data resource | PASS for metadata/size/licence audit | **3,928 unique AOI IDs**, **71 India**, **125 South Asia**, **107,036,250,648 bytes** across record files | Regional coverage exists; these counts do not prove usable cloud-free/co-registered training pairs |
-| R4 labels | PARTIAL / BLOCKED overall | Author inventory: **838 polygons**. Real Colombia pre/post crop downloaded with **748 valid labelled landslide pixels**. Original Landslide4Sense host fails DNS after retries | Temporal-labelled data can be reconstructed from the paper's release, but the full calibration split and Landslide4Sense content are not verified |
+| R4 labels | PASS for sample access | Author inventory: **838 polygons**. Real Colombia pre/post crop: **748 valid labelled landslide pixels**. IBM-NASA Landslide4Sense training image/mask: **405 landslide pixels** | Both label types are downloadable; the full held-out calibration split still needs preparation |
 | R5 fine-tune | BLOCKED; **0 steps run** | Prepared WorldStrat pair manifest absent; current runtime is native Windows, not Colab | Colab notebook/runner ready for real prepared pairs; no loss-decrease or saved trained-checkpoint claim |
 
 Machine-readable evidence: [R1](risk/results/r1.json), [R2](risk/results/r2.json), [R3](risk/results/r3.json), [R4](risk/results/r4.json), [R5](risk/results/r5.json). Exact policies are in [configuration](configs/phase0.yaml); per-run policy snapshots are in risk/results/config_snapshots/.
@@ -55,7 +55,7 @@ The access-proof sample reconstructs a 128x128, 10m window near the largest inve
 
 This selected positive crop is not an unbiased validation set. Inventory negatives can be incomplete, the pre-date is seasonally distant, and labels at 10m do not provide independent 2.5m truth. Prepare multiple held-out event/AOI samples before calibrating k or reporting F1.
 
-Both the official Landslide4Sense training share and download URL failed name resolution at cloud.iarai.ac.at after an initial attempt plus three retries. The retrieved official loader/README describe HDF5 image key img (128x128x14) and mask key mask. No real Landslide4Sense archive/mask was obtained. The script can inspect a successfully retrieved ZIP, but its synthetic ZIP unit test is not data-download evidence. Do not claim Landslide4Sense access or substitute its single-date segmentation labels for temporal pairs.
+Both the official Landslide4Sense training share and download URL failed name resolution at cloud.iarai.ac.at after an initial attempt plus three retries. The retrieved official loader/README describe HDF5 image key img (128x128x14) and mask key mask. The subsequent IBM-NASA mirror check downloaded a genuine image_1.h5/mask_1.h5 training pair at pinned revision 4b291891badf301b5c75c2153f0f8fe00eeb1435. The image has shape 128x128x14; only zero-based channels [3,2,1,7] (RGBN) are read into the spectral sample. The binary mask contains 405 landslide pixels. SHA256 hashes and exact source URLs are recorded in R4. This is a redistribution and has not been byte-compared against the unavailable IARAI original. It confirms a sample download, not the full archive, georeferencing, temporal labels or independent 2.5m truth. Do not substitute these single-date segmentation labels for temporal pairs.
 
 ## R5: runnable, but not executed scientifically
 
@@ -67,7 +67,7 @@ Current evidence is **BLOCKED with zero optimizer steps** because no prepared re
 
 ## Verification and phase gate
 
-- 18 CPU tests passed in approximately 10 seconds in the isolated environment.
+- 19 CPU tests passed in approximately 10 seconds in the isolated environment.
 - pip check: no broken requirements.
 - Real R4 COG/grid inspection passed.
 - Colab notebook code cells compile; notebook was not executed in Colab.
@@ -75,3 +75,7 @@ Current evidence is **BLOCKED with zero optimizer steps** because no prepared re
 - Package/source pins and runtime: [requirements](requirements-phase0.txt), [Windows lock](requirements-lock-windows.txt), [environment evidence](risk/results/environment.json).
 
 **Stop here.** Before requesting Phase 1: resolve the fixed-mask tile policy, obtain/inspect Landslide4Sense or explicitly revise that requirement, prepare real WorldStrat pairs and complete the Colab smoke test, and accept or revise the delayed Wayanad imagery claim. No phase can treat an unresolved entry as passed.
+
+## Continuation audit
+
+R4 now passes the sample-access requirement through the pinned IBM-NASA mirror. R1 remains a measured shape failure and R5 remains unexecuted. Colab was opened in the available in-app browser on 2026-09-26; it requires Google sign-in, with no authenticated runtime available yet. The newer WorldStrat publisher release (Zenodo 15382551) offers ZIP archives; a real HTTP range request returned 206 for the final 65,536 bytes of hr_dataset.zip, allowing investigation of selective retrieval. This is not yet evidence of prepared training pairs.

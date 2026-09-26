@@ -1,5 +1,5 @@
 {
-  "status": "BLOCKED",
+  "status": "PASS",
   "inventory": {
     "table": "colombia_landslides",
     "feature_count": 838,
@@ -38,7 +38,49 @@
     "manifest": "r4_sample.json",
     "sample_only": true
   },
-  "l4s": {},
+  "l4s": {
+    "ibm_nasa_mirror": {
+      "labelled_pair_verified": true,
+      "image_shape": [
+        128,
+        128,
+        14
+      ],
+      "selected_shape": [
+        128,
+        128,
+        4
+      ],
+      "selected_band_indices": [
+        3,
+        2,
+        1,
+        7
+      ],
+      "mask_values": [
+        0,
+        1
+      ],
+      "landslide_pixels": 405,
+      "image_sha256": "05933f459b84368f046a6dacf4204528b470718754dd617dfb60755de50ecb6d",
+      "mask_sha256": "5ab8737ab1c08d51ace62c5d02a21b78944baf6dbc6f942f71cc07696319f8b6",
+      "temporal_pair": false,
+      "georeferencing_verified": false,
+      "source": {
+        "repository": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense",
+        "revision": "4b291891badf301b5c75c2153f0f8fe00eeb1435",
+        "image_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/images/train/image_1.h5",
+        "mask_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/annotations/train/mask_1.h5",
+        "band_indices": [
+          3,
+          2,
+          1,
+          7
+        ]
+      },
+      "provenance": "IBM-NASA hosted redistribution; not byte-compared with unavailable IARAI original"
+    }
+  },
   "errors": [
     {
       "source": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm",
@@ -49,7 +91,7 @@
       "error": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download: failed after 4 attempts: HTTPSConnectionPool(host='cloud.iarai.ac.at', port=443): Max retries exceeded with url: /index.php/s/KrwKngeXN7KjkFm/download (Caused by NameResolutionError(\"HTTPSConnection(host='cloud.iarai.ac.at', port=443): Failed to resolve 'cloud.iarai.ac.at' ([Errno 11001] getaddrinfo failed)\"))"
     }
   ],
-  "reason": "See inventory.paired_rasters_downloaded for the real pair access check. Landslide4Sense image/mask content must be inspected before calibration use.",
+  "reason": "Both sources yielded inspectable label samples; a held-out calibration split still needs preparation.",
   "l4s_label_contract_from_readme": "Single-date 128x128, ~10 m, 14 channels; training binary masks. Only channels B02/B03/B04/B08 permitted. Not paired temporal or 2.5 m truth.",
   "checked_urls": {
     "repository": "https://github.com/links-ads/igarss-landslide-delineation",
@@ -58,6 +100,18 @@
     "notebook_url": "https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/processing/processing_colombia.ipynb",
     "l4s_training_share": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm",
     "l4s_download_url": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download",
+    "l4s_mirror": {
+      "repository": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense",
+      "revision": "4b291891badf301b5c75c2153f0f8fe00eeb1435",
+      "image_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/images/train/image_1.h5",
+      "mask_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/annotations/train/mask_1.h5",
+      "band_indices": [
+        3,
+        2,
+        1,
+        7
+      ]
+    },
     "sample_crs": "EPSG:32618",
     "sample_pixels": 128,
     "sample_resolution_m": 10,
@@ -68,7 +122,7 @@
     "sample_min_coverage_pct": 99
   },
   "risk": "r4",
-  "started_utc": "2026-09-25T21:30:42.233272+00:00",
-  "finished_utc": "2026-09-25T21:31:52.630420+00:00",
-  "config_sha256": "1e4ebf5419588668db81dc24ebc5dd41dea5d736b662cac857a9279aff914f9f"
+  "started_utc": "2026-09-26T11:57:59.864982+00:00",
+  "finished_utc": "2026-09-26T11:58:57.681312+00:00",
+  "config_sha256": "addc5a2e2525cd0e374fa642ac96c5599d3ef148260e54572a5e248590fe1c7b"
 }

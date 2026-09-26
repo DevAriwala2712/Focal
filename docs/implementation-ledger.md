@@ -36,3 +36,7 @@ Each script writes status PASS/FAIL/BLOCKED, UTC timestamp, config hash, observe
 - Ruling: pin affine 2.4.0 with rasterio 1.4.3 to avoid the new affine 3.x API deprecation encountered during setup. Full suite passes after pinning.
 - Independent reviewer dispatch failed due its usage limit. No successful external review is claimed; local review was completed and found the train-mode issue.
 - Final verification: 18 CPU tests pass; pip check passes; real R4 COG/grid inspection passes; Colab notebook cells compile. No Phase 1 work performed.
+
+## Continuation: recover R4 access
+
+Ruling: use the IBM-NASA hosted redistribution as a documented alternate download, retaining original-host failures and no claim of byte-equivalence. Pinned revision and file hashes recorded. Added a test first (failed on missing inspector), then implemented bounded image/mask retrieval with RGBN-only reading and binary-mask validation. Full suite: 19 passed. R4 rerun returned PASS with actual mask containing 405 positive pixels. Colab is at Google sign-in; user must establish an authenticated session. WorldStrat ZIP selective-access feasibility is under investigation; no real prepared pairs claimed.

@@ -9,6 +9,29 @@ import zipfile
 from risk.common import digest, download, run_cli
 
 
+def inspect_l4s_pair(image_path, mask_path, band_indices):
+    import h5py
+    import numpy as np
+    if list(band_indices) != [3, 2, 1, 7]:
+        raise ValueError('Only RGBN band indices [3, 2, 1, 7] are permitted')
+    with h5py.File(image_path, 'r') as f:
+        shape = f['img'].shape
+        if shape != (128, 128, 14):
+            raise ValueError('Unexpected Landslide4Sense image shape')
+        image = np.stack([f['img'][:, :, i] for i in band_indices], axis=-1)
+    with h5py.File(mask_path, 'r') as f:
+        labels = f['mask'][:]
+    if labels.shape != (128, 128) or not np.isin(labels, [0, 1]).all():
+        raise ValueError('Expected a 128x128 binary mask')
+    if not np.isfinite(image).all():
+        raise ValueError('Nonfinite values in selected RGBN bands')
+    return {'labelled_pair_verified': True, 'image_shape': list(shape),
+            'selected_shape': list(image.shape), 'selected_band_indices': list(band_indices),
+            'mask_values': np.unique(labels).tolist(), 'landslide_pixels': int(labels.sum()),
+            'image_sha256': digest(image_path), 'mask_sha256': digest(mask_path),
+            'temporal_pair': False, 'georeferencing_verified': False}
+
+
 def inspect_l4s_archive(path, max_member_bytes):
     import h5py
     import numpy as np
@@ -79,6 +102,16 @@ def probe(cfg, root):
                 findings['l4s'][key].update(inspect_l4s_archive(path, policy['max_download_bytes']))
         except Exception as exc:
             findings['errors'].append({'source': settings[key], 'error': str(exc)})
+    if 'l4s_mirror' in settings:
+        mirror = settings['l4s_mirror']
+        try:
+            image = download(mirror['image_url'], cache / 'ibm-nasa' / 'image_1.h5', policy)
+            mask = download(mirror['mask_url'], cache / 'ibm-nasa' / 'mask_1.h5', policy)
+            findings['l4s']['ibm_nasa_mirror'] = {
+                **inspect_l4s_pair(image, mask, mirror['band_indices']),
+                'source': mirror, 'provenance': 'IBM-NASA hosted redistribution; not byte-compared with unavailable IARAI original'}
+        except Exception as exc:
+            findings['errors'].append({'source': mirror['image_url'], 'error': str(exc)})
     complete = (findings['inventory'].get('paired_rasters_downloaded', False) and
                 any(value.get('labelled_pair_verified', False) for value in findings['l4s'].values()))
     return {'status': 'PASS' if complete else 'BLOCKED', **findings,

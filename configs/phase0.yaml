@@ -60,6 +60,12 @@ labels:
   notebook_url: https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/processing/processing_colombia.ipynb
   l4s_training_share: https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm
   l4s_download_url: https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download
+  l4s_mirror:
+    repository: https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense
+    revision: 4b291891badf301b5c75c2153f0f8fe00eeb1435
+    image_url: https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/images/train/image_1.h5
+    mask_url: https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/annotations/train/mask_1.h5
+    band_indices: [3, 2, 1, 7]
   sample_crs: EPSG:32618
   sample_pixels: 128
   sample_resolution_m: 10
