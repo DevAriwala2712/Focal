@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "errors": [],
+  "scope": "Dataset availability, size, metadata counts and licence; image-pair suitability is checked in R5.",
+  "metadata_rows": 62848,
+  "metadata_sha256": "5708e7763b595f8b41e25753d34f416b6874917492943313ee6fb55188694a50",
+  "boundaries_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+  "boundaries_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson",
+  "boundary_policy": "Natural Earth v5.1.2, AOI centre, disputed geography follows this dataset; ambiguous and offshore centres excluded",
+  "unique_aois": 3928,
+  "india_count": 71,
+  "south_asia_count": 125,
+  "south_asia_definition": [
+    "Afghanistan",
+    "Bangladesh",
+    "Bhutan",
+    "India",
+    "Maldives",
+    "Nepal",
+    "Pakistan",
+    "Sri Lanka"
+  ],
+  "iran_count_separate": 22,
+  "unmatched_count": 35,
+  "ambiguous_count": 0,
+  "archive_files": [
+    {
+      "name": "metadata.csv",
+      "bytes": 14562136,
+      "checksum": "md5:dfeb3348e79b719bf03c230d5d258839"
+    },
+    {
+      "name": "WorldStrat_article_and_datasheet.pdf",
+      "bytes": 2617946,
+      "checksum": "md5:58d8e87c52bfaec962ab1ca5c3bf48b1"
+    },
+    {
+      "name": "stratified_train_val_test_split.csv",
+      "bytes": 282609,
+      "checksum": "md5:745035835d835280aa0298a9dc1996d1"
+    },
+    {
+      "name": "hr_dataset.tar.gz",
+      "bytes": 41542117051,
+      "checksum": "md5:ca7167334006f3c17f9071f14c435335"
+    },
+    {
+      "name": "LICENSE.txt",
+      "bytes": 39298,
+      "checksum": "md5:d97b8d86da83f7e51f2d3205509e4a7b"
+    },
+    {
+      "name": "hr_dataset_raw.tar.gz",
+      "bytes": 11323245225,
+      "checksum": "md5:40a4fd5241e91bffeddee0ed109778da"
+    },
+    {
+      "name": "lr_dataset_l2a.tar.gz",
+      "bytes": 26764158267,
+      "checksum": "md5:8cfc6a477cee9e9cd8b20ea27227de65"
+    },
+    {
+      "name": "lr_dataset_l1c.tar.gz",
+      "bytes": 27389228116,
+      "checksum": "md5:d2dcafa207b1e1bc6c754607f15e9ed6"
+    }
+  ],
+  "total_bytes": 107036250648,
+  "license": {
+    "hr": "CC BY-NC 4.0",
+    "other_dataset_content": "CC BY 4.0",
+    "code": "BSD-3-Clause"
+  },
+  "license_sha256": "96cdd6a6d5b950b5d3266c6cd93f3a7456afb6a7863dc9765cf21a7fdc0c8187",
+  "aoi_details": "r3_aoi_countries.json",
+  "risk": "r3",
+  "started_utc": "2026-09-25T21:24:00.130036+00:00",
+  "finished_utc": "2026-09-25T21:24:26.117143+00:00",
+  "config_sha256": "fb938475f918afa6c69896361edbb8a495b82edfc5dea22a3d5cff6087e83275"
+}

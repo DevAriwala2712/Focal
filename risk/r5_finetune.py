@@ -132,7 +132,7 @@ def probe(cfg, root):
         model.eval()
         with torch.inference_mode():
             reference = model(samples[0][0].to('cuda')).cpu()
-        weights = {k: v.detach().cpu().contiguous() for k, v in model.state_dict().items()}
+        weights = {k: v.detach().cpu().contiguous().clone() for k, v in model.state_dict().items()}
         del model
         gc.collect()
         torch.cuda.empty_cache()

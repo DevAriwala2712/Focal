@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "pre_dates": [
+    "2024-01-11",
+    "2024-01-21",
+    "2024-01-31",
+    "2024-02-05",
+    "2024-02-10",
+    "2024-02-15",
+    "2024-03-01",
+    "2024-03-06",
+    "2024-03-31",
+    "2024-04-05",
+    "2024-04-30",
+    "2024-05-05"
+  ],
+  "first_post_date": "2024-12-06",
+  "reason": "",
+  "scene_count": 147,
+  "acquisition_count": 73,
+  "errors": [],
+  "aoi": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          76.18692214297309,
+          11.736987043826518
+        ],
+        [
+          76.27867455724041,
+          11.736591257418967
+        ],
+        [
+          76.27909285579119,
+          11.827003853804035
+        ],
+        [
+          76.1873104439934,
+          11.827402773799028
+        ],
+        [
+          76.18692214297309,
+          11.736987043826518
+        ]
+      ]
+    ]
+  },
+  "aoi_crs": "EPSG:32643",
+  "scl_shape": [
+    500,
+    500
+  ],
+  "thresholds": {
+    "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1",
+    "collection": "sentinel-2-l2a",
+    "longitude": 76.233,
+    "latitude": 11.782,
+    "crs": "EPSG:32643",
+    "aoi_size_m": 10000,
+    "audit_resolution_m": 20,
+    "start": "2024-01-01T00:00:00Z",
+    "end": "2024-12-31T23:59:59Z",
+    "event_date": "2024-07-30",
+    "max_cloud_shadow_pct": 10,
+    "min_coverage_pct": 99,
+    "min_pre_dates": 3,
+    "cloud_classes": [
+      8,
+      9,
+      10
+    ],
+    "shadow_classes": [
+      2,
+      3
+    ],
+    "invalid_classes": [
+      0,
+      1,
+      11
+    ],
+    "page_limit": 100
+  },
+  "audit": "r2_acquisitions.json",
+  "scene_table": "r2_scenes.csv",
+  "risk": "r2",
+  "started_utc": "2026-09-25T21:22:20.631131+00:00",
+  "finished_utc": "2026-09-25T21:25:59.367129+00:00",
+  "config_sha256": "fb938475f918afa6c69896361edbb8a495b82edfc5dea22a3d5cff6087e83275"
+}

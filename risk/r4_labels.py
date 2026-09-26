@@ -2,9 +2,37 @@
 from __future__ import annotations
 
 import json
+import io
 import sqlite3
+import zipfile
 
 from risk.common import digest, download, run_cli
+
+
+def inspect_l4s_archive(path, max_member_bytes):
+    import h5py
+    import numpy as np
+    with zipfile.ZipFile(path) as archive:
+        names = set(archive.namelist())
+        for name in sorted(names):
+            if '/img/image_' not in name or not name.endswith('.h5'):
+                continue
+            mask = name.replace('/img/image_', '/mask/mask_')
+            if mask not in names:
+                continue
+            if any(archive.getinfo(n).file_size > max_member_bytes for n in [name, mask]):
+                raise ValueError('HDF5 archive member exceeds download limit')
+            with h5py.File(io.BytesIO(archive.read(name)), 'r') as f:
+                image = f['img'][:]
+            with h5py.File(io.BytesIO(archive.read(mask)), 'r') as f:
+                labels = f['mask'][:]
+            if image.shape != (128, 128, 14) or labels.shape != (128, 128):
+                raise ValueError('Landslide4Sense image/mask shape differs from published contract')
+            if not np.isfinite(image).all() or not np.isin(labels, [0, 1]).all():
+                raise ValueError('Invalid Landslide4Sense values')
+            return {'labelled_pair_verified': True, 'image_member': name, 'mask_member': mask,
+                    'image_shape': list(image.shape), 'mask_values': np.unique(labels).tolist()}
+    raise ValueError('No matching Landslide4Sense image/mask HDF5 files in archive')
 
 
 def inspect_inventory(path):
@@ -47,11 +75,16 @@ def probe(cfg, root):
                 magic = f.read(8)
             findings['l4s'][key] = {'retrieved_bytes': path.stat().st_size, 'sha256': digest(path),
                                     'zip_header': magic.startswith(b'PK'), 'html_only': magic.lstrip().startswith(b'<')}
+            if magic.startswith(b'PK'):
+                findings['l4s'][key].update(inspect_l4s_archive(path, policy['max_download_bytes']))
         except Exception as exc:
             findings['errors'].append({'source': settings[key], 'error': str(exc)})
-    return {'status': 'BLOCKED', **findings,
-            'reason': 'See inventory.paired_rasters_downloaded for the real pair access check. '
-                      'Landslide4Sense image/mask content must be inspected before calibration use.',
+    complete = (findings['inventory'].get('paired_rasters_downloaded', False) and
+                any(value.get('labelled_pair_verified', False) for value in findings['l4s'].values()))
+    return {'status': 'PASS' if complete else 'BLOCKED', **findings,
+            'reason': ('Both sources yielded inspectable label samples; a held-out calibration split still needs preparation.'
+                       if complete else 'See inventory.paired_rasters_downloaded for the real pair access check. '
+                       'Landslide4Sense image/mask content must be inspected before calibration use.'),
             'l4s_label_contract_from_readme': 'Single-date 128x128, ~10 m, 14 channels; training binary masks. '
                       'Only channels B02/B03/B04/B08 permitted. Not paired temporal or 2.5 m truth.',
             'checked_urls': settings}

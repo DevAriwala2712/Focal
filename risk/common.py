@@ -129,6 +129,7 @@ def run_cli(name: str, probe):
         result = {'status': 'BLOCKED', 'reason': f'{type(exc).__name__}: {exc}'}
     result.update(risk=name, started_utc=started, finished_utc=datetime.now(timezone.utc).isoformat(),
                   config_sha256=config_hash)
+    write_json(root / cfg['paths']['results'] / 'config_snapshots' / f'{config_hash}.json', cfg)
     out = root / cfg['paths']['results'] / f'{name}.json'
     write_json(out, result)
     print(json.dumps(result, indent=2))

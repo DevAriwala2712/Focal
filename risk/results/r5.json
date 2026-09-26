@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED",
+  "reason": "WorldStrat prepared pair manifest missing: data/worldstrat/pairs.json; This runtime is not Google Colab; a local run cannot satisfy R5",
+  "training_steps_run": 0,
+  "colab": false,
+  "risk": "r5",
+  "started_utc": "2026-09-26T10:46:08.058417+00:00",
+  "finished_utc": "2026-09-26T10:46:08.058686+00:00",
+  "config_sha256": "1e4ebf5419588668db81dc24ebc5dd41dea5d736b662cac857a9279aff914f9f"
+}

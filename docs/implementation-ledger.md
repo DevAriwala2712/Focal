@@ -14,12 +14,25 @@ Pre-flight: all scripts consume a YAML config and shared download/result handlin
 
 ## Execution checklist
 
-- [ ] Shared config, bounded downloads/retries, JSON results; CPU failure-path tests.
-- [ ] R1 actual pretrained model benchmark and memory/shape evidence.
-- [ ] R2 annual STAC/SCL audit, date selection and no-data tests.
-- [ ] R3 unique AOI country counts, archive size and licence evidence.
-- [ ] R4 actual label/download checks and truthful pair-availability status.
-- [ ] R5 validated pair manifest, 50-step runner and Colab notebook; run or record concrete blocker.
-- [ ] Full CPU suite, source review, evidence-backed RISK_REPORT and reproduction instructions.
+- [x] Shared config, bounded downloads/retries, JSON results; CPU failure-path tests.
+- [x] R1 actual pretrained model benchmark and memory/shape evidence.
+- [x] R2 annual STAC/SCL audit, date selection and no-data tests.
+- [x] R3 unique AOI country counts, archive size and licence evidence.
+- [x] R4 actual label/download checks and truthful pair-availability status.
+- [x] R5 validated pair manifest, 50-step runner and Colab notebook; run or record concrete blocker.
+- [x] Full CPU suite, source review, evidence-backed RISK_REPORT and reproduction instructions.
 
 Each script writes status PASS/FAIL/BLOCKED, UTC timestamp, config hash, observed measurements and explicit limitations. Downloads retry three times after the initial attempt, with exponential backoff. Test results are separate from scientific feasibility results.
+
+## Execution results
+
+- Shared/download and scientific guard tests were written before their implementations; missing functions failed, then passed. Additional guards reject unknown SCL codes, zero radiometric scales, shifted paired grids and model hash mismatches.
+- R1 invoked the actual pretrained model on CUDA: 128px native input succeeds; 512/64 input fails the fixed Fourier-mask shape requirement. Keep that failure visible; no adapter was invented during the risk phase.
+- R2: all 147 SCL assets audited, 73 acquisitions, 12 clear pre-dates, first accepted post-date 2024-12-06.
+- R3: metadata/country/licence audit passes. 71 India, 125 South Asia. No full WorldStrat imagery archive fetched.
+- R4: 838-polygon inventory and real pre/post/label COG proof retrieved; original Landslide4Sense host DNS fails after retries. Overall BLOCKED.
+- R5: runner invoked, BLOCKED with zero steps due missing real prepared pairs and non-Colab runtime. Notebook syntax verified, not executed in Colab.
+- Ruling: the upstream trainable loader does not enable Conv3XC.train_mode. Explicitly enable the existing differentiable branch after loading weights; CPU characterization verifies forward equivalence and actual gradient flow. This preserves pretrained initialization.
+- Ruling: pin affine 2.4.0 with rasterio 1.4.3 to avoid the new affine 3.x API deprecation encountered during setup. Full suite passes after pinning.
+- Independent reviewer dispatch failed due its usage limit. No successful external review is claimed; local review was completed and found the train-mode issue.
+- Final verification: 18 CPU tests pass; pip check passes; real R4 COG/grid inspection passes; Colab notebook cells compile. No Phase 1 work performed.

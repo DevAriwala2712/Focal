@@ -1,0 +1,57 @@
+{
+  "status": "FAIL",
+  "native_tile_passed": true,
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "total_vram_mib": 6140.5,
+  "torch": "2.8.0+cu126",
+  "cuda_runtime": "12.6",
+  "precision": "float32",
+  "input_kind": "seeded synthetic memory probe; not real imagery or fidelity evidence",
+  "allocator_budget_gib": 4.0,
+  "measurements": [
+    {
+      "input_tile": 128,
+      "output_shape": [
+        1,
+        4,
+        512,
+        512
+      ],
+      "status": "PASS",
+      "seconds_per_tile_median": 0.12079529999755323,
+      "seconds_samples": [
+        0.11809860001085326,
+        0.12496079999255016,
+        0.12079529999755323
+      ],
+      "peak_allocated_mib": 100.47998046875,
+      "peak_reserved_mib": 128.0,
+      "device_used_after_mib": 1218.5
+    },
+    {
+      "input_tile": 512,
+      "status": "FAIL",
+      "failure": "MODEL_SHAPE_OR_RUNTIME",
+      "reason": "The size of tensor a (2048) must match the size of tensor b (512) at non-singleton dimension 3"
+    },
+    {
+      "input_tile": 64,
+      "status": "FAIL",
+      "failure": "MODEL_SHAPE_OR_RUNTIME",
+      "reason": "The size of tensor a (256) must match the size of tensor b (512) at non-singleton dimension 3"
+    }
+  ],
+  "physical_4gb_gpu_verified": false,
+  "limitation": "Allocator cap excludes CUDA context and other processes. This is not a physical 4 GB GPU test.",
+  "model_revision": "469e9b3a049f9320ba66b3a39b9655dbd31480b3",
+  "artifact_sha256": {
+    "mlm.json": "419d562511737b0e465a34983d634944f6e84f97ad9207a86dd94d8e430ca606",
+    "load.py": "4b6c836b1f73078c62c84d4374b2d8daee5345f6239f64e0b6be29432383bac6",
+    "model.safetensor": "479aa796d5068d0b1206118ccbca27bd3223df0214db1a9b31a1e18349ed1c7e",
+    "hard_constraint.safetensor": "fbad981519066387c413ead1d6af7ef3e0d2947c34147ba90163fc79ae539239"
+  },
+  "risk": "r1",
+  "started_utc": "2026-09-26T10:41:28.843881+00:00",
+  "finished_utc": "2026-09-26T10:42:15.015932+00:00",
+  "config_sha256": "1e4ebf5419588668db81dc24ebc5dd41dea5d736b662cac857a9279aff914f9f"
+}

@@ -16,4 +16,4 @@ The following is a proposed relative schedule, not a confirmed calendar commitme
 
 Priorities: real input provenance â†’ offline end-to-end demo â†’ trustworthy metrics/labels â†’ optional live tile â†’ polish. Never shorten the schedule by fabricating risk passes, fine-tuning success or cloud-free imagery. If data/calibration fails, explain the limitation and revise the claim before moving on.
 
-No Phase 1 implementation has begun. The current design records the requested approach; executable Phase 0 work and its final report are the next milestone.
+No Phase 1 implementation has begun. Phase 0 scripts and an execution report now exist. The next milestone is resolving the report's fixed-mask tile limitation, original Landslide4Sense download failure and missing real-data Colab run. The late clear Wayanad post-image must inform the demo claim. Calendar dates still require the confirmed finale date.

@@ -1,3 +1,15 @@
+# Implementation environment update (2026-09-26)
+
+The original capture below is retained as history. The isolated project `.venv` now has **Python 3.13.14, torch 2.8.0+cu126, torchvision 0.23.0+cu126 and CUDA 12.6**, with CUDA available on the RTX 4050 Laptop GPU. A real CUDA tensor operation and the pretrained R1 forward pass succeeded. The global CPU-only PyTorch installation was not replaced.
+
+Rasterio 1.4.3 and affine 2.4.0 are installed; real COG outputs were read back and checked for matching grid/CRS/bounds. `pip check` reports no broken requirements. The direct requirements and exact Windows freeze are in the repository; see [runtime evidence](../risk/results/environment.json) and [R1 measurements](../risk/results/r1.json).
+
+The implementation used the existing Python 3.13 runtime instead of the proposed Python 3.11 trial because compatible pinned wheels were available. The initial install attempt used an unavailable mlstac version and stopped; mlstac is not needed by the final implementation, which calls the inspected, hash-pinned upstream load.py API directly. One dependency install was interrupted before completion to avoid retaining an unpinned CPU PyTorch dependency; the final environment was repaired and checked. No claim is made that this dependency set has run in Colab.
+
+A Git repository was initialized during planning; implementation is saved on branch `phase0-risk-tests`.
+
+---
+
 # Local environment
 
 Captured 2026-09-26, Asia/Kolkata. Commands were run in native Windows PowerShell, not WSL. This does not establish whether WSL is installed elsewhere on the machine.

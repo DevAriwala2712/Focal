@@ -1,0 +1,74 @@
+{
+  "status": "BLOCKED",
+  "inventory": {
+    "table": "colombia_landslides",
+    "feature_count": 838,
+    "srs_id": 4326,
+    "bounds": [
+      -74.25913833581892,
+      3.37182478660113,
+      -74.06581625016263,
+      3.611863274516188
+    ],
+    "columns": [
+      "fid",
+      "geom",
+      "source_name",
+      "source_link",
+      "trigger",
+      "event_date"
+    ],
+    "event_dates": [
+      "2019-12-24T00:00:00.000"
+    ],
+    "sha256": "c55da5d5d5c72dd6eed2ad1173ce261a3b1eb4080b17b04ba7a49e1a2e04d29f",
+    "download_verified": true,
+    "recipe_uses_planetary_computer": true,
+    "notebook_sha256": "a5d4c6e8ee3526726491328d46a82e66d41bf8921154488d2cdfa24c23953d2a",
+    "label_values_in_recipe": [
+      0,
+      255
+    ],
+    "label_meaning": "Landslide polygons rasterized to the Sentinel-2 grid; not building-damage labels",
+    "paired_rasters_downloaded": true,
+    "pre_date": "2019-05-24T15:26:41.024000Z",
+    "post_date": "2020-01-09T15:26:31.024000Z",
+    "valid_landslide_pixels": 748,
+    "valid_pct": 99.4384765625,
+    "manifest": "r4_sample.json",
+    "sample_only": true
+  },
+  "l4s": {},
+  "errors": [
+    {
+      "source": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm",
+      "error": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm: failed after 4 attempts: HTTPSConnectionPool(host='cloud.iarai.ac.at', port=443): Max retries exceeded with url: /index.php/s/KrwKngeXN7KjkFm (Caused by NameResolutionError(\"HTTPSConnection(host='cloud.iarai.ac.at', port=443): Failed to resolve 'cloud.iarai.ac.at' ([Errno 11001] getaddrinfo failed)\"))"
+    },
+    {
+      "source": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download",
+      "error": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download: failed after 4 attempts: HTTPSConnectionPool(host='cloud.iarai.ac.at', port=443): Max retries exceeded with url: /index.php/s/KrwKngeXN7KjkFm/download (Caused by NameResolutionError(\"HTTPSConnection(host='cloud.iarai.ac.at', port=443): Failed to resolve 'cloud.iarai.ac.at' ([Errno 11001] getaddrinfo failed)\"))"
+    }
+  ],
+  "reason": "See inventory.paired_rasters_downloaded for the real pair access check. Landslide4Sense image/mask content must be inspected before calibration use.",
+  "l4s_label_contract_from_readme": "Single-date 128x128, ~10 m, 14 channels; training binary masks. Only channels B02/B03/B04/B08 permitted. Not paired temporal or 2.5 m truth.",
+  "checked_urls": {
+    "repository": "https://github.com/links-ads/igarss-landslide-delineation",
+    "revision": "ce34d3ac02b80d4db7e542203b7e534649a46352",
+    "inventory_url": "https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/inventories/colombia_landslides.gpkg",
+    "notebook_url": "https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/processing/processing_colombia.ipynb",
+    "l4s_training_share": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm",
+    "l4s_download_url": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download",
+    "sample_crs": "EPSG:32618",
+    "sample_pixels": 128,
+    "sample_resolution_m": 10,
+    "sample_pre_days": 360,
+    "sample_post_days": 90,
+    "sample_max_candidates": 8,
+    "sample_max_cloud_shadow_pct": 10,
+    "sample_min_coverage_pct": 99
+  },
+  "risk": "r4",
+  "started_utc": "2026-09-25T21:30:42.233272+00:00",
+  "finished_utc": "2026-09-25T21:31:52.630420+00:00",
+  "config_sha256": "1e4ebf5419588668db81dc24ebc5dd41dea5d736b662cac857a9279aff914f9f"
+}

@@ -6,6 +6,16 @@ import importlib.util
 from risk.common import digest, download
 
 
+def enable_training_path(sr_model):
+    # The inspected upstream trainable loader constructs Conv3XC(train_mode=False).
+    # That branch calls update_params() using detached .data and freezes eval_conv.
+    # .train() alone does not change this separate upstream flag.
+    from sen2sr.models.opensr_baseline.cnn import Conv3XC
+    for module in sr_model.modules():
+        if isinstance(module, Conv3XC):
+            module.train_mode = True
+
+
 def verify_artifacts(directory, expected):
     if not expected:
         raise ValueError('Model artifact hashes must be configured before executing loader code')
@@ -26,6 +36,8 @@ def load_model(cfg, root, *, trainable=False, device='cuda'):
     loader = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(loader)
     model = (loader.trainable_model if trainable else loader.compiled_model)(directory, device=device)
+    if trainable:
+        enable_training_path(model.sr_model)
     if trainable and not any(p.requires_grad for p in model.sr_model.parameters()):
         raise RuntimeError('Upstream training loader returned frozen SR weights')
     return model

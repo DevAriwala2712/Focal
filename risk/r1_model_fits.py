@@ -56,9 +56,11 @@ def probe(cfg, root):
         try:
             result = benchmark(model, size, settings, torch)
         except torch.cuda.OutOfMemoryError as exc:
+            message = str(exc)
+            exc.__traceback__ = None
             gc.collect()
             torch.cuda.empty_cache()
-            result = {'input_tile': size, 'status': 'FAIL', 'failure': 'CUDA_OOM', 'reason': str(exc)}
+            result = {'input_tile': size, 'status': 'FAIL', 'failure': 'CUDA_OOM', 'reason': message}
             try:
                 fallback, used, failures = retry_tiles(lambda s: benchmark(model, s, settings, torch),
                     size // 2, settings['min_tile'], torch.cuda.OutOfMemoryError, torch.cuda.empty_cache)

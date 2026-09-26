@@ -1,0 +1,15 @@
+{
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\HP\\OneDrive\\Desktop\\Focus\\.venv\\Scripts\\python.exe",
+  "os": "Windows-11-10.0.26200-SP0",
+  "torch": "2.8.0+cu126",
+  "cuda_runtime": "12.6",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "vram_bytes": 6438780928,
+  "rasterio": "1.4.3",
+  "gdal": "3.9.3",
+  "numpy": "2.2.6",
+  "sen2sr": "0.8.5",
+  "affine": "2.4.0"
+}

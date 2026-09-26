@@ -1,6 +1,6 @@
 # TrustSR design and decision record
 
-Status: planning baseline, 2026-09-26. Phase 0 is not complete; Phase 1 is closed.
+Status: design baseline plus Phase 0 implementation, 2026-09-26. The risk harness is implemented, but the Phase 0 gate has not passed; Phase 1 is closed. The execution evidence in [RISK_REPORT.md](../RISK_REPORT.md) supersedes initial availability assumptions below.
 Authority: [AGENTS.md](../AGENTS.md), the user's GPU correction, and the [full supplied NTRO statement](problem_statement.md).
 The statement is copied byte-for-byte from the root file; an official SIH statement ID/URL has not been supplied or independently authenticated.
 

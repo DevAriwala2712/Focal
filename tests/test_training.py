@@ -37,6 +37,7 @@ def test_zero_radiometric_scale_is_rejected(tmp_path):
 def test_cpu_training_updates_weights_for_all_fifty_steps():
     import torch
     from risk.r5_finetune import train_steps
+    torch.set_num_threads(1)
     # Tiny artificial model tests the optimizer loop only, never the R5 science claim.
     model = torch.nn.Conv2d(1, 1, 1, bias=False)
     with torch.no_grad():

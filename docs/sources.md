@@ -1,5 +1,18 @@
 # TrustSR source register
 
+## Execution update (2026-09-26)
+
+The sections below preserve the initial source audit; later verified results are in [RISK_REPORT.md](../RISK_REPORT.md). WorldStrat now has measured country-centre counts: 71 India, 125 across the defined eight South Asian countries. R2 queried the live Planetary Computer catalogue and read SCL for all 147 items; first accepted post-event date is 2024-12-06. The arXiv author's Colombia inventory and one real pre/post crop were downloaded. Both original Landslide4Sense training URLs fail DNS resolution locally. R5 remains blocked; no real fine-tuning result exists.
+
+Additional inspected implementation sources:
+- [SEN2SR Conv3XC/CNNSR](https://github.com/ESAOpenSR/SEN2SR/blob/8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4/sen2sr/models/opensr_baseline/cnn.py): train_mode is separate from PyTorch's train/eval flag; the risk loader explicitly enables its differentiable branch for fine-tuning.
+- [Hard constraint](https://github.com/ESAOpenSR/SEN2SR/blob/8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4/sen2sr/models/tricks.py): Fourier mask dimensions explain the observed non-128 input failures.
+- [Landslide4Sense HDF5 loader](https://github.com/iarai/Landslide4Sense-2022/blob/main/dataset/landslide_dataset.py): confirms img/mask keys and image channel-last layout; archive content is still unavailable from the original host.
+- [Natural Earth v5.1.2 country polygons](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson): downloaded and hashed for AOI-centre classification; disputed/coastal assignments follow this dataset.
+- [PyTorch official version instructions](https://pytorch.org/get-started/previous-versions/): CUDA 12.6 builds of torch 2.8.0 and torchvision 0.23.0 installed and tested in the project environment.
+
+Hugging Face model revision is now pinned to 469e9b3a049f9320ba66b3a39b9655dbd31480b3; actual loader/weight hashes are in configs/phase0.yaml and risk/results/r1.json. The earlier unpinned/undownloaded statements below describe the initial planning pass only.
+
 Checked 2026-09-26. “Accessible” means the page/source was retrieved, not that its data, weights or executable examples have passed a test. Links here are the reference list for [design](design.md) and [risk status](../RISK_REPORT.md).
 
 ## NTRO and project brief
