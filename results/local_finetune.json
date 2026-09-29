@@ -1,0 +1,17 @@
+{
+  "runtime": "local Windows RTX 4050",
+  "colab": false,
+  "status": "PASS",
+  "steps": 50,
+  "first_window_mean": 0.01166828591376543,
+  "last_window_mean": 0.011593547090888024,
+  "weight_l1_change": 34.59263197565451,
+  "tile_size": 128,
+  "checkpoint_sha256": "bbbdad6bda5dfadfc4099dc08dbf54ecacd9fe31e1640b85ff6f6cac75e12709",
+  "pair_manifest_sha256": "7615855dfe2d31b48e0f146d2e26e6f5a825cf6649994c974ec8e6bc06065981",
+  "aoi_ids": [
+    "Landcover-118968",
+    "Landcover-151915",
+    "Landcover-1534788"
+  ]
+}
