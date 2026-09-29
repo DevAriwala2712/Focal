@@ -1,7 +1,7 @@
 # TrustSR Phase 0 execution report
 
-Updated 2026-09-26. **Phase 0 gate NOT PASSED. Phase 1 has not started.**
-The five scripts are implemented and have been invoked. R1/R2/R3 and the accessible part of R4 produced real measurements; R5 stopped at its prerequisites with zero training steps. A blocked experiment is not a pass.
+Updated 2026-09-29. **Phase 0 experiments complete; the Phase 1 gate is NOT PASSED. Phase 1 has not started.**
+All five risk scripts have real results. R5 completed 50 steps on three genuine WorldStrat pairs in Colab and saved/reloaded a checkpoint. R1 still fails the requested 512px and 64px tile shapes, and R2's first clear post-event Wayanad scene is 129 days late. Those findings require a design decision before Phase 1.
 
 ## Results
 
@@ -11,7 +11,7 @@ The five scripts are implemented and have been invoked. R1/R2/R3 and the accessi
 | R2 imagery | PASS for configured availability test | **147 STAC items, 73 acquisition groups**, all SCL reads succeeded. **12 distinct clear pre-event dates**. First clear post-event date: **2024-12-06**, **0.0664%** AOI cloud/shadow | Clear imagery exists, but that post-date is **129 days after the event**; this selection cannot support an immediate-response claim |
 | R3 paired-data resource | PASS for metadata/size/licence audit | **3,928 unique AOI IDs**, **71 India**, **125 South Asia**, **107,036,250,648 bytes** across record files | Regional coverage exists; these counts do not prove usable cloud-free/co-registered training pairs |
 | R4 labels | PASS for sample access | Author inventory: **838 polygons**. Real Colombia pre/post crop: **748 valid labelled landslide pixels**. IBM-NASA Landslide4Sense training image/mask: **405 landslide pixels** | Both label types are downloadable; the full held-out calibration split still needs preparation |
-| R5 fine-tune | BLOCKED; **0 steps run** | Prepared WorldStrat pair manifest absent; current runtime is native Windows, not Colab | Colab notebook/runner ready for real prepared pairs; no loss-decrease or saved trained-checkpoint claim |
+| R5 fine-tune | PASS smoke test | **50** steps on three verified WorldStrat train AOIs in Colab T4; first five-loss mean **0.01166859**, last five-loss mean **0.01159419**; checkpoint saved and reloaded with matching output | The optimizer path works on real pairs; this is not an SR accuracy or disaster-detection result |
 
 Machine-readable evidence: [R1](risk/results/r1.json), [R2](risk/results/r2.json), [R3](risk/results/r3.json), [R4](risk/results/r4.json), [R5](risk/results/r5.json). Exact policies are in [configuration](configs/phase0.yaml); per-run policy snapshots are in risk/results/config_snapshots/.
 
@@ -57,31 +57,27 @@ This selected positive crop is not an unbiased validation set. Inventory negativ
 
 Both the official Landslide4Sense training share and download URL failed name resolution at cloud.iarai.ac.at after an initial attempt plus three retries. The retrieved official loader/README describe HDF5 image key img (128x128x14) and mask key mask. The subsequent IBM-NASA mirror check downloaded a genuine image_1.h5/mask_1.h5 training pair at pinned revision 4b291891badf301b5c75c2153f0f8fe00eeb1435. The image has shape 128x128x14; only zero-based channels [3,2,1,7] (RGBN) are read into the spectral sample. The binary mask contains 405 landslide pixels. SHA256 hashes and exact source URLs are recorded in R4. This is a redistribution and has not been byte-compared against the unavailable IARAI original. It confirms a sample download, not the full archive, georeferencing, temporal labels or independent 2.5m truth. Do not substitute these single-date segmentation labels for temporal pairs.
 
-## R5: runnable, but not executed scientifically
+## R5: real-data Colab fine-tune smoke test
 
 [Runner](risk/r5_finetune.py), [Colab notebook](notebooks/colab_finetune.ipynb), and [real-data contract](docs/r5_data_contract.md) are provided. Before training, the runner requires a WorldStrat manifest, >=3 distinct train AOIs, actual matching hashes, four named RGBN bands, exact x4 COG geometry, explicit finite radiometric scale/offset and valid crops. Source provenance and the published split still require inspection during data preparation.
 
 The runner restarts from pretrained weights if CUDA OOM causes a tile-size retry, records all 50 losses, checks real parameter changes/gradients, saves safetensors and verifies a reload. The fixed-mask 64px limitation remains, so an OOM at 128 must currently be reported, not bypassed.
 
-Current evidence is **BLOCKED with zero optimizer steps** because no prepared real pairs or Colab runtime are present. The CPU optimizer unit test runs 50 steps on a tiny artificial network only to validate software mechanics.
+Three same-day publisher WorldStrat train AOIs passed source-member CRC/SHA checks, valid land-crop checks and the four-band/x4 COG manifest validation: Landcover-118968, Landcover-151915 and Landcover-1534788. The [preparation audit](risk/results/worldstrat_preparation.json) records the selected and rejected candidates, source URLs, crop positions, transformations and radiometric fits. WorldStrat SPOT high-resolution files lack a geotransform, so their bounds were reconstructed from published metadata and checked against the Sentinel-2 raster. HR DN values were empirically fitted per band to paired LR reflectance for this smoke test. These are not physically calibrated HR reflectances. The source grid is geographic with nominal 10m sampling and exact x4 subdivision, not a guaranteed metric 2.5m grid.
+
+The Colab run used a Tesla T4, pinned torch 2.8.0+cu126 and the repository's full pinned requirements in an isolated virtual environment. Colab's notebook-only Matplotlib backend initially blocked import; setting `MPLBACKEND=Agg` for the subprocess resolved it. The successful run used a 128px LR tile, no OOM retry, and reported 50 finite losses. The mean of the first five losses was **0.0116685908**, compared with **0.0115941893** for the last five (a **0.64%** decrease). Trainable weights changed by L1 sum **34.2322**, finite nonzero gradients were seen, and reloaded checkpoint output matched. The checkpoint SHA256 reported by Colab was `dd284235ddfcc82ee61da09055f012782442a5360eee483c59251e5b6aa2b1aa`. [R5 result](risk/results/r5.json) contains every loss and the exact runtime/config/manifest hashes. It was transcribed from the visible Colab output after its browser download did not deliver a local file; the binary checkpoint remains in Colab's temporary runtime and is not part of this repository. This limits independent artifact verification but not the observed save/reload smoke-test result. [Live notebook](https://colab.research.google.com/drive/1F97r5UJKhszCpoKFGaEXxvCxw-HB_rYd) shows the run and the initial backend failure.
 
 ## Verification and phase gate
 
-- 19 CPU tests passed in approximately 10 seconds in the isolated environment.
+- 23 CPU tests passed in the isolated environment after this report update (latest `pytest -q` exit code 0).
 - pip check: no broken requirements.
 - Real R4 COG/grid inspection passed.
-- Colab notebook code cells compile; notebook was not executed in Colab.
+- The pinned Colab environment installed and passed `pip check`; the real-data R5 run completed on T4 and reloaded its saved checkpoint.
 - Independent review was attempted but the reviewer could not run because of its usage limit. Local source/code review found and corrected the Conv3XC gradient-path issue; there is no claim of completed independent review.
 - Package/source pins and runtime: [requirements](requirements-phase0.txt), [Windows lock](requirements-lock-windows.txt), [environment evidence](risk/results/environment.json).
 
-**Stop here.** Before requesting Phase 1: resolve the fixed-mask tile policy, obtain/inspect Landslide4Sense or explicitly revise that requirement, prepare real WorldStrat pairs and complete the Colab smoke test, and accept or revise the delayed Wayanad imagery claim. No phase can treat an unresolved entry as passed.
+**Stop here.** Before requesting Phase 1: resolve the fixed-mask tile policy, use the accessible Landslide4Sense mirror and prepare held-out calibration/evaluation data, and accept or revise the delayed Wayanad imagery claim. The R5 smoke test is complete, but none of these open points may be treated as passed.
 
-## Continuation audit
+## Source-selection audit
 
-R4 now passes the sample-access requirement through the pinned IBM-NASA mirror. R1 remains a measured shape failure and R5 remains unexecuted. Colab was opened in the available in-app browser on 2026-09-26; it requires Google sign-in, with no authenticated runtime available yet. The newer WorldStrat publisher release (Zenodo 15382551) offers ZIP archives; a real HTTP range request returned 206 for the final 65,536 bytes of hr_dataset.zip, allowing investigation of selective retrieval. This is not yet evidence of prepared training pairs.
-
-### R5 source-sample inspection (not a training pass)
-
-Twelve original ZIP members were selectively retrieved from publisher release 15382551 for three published train AOIs: Landcover-746405, Landcover-769378 and Landcover-775055. Each has same-day HR/LR acquisitions. Local ZIP CRC32 and new SHA256 hashes are recorded in [source evidence](risk/results/r5_source_samples.json); full-archive checksums were not verified. All HR files have four channels but an identity geotransform despite EPSG:4326. Source bounds match LR bounds for all three. Upstream SPOTDownloader explicitly exports DN values without a transform; [pinned source inspection](risk/results/worldstrat_preparation_sources.json) records this. The LR rasters use geographic coordinates and nominal ~10m sampling, not an exact metric grid.
-
-Metadata reports zero cloud for these candidates, but two actual SCL rasters contain cloud/shadow pixels. The first candidate is entirely SCL water and is a poor land-focused training choice. These are original samples, not an approved training manifest. Before R5, select suitable valid land crops, reconstruct documented HR bounds, preserve input CRS and exact x4 grid alignment, and establish explicit radiometric harmonization. Do not call normalized DN physical reflectance or silently assume a geographic pixel is exactly 10m. R5 remains zero steps.
+An earlier WorldStrat sample check retrieved three other train AOIs and found the HR geotransform/radiometry issue plus SCL cloud/water discrepancies despite metadata cloud values of zero. [Original sample evidence](risk/results/r5_source_samples.json) and [upstream source inspection](risk/results/worldstrat_preparation_sources.json) remain for traceability. Those candidates were not used for R5. The subsequent preparation audit selected three fully valid land crops and the Colab result above is the actual smoke-test evidence. Full source archive checksums were not verified; selected ZIP members had CRC and SHA256 checks.

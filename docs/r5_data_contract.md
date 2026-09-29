@@ -1,6 +1,6 @@
 # R5 real-data input contract
 
-R5 has not run on WorldStrat in Colab. Its executable runner deliberately stops if the prepared pair manifest or Colab GPU is missing. A synthetic CPU unit test exercises the optimizer, but is not a substitute for the scientific smoke test.
+R5 completed 50 steps on three provenance-checked WorldStrat train AOIs in Colab on 2026-09-29; the result is [risk/results/r5.json](../risk/results/r5.json). Its executable runner deliberately stops if the prepared pair manifest or Colab GPU is missing. A synthetic CPU unit test exercises optimizer mechanics only; the Colab result is the scientific smoke test, not an SR accuracy claim.
 
 ## Required preparation
 

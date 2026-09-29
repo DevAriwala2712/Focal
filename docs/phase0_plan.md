@@ -1,6 +1,6 @@
 # Phase 0 execution plan
 
-Execution update, 2026-09-26: the specified scripts are implemented and invoked. R2/R3 passed their audits; R1 has a fixed-mask tile failure; R4 is partly verified; R5 is blocked. See [RISK_REPORT.md](../RISK_REPORT.md) for measured evidence. This document retains the original acceptance criteria. Product components remain gated.
+Execution update, 2026-09-29: the specified scripts are implemented and invoked. R2/R3 passed their audits; R4 has downloaded sample evidence; R5 passed its real-data Colab smoke test. R1 retains a fixed-mask tile failure, and R2's first clear Wayanad post-event image is 129 days late. See [RISK_REPORT.md](../RISK_REPORT.md) for measured evidence. This document retains the original acceptance criteria. Product components remain gated.
 
 | Script to write | Work | Required evidence and decision |
 | --- | --- | --- |

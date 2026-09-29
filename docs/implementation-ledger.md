@@ -30,12 +30,12 @@ Each script writes status PASS/FAIL/BLOCKED, UTC timestamp, config hash, observe
 - R1 invoked the actual pretrained model on CUDA: 128px native input succeeds; 512/64 input fails the fixed Fourier-mask shape requirement. Keep that failure visible; no adapter was invented during the risk phase.
 - R2: all 147 SCL assets audited, 73 acquisitions, 12 clear pre-dates, first accepted post-date 2024-12-06.
 - R3: metadata/country/licence audit passes. 71 India, 125 South Asia. No full WorldStrat imagery archive fetched.
-- R4: 838-polygon inventory and real pre/post/label COG proof retrieved; original Landslide4Sense host DNS fails after retries. Overall BLOCKED.
-- R5: runner invoked, BLOCKED with zero steps due missing real prepared pairs and non-Colab runtime. Notebook syntax verified, not executed in Colab.
+- R4: 838-polygon inventory and real pre/post/label COG proof retrieved; original Landslide4Sense host DNS fails after retries, but the pinned IBM-NASA mirror supplied a genuine image/mask sample. Sample-access PASS.
+- R5: three genuine WorldStrat train AOIs were prepared and a Colab T4 run completed 50 optimizer steps; final loss window decreased, weights changed, and checkpoint reload matched. Smoke-test PASS, without an SR accuracy claim.
 - Ruling: the upstream trainable loader does not enable Conv3XC.train_mode. Explicitly enable the existing differentiable branch after loading weights; CPU characterization verifies forward equivalence and actual gradient flow. This preserves pretrained initialization.
 - Ruling: pin affine 2.4.0 with rasterio 1.4.3 to avoid the new affine 3.x API deprecation encountered during setup. Full suite passes after pinning.
 - Independent reviewer dispatch failed due its usage limit. No successful external review is claimed; local review was completed and found the train-mode issue.
-- Final verification: 18 CPU tests pass; pip check passes; real R4 COG/grid inspection passes; Colab notebook cells compile. No Phase 1 work performed.
+- Final verification before the Colab run: 23 CPU tests pass; pip check and real R4 COG/grid inspection pass. The Colab isolated environment later passed pip check and R5. No Phase 1 work performed.
 
 ## Continuation: recover R4 access
 
@@ -51,4 +51,4 @@ Ruling: restore missing HR geotransforms from publisher WGS84 bounds only after 
 
 Tests were red before implementing member CRC/size/name validation, clear-land crop selection and empirical gain recovery. A transient OneDrive replacement lock was reproduced with a failing test, then fixed with bounded atomic-replace retries. Full suite now 23 passed.
 
-Preparation succeeded for Landcover-118968, Landcover-151915 and Landcover-1534788, each from the published train split and same-day HR/LR acquisitions. See worldstrat_preparation.json for hashes, source members, rejected candidates, coefficients and grids. The generated pairs are ignored data artifacts. Colab T4 connected; base runtime torch 2.11.0+cu128. Isolated pinned torch 2.8.0+cu126 environment installation is in progress. Standard venv failed at ensurepip; the documented pip --python method bootstraps the venv without altering Colab base packages. No completed training result yet.
+Preparation succeeded for Landcover-118968, Landcover-151915 and Landcover-1534788, each from the published train split and same-day HR/LR acquisitions. See worldstrat_preparation.json for hashes, source members, rejected candidates, coefficients and grids. The generated pairs are ignored data artifacts. Colab T4 base runtime used torch 2.11.0+cu128. Standard venv failed at ensurepip; `venv --without-pip` plus pip's `--python` method installed the complete pinned dependencies without altering base packages. The first isolated training attempt lacked Matplotlib; the next inherited Colab's inline backend, which was unavailable in the venv. With `MPLBACKEND=Agg`, 50 real-data steps completed, checkpoint saved and reloaded, and R5 returned PASS. The browser could not transfer the ZIP archive to this checkout, so the local R5 JSON was transcribed from visible Colab output and the checkpoint remains only in Colab's temporary runtime. See RISK_REPORT for the measured values and remaining Phase 1 gate failures.

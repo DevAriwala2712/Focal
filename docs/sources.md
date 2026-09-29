@@ -2,7 +2,7 @@
 
 ## Execution update (2026-09-26)
 
-The sections below preserve the initial source audit; later verified results are in [RISK_REPORT.md](../RISK_REPORT.md). WorldStrat now has measured country-centre counts: 71 India, 125 across the defined eight South Asian countries. R2 queried the live Planetary Computer catalogue and read SCL for all 147 items; first accepted post-event date is 2024-12-06. The arXiv author's Colombia inventory and one real pre/post crop were downloaded. Both original Landslide4Sense training URLs fail DNS resolution locally. R5 remains blocked; no real fine-tuning result exists.
+The sections below preserve the initial source audit; later verified results are in [RISK_REPORT.md](../RISK_REPORT.md). WorldStrat has measured country-centre counts: 71 India, 125 across the defined eight South Asian countries. R2 queried the live Planetary Computer catalogue and read SCL for all 147 items; first accepted post-event date is 2024-12-06. The arXiv author's Colombia inventory and one real pre/post crop were downloaded. Both original Landslide4Sense training URLs fail DNS resolution locally; a pinned IBM-NASA mirror supplied one genuine sample. R5 completed 50 real-data steps in Colab on 2026-09-29.
 
 Additional inspected implementation sources:
 - [SEN2SR Conv3XC/CNNSR](https://github.com/ESAOpenSR/SEN2SR/blob/8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4/sen2sr/models/opensr_baseline/cnn.py): train_mode is separate from PyTorch's train/eval flag; the risk loader explicitly enables its differentiable branch for fine-tuning.
