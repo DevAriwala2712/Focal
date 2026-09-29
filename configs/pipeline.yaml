@@ -1,0 +1,49 @@
+schema_version: 1
+paths:
+  model: models/SEN2SRLite_RGBN
+network:
+  retries: 3
+  backoff_seconds: 2
+  timeout_seconds: 45
+  max_download_bytes: 40000000
+model:
+  bands: [B04, B03, B02, B08]
+  scale: 4
+  native_tile: 128
+  min_tile: 64
+  budget_gib: 4.0
+  base_url: https://huggingface.co/tacofoundation/SEN2SR/resolve/469e9b3a049f9320ba66b3a39b9655dbd31480b3/SEN2SRLite/NonReference_RGBN_x4
+  sha256:
+    mlm.json: 419d562511737b0e465a34983d634944f6e84f97ad9207a86dd94d8e430ca606
+    load.py: 4b6c836b1f73078c62c84d4374b2d8daee5345f6239f64e0b6be29432383bac6
+    model.safetensor: 479aa796d5068d0b1206118ccbca27bd3223df0214db1a9b31a1e18349ed1c7e
+    hard_constraint.safetensor: fbad981519066387c413ead1d6af7ef3e0d2947c34147ba90163fc79ae539239
+training:
+  checkpoint: checkpoints/r5-smoke.safetensors
+imagery:
+  stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
+  collection: sentinel-2-l2a
+  crs: EPSG:32643
+  audit_resolution_m: 20
+  event_date: '2024-07-30'
+  max_cloud_shadow_pct: 10
+  min_coverage_pct: 99
+  min_pre_dates: 3
+  cloud_classes: [8, 9, 10]
+  shadow_classes: [2, 3]
+  invalid_classes: [0, 1, 11]
+  page_limit: 100
+fetch:
+  max_pre_dates: 3
+  stack: data/wayanad/stack.tif
+sr:
+  tile_size: 128
+  overlap: 16
+  min_tile: 64
+change:
+  k: 2.0
+  parent_drop_threshold: 0.1
+  invalid_scl: [0, 1, 2, 3, 8, 9, 10, 11]
+demo:
+  output_dir: data/wayanad/demo
+  tile_pixels: 128
