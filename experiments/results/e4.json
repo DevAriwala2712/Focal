@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "evidence": "synthetic",
+  "reason": "CUDA GPU required: torch.cuda.is_available() is False on this machine (torch 2.8.0, no NVIDIA GPU/driver). Memory cannot be measured on CPU, and an allocator cap is meaningless without CUDA. Needed: an NVIDIA GPU with a CUDA build of torch (the project reference is an RTX 4050 Laptop 6 GB).",
+  "limitations": [
+    "The CUDA path of this experiment is implemented but was never executed on CUDA; only the stage-tracking logic is unit-tested, against a fake memory API.",
+    "No memory number exists yet. Nothing here supports or opposes dropping the 64 px fallback."
+  ],
+  "experiment": "e4",
+  "risk": "e4",
+  "started_utc": "2026-09-29T12:47:46.395987+00:00",
+  "finished_utc": "2026-09-29T12:47:46.786387+00:00",
+  "config_sha256": "07ccb97318712ac04675fb5c5948a89b7b02906347fd3e39ef16ffc1ea6f5ea9"
+}

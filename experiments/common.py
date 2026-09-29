@@ -23,9 +23,10 @@ EVIDENCE = ('synthetic', 'real')
 class Blocked(Exception):
     """A prerequisite (real data, GPU, network) is missing. Never converted to PASS."""
 
-    def __init__(self, reason: str, evidence: str = 'real'):
+    def __init__(self, reason: str, evidence: str = 'real', limitations=None):
         super().__init__(reason)
         self.evidence = evidence
+        self.limitations = list(limitations or [])
 
 
 def array_sha256(array: np.ndarray) -> str:
@@ -67,7 +68,7 @@ def run_probe(name: str, probe, cfg, root, config_hash: str) -> dict:
     try:
         result = probe(cfg, root)
     except Blocked as exc:
-        result = {'status': 'BLOCKED', 'evidence': exc.evidence, 'reason': str(exc)}
+        result = {'status': 'BLOCKED', 'evidence': exc.evidence, 'reason': str(exc), 'limitations': exc.limitations}
     except Exception as exc:  # a bug is a FAIL with its error, never a silent BLOCKED
         result = {'status': 'FAIL', 'evidence': 'synthetic',
                   'error': f'{type(exc).__name__}: {exc}'}

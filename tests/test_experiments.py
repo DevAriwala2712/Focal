@@ -432,3 +432,64 @@ def test_seeded_tiled_run_with_a_torch_operator_repeats_bit_for_bit_on_cpu():
         return super_resolve_tiled(synthetic_scene(200, 1), None, op, tile=128, stride=96, scale=4,
                                    feather=32).array
     assert array_sha256(run()) == array_sha256(run())
+
+
+# ---- E4 memory gate ---------------------------------------------------------------------
+
+class _FakeMem:
+    """Scripted stand-in for torch.cuda peak counters."""
+    def __init__(self, script):
+        self.script, self.resets = list(script), 0
+        self._cur = (0, 0)
+    def reset_peak(self):
+        self.resets += 1
+        self._cur = self.script.pop(0) if self.script else (0, 0)
+    def max_allocated(self):
+        return self._cur[0]
+    def max_reserved(self):
+        return self._cur[1]
+
+
+def test_stage_memory_keeps_the_max_peak_per_stage_across_repeated_entries():
+    from experiments.e4_memory_gate import StageMemory
+    mem = _FakeMem([(100, 128), (300, 384), (0, 0)])
+    rec = StageMemory(mem)
+    with rec('forward'):
+        pass
+    with rec('forward'):
+        pass
+    with rec('blend'):
+        pass
+    assert rec.stages['forward'] == {'calls': 2, 'peak_allocated_bytes': 300, 'peak_reserved_bytes': 384}
+    assert rec.stages['blend'] == {'calls': 1, 'peak_allocated_bytes': 0, 'peak_reserved_bytes': 0}
+    assert mem.resets == 3
+    assert rec.overall() == {'peak_allocated_bytes': 300, 'peak_reserved_bytes': 384}
+
+
+def test_stage_memory_records_a_peak_even_when_the_stage_raises():
+    from experiments.e4_memory_gate import StageMemory
+    rec = StageMemory(_FakeMem([(7, 9)]))
+    with pytest.raises(RuntimeError):
+        with rec('forward'):
+            raise RuntimeError('oom')
+    assert rec.stages['forward']['peak_reserved_bytes'] == 9
+
+
+def test_memory_gate_verdict_is_strictly_below_the_cap():
+    from experiments.e4_memory_gate import gate_verdict
+    gib = 2 ** 30
+    assert gate_verdict(4 * gib - 1, 4.0) is True
+    assert gate_verdict(4 * gib, 4.0) is False          # 'peak reserved < 4 GiB' is strict
+    assert gate_verdict(128 * 2 ** 20, 4.0) is True
+
+
+def test_e4_without_cuda_is_blocked_and_names_the_missing_hardware(tmp_path):
+    import torch
+    if torch.cuda.is_available():
+        pytest.skip('CUDA present; the blocked path is not reachable')
+    from experiments.common import run_probe
+    from experiments.e4_memory_gate import probe
+    out = run_probe('e4', probe, {'e4': {}, 'phase0': {}}, tmp_path, 'h')
+    assert out['status'] == 'BLOCKED' and 'CUDA' in out['reason']
+    assert out['evidence'] == 'synthetic'
+    assert any('never executed on CUDA' in x for x in out['limitations'])

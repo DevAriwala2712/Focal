@@ -46,3 +46,6 @@ e3:
   cpu_runs: 2
   cpu_threads: [1, 4]            # each setting is run in fresh processes; cross-setting equality is a finding
   gpu_runs: 2
+e4:
+  aoi_px: 1000
+  cap_gib: 4.0                   # torch.cuda.set_per_process_memory_fraction; NOT a physical 4 GB GPU
