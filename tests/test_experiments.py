@@ -493,3 +493,82 @@ def test_e4_without_cuda_is_blocked_and_names_the_missing_hardware(tmp_path):
     assert out['status'] == 'BLOCKED' and 'CUDA' in out['reason']
     assert out['evidence'] == 'synthetic'
     assert any('never executed on CUDA' in x for x in out['limitations'])
+
+
+# ---- E8 dihedral 4 vs 8 + shared change helpers ------------------------------------------
+
+def test_spearman_handles_monotone_reversed_and_tied_values():
+    from experiments.common import spearman
+    a = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
+    assert spearman(a, a ** 3) == pytest.approx(1.0)
+    assert spearman(a, -a) == pytest.approx(-1.0)
+    x = np.array([1.0, 2.0, 2.0, 3.0])
+    y = np.array([1.0, 3.0, 2.0, 4.0])
+    ranks_x, ranks_y = np.array([1, 2.5, 2.5, 4]), np.array([1, 3, 2, 4])
+    assert spearman(x, y) == pytest.approx(np.corrcoef(ranks_x, ranks_y)[0, 1])
+    assert np.isnan(spearman(np.ones(5), a))
+
+
+def test_classify_change_follows_the_design_table_and_no_data_overrides():
+    from experiments.common import CLASS_CODES, classify_change
+    d = np.array([1.0, 0.1, 1.0, 0.1, 1.0])
+    sigma = np.full(5, 0.2)                                  # k=2 -> threshold 0.4
+    parent = np.array([True, True, False, False, True])
+    no_data = np.array([False, False, False, False, True])
+    out = classify_change(d, sigma, parent, no_data, 2.0)
+    names = {v: k for k, v in CLASS_CODES.items()}
+    assert [names[c] for c in out] == ['OBSERVED', 'INFERRED', 'UNSUPPORTED', 'NO_CHANGE', 'NO_DATA']
+    assert set(CLASS_CODES) == {'NO_CHANGE', 'OBSERVED', 'INFERRED', 'UNSUPPORTED', 'NO_DATA'}
+
+
+def test_classify_change_uses_strict_greater_than_k_sigma():
+    from experiments.common import CLASS_CODES, classify_change
+    out = classify_change(np.array([0.4]), np.array([0.2]), np.array([False]), np.array([False]), 2.0)
+    assert out[0] == CLASS_CODES['NO_CHANGE']                # d == k*sigma is not "d > k*sigma"
+
+
+def test_dihedral_transform_inverse_is_identity_for_all_eight_and_the_first_four_are_rotations():
+    from experiments.e8_dihedral import apply_dihedral, invert_dihedral
+    rng = np.random.default_rng(0)
+    x = rng.random((4, 6, 6)).astype('float32')
+    outs = []
+    for t in range(8):
+        y = apply_dihedral(x, t)
+        assert np.array_equal(invert_dihedral(y, t), x)
+        outs.append(y)
+    assert all(not np.array_equal(outs[i], outs[j]) for i in range(8) for j in range(i + 1, 8))
+    for k in range(4):
+        assert np.array_equal(outs[k], np.rot90(x, k, axes=(-2, -1)))
+    with pytest.raises(ValueError, match='0..7'):
+        apply_dihedral(x, 8)
+
+
+def test_dihedral_stats_are_zero_sigma_for_an_equivariant_operator():
+    from experiments.common import ndvi, synthetic_scene
+    from experiments.e8_dihedral import dihedral_ndvi_stats
+    tile = synthetic_scene(16, 3)
+    for transforms in (range(4), range(8)):
+        mean, std, valid = dihedral_ndvi_stats(_nearest_x4, tile, list(transforms), 0.01, 1)
+        direct = ndvi(_nearest_x4(tile[None])[0], 0.01)
+        assert valid.all() and np.abs(std).max() < 1e-6
+        np.testing.assert_allclose(mean, direct, atol=1e-6)
+
+
+def test_dihedral_stats_show_spread_for_a_non_equivariant_operator():
+    from experiments.common import synthetic_scene
+    from experiments.e8_dihedral import dihedral_ndvi_stats
+    def shifting(batch):                                    # not equivariant: shifts content by one pixel
+        return np.roll(_nearest_x4(batch), 1, axis=3)
+    _, std, valid = dihedral_ndvi_stats(shifting, synthetic_scene(16, 3), list(range(8)), 0.01, 1)
+    assert std[valid].mean() > 1e-3
+
+
+def test_synthetic_change_pair_has_a_known_changed_square():
+    from experiments.common import ndvi, synthetic_change_pair
+    pre, post, truth = synthetic_change_pair(64, 5, (20, 24, 16, 16), noise=0.002)
+    pre2, post2, truth2 = synthetic_change_pair(64, 5, (20, 24, 16, 16), noise=0.002)
+    assert np.array_equal(pre, pre2) and np.array_equal(post, post2) and np.array_equal(truth, truth2)
+    assert truth.sum() == 16 * 16 and truth[20:36, 24:40].all()
+    drop = ndvi(pre, 0.01) - ndvi(post, 0.01)
+    assert np.nanmedian(drop[truth]) > 0.3                  # a strong, known NDVI drop inside the square
+    assert np.nanmedian(np.abs(drop[~truth])) < 0.02        # only noise outside it

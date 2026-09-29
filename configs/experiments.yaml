@@ -49,3 +49,21 @@ e3:
 e4:
   aoi_px: 1000
   cap_gib: 4.0                   # torch.cuda.set_per_process_memory_fraction; NOT a physical 4 GB GPU
+change:
+  k: 2.0                         # design default, uncalibrated
+  parent_drop_threshold: 0.15    # uncalibrated placeholder for mechanics; calibration is a later decision
+e8:
+  tiles: 4
+  ddof: 1
+  min_spearman: 0.95
+  min_class_agreement: 0.99
+  square: [40, 48, 32, 32]       # synthetic changed square (r0, c0, h, w) in 10 m px
+  noise: 0.004
+  real_pre:
+    path: data/experiments-cache/real_pre_10m.tif      # 4-band B04,B03,B02,B08 at 10 m
+    dn_scale: null
+    dn_offset: null
+  real_post:
+    path: data/experiments-cache/real_post_10m.tif     # same grid as real_pre
+    dn_scale: null
+    dn_offset: null

@@ -147,3 +147,57 @@ def ndvi(array: np.ndarray, min_denominator: float, red: int = 0, nir: int = 3) 
     with np.errstate(invalid='ignore', divide='ignore'):
         out = np.where(denom >= min_denominator, (n - r) / denom, np.nan)
     return out.astype(np.float32)
+
+
+# ---- change semantics (docs/design.md) -----------------------------------------------------
+
+CLASS_CODES = {'NO_CHANGE': 0, 'OBSERVED': 1, 'INFERRED': 2, 'UNSUPPORTED': 3, 'NO_DATA': 4}
+
+
+def classify_change(d, sigma, parent, no_data, k: float) -> np.ndarray:
+    """S = d > k*sigma, P = parent drop. OBSERVED S&P, INFERRED P only, UNSUPPORTED S only; NO_DATA overrides."""
+    s = np.asarray(d) > k * np.asarray(sigma)
+    p = np.asarray(parent, dtype=bool)
+    out = np.full(s.shape, CLASS_CODES['NO_CHANGE'], dtype=np.uint8)
+    out[s & p] = CLASS_CODES['OBSERVED']
+    out[~s & p] = CLASS_CODES['INFERRED']
+    out[s & ~p] = CLASS_CODES['UNSUPPORTED']
+    out[np.asarray(no_data, dtype=bool)] = CLASS_CODES['NO_DATA']
+    return out
+
+
+def _average_ranks(a: np.ndarray) -> np.ndarray:
+    order = np.argsort(a, kind='mergesort')
+    sorted_a = a[order]
+    new_group = np.r_[True, sorted_a[1:] != sorted_a[:-1]]
+    group = np.cumsum(new_group) - 1
+    starts = np.flatnonzero(new_group)
+    ends = np.r_[starts[1:], a.size] - 1
+    ranks = np.empty(a.size, dtype=np.float64)
+    ranks[order] = ((starts + ends) / 2 + 1)[group]
+    return ranks
+
+
+def spearman(a: np.ndarray, b: np.ndarray) -> float:
+    """Spearman rho with average ranks for ties; NaN if either input is constant."""
+    ra, rb = _average_ranks(np.ravel(a)), _average_ranks(np.ravel(b))
+    ra, rb = ra - ra.mean(), rb - rb.mean()
+    denom = np.sqrt((ra ** 2).sum() * (rb ** 2).sum())
+    return float('nan') if denom == 0 else float((ra * rb).sum() / denom)
+
+
+def synthetic_change_pair(size: int, seed: int, square, noise: float):
+    """(pre, post, truth). Both dates share one scene; the square (r0, c0, h, w, 10 m px) is forest before and
+    bare/burned after, so the NDVI drop there is well defined. post also gets `noise`. Synthetic."""
+    scene = synthetic_scene(size, seed).astype(np.float64)
+    rng = np.random.default_rng([seed, 1])
+    r0, c0, h, w = square
+    inside = (slice(None), slice(r0, r0 + h), slice(c0, c0 + w))
+    pre = scene.copy()
+    pre[inside] = _CLASS_SPECTRA[0][:, None, None] * (1 + 0.05 * rng.standard_normal((1, h, w)))
+    post = scene.copy()
+    post[inside] = np.array([0.25, 0.22, 0.18, 0.20])[:, None, None]
+    post += noise * rng.standard_normal(post.shape)
+    truth = np.zeros((size, size), dtype=bool)
+    truth[r0:r0 + h, c0:c0 + w] = True
+    return np.clip(pre, 0, 1).astype('float32'), np.clip(post, 0, 1).astype('float32'), truth
