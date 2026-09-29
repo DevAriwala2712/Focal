@@ -1,6 +1,6 @@
 import numpy as np
 
-from trustsr.evaluate import spectral_rmse, psnr, f1_score, assess_sr
+from trustsr.evaluate import spectral_rmse, psnr, f1_score, assess_sr, calibrate_k
 
 
 def test_spectral_error_uses_parent_averages():
@@ -25,3 +25,16 @@ def test_assessment_distinguishes_training_diagnostic_from_heldout():
     assert result['split'] == 'train'
     assert result['held_out'] is False
     assert result['spectral_rmse'] < 1e-6
+
+
+def test_k_selection_uses_labelled_parent_grid_and_f1():
+    positive = np.full((4, 4), .5, dtype=np.float32)
+    post = np.full((4, 4), .3, dtype=np.float32)
+    standard = np.full((4, 4), .04, dtype=np.float32)
+    sample = {'pre_mean': positive, 'post_mean': post, 'pre_std': standard,
+              'post_std': standard, 'parent_pre': np.array([[.5]]),
+              'parent_post': np.array([[.3]]), 'valid': np.ones((4, 4), bool),
+              'labels': np.array([[1]], bool)}
+    result = calibrate_k([sample], [2.0, 6.0], parent_drop_threshold=.1)
+    assert result['selected_k'] == 2.0
+    assert result['scores'][0]['f1'] == 1.0

@@ -1,0 +1,58 @@
+{
+  "training_pair_diagnostic_only": [
+    {
+      "aoi_id": "Landcover-118968",
+      "split": "train",
+      "held_out": false,
+      "psnr_db": 35.99637553518464,
+      "ssim": 0.8286611986487008,
+      "spectral_rmse": 7.137087809638842e-09,
+      "data_range": 1.0
+    },
+    {
+      "aoi_id": "Landcover-151915",
+      "split": "train",
+      "held_out": false,
+      "psnr_db": 33.113615602212974,
+      "ssim": 0.8503064789837312,
+      "spectral_rmse": 7.450538408448892e-09,
+      "data_range": 1.0
+    },
+    {
+      "aoi_id": "Landcover-1534788",
+      "split": "train",
+      "held_out": false,
+      "psnr_db": 34.20639890470682,
+      "ssim": 0.89503750432346,
+      "spectral_rmse": 6.271371422172933e-09,
+      "data_range": 1.0
+    }
+  ],
+  "held_out_worldstrat": null,
+  "held_out_reason": "Only three WorldStrat train AOIs were prepared; no independent validation/test pairs are available.",
+  "downstream_f1_10m": null,
+  "downstream_f1_2p5m": null,
+  "downstream_f1_trust": null,
+  "downstream_reason": "No held-out georeferenced pre/post landslide labels aligned to this Wayanad tile.",
+  "opensr_test": null,
+  "opensr_test_reason": "Optional package dry-run would upgrade pinned timm and add substantial dependencies; benchmark dataset not installed.",
+  "wayanad_tile": {
+    "pre_spectral_rmse": 1.0009459927573516e-08,
+    "post_spectral_rmse": 6.1104339366124805e-09,
+    "class_counts": {
+      "unsupported_pixels": 15748,
+      "observed_pixels": 15229,
+      "inferred_pixels": 99,
+      "no_data_pixels": 15584
+    },
+    "pre_dates": [
+      "2024-03-01",
+      "2024-03-06",
+      "2024-04-10"
+    ],
+    "post_date": "2024-12-16",
+    "post_event_lag_days": 139
+  },
+  "checkpoint_sha256": "bbbdad6bda5dfadfc4099dc08dbf54ecacd9fe31e1640b85ff6f6cac75e12709",
+  "pair_manifest_sha256": "7615855dfe2d31b48e0f146d2e26e6f5a825cf6649994c974ec8e6bc06065981"
+}

@@ -48,3 +48,35 @@ def assess_sr(lr, hr, prediction, *, split: str, data_range=1.0):
                           for i in range(hr.shape[0])]))
     return {'split': split, 'held_out': split in {'val', 'test'}, 'psnr_db': psnr(hr, prediction, data_range=data_range),
             'ssim': ssim, 'spectral_rmse': spectral_rmse(lr, prediction), 'data_range': data_range}
+
+
+def calibrate_k(samples, candidates, *, parent_drop_threshold):
+    """Maximise F1 of OBSERVED support on labelled 10 m parent pixels."""
+    from trustsr.change import OBSERVED, classify
+    samples = list(samples)
+    if not samples or not candidates:
+        raise ValueError('Calibration needs labelled samples and candidate k values')
+    scores = []
+    for k in candidates:
+        truth, prediction, validity = [], [], []
+        for sample in samples:
+            classes, _ = classify(sample['pre_mean'], sample['post_mean'], sample['pre_std'],
+                                  sample['post_std'], sample['parent_pre'], sample['parent_post'],
+                                  sample['valid'], k=float(k), parent_drop_threshold=parent_drop_threshold)
+            height, width = sample['parent_pre'].shape
+            observed_parent = (classes == OBSERVED).reshape(height, 4, width, 4).any((1, 3))
+            valid_parent = np.asarray(sample['valid']).reshape(height, 4, width, 4).all((1, 3))
+            labels = np.asarray(sample['labels'], bool)
+            if labels.shape != (height, width):
+                raise ValueError('Calibration labels must be on the observed 10 m parent grid')
+            truth.append(labels.ravel())
+            prediction.append(observed_parent.ravel())
+            validity.append(valid_parent.ravel())
+        score = f1_score(np.concatenate(truth), np.concatenate(prediction), np.concatenate(validity))
+        scores.append({'k': float(k), 'f1': score})
+    usable = [row for row in scores if row['f1'] is not None]
+    if not usable:
+        raise ValueError('Calibration has no scored positive/predicted pixels')
+    selected = max(usable, key=lambda row: (row['f1'], -row['k']))
+    return {'selected_k': selected['k'], 'scores': scores, 'sample_count': len(samples),
+            'label_grid': '10 m parent', 'predicted_class': 'OBSERVED'}
