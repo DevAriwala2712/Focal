@@ -34,6 +34,16 @@ def test_zero_radiometric_scale_is_rejected(tmp_path):
         validate_manifest(manifest, tmp_path, ['B04','B03','B02','B08'])
 
 
+def test_validation_manifest_cannot_enter_training(tmp_path):
+    from risk.r5_finetune import validate_manifest
+    manifest = prepared_pair(tmp_path)
+    manifest['pairs'][0]['split'] = 'val'
+    bands = ['B04', 'B03', 'B02', 'B08']
+    with pytest.raises(ValueError, match='not allowed'):
+        validate_manifest(manifest, tmp_path, bands)
+    assert validate_manifest(manifest, tmp_path, bands, allowed_splits=('val',))[0]['split'] == 'val'
+
+
 def test_cpu_training_updates_weights_for_all_fifty_steps():
     import torch
     from risk.r5_finetune import train_steps

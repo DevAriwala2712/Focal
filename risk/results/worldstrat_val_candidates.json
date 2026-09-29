@@ -1,0 +1,41 @@
+{
+  "checked": [
+    {
+      "aoi": "Amnesty POI-6-2-2",
+      "status": "REJECTED",
+      "reason": "'lr_dataset/Amnesty POI-6-2-2/L2A/Amnesty POI-6-2-2-1-SCL.tiff'"
+    },
+    {
+      "aoi": "Landcover-1588648",
+      "status": "PREPARED"
+    },
+    {
+      "aoi": "Landcover-1733908",
+      "status": "REJECTED",
+      "reason": "Poor HR/LR correlation: 0.3888"
+    },
+    {
+      "aoi": "Landcover-1750984",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-1825428",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-1882765",
+      "status": "REJECTED",
+      "reason": "No fully valid clear land crop"
+    },
+    {
+      "aoi": "Landcover-485204",
+      "status": "PREPARED"
+    },
+    {
+      "aoi": "Landcover-768945",
+      "status": "PREPARED"
+    }
+  ]
+}

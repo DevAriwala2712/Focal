@@ -9,7 +9,7 @@ from pathlib import Path
 from risk.common import digest, retry_tiles, run_cli
 
 
-def validate_manifest(manifest, base, bands):
+def validate_manifest(manifest, base, bands, *, allowed_splits=('train',)):
     if manifest.get('dataset') != 'WorldStrat':
         raise ValueError('Only provenance-checked WorldStrat pairs are accepted')
     if not manifest.get('pairs'):
@@ -20,8 +20,8 @@ def validate_manifest(manifest, base, bands):
         for field in ['aoi_id', 'lr', 'hr', 'lr_sha256', 'hr_sha256', 'source_urls', 'split']:
             if not entry.get(field):
                 raise ValueError(f'Missing pair provenance: {field}')
-        if entry['split'] != 'train':
-            raise ValueError('Smoke training may only use the train split')
+        if entry['split'] not in allowed_splits:
+            raise ValueError(f"Pair split {entry['split']} is not allowed here; expected {allowed_splits}")
         lr_path, hr_path = base / entry['lr'], base / entry['hr']
         for key, path in [('lr', lr_path), ('hr', hr_path)]:
             if digest(path) != entry[key + '_sha256']:

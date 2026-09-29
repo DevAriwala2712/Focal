@@ -86,6 +86,8 @@ def main():
         st.error('Precomputed Wayanad demo assets are missing. Run the fetch and demo-tile scripts in the README.')
         return
     manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    evaluation_path = ROOT/'results/metrics.json'
+    evaluation = json.loads(evaluation_path.read_text(encoding='utf-8')) if evaluation_path.is_file() else None
     expected = np.array([cfg['imagery']['longitude'], cfg['imagery']['latitude'], cfg['imagery']['aoi_size_m']])
     if manifest.get('source_aoi') is None or not np.allclose(manifest['source_aoi'], expected, rtol=0, atol=1e-6):
         st.error('The bundled tile was generated from the supplied coordinates, which NRSC places away from the landslide. Corrected event-site imagery is being rebuilt; this tile is hidden.')
@@ -130,6 +132,8 @@ def main():
                     '🟠 **Inferred position** — changed parent, but fine-pixel signal is uncertain.  \n'
                     '⬜ **No data** — cloud, shadow, or invalid in any selected date.')
         st.info(f"This is vegetation disturbance, not verified landslide damage. The first clear post image is {manifest['post_event_lag_days']} days after the event.")
+        if evaluation and evaluation.get('downstream_f1_trust') is not None:
+            st.warning(f"Independent event test F1: {evaluation['downstream_f1_trust']:.3f} at the 10 m label scale. This low score means the current detector is not reliable for damage decisions. Wayanad itself has no matching ground-truth mask.")
         st.caption('A published study reported 507 buildings and 8.38 km of road impacted. Those figures use a different sensor/method and are context only, not TrustSR detections.')
     with st.expander('Provenance and evaluation'):
         st.json({'pre_dates': manifest['pre_dates'], 'post_date': manifest['post_date'],
@@ -137,7 +141,13 @@ def main():
                  'checkpoint_sha256': manifest.get('checkpoint_sha256'),
                  'crs': manifest['grid_crs'], 'k': manifest['k'],
                  'parent_ndvi_drop_threshold': manifest['parent_drop_threshold']})
-        st.warning('Held-out landslide F1 and high-resolution boundary accuracy are unavailable. See results/REPORT.md.')
+        if evaluation:
+            st.json({'held_out_worldstrat': evaluation.get('held_out_worldstrat'),
+                     'event_held_out_f1_10m': evaluation.get('downstream_f1_10m'),
+                     'event_held_out_f1_raw_sr': evaluation.get('downstream_f1_2p5m'),
+                     'event_held_out_f1_trust': evaluation.get('downstream_f1_trust'),
+                     'calibration': evaluation.get('calibration')})
+        st.warning('Independent 2.5 m landslide boundary truth is unavailable. The event test scores use 10 m masks and do not measure Wayanad accuracy.')
 
 
 if __name__ == '__main__':

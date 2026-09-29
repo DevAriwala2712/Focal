@@ -1,0 +1,133 @@
+{
+  "dataset": "Sen12Landslides harmonized S12LS-LD",
+  "split_url": "https://raw.githubusercontent.com/PaulH97/Sen12Landslides/main/tasks/S12LS-LD/harmonized/s2/splits.json",
+  "split_sha256": "0e8de6ee05bd49971ea7b4cd527e0ee29c716559d94b0ad921e97380514be1af",
+  "selection": "First configured count of positive patches in publisher test split and archive order, per event; selection used no model outputs.",
+  "calibration_events": [
+    "chimanimani",
+    "italy"
+  ],
+  "evaluation_events": [
+    "kyrgyzstan1"
+  ],
+  "samples": [
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1004.nc",
+      "published_split": "test",
+      "positive_pixels": 362,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1004.nc",
+      "sha256": "ce05fe870fa03d3dfdc29ea2597a31ad20fc347204f4072fcd19428e2df5457e"
+    },
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1033.nc",
+      "published_split": "test",
+      "positive_pixels": 312,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1033.nc",
+      "sha256": "9e59780ee12e66c24b7c3d8190952d79ca0dabd84dc8172de242bdca703487b6"
+    },
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1042.nc",
+      "published_split": "test",
+      "positive_pixels": 88,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1042.nc",
+      "sha256": "8450d58d3708fe6bf98368eaaed6e96e05fd615771bfe047ba51c31a3be0f9ed"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1597.nc",
+      "published_split": "test",
+      "positive_pixels": 72,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1597.nc",
+      "sha256": "d5d5d64ad0a9f91d0e4fd6138da75b756ef222034569799d9915a10e2adcae25"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1610.nc",
+      "published_split": "test",
+      "positive_pixels": 100,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1610.nc",
+      "sha256": "8083e9be908d49fd7ef983a0af03a85e9b50862925a58e557c2f0ebfb4c05bec"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1613.nc",
+      "published_split": "test",
+      "positive_pixels": 98,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1613.nc",
+      "sha256": "f2fb3f4513fdfcf8b3288505e7c83f052acccc0d5cb2d618a667c430e610e1a5"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2394.nc",
+      "published_split": "test",
+      "positive_pixels": 219,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2394.nc",
+      "sha256": "e2ba3c124585094d71c088399e08d996cae6335ce051fbf4996c82e79927fa90"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2406.nc",
+      "published_split": "test",
+      "positive_pixels": 119,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2406.nc",
+      "sha256": "11cefccb9232ec17e96b8fcc4b303ea5bf689a5782af253aacefe422f19ab740"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2421.nc",
+      "published_split": "test",
+      "positive_pixels": 340,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2421.nc",
+      "sha256": "6306381444dc42521299a9c08fe97102c0506f28d1b0292c424e809283080f4d"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2484.nc",
+      "published_split": "test",
+      "positive_pixels": 143,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2484.nc",
+      "sha256": "9c8071afdedf261920cfbf828932aa798f34c8135453cb2f9ec6725b9ff804c2"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2612.nc",
+      "published_split": "test",
+      "positive_pixels": 101,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2612.nc",
+      "sha256": "b38773130e17d6db84ae6ae31726ae74bae3343ed42293ecdbfe4ddc35b967b7"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2660.nc",
+      "published_split": "test",
+      "positive_pixels": 2021,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2660.nc",
+      "sha256": "7c9aa3e4adac007d71ac626237ae260fac3e4d71c1aba045c227e6b5de83ecbe"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2680.nc",
+      "published_split": "test",
+      "positive_pixels": 1085,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2680.nc",
+      "sha256": "7f6bc03faab5f4a95a41ab16b2bc011ba07a0e983552b55eabd191fb358a544c"
+    }
+  ],
+  "caveat": "Publisher test split is patch-random; this study additionally keeps calibration and evaluation event inventories disjoint. Only positive-containing patches were sampled."
+}

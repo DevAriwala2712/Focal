@@ -4,9 +4,11 @@
 
 The Phase 0 gate below records its historical status. Phase 1 implementation now exists. An [NRSC/ISRO event map](location_correction.md) places the landslide 36.43 km from the brief's supplied coordinates, so the original R2 dates must not be used to claim event-site coverage. A separate event-site annual SCL audit is under `risk/results/event_aoi/` and the pipeline config uses its verified map point.
 
-The pretrained SEN2SR CNN runs at 64px, but its Fourier hard constraint has a fixed 512px output mask. Tiled inference therefore keeps the pretrained CNN and replaces that fixed-mask postprocessing with an explicit 4×4 parent-mean projection. This mathematically enforces downsample consistency after feathered stitching, but it is a documented inference change, not a claim that the published hard constraint is unchanged. The 50-step local checkpoint is separate from Colab's smoke checkpoint; both were trained on three WorldStrat training AOIs. Held-out accuracy remains unavailable.
+The pretrained SEN2SR CNN runs at 64px, but its Fourier hard constraint has a fixed 512px output mask. Tiled inference therefore keeps the pretrained CNN and replaces that fixed-mask postprocessing with an explicit 4×4 parent-mean projection. This mathematically enforces downsample consistency after feathered stitching, but it is a documented inference change, not a claim that the published hard constraint is unchanged. The 50-step local checkpoint is separate from Colab's smoke checkpoint; both were trained on three WorldStrat training AOIs. Three separate publisher validation AOIs were scored for spatial fidelity, with the limitation that HR DN was empirically fitted to paired LR reflectance.
 
-Status: design baseline plus Phase 0 implementation, 2026-09-26. The risk harness is implemented, but the Phase 0 gate has not passed; Phase 1 is closed. The execution evidence in [RISK_REPORT.md](../RISK_REPORT.md) supersedes initial availability assumptions below.
+The Sen12Landslides multi-event check used two calibration inventories and one event-held-out inventory. All candidate k values tied on calibration F1, so the default 2.0 remains rather than claiming a uniquely calibrated value. Held-out landslide F1 was very low. The trust gate rejects unsupported SR-only changes but cannot improve its original-resolution binary parent decision by construction. This result narrows the demo claim to a transparent research workflow, not an accurate disaster detector; see [RISK_REPORT.md](../RISK_REPORT.md).
+
+Historical design baseline, 2026-09-26. The later implementation and evaluation evidence in [RISK_REPORT.md](../RISK_REPORT.md) supersedes initial availability assumptions below.
 Authority: [AGENTS.md](../AGENTS.md), the user's GPU correction, and the [full supplied NTRO statement](problem_statement.md).
 The statement is copied byte-for-byte from the root file; an official SIH statement ID/URL has not been supplied or independently authenticated.
 
@@ -20,7 +22,7 @@ Trustworthiness takes priority over sharpness. The 2.5 m output is a model recon
 
 | Option | Decision | Reason |
 | --- | --- | --- |
-| A: pretrained SEN2SR-lite RGBN Ã—4, fine-tuning, original-resolution change support and transform sensitivity | Selected by project brief; feasibility still gated by Phase 0 | Small pretrained four-band model, explicit spectral constraint, inspectable inference/training path, and a manageable demo scope |
+| A: pretrained SEN2SR-lite RGBN Ã—4, fine-tuning, original-resolution change support and transform sensitivity | Selected and implemented | Small pretrained four-band model, explicit spectral constraint, inspectable inference/training path, and a manageable demo scope |
 | B: diffusion SR | Rejected for this project | Iterative sampling and uncertainty ensembles would add memory/runtime and validation burden. Plausible invented textures are especially problematic for damage mapping. This is a project trade-off, not a claim that every diffusion method is inaccurate |
 | C: train our own SR model from scratch | Rejected | Violates the brief; insufficient compute, paired-data coverage and time to establish reliability |
 | Pure interpolation | Retain as a baseline, not the proposed SR solution | Helps establish whether learned SR adds analytical value |
@@ -36,7 +38,7 @@ The inspected model `load.py` defines `trainable_model(path, device=...)` separa
 Do not infer trainability from a successful forward pass.
 
 Preserve storage-band names and explicitly reorder for the model. Validate reflectance scale/offset from actual provider assets; do not blindly divide every source by 10,000. Retain invalid masks even if finite fill values are required for inference.
-Pin upstream code and checkpoint revisions/hashes at download time; the currently inspected GitHub revision is 8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4. The Hugging Face revision has not yet been pinned.
+Upstream GitHub source was inspected at 8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4; the Hugging Face model is pinned to 469e9b3a049f9320ba66b3a39b9655dbd31480b3 with individual file hashes in [configs/phase0.yaml](../configs/phase0.yaml).
 
 ## Compute and geometry
 

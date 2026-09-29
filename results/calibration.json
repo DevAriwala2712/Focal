@@ -1,0 +1,52 @@
+{
+  "selected_k": 2.0,
+  "scores": [
+    {
+      "k": 0.5,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 1.0,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 1.5,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 2.0,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 2.5,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 3.0,
+      "f1": 0.09289002557544757
+    },
+    {
+      "k": 4.0,
+      "f1": 0.09289002557544757
+    }
+  ],
+  "sample_count": 6,
+  "label_grid": "10 m parent",
+  "predicted_class": "OBSERVED",
+  "identifiable": false,
+  "tied_best_k": [
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    4.0
+  ],
+  "tie_policy": "Keep candidate closest to default k=2.0 when F1 ties",
+  "events": [
+    "chimanimani",
+    "italy"
+  ],
+  "source_manifest_sha256": "ec80fcf14ebb302691978543e8afa2d00132175e08f163af1515641288560732"
+}

@@ -1,0 +1,250 @@
+{
+  "dataset": "Sen12Landslides harmonized S12LS-LD",
+  "selected_k": 2.0,
+  "calibration": {
+    "selected_k": 2.0,
+    "scores": [
+      {
+        "k": 0.5,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 1.0,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 1.5,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 2.0,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 2.5,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 3.0,
+        "f1": 0.09289002557544757
+      },
+      {
+        "k": 4.0,
+        "f1": 0.09289002557544757
+      }
+    ],
+    "sample_count": 6,
+    "label_grid": "10 m parent",
+    "predicted_class": "OBSERVED",
+    "identifiable": false,
+    "tied_best_k": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      4.0
+    ],
+    "tie_policy": "Keep candidate closest to default k=2.0 when F1 ties",
+    "events": [
+      "chimanimani",
+      "italy"
+    ],
+    "source_manifest_sha256": "ec80fcf14ebb302691978543e8afa2d00132175e08f163af1515641288560732"
+  },
+  "evaluation": {
+    "f1_10m": 0.023519163763066203,
+    "f1_raw_2p5m_aggregated_to_10m": 0.01463984745032909,
+    "f1_trust_2p5m_aggregated_to_10m": 0.023519163763066203,
+    "f1_observed_only_aggregated_to_10m": 0.023519163763066203,
+    "confusion": {
+      "10m": {
+        "tp": 27,
+        "fp": 2144,
+        "fn": 98
+      },
+      "raw_2p5m": {
+        "tp": 119,
+        "fp": 16013,
+        "fn": 6
+      },
+      "trust": {
+        "tp": 27,
+        "fp": 2144,
+        "fn": 98
+      },
+      "observed_only": {
+        "tp": 27,
+        "fp": 2144,
+        "fn": 98
+      }
+    },
+    "unsupported_2p5m_pixels": 177864,
+    "valid_10m_pixels": 32127,
+    "positive_10m_pixels": 125
+  },
+  "calibration_events": [
+    "chimanimani",
+    "italy"
+  ],
+  "evaluation_events": [
+    "kyrgyzstan1"
+  ],
+  "patch_count": 8,
+  "patches": [
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1004.nc",
+      "published_split": "test",
+      "positive_pixels": 362,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1004.nc",
+      "sha256": "ce05fe870fa03d3dfdc29ea2597a31ad20fc347204f4072fcd19428e2df5457e",
+      "pre_date": "2019-03-10",
+      "post_date": "2019-03-20",
+      "event_date": "2019-03-15",
+      "valid_parent_pixels": 16384,
+      "labelled_parent_pixels": 362,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1033.nc",
+      "published_split": "test",
+      "positive_pixels": 312,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1033.nc",
+      "sha256": "9e59780ee12e66c24b7c3d8190952d79ca0dabd84dc8172de242bdca703487b6",
+      "pre_date": "2019-03-10",
+      "post_date": "2019-03-25",
+      "event_date": "2019-03-15",
+      "valid_parent_pixels": 15664,
+      "labelled_parent_pixels": 312,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "chimanimani",
+      "file": "data/sen12/chimanimani_s2_1042.nc",
+      "published_split": "test",
+      "positive_pixels": 88,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part01.tar.gz",
+      "source_member": "chimanimani_s2_1042.nc",
+      "sha256": "8450d58d3708fe6bf98368eaaed6e96e05fd615771bfe047ba51c31a3be0f9ed",
+      "pre_date": "2019-03-10",
+      "post_date": "2019-04-04",
+      "event_date": "2019-03-15",
+      "valid_parent_pixels": 15004,
+      "labelled_parent_pixels": 88,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1597.nc",
+      "published_split": "test",
+      "positive_pixels": 72,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1597.nc",
+      "sha256": "d5d5d64ad0a9f91d0e4fd6138da75b756ef222034569799d9915a10e2adcae25",
+      "pre_date": "2023-04-23",
+      "post_date": "2023-05-23",
+      "event_date": "2023-05-16",
+      "valid_parent_pixels": 16382,
+      "labelled_parent_pixels": 72,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1610.nc",
+      "published_split": "test",
+      "positive_pixels": 100,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1610.nc",
+      "sha256": "8083e9be908d49fd7ef983a0af03a85e9b50862925a58e557c2f0ebfb4c05bec",
+      "pre_date": "2023-02-07",
+      "post_date": "2023-05-23",
+      "event_date": "2023-05-16",
+      "valid_parent_pixels": 16384,
+      "labelled_parent_pixels": 100,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "italy",
+      "file": "data/sen12/italy_s2_1613.nc",
+      "published_split": "test",
+      "positive_pixels": 98,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part10.tar.gz",
+      "source_member": "italy_s2_1613.nc",
+      "sha256": "f2fb3f4513fdfcf8b3288505e7c83f052acccc0d5cb2d618a667c430e610e1a5",
+      "pre_date": "2023-04-18",
+      "post_date": "2023-05-28",
+      "event_date": "2023-05-16",
+      "valid_parent_pixels": 15664,
+      "labelled_parent_pixels": 86,
+      "evaluation_group": "calibration"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2406.nc",
+      "published_split": "test",
+      "positive_pixels": 119,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2406.nc",
+      "sha256": "11cefccb9232ec17e96b8fcc4b303ea5bf689a5782af253aacefe422f19ab740",
+      "pre_date": "2017-10-31",
+      "post_date": "2018-02-28",
+      "event_date": "2018-02-23",
+      "valid_parent_pixels": 15847,
+      "labelled_parent_pixels": 63,
+      "evaluation_group": "evaluation"
+    },
+    {
+      "event_id": "kyrgyzstan1",
+      "file": "data/sen12/kyrgyzstan1_s2_2612.nc",
+      "published_split": "test",
+      "positive_pixels": 101,
+      "source_archive": "https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part21.tar.gz",
+      "source_member": "kyrgyzstan1_s2_2612.nc",
+      "sha256": "b38773130e17d6db84ae6ae31726ae74bae3343ed42293ecdbfe4ddc35b967b7",
+      "pre_date": "2016-07-13",
+      "post_date": "2017-04-09",
+      "event_date": "2017-04-09",
+      "valid_parent_pixels": 16280,
+      "labelled_parent_pixels": 62,
+      "evaluation_group": "evaluation"
+    }
+  ],
+  "rejected_patches": [
+    {
+      "file": "data/sen12/kyrgyzstan1_s2_2394.nc",
+      "event_id": "kyrgyzstan1",
+      "reason": "Multiple events share one inventory mask: kyrgyzstan1_s2_2394.nc"
+    },
+    {
+      "file": "data/sen12/kyrgyzstan1_s2_2421.nc",
+      "event_id": "kyrgyzstan1",
+      "reason": "Multiple events share one inventory mask: kyrgyzstan1_s2_2421.nc"
+    },
+    {
+      "file": "data/sen12/kyrgyzstan1_s2_2484.nc",
+      "event_id": "kyrgyzstan1",
+      "reason": "Multiple events share one inventory mask: kyrgyzstan1_s2_2484.nc"
+    },
+    {
+      "file": "data/sen12/kyrgyzstan1_s2_2660.nc",
+      "event_id": "kyrgyzstan1",
+      "reason": "Multiple events share one inventory mask: kyrgyzstan1_s2_2660.nc"
+    },
+    {
+      "file": "data/sen12/kyrgyzstan1_s2_2680.nc",
+      "event_id": "kyrgyzstan1",
+      "reason": "Multiple events share one inventory mask: kyrgyzstan1_s2_2680.nc"
+    }
+  ],
+  "limitations": [
+    "Event inventories are disjoint, but this is a small, positive-patch-enriched sample.",
+    "MASK is a 10 m landslide inventory repeated across dates; no independent 2.5 m truth exists.",
+    "The 2.5 m predictions were aggregated back to 10 m for F1.",
+    "Trusted change includes OBSERVED and INFERRED; its 10 m F1 is algebraically tied to the parent gate."
+  ]
+}

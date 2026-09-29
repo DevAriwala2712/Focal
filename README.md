@@ -26,6 +26,9 @@ The tested runtime is native Windows 11, Python 3.13, an RTX 4050 Laptop GPU wit
 .\.venv\Scripts\python.exe -m scripts.audit_event_aoi
 .\.venv\Scripts\python.exe -m scripts.fetch_wayanad
 .\.venv\Scripts\python.exe -m scripts.run_demo_tile
+.\.venv\Scripts\python.exe -m scripts.prepare_worldstrat_validation
+.\.venv\Scripts\python.exe -m scripts.prepare_sen12_validation
+.\.venv\Scripts\python.exe -m scripts.evaluate_sen12
 .\.venv\Scripts\python.exe -m scripts.evaluate_results
 .\.venv\Scripts\python.exe -m scripts.package_demo
 ```
@@ -38,6 +41,8 @@ The checkpoint can be regenerated from the three provenance-verified WorldStrat 
 
 ## Evidence and limits
 
-See [results/REPORT.md](results/REPORT.md) and [results/metrics.json](results/metrics.json). The three WorldStrat PSNR/SSIM values are **training-pair diagnostics only**. Held-out SR fidelity, calibrated `k`, and landslide-detection F1 are **unavailable**: an independent multi-event paired label split has not been prepared. `scripts/calibrate_k.py` deliberately refuses the single Phase 0 access-proof crop, retaining default `k=2.0`. Landslide4Sense supplies single-image masks, not before/after truth. The published 507-building / 8.38-km-road figure is contextual research from a different sensor/method, not a TrustSR measurement.
+See [results/REPORT.md](results/REPORT.md) and [results/metrics.json](results/metrics.json). Three WorldStrat publisher validation AOIs, disjoint from fine-tuning, yielded mean **33.53 dB PSNR** and **0.858 SSIM**. WorldStrat's HR digital numbers were fitted per pair to paired LR reflectance, so these are limited spatial-fidelity estimates, not physically calibrated spectral accuracy. The training-pair figures are kept separately as optimizer diagnostics.
+
+An independent Sen12Landslides temporal check uses two calibration event inventories and a distinct evaluation inventory. All candidate `k` values tied on calibration F1, so the configured **k=2.0** remains; the threshold is **not identified by the labels**. The event-held-out landslide F1 is very low; see the report for the exact sample size, counts and 10 m comparison basis. This is evidence that the current NDVI detector is **not operationally reliable**. There is no independently surveyed 2.5 m landslide truth, and the delayed Wayanad tile has no matching independent landslide mask. `scripts/calibrate_k.py` deliberately refuses the single Phase 0 access-proof crop. Landslide4Sense supplies single-image masks, not before/after truth. The published 507-building / 8.38-km-road figure is contextual research from a different sensor/method, not a TrustSR measurement.
 
 The required modules are [fetch.py](trustsr/fetch.py), [sr.py](trustsr/sr.py), [trust.py](trustsr/trust.py), [change.py](trustsr/change.py), and [evaluate.py](trustsr/evaluate.py). CPU synthetic tests cover grid identity, spectral consistency, transform inverses, tile stitching/OOM fallback, known change classes and COG outputs. The original Phase 0 evidence remains in [RISK_REPORT.md](RISK_REPORT.md), and [design.md](docs/design.md) records the rejected diffusion and from-scratch alternatives.

@@ -154,8 +154,8 @@ def harmonize(low, high_dn, scale, min_correlation):
     return np.asarray(out, dtype='float32'), coefficients
 
 
-def probe(cfg, root):
-    """Prepare three real clear land crops, preserving geographic CRS and x4 grid."""
+def probe(cfg, root, *, split='train', target_pairs=None, manifest_path=None):
+    """Prepare real clear land crops from one published split on an exact x4 grid."""
     import rasterio
     from rasterio.transform import from_bounds
     from rasterio.warp import reproject, Resampling
@@ -169,17 +169,19 @@ def probe(cfg, root):
     for key in ['metadata', 'split']:
         spec = settings[key]
         files[key] = download(spec['url'], cache/spec['name'], policy, sha256=spec['sha256'])
+    if split not in {'train', 'val', 'test'}:
+        raise ValueError(f'Unknown WorldStrat split: {split}')
     with files['split'].open(encoding='utf-8') as f:
-        train = {r['tile'] for r in csv.DictReader(f) if r['split'] == 'train'}
+        split_aois = {r['tile'] for r in csv.DictReader(f) if r['split'] == split}
     with files['metadata'].open(encoding='utf-8') as f:
-        candidates = [r for r in csv.DictReader(f) if r['tile'] in train and
+        candidates = [r for r in csv.DictReader(f) if r['tile'] in split_aois and
                       abs(int(r['delta'])) <= settings['max_date_gap_days'] and
                       float(r['cloud_cover']) <= settings['max_metadata_cloud_pct'] and
                       r['IPCC Class'] in settings['land_cover_classes']]
     candidates.sort(key=lambda r: (abs(int(r['delta'])), float(r['cloud_cover']), r['tile'], int(r['n'])))
     archives = settings['archives']
     indices = {key: archive_index(spec, cache, policy) for key, spec in archives.items()}
-    manifest_path = root / cfg['training']['pair_manifest']
+    manifest_path = root / (manifest_path or cfg['training']['pair_manifest'])
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     pairs, checked, seen = [], [], set()
     size, scale = cfg['model']['native_tile'], cfg['model']['scale']
@@ -234,7 +236,7 @@ def probe(cfg, root):
             lr_path, hr_path = manifest_path.parent/f'{aoi}_lr.tif', manifest_path.parent/f'{aoi}_hr.tif'
             write_cog(lr_path, low, crs, transform, cfg['model']['bands'], None)
             write_cog(hr_path, target, crs, high_transform, cfg['model']['bands'], None)
-            pairs.append({'aoi_id': aoi, 'split': 'train', 'lr': lr_path.name, 'hr': hr_path.name,
+            pairs.append({'aoi_id': aoi, 'split': split, 'lr': lr_path.name, 'hr': hr_path.name,
                           'lr_sha256': digest(lr_path), 'hr_sha256': digest(hr_path),
                           'lr_scale': 1, 'lr_offset': 0, 'hr_scale': 1, 'hr_offset': 0,
                           'source_urls': [spec['url'] for spec in archives.values()],
@@ -243,23 +245,27 @@ def probe(cfg, root):
                           'radiometry': {'method': 'Per-band affine fit from averaged HR DN to paired LR reflectance',
                                          'physical_hr_reflectance': False, 'coefficients': coefficients},
                           'resolution': 'Native geographic ~10m LR and exact x4 subdivision; not exact metric 2.5m',
-                          'use': 'Training smoke test only; no validation or accuracy claim'})
+                          'use': 'Training smoke test only' if split == 'train' else
+                                 'Held-out SR evaluation with empirical per-pair radiometric harmonization'})
             checked.append({'aoi': aoi, 'status': 'PREPARED'})
         except Exception as exc:
             checked.append({'aoi': aoi, 'status': 'REJECTED', 'reason': str(exc)})
             print(f'Rejected: {exc}', flush=True)
-        write_json(root/cfg['paths']['results']/'worldstrat_candidates.json', {'checked': checked})
-        if len(pairs) == cfg['training']['min_pairs']:
+        candidate_log = 'worldstrat_candidates.json' if split == 'train' else f'worldstrat_{split}_candidates.json'
+        write_json(root/cfg['paths']['results']/candidate_log, {'checked': checked})
+        if len(pairs) == (target_pairs or cfg['training']['min_pairs']):
             break
-    if len(pairs) < cfg['training']['min_pairs']:
+    if len(pairs) < (target_pairs or cfg['training']['min_pairs']):
         return {'status': 'BLOCKED', 'prepared': len(pairs), 'checked': checked, 'reason': 'Not enough verified pairs; no ready manifest published'}
-    manifest = {'dataset': 'WorldStrat', 'pairs': pairs, 'smoke_only': True,
+    manifest = {'dataset': 'WorldStrat', 'pairs': pairs, 'smoke_only': split == 'train',
                 'metadata_sha256': digest(files['metadata']), 'split_sha256': digest(files['split'])}
-    validate_manifest(manifest, manifest_path.parent, cfg['model']['bands'])
+    validate_manifest(manifest, manifest_path.parent, cfg['model']['bands'], allowed_splits=(split,))
     write_json(manifest_path, manifest)
     return {'status': 'PASS', 'prepared': len(pairs), 'checked': checked,
             'manifest_sha256': digest(manifest_path), 'manifest': manifest,
-            'scope': 'Empirically harmonized real WorldStrat pairs for optimizer smoke test only'}
+            'scope': ('Empirically harmonized real WorldStrat pairs for optimizer smoke test only'
+                      if split == 'train' else
+                      'Published held-out WorldStrat split with per-pair empirical radiometric harmonization')}
 
 
 if __name__ == '__main__':

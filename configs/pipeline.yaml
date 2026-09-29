@@ -52,6 +52,18 @@ change:
   invalid_scl: [0, 1, 2, 3, 8, 9, 10, 11]
 calibration:
   candidate_k: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0]
+validation:
+  sen12_split_url: https://raw.githubusercontent.com/PaulH97/Sen12Landslides/main/tasks/S12LS-LD/harmonized/s2/splits.json
+  sen12_archive_template: https://huggingface.co/datasets/paulhoehn/Sen12Landslides/resolve/main/data_harmonized/s2/s2_part{part:02d}.tar.gz
+  sen12_event_parts: {chimanimani: 1, italy: 10, kyrgyzstan1: 21}
+  sen12_patches_per_event: {chimanimani: 3, italy: 3, kyrgyzstan1: 7}
+  sen12_max_archive_members: 180
+  sen12_min_positive_pixels: 50
+  sen12_max_invalid_pct: 10
+  sen12_timeout_seconds: 120
+  sen12_source_split: test
+  sen12_cache: data/sen12
+  sen12_manifest: results/sen12_manifest.json
 demo:
   output_dir: data/wayanad/demo
   tile_pixels: 128

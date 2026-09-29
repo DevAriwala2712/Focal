@@ -38,3 +38,13 @@ def test_k_selection_uses_labelled_parent_grid_and_f1():
     result = calibrate_k([sample], [2.0, 6.0], parent_drop_threshold=.1)
     assert result['selected_k'] == 2.0
     assert result['scores'][0]['f1'] == 1.0
+
+
+def test_k_tie_keeps_default_and_marks_calibration_inconclusive():
+    sample = {'pre_mean': np.full((4, 4), .5), 'post_mean': np.full((4, 4), .2),
+              'pre_std': np.zeros((4, 4)), 'post_std': np.zeros((4, 4)),
+              'parent_pre': np.array([[.5]]), 'parent_post': np.array([[.2]]),
+              'valid': np.ones((4, 4), bool), 'labels': np.array([[1]], bool)}
+    result = calibrate_k([sample], [0.5, 2.0, 4.0], parent_drop_threshold=.1)
+    assert result['selected_k'] == 2.0
+    assert result['identifiable'] is False

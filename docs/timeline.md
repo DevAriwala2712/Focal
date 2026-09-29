@@ -1,6 +1,6 @@
 # TrustSR timeline
 
-Update 2026-09-29: The Phase 0 Colab smoke test passed, and Phase 1 components, an offline demo and a local 50-step checkpoint have been implemented. A location cross-check revealed that the brief's coordinates are 36.43 km from NRSC's mapped disaster site; the event-site SCL audit has been rerun and the corrected showcase is being generated. The finale date is still unconfirmed, so the relative deadlines below remain planning targets, not calendar commitments. Held-out landslide F1 and k calibration remain dependent on an independent multi-event label set.
+Update 2026-09-29: The Phase 0 Colab smoke test, Phase 1 components, offline event-site demo and local 50-step checkpoint have been implemented. Held-out WorldStrat and event-disjoint Sen12Landslides checks have been run; the latter found very low F1 and no unique k optimum. The demo is a proof of the trust-gating workflow, not a validated landslide damage detector. The finale date is still unconfirmed, so the relative deadlines below remain planning targets, not calendar commitments.
 
 Updated 2026-09-26. **Finale date/year: not yet supplied or confirmed.** An earlier submission deadline is also unknown. Do not infer either from a previous SIH edition. The user has been asked for the actual dates.
 
@@ -18,4 +18,4 @@ The following is a proposed relative schedule, not a confirmed calendar commitme
 
 Priorities: real input provenance â†’ offline end-to-end demo â†’ trustworthy metrics/labels â†’ optional live tile â†’ polish. Never shorten the schedule by fabricating risk passes, fine-tuning success or cloud-free imagery. If data/calibration fails, explain the limitation and revise the claim before moving on.
 
-No Phase 1 implementation has begun. Phase 0 scripts and an execution report now exist. The next milestone is resolving the report's fixed-mask tile limitation, original Landslide4Sense download failure and missing real-data Colab run. The late clear Wayanad post-image must inform the demo claim. Calendar dates still require the confirmed finale date.
+The functional demo path is ready for rehearsal. Before any operational claim, obtain stronger event-disjoint temporal labels, an independently surveyed fine-resolution reference, a closer post-event Wayanad scene if available, and a physical 4 GB GPU run. Calendar dates still require the confirmed finale date.

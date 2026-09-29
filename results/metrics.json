@@ -28,12 +28,58 @@
       "data_range": 1.0
     }
   ],
-  "held_out_worldstrat": null,
-  "held_out_reason": "Only three WorldStrat train AOIs were prepared; no independent validation/test pairs are available.",
-  "downstream_f1_10m": null,
-  "downstream_f1_2p5m": null,
-  "downstream_f1_trust": null,
-  "downstream_reason": "No held-out georeferenced pre/post landslide labels aligned to this Wayanad tile.",
+  "held_out_worldstrat": {
+    "pairs": [
+      {
+        "aoi_id": "Landcover-1588648",
+        "split": "val",
+        "held_out": true,
+        "psnr_db": 35.12731652510971,
+        "ssim": 0.8671395091186519,
+        "spectral_rmse": 4.9388106937442444e-09,
+        "data_range": 1.0
+      },
+      {
+        "aoi_id": "Landcover-485204",
+        "split": "val",
+        "held_out": true,
+        "psnr_db": 35.38356158509834,
+        "ssim": 0.857664112412756,
+        "spectral_rmse": 1.1942796973585246e-08,
+        "data_range": 1.0
+      },
+      {
+        "aoi_id": "Landcover-768945",
+        "split": "val",
+        "held_out": true,
+        "psnr_db": 30.075968827534147,
+        "ssim": 0.8483450882084038,
+        "spectral_rmse": 7.646186794829646e-09,
+        "data_range": 1.0
+      }
+    ],
+    "mean_psnr_db": 33.528948979247396,
+    "mean_ssim": 0.8577162365799372,
+    "mean_spectral_rmse": 8.175931487386379e-09,
+    "pair_count": 3,
+    "manifest_sha256": "85a6fa7526b9c1824f0f540104835d8a8bcf75229780b8fe92bb844ce2ea75fc",
+    "caveat": "HR DN is fit per band to each paired LR tile; this is a held-out spatial-fidelity comparison, not calibrated physical reflectance accuracy."
+  },
+  "held_out_reason": null,
+  "downstream_f1_10m": 0.023519163763066203,
+  "downstream_f1_2p5m": 0.01463984745032909,
+  "downstream_f1_trust": 0.023519163763066203,
+  "downstream_unsupported_pixels": 177864,
+  "downstream_scope": "Sen12Landslides event-held-out 10 m masks; positive-enriched patches; SR predictions aggregated to 10 m; Wayanad has no independent labels.",
+  "downstream_reason": null,
+  "calibration": {
+    "selected_k": 2.0,
+    "identifiable": false,
+    "events": [
+      "chimanimani",
+      "italy"
+    ]
+  },
   "opensr_test": null,
   "opensr_test_reason": "Optional package dry-run would upgrade pinned timm and add substantial dependencies; benchmark dataset not installed.",
   "wayanad_tile": {

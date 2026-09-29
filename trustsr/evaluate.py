@@ -50,7 +50,7 @@ def assess_sr(lr, hr, prediction, *, split: str, data_range=1.0):
             'ssim': ssim, 'spectral_rmse': spectral_rmse(lr, prediction), 'data_range': data_range}
 
 
-def calibrate_k(samples, candidates, *, parent_drop_threshold):
+def calibrate_k(samples, candidates, *, parent_drop_threshold, preferred_k=2.0):
     """Maximise F1 of OBSERVED support on labelled 10 m parent pixels."""
     from trustsr.change import OBSERVED, classify
     samples = list(samples)
@@ -77,6 +77,10 @@ def calibrate_k(samples, candidates, *, parent_drop_threshold):
     usable = [row for row in scores if row['f1'] is not None]
     if not usable:
         raise ValueError('Calibration has no scored positive/predicted pixels')
-    selected = max(usable, key=lambda row: (row['f1'], -row['k']))
+    maximum = max(row['f1'] for row in usable)
+    winners = [row for row in usable if abs(row['f1'] - maximum) < 1e-12]
+    selected = min(winners, key=lambda row: (abs(row['k'] - preferred_k), row['k']))
     return {'selected_k': selected['k'], 'scores': scores, 'sample_count': len(samples),
-            'label_grid': '10 m parent', 'predicted_class': 'OBSERVED'}
+            'label_grid': '10 m parent', 'predicted_class': 'OBSERVED',
+            'identifiable': len(winners) == 1, 'tied_best_k': [row['k'] for row in winners],
+            'tie_policy': f'Keep candidate closest to default k={preferred_k} when F1 ties'}
