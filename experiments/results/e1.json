@@ -22,7 +22,7 @@
         "origins_rows": [
           0
         ],
-        "seconds": 0.06122366597992368,
+        "seconds": 0.04550962502253242,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -100,7 +100,7 @@
           96,
           172
         ],
-        "seconds": 0.38695720801479183,
+        "seconds": 0.40511029199115,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -181,7 +181,7 @@
           384,
           389
         ],
-        "seconds": 1.5126394999970216,
+        "seconds": 2.1134342919976916,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -267,7 +267,7 @@
           864,
           872
         ],
-        "seconds": 5.179906624980504,
+        "seconds": 6.5997241659788415,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -352,7 +352,7 @@
   ],
   "experiment": "e1",
   "risk": "e1",
-  "started_utc": "2026-09-29T12:37:45.335185+00:00",
-  "finished_utc": "2026-09-29T12:37:55.089117+00:00",
-  "config_sha256": "16c3fd4b1d666c3606a7a2aacf96983e6c611895f2843892d3bc7fdcfe62f174"
+  "started_utc": "2026-09-29T12:44:22.021509+00:00",
+  "finished_utc": "2026-09-29T12:44:33.375887+00:00",
+  "config_sha256": "cd9d2d686b0dfc8fa621dfcf2360b5843663843ceceaf95289ff3230b427cd52"
 }

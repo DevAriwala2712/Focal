@@ -273,3 +273,116 @@ def test_real_crop_refuses_unset_radiometry_and_wrong_geometry(tmp_path):
         dst.write(data)
     with pytest.raises(Blocked, match='10 m'):
         load_real_crop({'path': 'coarse.tif', 'dn_scale': 10000.0, 'dn_offset': 0.0}, tmp_path)
+
+
+# ---- shared NDVI + E2 tile invariance ----------------------------------------------
+
+def test_ndvi_uses_red_and_nir_and_masks_unstable_denominators():
+    from experiments.common import ndvi
+    a = np.zeros((4, 1, 3), 'float32')
+    a[0, 0] = [0.1, 0.2, 0.001]          # B04 red
+    a[3, 0] = [0.3, 0.2, 0.001]          # B08 nir
+    out = ndvi(a, min_denominator=0.01)
+    assert out.dtype == np.float32 and out.shape == (1, 3)
+    assert out[0, 0] == pytest.approx(0.5) and out[0, 1] == pytest.approx(0.0)
+    assert np.isnan(out[0, 2])
+
+
+def test_coverage_count_and_seam_lines_follow_the_tile_layout():
+    from experiments.e2_tile_invariance import coverage_count, seam_lines
+    counts = coverage_count(300, [0, 96, 172], 128)
+    assert counts[0] == 1 and counts[96] == 2 and counts[127] == 2 and counts[128] == 1
+    assert counts[172] == 2 and counts[223] == 2 and counts[224] == 1 and counts.min() == 1
+    # tile-boundary lines inside the image (a hard cut steps here), in 4x output pixels;
+    # the borders 0 and 1200 are image edges, not seams
+    assert seam_lines(300, [0, 96, 172], 128, 4) == [384, 512, 688, 896]
+    assert seam_lines(128, [0], 128, 4) == []
+
+
+def test_zone_masks_partition_the_output_and_separate_shared_from_different_tiles():
+    from experiments.e2_tile_invariance import zone_masks
+    z = zone_masks(300, [0, 96, 172], [0, 32, 128, 172], 128, 4)
+    assert set(z) == {'interior_different_tile', 'interior_same_tile', 'seam'}
+    stacked = np.stack(list(z.values()))
+    assert stacked.shape == (3, 1200, 1200) and (stacked.sum(0) == 1).all()   # exact partition
+    # positions 0..31 are covered only by tile 0 in both runs: identical computation, not evidence
+    assert z['interior_same_tile'][10 * 4, 10 * 4] and not z['interior_different_tile'][10 * 4, 10 * 4]
+    # position 160: only tile 96 in run A, only tile 128 in run B -> a genuinely different tile
+    assert z['interior_different_tile'][160 * 4, 160 * 4]
+    # position 60 lies in one tile of run A but two tiles (origins 0 and 32) of run B -> seam
+    assert z['seam'][60 * 4, 60 * 4]
+
+
+def test_seam_score_detects_a_step_and_ignores_a_smooth_ramp():
+    from experiments.e2_tile_invariance import seam_score
+    ramp = np.tile(np.linspace(0, 1, 800, dtype='float32'), (4, 800, 1))
+    smooth = seam_score(ramp, [], [448])
+    assert smooth['ratio'] == pytest.approx(1.0, rel=0.05)
+    step = ramp.copy()
+    step[:, :, 448:] += 0.2
+    stepped = seam_score(step, [], [448])
+    assert stepped['ratio'] > 20 and stepped['seam_mean'] > stepped['elsewhere_mean']
+
+
+def test_delta_stats_report_max_and_p99_over_a_mask():
+    from experiments.e2_tile_invariance import delta_stats
+    a = np.zeros((4, 10, 10), 'float32')
+    b = a.copy()
+    b[0, 0, 0] = 0.5
+    b[1, 5, 5] = -0.25
+    mask = np.ones((10, 10), bool)
+    full = delta_stats(a, b, mask)
+    assert full['max_abs'] == 0.5 and full['count'] == 400 and 0 <= full['p99_abs'] < 0.5
+    mask[0, 0] = False
+    assert delta_stats(a, b, mask)['max_abs'] == 0.25
+    assert delta_stats(a, b, np.zeros((10, 10), bool))['count'] == 0
+
+
+def test_seam_score_compares_against_the_same_subpixel_phase():
+    from experiments.e2_tile_invariance import seam_score
+    x = np.arange(800)
+    profile = 0.01 * (x % 4 == 0).astype('float32') * (x > 0)      # block-boundary gradients everywhere
+    img = np.cumsum(profile)[None, None, :].repeat(4, 0).repeat(8, 1).astype('float32')
+    naive_like = seam_score(img, [], [448], scale=1)                # phase-blind
+    phased = seam_score(img, [], [448], scale=4)                    # 448 % 4 == 0: same phase as most steps
+    assert phased['ratio'] == pytest.approx(1.0, rel=0.05)
+    assert naive_like['ratio'] > 2
+
+
+def test_tile_bias_operator_cycles_a_known_step_per_tile():
+    from experiments.e2_tile_invariance import biased_operator
+    op = biased_operator(lambda b: np.zeros((b.shape[0], 4, 8, 8), 'float32'), 0.25, period=3)
+    got = [float(op(np.zeros((1, 4, 2, 2), 'float32')).max()) for _ in range(4)]
+    assert got == [0.0, 0.25, 0.5, 0.0]
+
+
+def test_keep_tiles_exposes_raw_per_tile_outputs():
+    from experiments.e1_tile_scheduler import super_resolve_tiled
+    out = super_resolve_tiled(np.zeros((4, 128, 224), 'float32'), None, _nearest_x4, tile=128, stride=96,
+                              scale=4, feather=32, keep_tiles=True)
+    assert set(out.tiles) == {(0, 0), (0, 96)} and out.tiles[(0, 0)].shape == (4, 512, 512)
+    assert super_resolve_tiled(np.zeros((4, 128, 128), 'float32'), None, _nearest_x4, tile=128, stride=96,
+                               scale=4, feather=32).tiles == {}
+
+
+def test_pair_disagreement_bins_raw_overlap_error_by_distance_to_the_nearer_tile_edge():
+    from experiments.e2_tile_invariance import pair_disagreement
+    zeros = np.zeros((4, 512, 512), 'float32')
+    b = zeros.copy()
+    b[:, :, :4] = 1.0                 # first input column of tile B disagrees with tile A
+    tiles = {(0, 0): zeros, (0, 96): b}
+    rows = pair_disagreement(tiles, 128, 4, [0, 2, 4, 8, 16])
+    assert [r['bin'] for r in rows] == ['[0,2)', '[2,4)', '[4,8)', '[8,16)', '[16,inf)']
+    assert rows[0]['max_abs'] == 1.0 and all(r['max_abs'] == 0.0 for r in rows[1:4])
+    assert rows[4]['count'] == 0
+    # overlap is 32 input px = 128 output cols x 512 rows x 4 bands, counted once per direction
+    assert sum(r['count'] for r in rows) == 4 * 512 * 128
+
+
+def test_pair_disagreement_also_covers_vertical_neighbours():
+    from experiments.e2_tile_invariance import pair_disagreement
+    zeros = np.zeros((4, 512, 512), 'float32')
+    b = zeros.copy()
+    b[:, :4, :] = 1.0                 # first input row of the lower tile disagrees
+    rows = pair_disagreement({(0, 0): zeros, (96, 0): b}, 128, 4, [0, 2, 4, 8, 16])
+    assert rows[0]['max_abs'] == 1.0 and all(r['max_abs'] == 0.0 for r in rows[1:4])

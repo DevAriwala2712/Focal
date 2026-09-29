@@ -41,10 +41,11 @@ class TiledResult:
     transform: object
     origins: list = field(default_factory=list)
     input_shapes: set = field(default_factory=set)
+    tiles: dict = field(default_factory=dict)      # raw per-tile outputs, only when keep_tiles=True
 
 
 def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feather,
-                        anchor=(0, 0), offset=(0, 0), batch_size=1, origins=None,
+                        anchor=(0, 0), offset=(0, 0), batch_size=1, origins=None, keep_tiles=False,
                         stage=lambda name: contextlib.nullcontext()) -> TiledResult:
     """Overlap-tile `operator` over image (C,H,W). Tile order is row-major and fixed."""
     channels, height, width = image.shape
@@ -57,7 +58,7 @@ def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feat
     out_tile, taper = tile * scale, feather * scale
     num = np.zeros((channels, height * scale, width * scale), dtype=np.float32)
     den = np.zeros((height * scale, width * scale), dtype=np.float32)
-    weights, shapes = {}, set()
+    weights, shapes, kept = {}, set(), {}
     for start in range(0, len(origins), batch_size):
         chunk = origins[start:start + batch_size]
         with stage('extract'):
@@ -74,6 +75,8 @@ def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feat
                     weights[key] = np.outer(feather_weights(out_tile, taper, key[0], key[1]),
                                             feather_weights(out_tile, taper, key[2], key[3]))
                 w = weights[key]
+                if keep_tiles:
+                    kept[(r, c)] = sr.copy()
                 R, C = r * scale, c * scale
                 num[:, R:R + out_tile, C:C + out_tile] += sr * w
                 den[R:R + out_tile, C:C + out_tile] += w
@@ -82,7 +85,7 @@ def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feat
     if transform is not None:
         from affine import Affine
         transform = transform * Affine.scale(1 / scale)
-    return TiledResult(result, transform, list(origins), shapes)
+    return TiledResult(result, transform, list(origins), shapes, kept)
 
 
 def spectral_consistency(sr, image, scale, bands) -> dict:

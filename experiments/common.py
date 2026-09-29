@@ -137,3 +137,12 @@ def load_real_crop(settings: dict, root):
                           evidence='real')
         dn = src.read().astype('float64')
         return ((dn + settings['dn_offset']) / settings['dn_scale']).astype('float32'), src.transform, src.crs
+
+
+def ndvi(array: np.ndarray, min_denominator: float, red: int = 0, nir: int = 3) -> np.ndarray:
+    """NDVI from a (4,H,W) B04,B03,B02,B08 array; NaN where red+nir < min_denominator (unstable)."""
+    r, n = array[red].astype(np.float64), array[nir].astype(np.float64)
+    denom = r + n
+    with np.errstate(invalid='ignore', divide='ignore'):
+        out = np.where(denom >= min_denominator, (n - r) / denom, np.nan)
+    return out.astype(np.float32)

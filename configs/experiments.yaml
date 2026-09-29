@@ -26,3 +26,18 @@ e1:
     path: data/experiments-cache/real_rgbn_10m.tif       # 4-band B04,B03,B02,B08, 10 m
     dn_scale: null                                       # must be set from the provider asset
     dn_offset: null
+ndvi:
+  min_denominator: 0.01          # red+nir below this is water/shadow: NDVI undefined -> NaN
+e2:
+  aoi_px: 517
+  offsets: [0, 32]
+  hard_cut_feather: 1            # control: near-hard seams
+  control_bias: 0.05             # positive control: step per unit of (tile number % period); must exceed the scene's natural gradient (~0.007)
+  control_period: 5              # coprime with 6 tiles/row so both horizontal and vertical neighbours differ
+  edge_distance_bins: [0, 2, 4, 8, 16, 32, 64]   # raw tile-pair overlap error, input px to the nearer tile edge
+  # Fixed before any E2 output was inspected. Twice E1's RMSE tolerance because a max over ~17M
+  # values is a harsher statistic than an RMSE.
+  interior_max_tolerance: 0.02
+  tolerance_rationale: >-
+    0.02 reflectance = twice the E1 per-band RMSE tolerance (0.01); project choice fixed before
+    measurement. NDVI deltas and seam-zone deltas are reported but are not part of the keep rule.
