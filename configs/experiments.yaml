@@ -10,3 +10,19 @@ e7:
   ddof: 0
   max_abs_error: 1.0e-6
   ram_growth_tolerance: 1.5
+e1:
+  tile: 128
+  stride: 96
+  feather: 32                    # input px; equals the default 128-96 overlap
+  aoi_sizes: [128, 300, 517, 1000]
+  affine: [10.0, 0.0, 500000.0, 0.0, -10.0, 1300000.0]   # synthetic reference grid, EPSG:32643-like
+  # Fixed before any model output was inspected: per-band RMSE of (SR block-mean to 10 m) - input.
+  spectral_rmse_tolerance: 0.01
+  tolerance_rationale: >-
+    0.01 reflectance is about 5% of a 0.2 reflectance target, the order of Sentinel-2 L2A absolute
+    radiometric uncertainty. A project choice fixed before measurement, not a published pass mark.
+    Per-band max and p99 are reported, alongside a no-model bicubic control.
+  real_crop:
+    path: data/experiments-cache/real_rgbn_10m.tif       # 4-band B04,B03,B02,B08, 10 m
+    dn_scale: null                                       # must be set from the provider asset
+    dn_offset: null

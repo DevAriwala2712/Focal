@@ -86,3 +86,54 @@ def run_cli(name: str, probe):
     print(json.dumps(result, indent=2, allow_nan=False))
     print(f'Result saved to {results / (name + ".json")}')
     raise SystemExit(0 if result['status'] == 'PASS' else 2)
+
+
+# ---- inputs ---------------------------------------------------------------------------
+
+_CLASS_SPECTRA = np.array([          # B04, B03, B02, B08 reflectance: forest, crop, bare soil, water
+    [0.03, 0.05, 0.03, 0.35],
+    [0.08, 0.10, 0.06, 0.30],
+    [0.20, 0.22, 0.17, 0.28],
+    [0.02, 0.03, 0.04, 0.02]], dtype=np.float64)
+
+
+def _smooth_noise(rng, n: int, sigma: float) -> np.ndarray:
+    freq = np.fft.fftfreq(n)
+    kernel = np.exp(-2 * (np.pi * sigma) ** 2 * (freq[:, None] ** 2 + freq[None, :] ** 2))
+    field = np.fft.ifft2(np.fft.fft2(rng.standard_normal((n, n))) * kernel).real
+    return (field - field.mean()) / field.std()
+
+
+def synthetic_scene(size: int, seed: int, full: int | None = None) -> np.ndarray:
+    """Deterministic RGBN-like reflectance scene (B04,B03,B02,B08), float32 in [0,1].
+
+    Generated at `full` px then cropped to `size`, so crops of one scene agree.
+    Synthetic: exercises mechanics only, never image-quality claims.
+    """
+    full = full or size
+    rng = np.random.default_rng(seed)
+    classes = np.digitize(_smooth_noise(rng, full, 12.0), [-0.8, 0.0, 0.9])
+    texture = 1 + 0.12 * _smooth_noise(rng, full, 1.5)
+    scene = _CLASS_SPECTRA[classes].transpose(2, 0, 1) * texture[None]
+    scene += 0.003 * rng.standard_normal(scene.shape)
+    return np.clip(scene, 0.0, 1.0).astype('float32')[:, :size, :size]
+
+
+def load_real_crop(settings: dict, root):
+    """Read a cached 4-band 10 m GeoTIFF as reflectance. Anything missing or unverified -> Blocked."""
+    import rasterio
+    path = Path(root) / settings['path']
+    if not path.is_file():
+        raise Blocked(f'real 10 m RGBN crop not cached: expected {settings["path"]} '
+                      '(4-band B04,B03,B02,B08 GeoTIFF, 10 m)', evidence='real')
+    if settings.get('dn_scale') is None or settings.get('dn_offset') is None:
+        raise Blocked(f'{settings["path"]} present but dn_scale/dn_offset unset; radiometry must be '
+                      'verified from the provider asset, not assumed', evidence='real')
+    with rasterio.open(path) as src:
+        if src.count != 4 or src.crs is None:
+            raise Blocked(f'{settings["path"]} must have 4 bands and a CRS', evidence='real')
+        if not (abs(src.transform.a) == 10 == abs(src.transform.e)):
+            raise Blocked(f'{settings["path"]} must be a 10 m grid, got {src.transform.a} x {src.transform.e}',
+                          evidence='real')
+        dn = src.read().astype('float64')
+        return ((dn + settings['dn_offset']) / settings['dn_scale']).astype('float32'), src.transform, src.crs

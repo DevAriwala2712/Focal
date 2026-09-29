@@ -1,0 +1,358 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "evidence_parts": {
+    "synthetic_rgbn": "PASS",
+    "real_10m_crop": "BLOCKED"
+  },
+  "criteria": {
+    "spectral_rmse_tolerance_reflectance": 0.01,
+    "tolerance_rationale": "0.01 reflectance is about 5% of a 0.2 reflectance target, the order of Sentinel-2 L2A absolute radiometric uncertainty. A project choice fixed before measurement, not a published pass mark. Per-band max and p99 are reported, alongside a no-model bicubic control.",
+    "tile": 128,
+    "stride": 96,
+    "feather_input_px": 32
+  },
+  "measurements": {
+    "device": "cpu",
+    "torch": "2.8.0",
+    "per_size": [
+      {
+        "aoi_px": 128,
+        "tiles": 1,
+        "origins_rows": [
+          0
+        ],
+        "seconds": 0.06122366597992368,
+        "checks": {
+          "only_128_inputs": true,
+          "output_exactly_4x": true,
+          "affine_is_input_times_scale_quarter": true,
+          "finite_and_fully_covered": true,
+          "spectral_rmse_within_tolerance": true
+        },
+        "spectral_consistency": {
+          "B04": {
+            "rmse": 0.006746130106573866,
+            "max_abs": 0.04731578822247684,
+            "p99_abs": 0.03183207947353367,
+            "bias": 6.158057814786844e-07
+          },
+          "B03": {
+            "rmse": 0.005267198561914137,
+            "max_abs": 0.03995696734637022,
+            "p99_abs": 0.02432461454998702,
+            "bias": 4.801826154476885e-07
+          },
+          "B02": {
+            "rmse": 0.0054531567233838145,
+            "max_abs": 0.0415666262852028,
+            "p99_abs": 0.024827623779419813,
+            "bias": 2.642700298594036e-07
+          },
+          "B08": {
+            "rmse": 0.00471287454575581,
+            "max_abs": 0.046426283195614815,
+            "p99_abs": 0.02428035185672343,
+            "bias": 1.059672692704794e-06
+          }
+        },
+        "bicubic_control_consistency": {
+          "B04": {
+            "rmse": 0.005414024915920692,
+            "max_abs": 0.03303702175617218,
+            "p99_abs": 0.02514444913220359,
+            "bias": 6.168288477215178e-07
+          },
+          "B03": {
+            "rmse": 0.00560955021694366,
+            "max_abs": 0.0360310813121032,
+            "p99_abs": 0.026398088876158,
+            "bias": 4.804469004859868e-07
+          },
+          "B02": {
+            "rmse": 0.0043080067926226885,
+            "max_abs": 0.02417433075606823,
+            "p99_abs": 0.01860768231097609,
+            "bias": 2.682879873816546e-07
+          },
+          "B08": {
+            "rmse": 0.006365831496245653,
+            "max_abs": 0.04812604555627331,
+            "p99_abs": 0.036109000347059925,
+            "bias": 1.0570200618007994e-06
+          }
+        },
+        "output_affine": [
+          2.5,
+          0.0,
+          500000.0,
+          0.0,
+          -2.5,
+          1300000.0
+        ],
+        "passed": true
+      },
+      {
+        "aoi_px": 300,
+        "tiles": 9,
+        "origins_rows": [
+          0,
+          96,
+          172
+        ],
+        "seconds": 0.38695720801479183,
+        "checks": {
+          "only_128_inputs": true,
+          "output_exactly_4x": true,
+          "affine_is_input_times_scale_quarter": true,
+          "finite_and_fully_covered": true,
+          "spectral_rmse_within_tolerance": true
+        },
+        "spectral_consistency": {
+          "B04": {
+            "rmse": 0.006299673904776329,
+            "max_abs": 0.05028424328338588,
+            "p99_abs": 0.030516969174495878,
+            "bias": 1.3286210964281507e-06
+          },
+          "B03": {
+            "rmse": 0.004873585742067747,
+            "max_abs": 0.047473447397351265,
+            "p99_abs": 0.02312383478973059,
+            "bias": 2.296146402740204e-06
+          },
+          "B02": {
+            "rmse": 0.0050157185784593696,
+            "max_abs": 0.04270746698603034,
+            "p99_abs": 0.0234186183661222,
+            "bias": -1.4718419901328161e-06
+          },
+          "B08": {
+            "rmse": 0.004115269602047524,
+            "max_abs": 0.05036255717277527,
+            "p99_abs": 0.020591653212904883,
+            "bias": 7.558304978121871e-07
+          }
+        },
+        "bicubic_control_consistency": {
+          "B04": {
+            "rmse": 0.004894559757446735,
+            "max_abs": 0.03636009152978659,
+            "p99_abs": 0.02307936378465453,
+            "bias": 1.798231751454043e-07
+          },
+          "B03": {
+            "rmse": 0.005049463512243953,
+            "max_abs": 0.03859553765505552,
+            "p99_abs": 0.024281968057039163,
+            "bias": 1.520597427442125e-07
+          },
+          "B02": {
+            "rmse": 0.003969101081522494,
+            "max_abs": 0.026687398552894592,
+            "p99_abs": 0.017925855943467444,
+            "bias": 1.6498540967909826e-07
+          },
+          "B08": {
+            "rmse": 0.005458246426392819,
+            "max_abs": 0.052238560281693935,
+            "p99_abs": 0.033178947744891,
+            "bias": 1.6123762488149397e-07
+          }
+        },
+        "output_affine": [
+          2.5,
+          0.0,
+          500000.0,
+          0.0,
+          -2.5,
+          1300000.0
+        ],
+        "passed": true
+      },
+      {
+        "aoi_px": 517,
+        "tiles": 36,
+        "origins_rows": [
+          0,
+          96,
+          192,
+          288,
+          384,
+          389
+        ],
+        "seconds": 1.5126394999970216,
+        "checks": {
+          "only_128_inputs": true,
+          "output_exactly_4x": true,
+          "affine_is_input_times_scale_quarter": true,
+          "finite_and_fully_covered": true,
+          "spectral_rmse_within_tolerance": true
+        },
+        "spectral_consistency": {
+          "B04": {
+            "rmse": 0.006117414704887787,
+            "max_abs": 0.0547624584287405,
+            "p99_abs": 0.029937303918413816,
+            "bias": 2.333984662000048e-06
+          },
+          "B03": {
+            "rmse": 0.0047366710421027965,
+            "max_abs": 0.04747344180941582,
+            "p99_abs": 0.02278379993513225,
+            "bias": 2.0516073395648672e-06
+          },
+          "B02": {
+            "rmse": 0.00486036705209922,
+            "max_abs": 0.04488938837312162,
+            "p99_abs": 0.023033999279141425,
+            "bias": 1.753117158033197e-06
+          },
+          "B08": {
+            "rmse": 0.004067719637840371,
+            "max_abs": 0.05528361536562443,
+            "p99_abs": 0.020166479237377584,
+            "bias": 8.745475286646333e-07
+          }
+        },
+        "bicubic_control_consistency": {
+          "B04": {
+            "rmse": 0.004755885243298234,
+            "max_abs": 0.045593360846396536,
+            "p99_abs": 0.022901417524954008,
+            "bias": 3.1591916430025044e-07
+          },
+          "B03": {
+            "rmse": 0.004905857828946336,
+            "max_abs": 0.05008713121060282,
+            "p99_abs": 0.024083775896579007,
+            "bias": 3.0440128231599564e-07
+          },
+          "B02": {
+            "rmse": 0.003854837140082677,
+            "max_abs": 0.0327848179731518,
+            "p99_abs": 0.017883172202855343,
+            "bias": 2.7084026648302093e-07
+          },
+          "B08": {
+            "rmse": 0.005311179409373278,
+            "max_abs": 0.06638201425084844,
+            "p99_abs": 0.03293874444440007,
+            "bias": 1.0472271342123517e-07
+          }
+        },
+        "output_affine": [
+          2.5,
+          0.0,
+          500000.0,
+          0.0,
+          -2.5,
+          1300000.0
+        ],
+        "passed": true
+      },
+      {
+        "aoi_px": 1000,
+        "tiles": 121,
+        "origins_rows": [
+          0,
+          96,
+          192,
+          288,
+          384,
+          480,
+          576,
+          672,
+          768,
+          864,
+          872
+        ],
+        "seconds": 5.179906624980504,
+        "checks": {
+          "only_128_inputs": true,
+          "output_exactly_4x": true,
+          "affine_is_input_times_scale_quarter": true,
+          "finite_and_fully_covered": true,
+          "spectral_rmse_within_tolerance": true
+        },
+        "spectral_consistency": {
+          "B04": {
+            "rmse": 0.006234406036609409,
+            "max_abs": 0.07211095932871103,
+            "p99_abs": 0.03054425845388325,
+            "bias": 5.345970083205333e-07
+          },
+          "B03": {
+            "rmse": 0.004818520506684765,
+            "max_abs": 0.05352207808755338,
+            "p99_abs": 0.023279913212172695,
+            "bias": 1.90852215149107e-07
+          },
+          "B02": {
+            "rmse": 0.004950716987902675,
+            "max_abs": 0.055815489031374454,
+            "p99_abs": 0.023561910307034854,
+            "bias": 3.616761741868686e-07
+          },
+          "B08": {
+            "rmse": 0.004160889661335658,
+            "max_abs": 0.061796434223651886,
+            "p99_abs": 0.021109911678358927,
+            "bias": 6.20671361567009e-08
+          }
+        },
+        "bicubic_control_consistency": {
+          "B04": {
+            "rmse": 0.0048335327513393455,
+            "max_abs": 0.045593360846396536,
+            "p99_abs": 0.023278401923453214,
+            "bias": 3.2451655533193957e-08
+          },
+          "B03": {
+            "rmse": 0.004985216642361092,
+            "max_abs": 0.05008713121060282,
+            "p99_abs": 0.024532958631752998,
+            "bias": 4.787225919392313e-08
+          },
+          "B02": {
+            "rmse": 0.00390780575924307,
+            "max_abs": 0.0327848179731518,
+            "p99_abs": 0.017984492698451513,
+            "bias": 1.8174423748860135e-08
+          },
+          "B08": {
+            "rmse": 0.005413435200838431,
+            "max_abs": 0.06638201425084844,
+            "p99_abs": 0.03359050207378461,
+            "bias": 1.1339710360746835e-07
+          }
+        },
+        "output_affine": [
+          2.5,
+          0.0,
+          500000.0,
+          0.0,
+          -2.5,
+          1300000.0
+        ],
+        "passed": true
+      }
+    ],
+    "single_tile_vs_direct_model_max_abs": 6.556510925292969e-07
+  },
+  "real_crop": {
+    "status": "BLOCKED",
+    "reason": "real 10 m RGBN crop not cached: expected data/experiments-cache/real_rgbn_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m)"
+  },
+  "limitations": [
+    "Synthetic scenes: mechanics, geometry and spectral consistency only; no accuracy or image-quality claim.",
+    "Spectral consistency is largely enforced by the model's hard constraint, so it is a sanity check on the tiler, not evidence of SR fidelity.",
+    "CPU run; GPU numerics and memory are not covered (see E3, E4).",
+    "Real 10 m crop not evaluated: real 10 m RGBN crop not cached: expected data/experiments-cache/real_rgbn_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m)"
+  ],
+  "experiment": "e1",
+  "risk": "e1",
+  "started_utc": "2026-09-29T12:37:45.335185+00:00",
+  "finished_utc": "2026-09-29T12:37:55.089117+00:00",
+  "config_sha256": "16c3fd4b1d666c3606a7a2aacf96983e6c611895f2843892d3bc7fdcfe62f174"
+}
