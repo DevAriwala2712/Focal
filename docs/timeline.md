@@ -1,5 +1,7 @@
 # TrustSR timeline
 
+Update 2026-09-29: The Phase 0 Colab smoke test passed, and Phase 1 components, an offline demo and a local 50-step checkpoint have been implemented. A location cross-check revealed that the brief's coordinates are 36.43 km from NRSC's mapped disaster site; the event-site SCL audit has been rerun and the corrected showcase is being generated. The finale date is still unconfirmed, so the relative deadlines below remain planning targets, not calendar commitments. Held-out landslide F1 and k calibration remain dependent on an independent multi-event label set.
+
 Updated 2026-09-26. **Finale date/year: not yet supplied or confirmed.** An earlier submission deadline is also unknown. Do not infer either from a previous SIH edition. The user has been asked for the actual dates.
 
 The following is a proposed relative schedule, not a confirmed calendar commitment. D means the confirmed finale date; compress scope only after the date and Phase 0 outcomes are known.

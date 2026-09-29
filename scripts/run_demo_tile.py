@@ -21,6 +21,7 @@ def main():
         return super_resolve(tile, model, device='cuda', tile_size=cfg['sr']['tile_size'],
                              overlap=cfg['sr']['overlap'], min_tile=cfg['sr']['min_tile'])
     result = process_stack(root / cfg['fetch']['stack'], root / cfg['demo']['output_dir'], operator,
+                           event_date=cfg['imagery']['event_date'],
                            tile_pixels=cfg['demo']['tile_pixels'], k=cfg['change']['k'],
                            parent_drop_threshold=cfg['change']['parent_drop_threshold'],
                            invalid_scl=cfg['change']['invalid_scl'])

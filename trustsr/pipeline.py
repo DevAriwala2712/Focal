@@ -1,6 +1,7 @@
 """Offline tile processing from an aligned stack to georeferenced trust outputs."""
 from __future__ import annotations
 
+import json
 from datetime import date
 from pathlib import Path
 
@@ -29,7 +30,7 @@ def _write_cog(path, values, crs, transform, descriptions, *, nodata=None):
     return str(path.resolve())
 
 
-def process_stack(stack, output_dir, sr_operator, *, tile_pixels=128, k=2.0,
+def process_stack(stack, output_dir, sr_operator, *, event_date: str, tile_pixels=128, k=2.0,
                   parent_drop_threshold=.1, invalid_scl=(0, 1, 2, 3, 8, 9, 10, 11)):
     """Process one central tile and save COGs plus a provenance manifest."""
     out = Path(output_dir)
@@ -67,8 +68,12 @@ def process_stack(stack, output_dir, sr_operator, *, tile_pixels=128, k=2.0,
         'post_ndvi_std': _write_cog(out/'post_ndvi_std.tif', np.nan_to_num(post['ndvi_std'], nan=-9999).astype('float32'), crs, fine_transform, ['NDVI_POST_STD'], nodata=-9999),
         'change': _write_cog(out/'change.tif', classes, crs, fine_transform, ['TRUST_CLASS'], nodata=0),
     }
-    metadata = {'source_stack': str(Path(stack).resolve()), 'pre_dates': dates[:-1], 'post_date': dates[-1],
-                'post_event_lag_days': (date.fromisoformat(dates[-1]) - date(2024, 7, 30)).days,
+    stack_manifest = Path(stack).with_suffix('.json')
+    source_aoi = json.loads(stack_manifest.read_text(encoding='utf-8')).get('aoi') if stack_manifest.exists() else None
+    metadata = {'source_stack': str(Path(stack).resolve()), 'source_aoi': source_aoi,
+                'pre_dates': dates[:-1], 'post_date': dates[-1],
+                'event_date': event_date,
+                'post_event_lag_days': (date.fromisoformat(dates[-1]) - date.fromisoformat(event_date)).days,
                 'grid_crs': str(crs), '10m_transform': list(transform)[:6],
                 '2p5m_transform': list(fine_transform)[:6], '10m_shape': [height, width],
                 'sr_shape': [height*4, width*4], 'classes': {'NO_DATA': 0, 'NO_CHANGE': 1,

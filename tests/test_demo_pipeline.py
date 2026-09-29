@@ -21,6 +21,7 @@ def test_real_grid_processing_writes_aligned_cogs_and_observed_change(tmp_path):
     def upscale(image):
         return np.repeat(np.repeat(image, 4, -2), 4, -1)
     result = process_stack(stack, tmp_path / 'out', upscale, tile_pixels=2, k=2,
+                           event_date='2024-07-30',
                            parent_drop_threshold=.1, invalid_scl=[0, 1, 2, 3, 8, 9, 10, 11])
     with rasterio.open(result['files']['change']) as ds:
         assert ds.crs.to_string() == 'EPSG:32643'

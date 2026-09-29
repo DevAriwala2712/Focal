@@ -1,0 +1,104 @@
+{
+  "source_stack": "Reproduce with scripts/fetch_wayanad.py; 10 km source COG is not bundled.",
+  "source_aoi": [
+    76.136272,
+    11.466763,
+    10000
+  ],
+  "pre_dates": [
+    "2024-03-01",
+    "2024-03-06",
+    "2024-04-10"
+  ],
+  "post_date": "2024-12-16",
+  "event_date": "2024-07-30",
+  "post_event_lag_days": 139,
+  "grid_crs": "EPSG:32643",
+  "10m_transform": [
+    10.0,
+    0.0,
+    623290.0,
+    0.0,
+    -10.0,
+    1268480.0
+  ],
+  "2p5m_transform": [
+    2.5,
+    0.0,
+    623290.0,
+    0.0,
+    -2.5,
+    1268480.0
+  ],
+  "10m_shape": [
+    128,
+    128
+  ],
+  "sr_shape": [
+    512,
+    512
+  ],
+  "classes": {
+    "NO_DATA": 0,
+    "NO_CHANGE": 1,
+    "OBSERVED": 2,
+    "INFERRED": 3,
+    "UNSUPPORTED": 4
+  },
+  "k": 2.0,
+  "parent_drop_threshold": 0.1,
+  "invalid_scl": [
+    0,
+    1,
+    2,
+    3,
+    8,
+    9,
+    10,
+    11
+  ],
+  "metrics": {
+    "unsupported_pixels": 15748,
+    "observed_pixels": 15229,
+    "inferred_pixels": 99,
+    "no_data_pixels": 15584
+  },
+  "files": {
+    "pre_10m": "pre_10m.tif",
+    "post_10m": "post_10m.tif",
+    "pre_2p5m": "pre_2p5m.tif",
+    "post_2p5m": "post_2p5m.tif",
+    "pre_ndvi_mean": "pre_ndvi_mean.tif",
+    "post_ndvi_mean": "post_ndvi_mean.tif",
+    "pre_ndvi_std": "pre_ndvi_std.tif",
+    "post_ndvi_std": "post_ndvi_std.tif",
+    "change": "change.tif"
+  },
+  "caveat": "SR boundaries are model-inferred; NDVI disturbance is not landslide ground truth.",
+  "source_item_ids": {
+    "2024-03-01": [
+      "S2A_MSIL2A_20240301T051741_R062_T43PFN_20240301T101216"
+    ],
+    "2024-03-06": [
+      "S2B_MSIL2A_20240306T051659_R062_T43PFN_20240306T093712"
+    ],
+    "2024-04-10": [
+      "S2A_MSIL2A_20240410T051651_R062_T43PFN_20240410T145500"
+    ],
+    "2024-12-16": [
+      "S2A_MSIL2A_20241216T052231_R062_T43PFN_20241216T085751"
+    ]
+  },
+  "checkpoint_sha256": "bbbdad6bda5dfadfc4099dc08dbf54ecacd9fe31e1640b85ff6f6cac75e12709",
+  "asset_sha256": {
+    "pre_10m": "6d4e1c1b328b6553ecccc343c28c0b97739863aea588902eafc8a49d0d6d7477",
+    "post_10m": "185ebe0ef807b905af0a3b0d0a6e215d0da4f2fa7c5d71c05bac1e08f5d0a8db",
+    "pre_2p5m": "7884ddc452ba646455e977d8a022347f821366bbe2cc3895a5724cb2ab134c46",
+    "post_2p5m": "58182ebc6cc8c96a2ae984dab816e0a6a68182f0c24555f40b01abfb9eb7fd6b",
+    "pre_ndvi_mean": "3958492e98b0be14734d42ad729ea4e7de975b712f41d615ac86adcf3546efd6",
+    "post_ndvi_mean": "78a4d3c22bbfd97b216690c5683c8fcc35847f257441ea5bf2b222fb814fd392",
+    "pre_ndvi_std": "aa2135e2e4bfbdbf1baaefce561efcc09807b35b442f477f7be722dbd80e4b68",
+    "post_ndvi_std": "a737601f07ed52fbe6dcc2d836e60f13559717320bc3796cd5a499474f27eadf",
+    "change": "e76d04416ec76b6d0c51b63b3128854b157409e0f08a7d644af4069c1c8f0eeb"
+  }
+}

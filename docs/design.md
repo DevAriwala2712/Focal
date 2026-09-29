@@ -1,5 +1,11 @@
 # TrustSR design and decision record
 
+## Implementation and event-site correction, 2026-09-29
+
+The Phase 0 gate below records its historical status. Phase 1 implementation now exists. An [NRSC/ISRO event map](location_correction.md) places the landslide 36.43 km from the brief's supplied coordinates, so the original R2 dates must not be used to claim event-site coverage. A separate event-site annual SCL audit is under `risk/results/event_aoi/` and the pipeline config uses its verified map point.
+
+The pretrained SEN2SR CNN runs at 64px, but its Fourier hard constraint has a fixed 512px output mask. Tiled inference therefore keeps the pretrained CNN and replaces that fixed-mask postprocessing with an explicit 4×4 parent-mean projection. This mathematically enforces downsample consistency after feathered stitching, but it is a documented inference change, not a claim that the published hard constraint is unchanged. The 50-step local checkpoint is separate from Colab's smoke checkpoint; both were trained on three WorldStrat training AOIs. Held-out accuracy remains unavailable.
+
 Status: design baseline plus Phase 0 implementation, 2026-09-26. The risk harness is implemented, but the Phase 0 gate has not passed; Phase 1 is closed. The execution evidence in [RISK_REPORT.md](../RISK_REPORT.md) supersedes initial availability assumptions below.
 Authority: [AGENTS.md](../AGENTS.md), the user's GPU correction, and the [full supplied NTRO statement](problem_statement.md).
 The statement is copied byte-for-byte from the root file; an official SIH statement ID/URL has not been supplied or independently authenticated.
