@@ -572,3 +572,99 @@ def test_synthetic_change_pair_has_a_known_changed_square():
     drop = ndvi(pre, 0.01) - ndvi(post, 0.01)
     assert np.nanmedian(drop[truth]) > 0.3                  # a strong, known NDVI drop inside the square
     assert np.nanmedian(np.abs(drop[~truth])) < 0.02        # only noise outside it
+
+
+# ---- E5 parent-first cascade ---------------------------------------------------------------
+
+def test_tiler_supports_a_different_output_channel_count_and_a_subset_of_tiles():
+    from experiments.e1_tile_scheduler import super_resolve_tiled
+    def two_channel(batch):
+        return _nearest_x4(batch)[:, :2]
+    img = np.ones((4, 224, 224), 'float32')
+    full = super_resolve_tiled(img, None, two_channel, tile=128, stride=96, scale=4, feather=32, out_channels=2)
+    assert full.array.shape == (2, 896, 896) and np.isfinite(full.array).all()
+    part = super_resolve_tiled(img, None, two_channel, tile=128, stride=96, scale=4, feather=32, out_channels=2,
+                               origins=[(0, 0)])
+    assert np.isfinite(part.array[:, :512, :512]).all() and np.isnan(part.array[:, 600:, 600:]).all()
+
+
+def test_parent_drop_mask_thresholds_the_ndvi_drop_and_flags_undefined_pixels():
+    from experiments.common import parent_drop_mask
+    pre = np.zeros((4, 1, 3), 'float32'); post = pre.copy()
+    pre[0, 0], pre[3, 0] = [0.05, 0.05, 0.001], [0.35, 0.35, 0.001]        # NDVI .75 .75 undefined
+    post[0, 0], post[3, 0] = [0.25, 0.05, 0.001], [0.20, 0.35, 0.001]      # NDVI -.11 .75 undefined
+    parent, valid = parent_drop_mask(pre, post, 0.15, 0.01)
+    assert parent.tolist() == [[True, False, False]] and valid.tolist() == [[True, True, False]]
+
+
+def test_select_tiles_fires_buffers_and_audits_deterministically():
+    from experiments.e5_parent_cascade import select_tiles
+    origins = [(r, c) for r in (0, 96, 192, 288) for c in (0, 96, 192, 288)]
+    parent = np.zeros((416, 416), bool)
+    parent[100:110, 100:110] = True                        # inside tiles (96,96) only? also (0,0),(0,96),(96,0)...
+    sel = select_tiles(origins, parent, 128, min_pixels=50, rings=0, audit_fraction=0.0, seed=1)
+    assert (96, 96) in sel['fired'] and (288, 288) not in sel['fired']
+    assert sel['ring'] == set() and sel['audit'] == set()
+    ringed = select_tiles(origins, parent, 128, min_pixels=50, rings=1, audit_fraction=0.0, seed=1)
+    assert ringed['ring'] and ringed['ring'].isdisjoint(ringed['fired'])
+    assert (288, 288) not in ringed['ring']                # two lattice steps away from any firing tile
+    a = select_tiles(origins, parent, 128, min_pixels=50, rings=1, audit_fraction=0.5, seed=7)
+    b = select_tiles(origins, parent, 128, min_pixels=50, rings=1, audit_fraction=0.5, seed=7)
+    c = select_tiles(origins, parent, 128, min_pixels=50, rings=1, audit_fraction=0.5, seed=8)
+    assert a['audit'] == b['audit'] and a['audit'] != c['audit']
+    skipped = set(origins) - a['fired'] - a['ring']
+    assert a['audit'] <= skipped and len(a['audit']) == int(np.ceil(0.5 * len(skipped)))
+    assert a['processed'] == a['fired'] | a['ring'] | a['audit']
+    assert a['skipped'] == set(origins) - a['processed']
+    assert len(a['fired'] | a['ring'] | a['audit'] | a['skipped']) == len(origins)
+
+
+def test_min_pixels_stops_a_single_noisy_pixel_from_firing_a_tile():
+    from experiments.e5_parent_cascade import select_tiles
+    origins = [(0, 0), (0, 96)]
+    parent = np.zeros((128, 224), bool)
+    parent[10, 10] = True
+    assert select_tiles(origins, parent, 128, min_pixels=2, rings=0, audit_fraction=0, seed=0)['fired'] == set()
+    assert select_tiles(origins, parent, 128, min_pixels=1, rings=0, audit_fraction=0, seed=0)['fired'] == {(0, 0)}
+
+
+def test_fully_processed_pixels_need_every_covering_tile_processed():
+    from experiments.e5_parent_cascade import fully_processed
+    origins = [(0, 0), (0, 72), (72, 0), (72, 72)]
+    full = fully_processed(200, origins, {(0, 0)}, 128)
+    assert full[10, 10] and full[71, 71]                    # only tile (0,0) covers these
+    assert not full[100, 100] and not full[10, 100]         # shared with skipped tiles
+    assert not full[150, 150]                               # covered only by a skipped tile
+    assert fully_processed(200, origins, set(origins), 128).all()
+
+
+def test_ensemble_stats_operator_counts_forward_passes_and_returns_mean_var_valid():
+    from experiments.common import ndvi, synthetic_scene
+    from experiments.e5_parent_cascade import EnsembleStats
+    op = EnsembleStats(_nearest_x4, [0, 1, 2, 3], 0.01, 1)
+    tile = synthetic_scene(16, 2)
+    out = op(np.stack([tile, tile]))
+    assert out.shape == (2, 3, 64, 64) and op.passes == 2 * 4
+    np.testing.assert_allclose(out[0, 0], ndvi(_nearest_x4(tile[None])[0], 0.01), atol=1e-6)
+    assert np.abs(out[0, 1]).max() < 1e-6 and (out[0, 2] == 1).all()
+
+
+def test_cascade_matches_the_full_run_on_fully_processed_pixels_with_fewer_forward_passes():
+    from experiments.common import synthetic_change_pair
+    from experiments.e5_parent_cascade import run_cascade
+    pre, post, truth = synthetic_change_pair(300, 4, (40, 40, 40, 40), noise=0.002)
+    cfg = {'tile': 128, 'stride': 96, 'scale': 4, 'feather': 32, 'transforms': [0, 1], 'ddof': 1, 'rings': 0,
+           'min_parent_pixels': 20, 'audit_fraction': 0.25, 'seed': 3, 'k': 2.0, 'parent_drop_threshold': 0.15,
+           'min_denominator': 0.05}
+    res = run_cascade(_nearest_x4, pre, post, cfg)
+    assert res['tiles_skipped_fraction'] > 0
+    assert res['forward_passes']['cascade'] < res['forward_passes']['full']
+    assert res['identical_on_fully_processed']['class_agreement'] == 1.0
+    assert res['identical_on_fully_processed']['max_abs_stat_delta'] == 0.0
+    assert res['identical_on_fully_processed']['pixels'] > 0
+    assert (0, 0) in res['selection']['fired']                # the known changed square lives in tile (0,0)
+    audit = res['audit_unsupported']
+    # the estimate scales the audit rate by skipped pixels whose NDVI is defined at 10 m (knowable without SR)
+    assert audit['skipped_only_parent_valid_pixels'] <= audit['skipped_only_pixels']
+    assert audit['estimated_unsupported_pixels_in_skipped'] == pytest.approx(
+        audit['unsupported_rate_estimate_for_skipped'] * audit['skipped_only_parent_valid_pixels'])

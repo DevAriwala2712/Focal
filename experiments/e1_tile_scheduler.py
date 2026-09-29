@@ -45,10 +45,11 @@ class TiledResult:
 
 
 def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feather,
-                        anchor=(0, 0), offset=(0, 0), batch_size=1, origins=None, keep_tiles=False,
+                        anchor=(0, 0), offset=(0, 0), batch_size=1, origins=None, keep_tiles=False, out_channels=None,
                         stage=lambda name: contextlib.nullcontext()) -> TiledResult:
     """Overlap-tile `operator` over image (C,H,W). Tile order is row-major and fixed."""
     channels, height, width = image.shape
+    out_channels = out_channels or channels
     offset = (offset, offset) if isinstance(offset, int) else offset
     anchor = (anchor, anchor) if isinstance(anchor, int) else anchor
     if origins is None:
@@ -56,7 +57,7 @@ def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feat
         cols = tile_origins(width, tile, stride, anchor[1], offset[1])
         origins = [(r, c) for r in rows for c in cols]
     out_tile, taper = tile * scale, feather * scale
-    num = np.zeros((channels, height * scale, width * scale), dtype=np.float32)
+    num = np.zeros((out_channels, height * scale, width * scale), dtype=np.float32)
     den = np.zeros((height * scale, width * scale), dtype=np.float32)
     weights, shapes, kept = {}, set(), {}
     for start in range(0, len(origins), batch_size):
@@ -66,8 +67,8 @@ def super_resolve_tiled(image, transform, operator, *, tile, stride, scale, feat
         shapes.add(batch.shape)
         with stage('forward'):
             out = operator(batch)
-        if out.shape != (len(chunk), channels, out_tile, out_tile):
-            raise ValueError(f'operator returned {out.shape}, expected {(len(chunk), channels, out_tile, out_tile)}')
+        if out.shape != (len(chunk), out_channels, out_tile, out_tile):
+            raise ValueError(f'operator returned {out.shape}, expected {(len(chunk), out_channels, out_tile, out_tile)}')
         with stage('blend'):
             for (r, c), sr in zip(chunk, out):
                 key = (r > 0, r + tile < height, c > 0, c + tile < width)

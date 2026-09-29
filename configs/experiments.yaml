@@ -67,3 +67,23 @@ e8:
     path: data/experiments-cache/real_post_10m.tif     # same grid as real_pre
     dn_scale: null
     dn_offset: null
+e5:
+  aoi_px: 517
+  transforms: 4                  # dihedral ensemble size per tile (identity, rot90, rot180, rot270)
+  # red+nir below this is water/deep shadow, where NDVI is ill-conditioned (noise alone crosses the parent threshold:
+  # measured on the synthetic scene). Stands in for SCL water/shadow masking on real data; E5-local on purpose.
+  min_denominator: 0.05
+  ddof: 1
+  rings: 1
+  min_parent_pixels: 64          # parent-drop pixels needed inside a tile footprint to fire it
+  audit_fraction: 0.25           # fraction of skipped tiles processed anyway; seeded by the top-level seed
+  square: [200, 280, 64, 64]     # synthetic changed square (r0, c0, h, w), 10 m px
+  noise: 0.004
+  real_pre:
+    path: data/experiments-cache/wayanad_pre_10m.tif   # 4-band B04,B03,B02,B08 at 10 m, cloud-screened pre date
+    dn_scale: null
+    dn_offset: null
+  real_post:
+    path: data/experiments-cache/wayanad_post_10m.tif  # 2024-12-06 post date on the same grid
+    dn_scale: null
+    dn_offset: null

@@ -1,0 +1,316 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "evidence_parts": {
+    "synthetic_mechanics": "PASS",
+    "wayanad_real": "BLOCKED"
+  },
+  "criteria": {
+    "rule": "cascade == full on fully processed pixels (bitwise stats, identical classes) and fewer forward passes",
+    "transforms": 4,
+    "rings": 1,
+    "audit_fraction": 0.25,
+    "min_parent_pixels": 64,
+    "parent_drop_threshold_uncalibrated_placeholder": 0.15,
+    "k": 2.0
+  },
+  "measurements": {
+    "tiles": {
+      "total": 36,
+      "fired": 4,
+      "ring": 12,
+      "audit": 5,
+      "skipped": 15
+    },
+    "tiles_skipped_fraction": 0.4166666666666667,
+    "forward_passes": {
+      "full": 288,
+      "cascade": 168,
+      "ratio": 0.5833333333333334
+    },
+    "identical_on_fully_processed": {
+      "pixels": 2329600,
+      "max_abs_stat_delta": 0.0,
+      "class_agreement": 1.0
+    },
+    "partially_processed_boundary": {
+      "pixels": 997888,
+      "class_agreement": 0.9956578293355567
+    },
+    "audit_unsupported": {
+      "audit_only_valid_pixels": 221729,
+      "unsupported_pixels_found": 61269,
+      "unsupported_rate_estimate_for_skipped": 0.2763238006755995,
+      "skipped_only_pixels": 949136,
+      "skipped_only_parent_valid_pixels": 802608,
+      "estimated_unsupported_pixels_in_skipped": 221779.69301264154,
+      "reference_full_run_unsupported_rate_in_skipped": 0.2764905298105962,
+      "reference_full_run_unsupported_pixels_in_skipped": 221188,
+      "reference_full_run_valid_pixels_in_skipped": 799984
+    },
+    "class_counts_full_on_fully_processed": {
+      "NO_CHANGE": 1318520,
+      "OBSERVED": 65985,
+      "INFERRED": 76,
+      "UNSUPPORTED": 493596,
+      "NO_DATA": 451423
+    },
+    "selection": {
+      "fired": [
+        [
+          96,
+          192
+        ],
+        [
+          96,
+          288
+        ],
+        [
+          192,
+          192
+        ],
+        [
+          192,
+          288
+        ]
+      ],
+      "ring": [
+        [
+          0,
+          96
+        ],
+        [
+          0,
+          192
+        ],
+        [
+          0,
+          288
+        ],
+        [
+          0,
+          384
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          96,
+          384
+        ],
+        [
+          192,
+          96
+        ],
+        [
+          192,
+          384
+        ],
+        [
+          288,
+          96
+        ],
+        [
+          288,
+          192
+        ],
+        [
+          288,
+          288
+        ],
+        [
+          288,
+          384
+        ]
+      ],
+      "audit": [
+        [
+          0,
+          389
+        ],
+        [
+          96,
+          389
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          288,
+          0
+        ],
+        [
+          384,
+          288
+        ]
+      ],
+      "processed": [
+        [
+          0,
+          96
+        ],
+        [
+          0,
+          192
+        ],
+        [
+          0,
+          288
+        ],
+        [
+          0,
+          384
+        ],
+        [
+          0,
+          389
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          96,
+          192
+        ],
+        [
+          96,
+          288
+        ],
+        [
+          96,
+          384
+        ],
+        [
+          96,
+          389
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          192,
+          96
+        ],
+        [
+          192,
+          192
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          192,
+          384
+        ],
+        [
+          288,
+          0
+        ],
+        [
+          288,
+          96
+        ],
+        [
+          288,
+          192
+        ],
+        [
+          288,
+          288
+        ],
+        [
+          288,
+          384
+        ],
+        [
+          384,
+          288
+        ]
+      ],
+      "skipped": [
+        [
+          0,
+          0
+        ],
+        [
+          96,
+          0
+        ],
+        [
+          192,
+          389
+        ],
+        [
+          288,
+          389
+        ],
+        [
+          384,
+          0
+        ],
+        [
+          384,
+          96
+        ],
+        [
+          384,
+          192
+        ],
+        [
+          384,
+          384
+        ],
+        [
+          384,
+          389
+        ],
+        [
+          389,
+          0
+        ],
+        [
+          389,
+          96
+        ],
+        [
+          389,
+          192
+        ],
+        [
+          389,
+          288
+        ],
+        [
+          389,
+          384
+        ],
+        [
+          389,
+          389
+        ]
+      ]
+    }
+  },
+  "real_wayanad": {
+    "status": "BLOCKED",
+    "reason": "real 10 m RGBN crop not cached: expected data/experiments-cache/wayanad_pre_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m)"
+  },
+  "limitations": [
+    "UNSUPPORTED here is dominated by synthetic date-to-date noise exceeding the dihedral sigma (sigma measures model sensitivity, not radiometric noise), NOT by SR hallucination. The high rate characterises this synthetic set-up only.",
+    "Synthetic scene with one known changed square: mechanics only. The skipped fraction and UNSUPPORTED rate here say nothing about real Wayanad imagery.",
+    "Pixels covered by both a processed and a skipped tile are blended from fewer tiles than in a full run; they are reported separately (partially_processed_boundary), not claimed identical.",
+    "The UNSUPPORTED estimate uses few audited tiles and spatially correlated pixels; it has no confidence interval here. The full-run reference exists only because this is synthetic.",
+    "Parent threshold and k are uncalibrated placeholders; the cascade never skips a tile whose change the parent mask cannot see, so its recall is bounded by the 10 m parent mask.",
+    "Real Wayanad part not run: real 10 m RGBN crop not cached: expected data/experiments-cache/wayanad_pre_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m)"
+  ],
+  "experiment": "e5",
+  "risk": "e5",
+  "started_utc": "2026-09-29T12:54:03.376531+00:00",
+  "finished_utc": "2026-09-29T12:54:22.533199+00:00",
+  "config_sha256": "a6a8542365a55f258b2a34680d96fcb519309467850d51c4a1f1ef2e0fd37fd9"
+}

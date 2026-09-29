@@ -201,3 +201,10 @@ def synthetic_change_pair(size: int, seed: int, square, noise: float):
     truth = np.zeros((size, size), dtype=bool)
     truth[r0:r0 + h, c0:c0 + w] = True
     return np.clip(pre, 0, 1).astype('float32'), np.clip(post, 0, 1).astype('float32'), truth
+
+
+def parent_drop_mask(pre: np.ndarray, post: np.ndarray, threshold: float, min_denominator: float):
+    """10 m parent mask from the ORIGINAL data: (NDVI_pre - NDVI_post > threshold, NDVI defined on both dates)."""
+    drop = ndvi(pre, min_denominator) - ndvi(post, min_denominator)
+    valid = np.isfinite(drop)
+    return valid & (np.nan_to_num(drop, nan=0.0) > threshold), valid
