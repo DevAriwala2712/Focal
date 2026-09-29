@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "evidence_parts": {
+    "cpu_hash_reruns": "PASS",
+    "gpu_reruns": "BLOCKED"
+  },
+  "criteria": {
+    "rule": "CPU SHA-256 identical across reruns (fresh process, fixed threads); GPU drift is a finding, not a failure",
+    "aoi_px": 517,
+    "cpu_runs_per_thread_setting": 2
+  },
+  "measurements": {
+    "cpu_by_thread_count": {
+      "1": {
+        "sha256": [
+          "0fb32c176c4ff7fbc93d6161d4dc7fa628e4598dd08fc5439a60b7cb0ee5fdcc",
+          "0fb32c176c4ff7fbc93d6161d4dc7fa628e4598dd08fc5439a60b7cb0ee5fdcc"
+        ],
+        "identical": true
+      },
+      "4": {
+        "sha256": [
+          "0fb32c176c4ff7fbc93d6161d4dc7fa628e4598dd08fc5439a60b7cb0ee5fdcc",
+          "0fb32c176c4ff7fbc93d6161d4dc7fa628e4598dd08fc5439a60b7cb0ee5fdcc"
+        ],
+        "identical": true
+      }
+    },
+    "cpu_hash_identical_across_thread_counts": true,
+    "sensitivity_control_reversed_tile_order": {
+      "hash_changes": true,
+      "max_abs_delta": 1.4901161193847656e-07,
+      "note": "same tiles, opposite accumulation order; shows the hash can change, so a fixed tile order is a real requirement"
+    },
+    "gpu": {
+      "status": "BLOCKED",
+      "reason": "CUDA GPU required for the GPU reruns: torch.cuda.is_available() is False on this machine (torch 2.8.0, no NVIDIA GPU/driver). CPU results above do not stand in for it."
+    },
+    "determinism_settings": [
+      "torch.use_deterministic_algorithms(True)",
+      "cudnn.deterministic=True, benchmark=False",
+      "CUBLAS_WORKSPACE_CONFIG=:4096:8",
+      "row-major tile order"
+    ]
+  },
+  "limitations": [
+    "Bitwise CPU reproducibility is shown on this machine, OS and torch build only; it does not transfer to other CPUs, BLAS builds or thread counts (see the cross-thread finding).",
+    "GPU determinism is untested here (no CUDA); it is BLOCKED, not passed.",
+    "Synthetic scene; hash equality says nothing about accuracy."
+  ],
+  "experiment": "e3",
+  "risk": "e3",
+  "started_utc": "2026-09-29T12:46:22.151699+00:00",
+  "finished_utc": "2026-09-29T12:46:41.263179+00:00",
+  "config_sha256": "60b46c9ea0f146221cd17218d05af5df4ff29a4373f43daeb7455d041f71415c"
+}

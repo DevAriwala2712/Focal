@@ -41,3 +41,8 @@ e2:
   tolerance_rationale: >-
     0.02 reflectance = twice the E1 per-band RMSE tolerance (0.01); project choice fixed before
     measurement. NDVI deltas and seam-zone deltas are reported but are not part of the keep rule.
+e3:
+  aoi_px: 517
+  cpu_runs: 2
+  cpu_threads: [1, 4]            # each setting is run in fresh processes; cross-setting equality is a finding
+  gpu_runs: 2

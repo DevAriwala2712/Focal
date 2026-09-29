@@ -386,3 +386,49 @@ def test_pair_disagreement_also_covers_vertical_neighbours():
     b[:, :4, :] = 1.0                 # first input row of the lower tile disagrees
     rows = pair_disagreement({(0, 0): zeros, (96, 0): b}, 128, 4, [0, 2, 4, 8, 16])
     assert rows[0]['max_abs'] == 1.0 and all(r['max_abs'] == 0.0 for r in rows[1:4])
+
+
+# ---- E3 hash-checked reruns ----------------------------------------------------------
+
+def test_seed_everything_makes_numpy_and_torch_repeatable_and_enables_deterministic_mode():
+    import torch
+    from experiments.e3_hash_reruns import seed_everything
+    seed_everything(5)
+    a, an = torch.rand(3), np.random.rand(3)
+    seed_everything(5)
+    assert torch.equal(a, torch.rand(3)) and np.array_equal(an, np.random.rand(3))
+    assert torch.are_deterministic_algorithms_enabled()
+
+
+def test_compare_runs_reports_hashes_identity_and_max_delta():
+    from experiments.e3_hash_reruns import compare_runs
+    a = np.linspace(0, 1, 64, dtype='float32').reshape(4, 4, 4)
+    same = compare_runs([a, a.copy()])
+    assert same['identical'] and same['max_abs_delta'] == 0.0 and len(set(same['sha256'])) == 1
+    b = a.copy()
+    b[0, 0, 0] += 1e-3
+    diff = compare_runs([a, b])
+    assert not diff['identical'] and diff['max_abs_delta'] == pytest.approx(1e-3, rel=1e-3)
+    assert len(set(diff['sha256'])) == 2
+    with pytest.raises(ValueError, match='shape'):
+        compare_runs([a, a[:, :2]])
+    with pytest.raises(ValueError, match='two'):
+        compare_runs([a])
+
+
+def test_seeded_tiled_run_with_a_torch_operator_repeats_bit_for_bit_on_cpu():
+    import torch
+    from experiments.common import array_sha256, synthetic_scene
+    from experiments.e1_tile_scheduler import super_resolve_tiled
+    from experiments.e3_hash_reruns import seed_everything
+
+    def run():
+        seed_everything(11)
+        conv = torch.nn.Conv2d(4, 4, 3, padding=1)
+        def op(batch):
+            with torch.inference_mode():
+                return torch.nn.functional.interpolate(conv(torch.from_numpy(batch)), scale_factor=4,
+                                                       mode='bicubic').numpy()
+        return super_resolve_tiled(synthetic_scene(200, 1), None, op, tile=128, stride=96, scale=4,
+                                   feather=32).array
+    assert array_sha256(run()) == array_sha256(run())
