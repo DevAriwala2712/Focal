@@ -749,3 +749,56 @@ def test_missing_e6_cache_is_blocked_and_lists_the_files(tmp_path):
     with pytest.raises(Blocked, match='2024-01-11') as info:
         load_cache(tmp_path / 'cache', ['2024-01-11', '2024-01-21'])
     assert info.value.evidence == 'real' and '2 of 2' in str(info.value)
+
+
+# ---- fetch byte budget + environment record ---------------------------------------------------------
+
+_NETSTAT = """Name       Mtu   Network       Address            Ipkts Ierrs     Ibytes    Opkts Oerrs     Obytes  Coll
+lo0        16384 <Link#1>                        496518     0  244112869   496518     0  244112869     0
+en0        1500  <Link#14>   aa:bb:cc:dd:ee:ff  1000     0     5000000    900     0     100000     0
+en0        1500  devs-macboo fe80:e::1           1000     -     5000000    900     -     100000     -
+utun3      1380  <Link#20>                          10     0        777     11     0        888     0
+"""
+
+
+def test_parse_interface_ibytes_reads_the_link_row_of_the_named_interface_only():
+    from experiments.e6_season_matched import parse_interface_ibytes
+    assert parse_interface_ibytes(_NETSTAT, 'en0') == 5000000        # not double counted via the address row
+    assert parse_interface_ibytes(_NETSTAT, 'utun3') == 777          # a row without a MAC address still parses
+    with pytest.raises(ValueError, match='en9'):
+        parse_interface_ibytes(_NETSTAT, 'en9')
+
+
+def test_byte_budget_logs_usage_and_stops_at_the_cap():
+    from experiments.e6_season_matched import ByteBudget
+    counter = iter([1000, 1600, 2600, 9000])
+    budget = ByteBudget(cap_bytes=2000, counter=lambda: next(counter))
+    assert budget.used() == 600
+    budget.check()                                       # 2600-1000 = 1600 <= 2000
+    with pytest.raises(RuntimeError, match='byte cap'):
+        budget.check()                                   # 9000-1000 exceeds 2000
+    assert budget.log()['cap_bytes'] == 2000
+
+
+def test_fetch_refuses_to_run_when_bytes_cannot_be_counted():
+    from experiments.common import Blocked
+    from experiments.e6_season_matched import ByteBudget
+    def broken():
+        raise OSError('no counter')
+    with pytest.raises(Blocked, match='cannot count'):
+        ByteBudget(cap_bytes=10, counter=broken)
+
+
+def test_environment_record_names_the_torch_deviation_from_the_pin():
+    from experiments.common import environment_record
+    env = environment_record({'pinned_torch': '2.8.0+cu126', 'deviation_note': 'macOS build'})
+    assert env['machine'] and env['torch'] and 'platform' in env
+    assert env['torch_matches_pin'] is (env['torch'] == '2.8.0+cu126')
+    assert env['deviation_note'] == 'macOS build' or env['torch_matches_pin']
+
+
+def test_every_result_carries_the_environment_and_a_platform_label_for_hashes():
+    from experiments.common import run_probe
+    out = run_probe('e0', lambda cfg, root: {'status': 'PASS', 'evidence': 'synthetic'},
+                    {'environment': {'pinned_torch': '2.8.0+cu126', 'deviation_note': 'x'}}, '.', 'h')
+    assert out['environment']['machine']

@@ -4,6 +4,11 @@ paths:
   results: experiments/results
   cache: data/experiments-cache
 seed: 2024
+environment:
+  pinned_torch: 2.8.0+cu126
+  deviation_note: >-
+    macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings
+    are specific to this platform and torch build.
 e7:
   run_counts: [8, 32, 96]
   shape: [4, 128, 128]
@@ -90,6 +95,7 @@ e5:
 e6:
   r2_result: risk/results/r2.json                # pre_dates and first_post_date come from R2
   catalog: risk/results/r2_catalog.json          # item ids/hrefs already recorded by R2
+  max_fetch_bytes: 250000000                     # hard stop for the E6 fetch (13 dates x 2 items x B04/B08/SCL, AOI window)
   cache_subdir: e6                               # under paths.cache; per-date .npz of B04/B08/SCL at 10 m
   january_dates: ['2024-01-11', '2024-01-21', '2024-01-31']
   min_processing_baseline: '04.00'

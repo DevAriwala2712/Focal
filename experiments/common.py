@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import platform
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -51,6 +52,20 @@ def load_experiment_config(path='configs/experiments.yaml'):
     return cfg, root, combined
 
 
+def environment_record(settings: dict | None = None) -> dict:
+    """Where a result was produced. Hashes and timings are only claimed for this platform/torch build."""
+    import torch
+    settings = settings or {}
+    pinned = settings.get('pinned_torch')
+    matches = pinned is None or torch.__version__ == pinned
+    env = {'platform': platform.platform(), 'machine': platform.machine(), 'python': platform.python_version(),
+           'numpy': np.__version__, 'torch': torch.__version__, 'pinned_torch': pinned,
+           'torch_matches_pin': matches, 'cuda_available': bool(torch.cuda.is_available())}
+    if not matches:
+        env['deviation_note'] = settings.get('deviation_note', 'torch differs from the pin')
+    return env
+
+
 def finalize_result(name: str, result: dict, config_hash: str, started: str) -> dict:
     if result.get('status') not in STATUSES:
         raise ValueError(f'status must be one of {STATUSES}, got {result.get("status")!r}')
@@ -72,7 +87,9 @@ def run_probe(name: str, probe, cfg, root, config_hash: str) -> dict:
     except Exception as exc:  # a bug is a FAIL with its error, never a silent BLOCKED
         result = {'status': 'FAIL', 'evidence': 'synthetic',
                   'error': f'{type(exc).__name__}: {exc}'}
-    return finalize_result(name, result, config_hash, started)
+    out = finalize_result(name, result, config_hash, started)
+    out['environment'] = environment_record((cfg or {}).get('environment'))
+    return out
 
 
 def run_cli(name: str, probe):

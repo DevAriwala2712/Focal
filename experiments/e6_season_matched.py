@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import warnings
 from pathlib import Path
 
@@ -83,6 +84,49 @@ def disk_mask(transform, shape, centre_xy, radius_m: float) -> np.ndarray:
     return (x - centre_xy[0]) ** 2 + (y - centre_xy[1]) ** 2 <= radius_m ** 2
 
 
+# ---- byte budget ------------------------------------------------------------------------------------
+
+def parse_interface_ibytes(netstat_text: str, interface: str) -> int:
+    """Received bytes of `interface` from `netstat -ib` output (its <Link#> row; Ibytes is 5th from the end)."""
+    for line in netstat_text.splitlines():
+        tokens = line.split()
+        if len(tokens) >= 8 and tokens[0] == interface and tokens[2].startswith('<Link#'):
+            return int(tokens[-5])
+    raise ValueError(f'no <Link#> row for interface {interface}')
+
+
+def default_interface_ibytes() -> int:
+    route = subprocess.run(['route', '-n', 'get', 'default'], capture_output=True, text=True, check=True).stdout
+    interface = next(l.split(':')[1].strip() for l in route.splitlines() if l.strip().startswith('interface:'))
+    text = subprocess.run(['netstat', '-ib'], capture_output=True, text=True, check=True).stdout
+    return parse_interface_ibytes(text, interface)
+
+
+class ByteBudget:
+    """Bytes received on the default interface since construction. System-wide, so an UPPER BOUND on this
+    process's traffic (any other traffic on the machine counts too). GDAL exposes no per-read byte counter."""
+
+    def __init__(self, cap_bytes: int, counter=default_interface_ibytes):
+        try:
+            self.counter, self.start = counter, counter()
+        except Exception as exc:
+            raise Blocked(f'cannot count network bytes ({exc}); refusing to download without a byte counter',
+                          evidence='real') from exc
+        self.cap_bytes, self.peak = cap_bytes, 0
+
+    def used(self) -> int:
+        self.peak = max(self.peak, self.counter() - self.start)
+        return self.peak
+
+    def check(self) -> None:
+        if self.used() > self.cap_bytes:
+            raise RuntimeError(f'network byte cap exceeded: {self.peak} > {self.cap_bytes} bytes; stopped fetching')
+
+    def log(self) -> dict:
+        return {'cap_bytes': self.cap_bytes, 'bytes_received_upper_bound': self.peak,
+                'method': 'default-interface received-bytes delta (netstat -ib); includes any other traffic'}
+
+
 # ---- cache + (explicit, opt-in) fetch --------------------------------------------------------
 
 def cache_path(cache: Path, date: str) -> Path:
@@ -104,19 +148,20 @@ def load_cache(cache: Path, dates) -> dict:
     return out
 
 
-def fetch(cfg, root, dates) -> None:
+def fetch(cfg, root, dates) -> dict:
     """Windowed reads of B04/B08/SCL from Planetary Computer onto the R2 AOI grid at 10 m. Network; opt-in only."""
     import planetary_computer as pc
     import rasterio
     from rasterio.enums import Resampling
     from rasterio.vrt import WarpedVRT
     from risk.common import retry
-    from risk.r2_imagery import aoi_grid
+    from risk.r2_imagery import aoi_grid, read_scl
     im, policy, s6 = cfg['phase0']['imagery'], cfg['phase0']['network'], cfg['e6']
     polygon, transform, shape = aoi_grid({**im, 'audit_resolution_m': 10})
     catalog = json.loads((root / s6['catalog']).read_text(encoding='utf-8'))['items']
     cache = root / cfg['paths']['cache'] / s6['cache_subdir']
     cache.mkdir(parents=True, exist_ok=True)
+    budget = ByteBudget(s6['max_fetch_bytes'])
 
     def read(href, resampling):
         def go():
@@ -139,10 +184,11 @@ def fetch(cfg, root, dates) -> None:
                 raise Blocked(f'{item["id"]}: processing baseline {baseline} < {s6["min_processing_baseline"]}; '
                               'the -1000 offset convention does not apply', evidence='real')
             baselines.add(baseline)
-            s_scl, _, _ = read(item['assets']['SCL']['href'], Resampling.nearest)
+            s_scl = read_scl(item, im, transform, shape, policy)        # R2's own SCL reader, at 10 m
             r, sc_r, of_r = read(item['assets']['B04']['href'], Resampling.nearest)
             n, sc_n, of_n = read(item['assets']['B08']['href'], Resampling.nearest)
             tags.add((float(sc_r), float(of_r), float(sc_n), float(of_n)))
+            budget.check()
             take = ~np.isin(s_scl, im['invalid_classes']) & ~taken          # first valid tile wins, as in R2
             red[take], nir[take], scl[take] = r[take], n[take], s_scl[take]
             taken |= take
@@ -150,7 +196,8 @@ def fetch(cfg, root, dates) -> None:
                             meta=json.dumps({'date': date, 'items': [i['id'] for i in items],
                                              'processing_baselines': sorted(baselines),
                                              'raster_scale_offset_tags': sorted(tags)}))
-        print(f'cached {date}', flush=True)
+        print(f'cached {date}: {budget.used()} bytes received so far (cap {budget.cap_bytes})', flush=True)
+    return budget.log()
 
 
 def probe(cfg, root):
@@ -226,6 +273,9 @@ if __name__ == '__main__':
         args = parser.parse_args()
         cfg_, root_, _ = load_experiment_config(args.config)
         r2_ = json.loads((root_ / cfg_['e6']['r2_result']).read_text(encoding='utf-8'))
-        fetch(cfg_, root_, r2_['pre_dates'] + [r2_['first_post_date']])
+        from risk.common import write_json
+        log = fetch(cfg_, root_, r2_['pre_dates'] + [r2_['first_post_date']])
+        write_json(root_ / cfg_['paths']['results'] / 'e6_fetch_log.json', log)
+        print(json.dumps(log, indent=2))
     else:
         run_cli('e6', probe)
