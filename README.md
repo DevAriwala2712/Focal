@@ -34,6 +34,10 @@ Before building the demo, resolve the risk report's fixed-mask tiling limitation
 
 ## Documents
 
+- [Project blueprint and acceptance gates](docs/project_blueprint.md)
+- [SIH playbook interpretation and jury narrative](docs/playbook_strategy.md)
+- [Research landscape and dataset fit](docs/landscape.md)
+- [Phase 0 closure implementation plan](docs/superpowers/plans/2026-09-29-trustsr-phase0-closure.md)
 - [Full supplied NTRO problem statement](docs/problem_statement.md)
 - [Design and rejected alternatives](docs/design.md)
 - [Source register](docs/sources.md)
