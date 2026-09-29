@@ -140,13 +140,18 @@ def load_real_crop(settings: dict, root):
         return ((dn + settings['dn_offset']) / settings['dn_scale']).astype('float32'), src.transform, src.crs
 
 
-def ndvi(array: np.ndarray, min_denominator: float, red: int = 0, nir: int = 3) -> np.ndarray:
-    """NDVI from a (4,H,W) B04,B03,B02,B08 array; NaN where red+nir < min_denominator (unstable)."""
-    r, n = array[red].astype(np.float64), array[nir].astype(np.float64)
+def ndvi_bands(red: np.ndarray, nir: np.ndarray, min_denominator: float) -> np.ndarray:
+    """NDVI from red and NIR reflectance; NaN where red+nir < min_denominator (unstable) or either is NaN."""
+    r, n = red.astype(np.float64), nir.astype(np.float64)
     denom = r + n
     with np.errstate(invalid='ignore', divide='ignore'):
         out = np.where(denom >= min_denominator, (n - r) / denom, np.nan)
     return out.astype(np.float32)
+
+
+def ndvi(array: np.ndarray, min_denominator: float, red: int = 0, nir: int = 3) -> np.ndarray:
+    """NDVI from a (4,H,W) B04,B03,B02,B08 array."""
+    return ndvi_bands(array[red], array[nir], min_denominator)
 
 
 # ---- change semantics (docs/design.md) -----------------------------------------------------

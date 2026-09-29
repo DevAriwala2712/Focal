@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED",
+  "evidence": "real",
+  "reason": "real 10 m imagery not cached: 13 of 13 per-date files missing under /Users/devariwala/Desktop/Focal/data/experiments-cache/e6 (first: 2024-01-11.npz; last: 2024-12-06.npz). Each needs B04/B08 digital numbers and SCL on the R2 AOI grid at 10 m; run `python -m experiments.e6_season_matched --fetch` once network use is approved.",
+  "limitations": [],
+  "experiment": "e6",
+  "risk": "e6",
+  "started_utc": "2026-09-29T12:57:59.303182+00:00",
+  "finished_utc": "2026-09-29T12:57:59.338464+00:00",
+  "config_sha256": "0d68bdb1506e9fa1672787c3651095fd4c8d0aa3b7078c089c2f3104c19a4705"
+}

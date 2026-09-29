@@ -668,3 +668,84 @@ def test_cascade_matches_the_full_run_on_fully_processed_pixels_with_fewer_forwa
     assert audit['skipped_only_parent_valid_pixels'] <= audit['skipped_only_pixels']
     assert audit['estimated_unsupported_pixels_in_skipped'] == pytest.approx(
         audit['unsupported_rate_estimate_for_skipped'] * audit['skipped_only_parent_valid_pixels'])
+
+
+# ---- E6 season-matched pre-event dates -------------------------------------------------------
+
+def test_reflectance_applies_esa_offset_only_for_new_processing_baselines():
+    from experiments.e6_season_matched import baseline_offset_ok, reflectance
+    assert reflectance(np.array([2000], 'uint16'), 10000.0, -1000.0)[0] == pytest.approx(0.1)
+    assert baseline_offset_ok('05.10', '04.00') and baseline_offset_ok('04.00', '04.00')
+    assert not baseline_offset_ok('03.01', '04.00')          # old baselines have no -1000 offset
+
+
+def test_valid_from_scl_excludes_configured_cloud_shadow_and_invalid_classes():
+    from experiments.e6_season_matched import valid_from_scl
+    scl = np.array([[4, 5, 8, 3, 0, 11, 9, 10, 2, 6]], 'uint8')
+    valid = valid_from_scl(scl, [8, 9, 10], [2, 3], [0, 1, 11])
+    assert valid.tolist() == [[True, True, False, False, False, False, False, False, False, True]]
+
+
+def test_stable_mask_requires_enough_valid_dates_low_std_and_outside_suspected_area():
+    from experiments.e6_season_matched import stable_mask
+    stack = np.full((4, 1, 5), 0.6, 'float32')
+    stack[:, 0, 1] = [0.6, 0.9, 0.3, 0.6]            # high variance
+    stack[:2, 0, 2] = np.nan                         # only 2 valid dates
+    stack[:, 0, 3] = [0.6, 0.62, 0.58, 0.6]          # low variance
+    suspected = np.zeros((1, 5), bool)
+    suspected[0, 4] = True
+    m = stable_mask(stack, suspected, min_valid=3, max_std=0.05)
+    assert m.tolist() == [[True, False, False, True, False]]
+
+
+def test_pooled_mean_uses_only_selected_dates_and_needs_minimum_valid_dates():
+    from experiments.e6_season_matched import pooled_mean
+    stack = np.array([[[0.2, np.nan]], [[0.4, np.nan]], [[0.9, 0.5]]], 'float32')
+    out = pooled_mean(stack, [0, 1], min_valid=2)
+    assert out[0, 0] == pytest.approx(0.3) and np.isnan(out[0, 1])
+    assert pooled_mean(stack, [0, 1, 2], min_valid=3)[0, 0] == pytest.approx(0.5)
+    assert np.isnan(pooled_mean(stack, [0, 1, 2], min_valid=3)[0, 1])
+
+
+def test_false_drop_flags_only_stable_comparable_pixels_and_uses_a_shared_pixel_set():
+    from experiments.e6_season_matched import false_drop
+    pre_a = np.array([[0.8, 0.8, 0.8, np.nan]], 'float32')
+    pre_b = np.array([[0.5, 0.8, np.nan, 0.8]], 'float32')
+    post = np.array([[0.4, 0.4, 0.4, 0.4]], 'float32')
+    stable = np.array([[True, True, True, True]])
+    out = false_drop(pre_a, pre_b, post, stable, threshold=0.15)
+    # comparable = stable & valid in both pools & post valid -> only pixels 0 and 1
+    assert out['comparable_pixels'] == 2
+    assert out['fraction_a'] == 1.0 and out['fraction_b'] == 0.5
+    assert out['flags_a'].tolist() == [[True, True, False, False]]      # flags exist only on comparable pixels
+    assert out['flags_b'].tolist() == [[False, True, False, False]]
+
+
+def test_block_bootstrap_difference_is_deterministic_and_degenerate_for_constant_flags():
+    from experiments.e6_season_matched import block_bootstrap_diff
+    a = np.ones((40, 40), bool)
+    b = np.zeros((40, 40), bool)
+    m = np.ones((40, 40), bool)
+    lo, hi = block_bootstrap_diff(a, b, m, block=10, n=50, seed=1)
+    assert lo == hi == 1.0
+    rng = np.random.default_rng(0)
+    a2, b2 = rng.random((40, 40)) < 0.3, rng.random((40, 40)) < 0.2
+    r1 = block_bootstrap_diff(a2, b2, m, block=10, n=200, seed=5)
+    assert r1 == block_bootstrap_diff(a2, b2, m, block=10, n=200, seed=5)
+    assert r1[0] < 0.1 < r1[1] and r1[0] <= r1[1]
+
+
+def test_disk_mask_marks_pixels_within_radius_of_a_projected_centre():
+    from affine import Affine
+    from experiments.e6_season_matched import disk_mask
+    t = Affine(10.0, 0.0, 1000.0, 0.0, -10.0, 2000.0)
+    m = disk_mask(t, (20, 20), (1100.0, 1900.0), 30.0)        # centre pixel (10, 10)
+    assert m[10, 10] and m[10, 12] and not m[10, 14] and not m[0, 0]   # pixel centres 25 m / 45 m away
+
+
+def test_missing_e6_cache_is_blocked_and_lists_the_files(tmp_path):
+    from experiments.common import Blocked
+    from experiments.e6_season_matched import load_cache
+    with pytest.raises(Blocked, match='2024-01-11') as info:
+        load_cache(tmp_path / 'cache', ['2024-01-11', '2024-01-21'])
+    assert info.value.evidence == 'real' and '2 of 2' in str(info.value)

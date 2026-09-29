@@ -162,6 +162,7 @@ def probe(cfg, root):
     ok = fp['class_agreement'] == 1.0 and fp['max_abs_stat_delta'] == 0.0 and \
         res['forward_passes']['cascade'] < res['forward_passes']['full']
     parts = {'synthetic_mechanics': 'PASS' if ok else 'FAIL'}
+    wayanad = None
     try:
         load_real_crop(s['real_pre'], root)
         load_real_crop(s['real_post'], root)
@@ -175,7 +176,7 @@ def probe(cfg, root):
                          'audit_fraction': s['audit_fraction'], 'min_parent_pixels': s['min_parent_pixels'],
                          'parent_drop_threshold_uncalibrated_placeholder': ch['parent_drop_threshold'], 'k': ch['k']},
             'measurements': _jsonable(res),
-            'real_wayanad': {'status': parts['wayanad_real'], 'reason': wayanad if 'wayanad' in dir() else None},
+            'real_wayanad': {'status': parts['wayanad_real'], 'reason': wayanad},
             'limitations': ['UNSUPPORTED here is dominated by synthetic date-to-date noise exceeding the dihedral sigma '
                             '(sigma measures model sensitivity, not radiometric noise), NOT by SR hallucination. The '
                             'high rate characterises this synthetic set-up only.',
@@ -187,7 +188,7 @@ def probe(cfg, root):
                             'confidence interval here. The full-run reference exists only because this is synthetic.',
                             'Parent threshold and k are uncalibrated placeholders; the cascade never skips a tile whose '
                             'change the parent mask cannot see, so its recall is bounded by the 10 m parent mask.']
-                           + (['Real Wayanad part not run: ' + wayanad] if 'wayanad' in dir() else [])}
+                           + (['Real Wayanad part not run: ' + wayanad] if wayanad else [])}
 
 
 if __name__ == '__main__':

@@ -87,3 +87,19 @@ e5:
     path: data/experiments-cache/wayanad_post_10m.tif  # 2024-12-06 post date on the same grid
     dn_scale: null
     dn_offset: null
+e6:
+  r2_result: risk/results/r2.json                # pre_dates and first_post_date come from R2
+  catalog: risk/results/r2_catalog.json          # item ids/hrefs already recorded by R2
+  cache_subdir: e6                               # under paths.cache; per-date .npz of B04/B08/SCL at 10 m
+  january_dates: ['2024-01-11', '2024-01-21', '2024-01-31']
+  min_processing_baseline: '04.00'
+  radiometry: {quantification: 10000.0, boa_add_offset: -1000.0}   # ESA convention for baseline >= 04.00
+  # Stable-pixel definition, fixed before any real result was seen:
+  stable_min_valid_dates: 10                     # of the 12 pre dates
+  stable_max_std: 0.05                           # NDVI std across the valid pre dates
+  suspected_areas:                               # no labelled polygons are cached; the project's stated event point
+    - {lon: 76.233, lat: 11.782, radius_m: 1500}
+  pool_min_valid: 2                              # valid dates required in a pool for a pixel to enter the comparison
+  bootstrap_block_px: 50
+  bootstrap_n: 500
+  require_ci_excluding_zero: true                # stricter than "lower": a lower point estimate inside noise is not a keep
