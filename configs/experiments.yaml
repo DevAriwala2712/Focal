@@ -1,0 +1,12 @@
+schema_version: 1
+phase0_config: configs/phase0.yaml
+paths:
+  results: experiments/results
+  cache: data/experiments-cache
+seed: 2024
+e7:
+  run_counts: [8, 32, 96]
+  shape: [4, 128, 128]
+  ddof: 0
+  max_abs_error: 1.0e-6
+  ram_growth_tolerance: 1.5
