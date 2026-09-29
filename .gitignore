@@ -12,3 +12,8 @@ docs/evidence/worldstrat-metadata.csv
 .env
 .env.*
 !.env.example
+
+# wayanad evidence: large rasters are reproducible from the cache/config; only small COGs, JSON and the figure are committed
+experiments/wayanad_evidence/outputs/stack_*.tif
+experiments/wayanad_evidence/outputs/sr_*.tif
+experiments/wayanad_evidence/outputs/*.tif.aux.xml

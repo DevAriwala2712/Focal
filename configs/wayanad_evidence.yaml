@@ -1,0 +1,83 @@
+# Wayanad evidence experiment (timeboxed; NOT Phase 1). Every value here was fixed BEFORE any imagery
+# for this AOI was read or any result was viewed. Labels for every output derived from this file:
+#   pretrained SEN2SR-lite (NOT fine-tuned), k = 2.0 (NOT calibrated), retrospective comparison.
+schema_version: 1
+phase0_config: configs/phase0.yaml      # model pin, network policy, SCL classes, clear-date thresholds are reused from here
+paths:
+  cache: data/experiments-cache/wayanad_evidence      # raw per-date DN windows (gitignored, data/)
+  outputs: experiments/wayanad_evidence/outputs       # COGs and JSON
+  results: experiments/wayanad_evidence
+seed: 2024
+labels:
+  model: pretrained SEN2SR-lite (NOT fine-tuned)
+  k: k = 2.0 (NOT calibrated)
+  comparison: retrospective comparison
+aoi:
+  # The R2 AOI (11.782N, 76.233E) is ~34 km north of the slide (the six-laws report flagged it; confirmed here against
+  # Wikipedia's Mundakkai page 11.4859N 76.1559E, the PMC12290006 Chooralmala bridge 11.4992N 76.1601E and the published
+  # crown 11.465104N 76.134982E). Centre chosen from published place coordinates only, never from imagery.
+  longitude: 76.160
+  latitude: 11.490
+  crs: EPSG:32643
+  size_m: 10240           # 1024 px at 10 m = 8 x 128, so the tile grid divides the AOI exactly; ~10 km as specified
+  snap_m: 20              # origin snapped to Sentinel-2's 20 m lattice so 10 m and 20 m (SCL) pixels are exact sub-grids
+  audit_resolution_m: 20
+  plausibility_points:    # published coordinates, used ONLY to check the found component is where the slide is; never a label
+    crown: {lon: 76.134982, lat: 11.465104}
+    mundakkai: {lon: 76.1559113, lat: 11.4859333}
+    chooralmala_bridge: {lon: 76.1601, lat: 11.4992}
+  plausibility_radius_m: 1500
+event_date: '2024-07-30'
+dates:
+  preferred_pre: ['2024-01-11', '2024-01-21', '2024-01-31']
+  preferred_post: '2024-12-06'
+  # Rule if a preferred date fails the AOI clear test on THIS AOI (phase0 thresholds: cloud+shadow <= 10 %, coverage >= 99 %):
+  # keep every preferred date that passes; replace each failing pre date by the earliest clear pre-event date not already
+  # chosen (January-May); replace a failing post date by the first clear post-event date.
+  fallback: earliest_clear
+  min_pre_dates: 3
+  audit_start: '2024-01-01T00:00:00Z'
+  audit_end: '2024-12-31T23:59:59Z'
+  max_pre_date: '2024-05-31'      # candidate fallback pre dates are limited to January-May, like R2's clear set
+radiometry:
+  min_processing_baseline: '04.00'   # STAC items carry no scale/offset tags (checked in r2_catalog.json): ESA convention by baseline
+  quantification: 10000.0
+  boa_add_offset: -1000.0
+  clip_min: 0.0                      # negative reflectance clipped to 0 before NDVI and before the model
+  min_denominator: 0.05              # NDVI = (N-R)/(N+R) undefined where N+R < this (dark water/shadow); same value as E5
+fetch:
+  max_fetch_bytes: 300000000         # hard stop for all downloads of this experiment
+  window_read_block: 512
+change:
+  # PROVISIONAL, set before viewing data. Not calibrated. Chosen from the published E6 stable-pixel statistics of the OLD
+  # AOI (date-to-date NDVI std <= 0.05; December mean NDVI 0.81 vs 0.72 dry-season pool), i.e. 6x that noise, and NOT from any
+  # scar imagery. A freshly bare scar loses far more than 0.30; this is deliberately conservative.
+  parent_drop_threshold: 0.30
+  parent_threshold_status: provisional, set before viewing data
+  parent_connectivity: 8
+  k: 2.0
+  ddof: 1
+  rho_min_object_px: 16              # objects smaller than one 10 m block (16 px at 2.5 m) reported separately
+  rho_connectivity: 8
+footprint:
+  buffer_m: 200                      # square (Chebyshev) dilation of the largest parent-positive component
+  min_valid_fraction: 0.90           # mirrors the AOI rule (<= 10 % cloud/shadow) but applied inside the footprint (ADR-002)
+tiling:
+  tile: 128                          # native model input; nothing else is ever sent to the model (ADR-001)
+  scale: 4
+  crop_margin_px: 16                 # input px discarded per tile side except at scene edges (ADR-001)
+  stride: 96                         # = tile - 2*crop_margin_px. 112 would need an 8 px crop, contradicting the >=16 rule
+  stride_if_smooth_mask: 112         # recorded for the mask check; NOT used (see above)
+  batch: 8                           # the 8 dihedral variants of one tile run as one batch; OOM -> retry once at batch 1
+  fill: band_median                  # finite fill for invalid input pixels before the model; they stay NO_DATA downstream
+model:
+  device: cpu                        # no CUDA on the run machine (macOS); MPS deliberately not used
+  deterministic: true
+dihedral: 8
+scale_check:
+  nrsc_main_scarp_m2: 86000          # scale check ONLY; definitions differ; NOT a label
+spectral_consistency:
+  tolerance_mae: 0.02                # reported against, not tuned
+figure:
+  dpi: 130
+  rgb_gain: 3.0
