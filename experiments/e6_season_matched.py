@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import warnings
 from pathlib import Path
@@ -86,27 +87,26 @@ def disk_mask(transform, shape, centre_xy, radius_m: float) -> np.ndarray:
 
 # ---- byte budget ------------------------------------------------------------------------------------
 
-def parse_interface_ibytes(netstat_text: str, interface: str) -> int:
-    """Received bytes of `interface` from `netstat -ib` output (its <Link#> row; Ibytes is 5th from the end)."""
-    for line in netstat_text.splitlines():
-        tokens = line.split()
-        if len(tokens) >= 8 and tokens[0] == interface and tokens[2].startswith('<Link#'):
-            return int(tokens[-5])
-    raise ValueError(f'no <Link#> row for interface {interface}')
+def parse_nettop_bytes_in(text: str) -> int:
+    """Bytes received, from `nettop -P -p PID -L 1 -J bytes_in,bytes_out` output (header + one row per process)."""
+    lines = [l for l in text.strip().splitlines() if l.strip()]
+    if not lines or lines[0].split(',')[1:2] != ['bytes_in']:
+        raise ValueError(f'unexpected nettop output, no bytes_in column: {text[:80]!r}')
+    return sum(int(l.split(',')[1]) for l in lines[1:])
 
 
-def default_interface_ibytes() -> int:
-    route = subprocess.run(['route', '-n', 'get', 'default'], capture_output=True, text=True, check=True).stdout
-    interface = next(l.split(':')[1].strip() for l in route.splitlines() if l.strip().startswith('interface:'))
-    text = subprocess.run(['netstat', '-ib'], capture_output=True, text=True, check=True).stdout
-    return parse_interface_ibytes(text, interface)
+def process_bytes_in() -> int:
+    """Bytes received by THIS process (GDAL/libcurl run in-process). Per-PID: unrelated machine traffic is excluded."""
+    text = subprocess.run(['nettop', '-P', '-p', str(os.getpid()), '-L', '1', '-J', 'bytes_in,bytes_out'],
+                          capture_output=True, text=True, check=True).stdout
+    return parse_nettop_bytes_in(text)
 
 
 class ByteBudget:
-    """Bytes received on the default interface since construction. System-wide, so an UPPER BOUND on this
-    process's traffic (any other traffic on the machine counts too). GDAL exposes no per-read byte counter."""
+    """Bytes received by this process since construction (nettop, per PID). GDAL exposes no per-read counter, and
+    the system-wide interface counter was rejected: it read ~2 MB/s of unrelated idle traffic on this machine."""
 
-    def __init__(self, cap_bytes: int, counter=default_interface_ibytes):
+    def __init__(self, cap_bytes: int, counter=process_bytes_in):
         try:
             self.counter, self.start = counter, counter()
         except Exception as exc:
@@ -123,8 +123,8 @@ class ByteBudget:
             raise RuntimeError(f'network byte cap exceeded: {self.peak} > {self.cap_bytes} bytes; stopped fetching')
 
     def log(self) -> dict:
-        return {'cap_bytes': self.cap_bytes, 'bytes_received_upper_bound': self.peak,
-                'method': 'default-interface received-bytes delta (netstat -ib); includes any other traffic'}
+        return {'cap_bytes': self.cap_bytes, 'bytes_received': self.peak,
+                'method': 'per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic'}
 
 
 # ---- cache + (explicit, opt-in) fetch --------------------------------------------------------
@@ -172,6 +172,9 @@ def fetch(cfg, root, dates) -> dict:
                         return vrt.read(1), src.scales[0], src.offsets[0]
         return retry(go, policy, href)
     for date in dates:
+        if cache_path(cache, date).is_file():
+            print(f'skip {date}: already cached', flush=True)
+            continue
         items = sorted((i for i in catalog if i['properties']['datetime'][:10] == date), key=lambda i: i['id'])
         if not items:
             raise RuntimeError(f'no catalogued item for {date}')

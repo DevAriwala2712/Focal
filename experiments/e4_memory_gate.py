@@ -55,10 +55,10 @@ def probe(cfg, root):
     """E4: 1000x1000 px AOI, batch 1, allocator capped at 4 GiB, per-stage peak memory."""
     import torch
     if not torch.cuda.is_available():
-        raise Blocked('CUDA GPU required: torch.cuda.is_available() is False on this machine '
-                      f'(torch {torch.__version__}, no NVIDIA GPU/driver). Memory cannot be measured on CPU, and an '
-                      'allocator cap is meaningless without CUDA. Needed: an NVIDIA GPU with a CUDA build of torch '
-                      '(the project reference is an RTX 4050 Laptop 6 GB).', evidence='synthetic',
+        raise Blocked('Needs the RTX 4050 machine (NVIDIA GPU, CUDA build of torch): torch.cuda.is_available() is '
+                      f'False here (torch {torch.__version__}, macOS arm64). Memory cannot be measured on CPU, an '
+                      'allocator cap is meaningless without CUDA, and MPS was deliberately not substituted.',
+                      evidence='synthetic',
                       limitations=['The CUDA path of this experiment is implemented but was never executed on CUDA; only the '
                                    'stage-tracking logic is unit-tested, against a fake memory API.',
                                    'No memory number exists yet. Nothing here supports or opposes dropping the 64 px fallback.'])

@@ -1,7 +1,7 @@
 {
   "status": "BLOCKED",
   "evidence": "real",
-  "reason": "real 10 m RGBN crop not cached: expected data/experiments-cache/real_pre_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m). The keep/drop verdict needs real 10 m tiles run through the real model.",
+  "reason": "real 10 m RGBN crop not cached: expected data/experiments-cache/real_pre_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m). The keep/drop verdict stays BLOCKED here: it needs real 10 m tiles run through the real model on the RTX 4050 machine.",
   "mechanics_synthetic": {
     "tile_pairs": 4,
     "comparable_pixels": 1039751,
@@ -43,7 +43,18 @@
   ],
   "experiment": "e8",
   "risk": "e8",
-  "started_utc": "2026-09-29T12:50:14.711983+00:00",
-  "finished_utc": "2026-09-29T12:50:19.844166+00:00",
-  "config_sha256": "2036ae38f34a8ad4eea0537a75aa3cbfb6168b3ef15d556f4a8a86398e7bf010"
+  "started_utc": "2026-09-29T13:18:00.215202+00:00",
+  "finished_utc": "2026-09-29T13:18:05.351583+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
 }

@@ -1,14 +1,25 @@
 {
   "status": "BLOCKED",
   "evidence": "synthetic",
-  "reason": "CUDA GPU required: torch.cuda.is_available() is False on this machine (torch 2.8.0, no NVIDIA GPU/driver). Memory cannot be measured on CPU, and an allocator cap is meaningless without CUDA. Needed: an NVIDIA GPU with a CUDA build of torch (the project reference is an RTX 4050 Laptop 6 GB).",
+  "reason": "Needs the RTX 4050 machine (NVIDIA GPU, CUDA build of torch): torch.cuda.is_available() is False here (torch 2.8.0, macOS arm64). Memory cannot be measured on CPU, an allocator cap is meaningless without CUDA, and MPS was deliberately not substituted.",
   "limitations": [
     "The CUDA path of this experiment is implemented but was never executed on CUDA; only the stage-tracking logic is unit-tested, against a fake memory API.",
     "No memory number exists yet. Nothing here supports or opposes dropping the 64 px fallback."
   ],
   "experiment": "e4",
   "risk": "e4",
-  "started_utc": "2026-09-29T12:47:46.395987+00:00",
-  "finished_utc": "2026-09-29T12:47:46.786387+00:00",
-  "config_sha256": "07ccb97318712ac04675fb5c5948a89b7b02906347fd3e39ef16ffc1ea6f5ea9"
+  "started_utc": "2026-09-29T13:17:36.796172+00:00",
+  "finished_utc": "2026-09-29T13:17:37.183776+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
 }

@@ -753,20 +753,18 @@ def test_missing_e6_cache_is_blocked_and_lists_the_files(tmp_path):
 
 # ---- fetch byte budget + environment record ---------------------------------------------------------
 
-_NETSTAT = """Name       Mtu   Network       Address            Ipkts Ierrs     Ibytes    Opkts Oerrs     Obytes  Coll
-lo0        16384 <Link#1>                        496518     0  244112869   496518     0  244112869     0
-en0        1500  <Link#14>   aa:bb:cc:dd:ee:ff  1000     0     5000000    900     0     100000     0
-en0        1500  devs-macboo fe80:e::1           1000     -     5000000    900     -     100000     -
-utun3      1380  <Link#20>                          10     0        777     11     0        888     0
+_NETTOP = """,bytes_in,bytes_out,
+Python.50887,2087538,4755,
 """
 
 
-def test_parse_interface_ibytes_reads_the_link_row_of_the_named_interface_only():
-    from experiments.e6_season_matched import parse_interface_ibytes
-    assert parse_interface_ibytes(_NETSTAT, 'en0') == 5000000        # not double counted via the address row
-    assert parse_interface_ibytes(_NETSTAT, 'utun3') == 777          # a row without a MAC address still parses
-    with pytest.raises(ValueError, match='en9'):
-        parse_interface_ibytes(_NETSTAT, 'en9')
+def test_parse_nettop_bytes_in_sums_process_rows_and_tolerates_no_traffic_yet():
+    from experiments.e6_season_matched import parse_nettop_bytes_in
+    assert parse_nettop_bytes_in(_NETTOP) == 2087538
+    assert parse_nettop_bytes_in(",bytes_in,bytes_out,\n") == 0        # process has not opened a connection yet
+    assert parse_nettop_bytes_in(_NETTOP + "Python.9,12,1,\n") == 2087550
+    with pytest.raises(ValueError, match='bytes_in'):
+        parse_nettop_bytes_in('garbage')
 
 
 def test_byte_budget_logs_usage_and_stops_at_the_cap():

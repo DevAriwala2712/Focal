@@ -22,7 +22,7 @@
         "origins_rows": [
           0
         ],
-        "seconds": 0.04550962502253242,
+        "seconds": 0.048464708001120016,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -100,7 +100,7 @@
           96,
           172
         ],
-        "seconds": 0.40511029199115,
+        "seconds": 0.37501062502269633,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -181,7 +181,7 @@
           384,
           389
         ],
-        "seconds": 2.1134342919976916,
+        "seconds": 1.5030262499931268,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -267,7 +267,7 @@
           864,
           872
         ],
-        "seconds": 6.5997241659788415,
+        "seconds": 5.111958249995951,
         "checks": {
           "only_128_inputs": true,
           "output_exactly_4x": true,
@@ -352,7 +352,18 @@
   ],
   "experiment": "e1",
   "risk": "e1",
-  "started_utc": "2026-09-29T12:44:22.021509+00:00",
-  "finished_utc": "2026-09-29T12:44:33.375887+00:00",
-  "config_sha256": "cd9d2d686b0dfc8fa621dfcf2360b5843663843ceceaf95289ff3230b427cd52"
+  "started_utc": "2026-09-29T13:16:59.592754+00:00",
+  "finished_utc": "2026-09-29T13:17:08.822258+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
 }

@@ -115,7 +115,8 @@ def probe(cfg, root):
         pairs = real_pairs(s, root, tile)
     except Blocked as exc:
         return {'status': 'BLOCKED', 'evidence': 'real',
-                'reason': f'{exc}. The keep/drop verdict needs real 10 m tiles run through the real model.',
+                'reason': f'{exc}. The keep/drop verdict stays BLOCKED here: it needs real 10 m tiles run through the real model '
+                          'on the RTX 4050 machine.',
                 'mechanics_synthetic': {**mechanics, 'note': 'mechanics only; NOT a verdict on 4 vs 8'},
                 'measurements': {}, **common}
     real = evaluate(op, pairs, s, md, change, p0['scale'])

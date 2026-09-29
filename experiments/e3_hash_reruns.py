@@ -71,8 +71,9 @@ def fresh_process_run(config_path: str, threads: int) -> dict:
 def gpu_part(cfg, root) -> dict:
     import torch
     if not torch.cuda.is_available():
-        raise Blocked('CUDA GPU required for the GPU reruns: torch.cuda.is_available() is False on this machine '
-                      f'(torch {torch.__version__}, no NVIDIA GPU/driver). CPU results above do not stand in for it.',
+        raise Blocked('GPU reruns need the RTX 4050 machine (an NVIDIA GPU with CUDA torch): '
+                      f'torch.cuda.is_available() is False here (torch {torch.__version__}, macOS arm64). '
+                      'CPU hashes do not stand in for GPU drift, and MPS was deliberately not substituted.',
                       evidence='real')
     runs = [run_e1(cfg, root, 'cuda', None) for _ in range(cfg['e3']['gpu_runs'])]
     cpu = run_e1(cfg, root, 'cpu', cfg['e3']['cpu_threads'][0])
@@ -111,9 +112,10 @@ def probe(cfg, root):
                              'determinism_settings': ['torch.use_deterministic_algorithms(True)',
                                                       'cudnn.deterministic=True, benchmark=False',
                                                       'CUBLAS_WORKSPACE_CONFIG=:4096:8', 'row-major tile order']},
+            'hash_scope': 'macOS-arm64-specific: valid only for this CPU architecture, OS and torch 2.8.0 macOS build',
             'limitations': ['Bitwise CPU reproducibility is shown on this machine, OS and torch build only; it does not '
                             'transfer to other CPUs, BLAS builds or thread counts (see the cross-thread finding).',
-                            'GPU determinism is untested here (no CUDA); it is BLOCKED, not passed.',
+                            'GPU determinism is untested (no CUDA here); it is BLOCKED until run on the RTX 4050 machine, not passed.',
                             'Synthetic scene; hash equality says nothing about accuracy.']}
 
 

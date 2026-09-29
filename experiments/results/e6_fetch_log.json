@@ -1,0 +1,7 @@
+{
+  "cap_bytes": 250000000,
+  "bytes_received": 83107418,
+  "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic",
+  "dates_fetched_in_this_log": 12,
+  "note": "2024-01-11 was fetched by an earlier, aborted run that used a rejected system-wide byte counter; its bytes are not in bytes_received. Per-date cost in this log averages about 6.9 MB, so the total for all 13 dates is roughly 90 MB (an estimate for that one date, not a measurement)."
+}
