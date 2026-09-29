@@ -23,6 +23,15 @@ def spectral_project(lr: np.ndarray, guessed: np.ndarray, scale: int = 4) -> np.
     return guessed.astype(np.float32) + np.repeat(np.repeat(correction, scale, -2), scale, -1)
 
 
+def spectral_project_torch(lr, guessed, scale: int = 4):
+    """Differentiable consistency projection for the 64px training fallback."""
+    import torch.nn.functional as F
+    if lr.ndim != 4 or guessed.shape != (lr.shape[0], lr.shape[1], lr.shape[2]*scale, lr.shape[3]*scale):
+        raise ValueError('Expected N,C,H,W and exactly x4 N,C,H,W')
+    correction = lr - F.avg_pool2d(guessed, kernel_size=scale, stride=scale)
+    return guessed + correction.repeat_interleave(scale, -2).repeat_interleave(scale, -1)
+
+
 def _starts(length: int, tile_size: int, overlap: int) -> list[int]:
     if length <= tile_size:
         return [0]

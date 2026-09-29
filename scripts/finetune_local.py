@@ -10,6 +10,17 @@ from safetensors.torch import save_file
 from risk.common import digest, load_config, write_json
 from risk.model import load_model
 from risk.r5_finetune import load_crop, train_steps, validate_manifest
+from trustsr.sr import spectral_project_torch
+
+
+class VariableTileTraining(torch.nn.Module):
+    """Use the pretrained CNN with differentiable parent constraint below 128px."""
+    def __init__(self, sr_model):
+        super().__init__()
+        self.sr_model = sr_model
+
+    def forward(self, x):
+        return spectral_project_torch(x, self.sr_model(x).clamp_min(0))
 
 
 def main():
@@ -27,7 +38,8 @@ def main():
         try:
             model = load_model(cfg, root, trainable=True).eval()
             samples = [tuple(torch.from_numpy(a[None]) for a in load_crop(p, size, 4)) for p in records]
-            losses, delta, gradients = train_steps(model, samples, cfg['training']['steps'],
+            training_model = model if size == cfg['model']['native_tile'] else VariableTileTraining(model.sr_model)
+            losses, delta, gradients = train_steps(training_model, samples, cfg['training']['steps'],
                                                    cfg['training']['learning_rate'], 'cuda')
             break
         except torch.cuda.OutOfMemoryError:

@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "device_memory_mib": 6140.5,
+  "allocator_cap_gib": 4.0,
+  "physical_4gb_device_verified": false,
+  "input": "seeded synthetic shape/memory probe",
+  "method": "SEN2SR pretrained CNN tiled with parent-mean consistency projection",
+  "measurements": [
+    {
+      "input_size": 64,
+      "output_size": 256,
+      "seconds": 0.513535000034608,
+      "peak_allocated_mib": 8.13134765625,
+      "peak_reserved_mib": 30.0
+    },
+    {
+      "input_size": 128,
+      "output_size": 512,
+      "seconds": 0.10344889998668805,
+      "peak_allocated_mib": 21.98388671875,
+      "peak_reserved_mib": 50.0
+    },
+    {
+      "input_size": 512,
+      "output_size": 2048,
+      "seconds": 1.8824427000363357,
+      "peak_allocated_mib": 21.98388671875,
+      "peak_reserved_mib": 50.0
+    }
+  ]
+}
