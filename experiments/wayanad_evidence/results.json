@@ -1,0 +1,231 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "measurements": {
+    "labels": {
+      "model": "pretrained SEN2SR-lite (NOT fine-tuned)",
+      "k": "k = 2.0 (NOT calibrated)",
+      "comparison": "retrospective comparison"
+    },
+    "dates": {
+      "pre": [
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26"
+      ],
+      "post": "2024-12-06",
+      "gap_days_event_to_post": 129,
+      "source": "fallback",
+      "replaced_vs_preferred": {
+        "2024-01-11": "2024-01-16",
+        "2024-01-31": "2024-01-26"
+      }
+    },
+    "step_status": {
+      "step1": "PASS",
+      "step2": "PASS",
+      "step3": "PASS",
+      "step4": "PASS"
+    },
+    "parent": {
+      "threshold": 0.3,
+      "threshold_status": "provisional, set before viewing data",
+      "positive_px_aoi": 18075,
+      "area_m2_aoi": 1807500.0,
+      "component_count": 243,
+      "largest_component_px": 5539,
+      "largest_component_area_m2": 553900.0,
+      "second_largest_px": 3761
+    },
+    "footprint": {
+      "buffer_m": 200,
+      "px": 39019,
+      "area_m2": 3901900.0
+    },
+    "crop": {
+      "rows": [
+        256,
+        896
+      ],
+      "cols": [
+        128,
+        640
+      ],
+      "shape_px": [
+        640,
+        512
+      ],
+      "tiles_128": [
+        5,
+        4
+      ]
+    },
+    "class_counts_px": {
+      "NO_CHANGE": 4780532,
+      "OBSERVED": 117069,
+      "INFERRED": 515,
+      "UNSUPPORTED": 138808,
+      "NO_DATA": 205956
+    },
+    "class_areas_m2": {
+      "NO_CHANGE": 29878325.0,
+      "OBSERVED": 731681.25,
+      "INFERRED": 3218.75,
+      "UNSUPPORTED": 867550.0,
+      "NO_DATA": 1287225.0
+    },
+    "ungated_S_px": 255877,
+    "unsupported_suppressed_px": 138808,
+    "rho": {
+      "objects_total": 2217,
+      "objects_ge_min_px": 637,
+      "all_objects": {
+        "n": 2217,
+        "min": 0.0625,
+        "p10": 0.0625,
+        "p25": 0.156531377220218,
+        "median": 0.3220743988128154,
+        "p75": 0.5541560196840309,
+        "p90": 0.7373630317874178,
+        "max": 0.990956308939127,
+        "mean": 0.3688708792883136
+      },
+      "objects_ge_min_px_distribution": {
+        "n": 637,
+        "min": 0.24520369996764296,
+        "p10": 0.44077732444744605,
+        "p25": 0.5307106869998149,
+        "median": 0.6436632580935815,
+        "p75": 0.7697744469776656,
+        "p90": 0.84345133761087,
+        "max": 0.990956308939127,
+        "mean": 0.6468588105678552
+      },
+      "energy_weighted_mean_rho": 0.9776153530911913,
+      "majority_unsupported_objects": {
+        "n": 2212,
+        "min": 0.0625,
+        "p10": 0.0625,
+        "p25": 0.15520984707199786,
+        "median": 0.32103902401855344,
+        "p75": 0.5525471521366441,
+        "p90": 0.7355385184207105,
+        "max": 0.9867152277208326,
+        "mean": 0.36760724684284235
+      }
+    },
+    "spectral_consistency": {
+      "2024-01-16": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0003571418933057102,
+          "B03": 0.00040342904128613224,
+          "B02": 0.0003824650423739183,
+          "B08": 0.002157730639403667
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0003587864123984966,
+          "B03": 0.0004054064935283527,
+          "B02": 0.0003861708953445547,
+          "B08": 0.002168875377960544
+        },
+        "valid_10m_px": 323116,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-01-21": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0004292110343762025,
+          "B03": 0.00046324323600111823,
+          "B02": 0.00046695959752721035,
+          "B08": 0.0026811321119274496
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004307626262133502,
+          "B03": 0.00046562724747750434,
+          "B02": 0.0004686432664539878,
+          "B08": 0.002694885046590527
+        },
+        "valid_10m_px": 320908,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-01-26": {
+        "per_band_mae_identity_run": {
+          "B04": 0.00044751306917139905,
+          "B03": 0.00048706731736920735,
+          "B02": 0.0004476151623689756,
+          "B08": 0.002716416844333961
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004494685496290072,
+          "B03": 0.0004884838609905195,
+          "B02": 0.0004497687326995864,
+          "B08": 0.0027302240875157887
+        },
+        "valid_10m_px": 324620,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-12-06": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0004923605581868508,
+          "B03": 0.0005765472328726974,
+          "B02": 0.0005057571871366069,
+          "B08": 0.002881844988178972
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004945495261801901,
+          "B03": 0.0005787513851665828,
+          "B02": 0.0005067844471955195,
+          "B08": 0.0028993865013562793
+        },
+        "valid_10m_px": 320612,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      }
+    },
+    "step2_earliest_passing_date": null,
+    "runtime": {
+      "median": 0.31235002100584097,
+      "p95": 0.3149371229286771,
+      "max": 0.35626183298882097,
+      "total": 43.76623954498791
+    },
+    "device": "cpu"
+  },
+  "blocked_items": [
+    {
+      "item": "GPU peak memory / GPU latency / physical 4 GB test",
+      "missing": "a CUDA device (the RTX 4050 machine); this run used the macOS CPU"
+    }
+  ],
+  "limitations": [
+    "NDVI drop indicates vegetation disturbance, not uniquely landslide damage",
+    "SCL cloud/shadow classes are a model-based estimate; footprint-valid does not mean the scar was visible without haze or shadow",
+    "footprint comes from the January-vs-post-date NDVI drop, so it is a circular basis for anything but date selection",
+    "k = 2.0 (NOT calibrated)",
+    "no 2.5 m ground truth exists",
+    "no accuracy/F1: no labels were used",
+    "no physical 4 GB GPU test",
+    "parent threshold is provisional (set before viewing data), not calibrated",
+    "parent threshold provisional (set before viewing data), not calibrated",
+    "pre dates are January-May dry season and the post date is 2024-12-06: seasonal/recovery confounding",
+    "pretrained SEN2SR-lite (NOT fine-tuned)",
+    "ran on CPU (no CUDA here): GPU peak memory and GPU time per tile are NOT measured; the R1 RTX 4050 numbers are the only GPU evidence and are synthetic-input",
+    "reflectance scale/offset convention follows ESA processing baseline; the SEN2SR training-data scaling was not verified against the model card",
+    "retrospective comparison",
+    "retrospective comparison, not a rapid-response result",
+    "sigma is dihedral + cross-date dispersion, a sensitivity proxy, not a calibrated probability"
+  ],
+  "experiment": "wayanad_evidence",
+  "risk": "wayanad_evidence",
+  "started_utc": "2026-09-29T17:39:05.237377+00:00",
+  "finished_utc": "2026-09-29T17:39:05.237527+00:00",
+  "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}

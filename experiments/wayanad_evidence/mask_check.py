@@ -62,6 +62,15 @@ def fit_families(mask, radius):
             'is_binary': bool(set(unique.tolist()) <= {0.0, 1.0}), 'radius': radius}
 
 
+def fit_free_gaussian(mask):
+    """Diagnostic only (not an upstream family at its radius): best Gaussian exp(-d^2 / 2 sigma^2) with free sigma."""
+    mask = np.asarray(mask, dtype=np.float32)
+    d = _distance(mask.shape)
+    err = lambda s: float(np.abs(mask - np.exp(-(d ** 2) / (2 * s ** 2)).astype(np.float32)).max())
+    sigma, diff = _refine(err, 1.0, 200.0)
+    return {'sigma': sigma, 'max_abs_diff': diff}
+
+
 def load_edge_probe(root: Path):
     """The synthetic FFT edge probe. The JSON is absent on this branch; the same content is read from the patch that adds it."""
     direct = root / 'experiments/probes/results/fft_edge_probe.json'

@@ -40,6 +40,7 @@ def mask_check(cfg, root, runner, real_window):
     return {'shape': list(mask.shape), 'dtype': str(mask.dtype), 'unique_values': int(np.unique(mask).size),
             'min': float(mask.min()), 'max': float(mask.max()), 'centre_value': float(mask[mask.shape[0] // 2, mask.shape[1] // 2]),
             'corner_value': float(mask[0, 0]), 'radius_used_for_fit': radius, 'fit': fit,
+            'free_sigma_gaussian_diagnostic': M.fit_free_gaussian(mask),
             'radial_profile_by_integer_distance': [float(v) for v in profile],
             'classification': 'smooth' if smooth else 'ideal/binary',
             'stride_allowed_by_mask_rule': cfg['tiling']['stride_if_smooth_mask'] if smooth else 96,

@@ -1,0 +1,281 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "measurements": {
+    "labels": {
+      "model": "pretrained SEN2SR-lite (NOT fine-tuned)",
+      "k": "k = 2.0 (NOT calibrated)",
+      "comparison": "retrospective comparison"
+    },
+    "k": 2.0,
+    "pre_dates": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26"
+    ],
+    "post_date": "2024-12-06",
+    "crop_2p5m_px": [
+      2560,
+      2048
+    ],
+    "pixel_area_m2": 6.25,
+    "class_counts_px": {
+      "NO_CHANGE": 4780532,
+      "OBSERVED": 117069,
+      "INFERRED": 515,
+      "UNSUPPORTED": 138808,
+      "NO_DATA": 205956
+    },
+    "class_areas_m2": {
+      "NO_CHANGE": 29878325.0,
+      "OBSERVED": 731681.25,
+      "INFERRED": 3218.75,
+      "UNSUPPORTED": 867550.0,
+      "NO_DATA": 1287225.0
+    },
+    "valid_px": 5036924,
+    "no_data": {
+      "total_px": 205956,
+      "scl_or_ndvi_invalid_at_10m_px": 204976,
+      "sr_ndvi_undefined_in_some_run_px": 980
+    },
+    "S_ungated_positive_px": 255877,
+    "S_ungated_area_m2": 1599231.25,
+    "unsupported_suppressed_px": 138808,
+    "unsupported_fraction_of_S": 0.5424793943965265,
+    "baselines": {
+      "parent_area_10m_crop_m2": 734900.0,
+      "parent_px_10m_crop": 7349,
+      "parent_area_10m_aoi_m2": 1807500.0,
+      "parent_area_largest_component_m2": 553900.0
+    },
+    "observed_area_m2": 731681.25,
+    "observed_union_inferred_area_m2": 734900.0,
+    "nrsc_scale_check": {
+      "nrsc_main_scarp_m2": 86000,
+      "note": "scale check only. NRSC maps the main scarp with different data and a different definition; TrustSR areas are NDVI-drop pixels (scarp plus runout vegetation loss) and NRSC is NOT a label"
+    },
+    "rho": {
+      "definition": "rho = ||P D||^2 / ||D||^2, D = d restricted to the S-object (zero elsewhere), P = 4x4 block mean; a fraction of signal energy in [0,1], NOT a probability; area averaging only approximates the S2 PSF",
+      "objects_total": 2217,
+      "objects_ge_min_px": 637,
+      "min_px_for_main_distribution": 16,
+      "all_objects": {
+        "n": 2217,
+        "min": 0.0625,
+        "p10": 0.0625,
+        "p25": 0.156531377220218,
+        "median": 0.3220743988128154,
+        "p75": 0.5541560196840309,
+        "p90": 0.7373630317874178,
+        "max": 0.990956308939127,
+        "mean": 0.3688708792883136
+      },
+      "objects_ge_min_px_distribution": {
+        "n": 637,
+        "min": 0.24520369996764296,
+        "p10": 0.44077732444744605,
+        "p25": 0.5307106869998149,
+        "median": 0.6436632580935815,
+        "p75": 0.7697744469776656,
+        "p90": 0.84345133761087,
+        "max": 0.990956308939127,
+        "mean": 0.6468588105678552
+      },
+      "energy_weighted_mean_rho": 0.9776153530911913,
+      "pixel_weighted_mean_rho": 0.918045114876183,
+      "majority_unsupported_objects": {
+        "n": 2212,
+        "min": 0.0625,
+        "p10": 0.0625,
+        "p25": 0.15520984707199786,
+        "median": 0.32103902401855344,
+        "p75": 0.5525471521366441,
+        "p90": 0.7355385184207105,
+        "max": 0.9867152277208326,
+        "mean": 0.36760724684284235
+      },
+      "majority_observed_or_inferred_objects": {
+        "n": 5,
+        "min": 0.6931356672654103,
+        "p10": 0.8084720189194615,
+        "p25": 0.9814765464005383,
+        "median": 0.9839196940960003,
+        "p75": 0.9900211491228244,
+        "p90": 0.9905822450126059,
+        "max": 0.990956308939127,
+        "mean": 0.9279018731647801
+      },
+      "csv": "rho_objects.csv"
+    },
+    "unsupported_diagnostics": {
+      "purpose": "what UNSUPPORTED pixels are: SR-only hallucination, or real but modest NDVI change below the parent threshold",
+      "d_sr_at_unsupported": {
+        "n": 138808,
+        "min": 0.0034633980703123735,
+        "p10": 0.03692178734064746,
+        "p25": 0.06193807379456784,
+        "median": 0.10903285969851403,
+        "p75": 0.1837835093258401,
+        "p90": 0.2528814491394239,
+        "max": 0.6603674577234095,
+        "mean": 0.1296130607532097
+      },
+      "d_sr_at_observed": {
+        "n": 117069,
+        "min": 0.04326072488903221,
+        "p10": 0.33844382104111,
+        "p25": 0.42233837449362516,
+        "median": 0.5421048799842337,
+        "p75": 0.659800006523335,
+        "p90": 0.7180242339395129,
+        "max": 1.1316045498319576,
+        "mean": 0.5364426145199898
+      },
+      "sigma_at_unsupported": {
+        "n": 138808,
+        "min": 0.001332981493070155,
+        "p10": 0.010288175628717764,
+        "p25": 0.016212454546730773,
+        "median": 0.024335637334507894,
+        "p75": 0.03250077330330434,
+        "p90": 0.04123064637784943,
+        "max": 0.17256746761153918,
+        "mean": 0.025608048707706086
+      },
+      "sigma_at_valid": {
+        "n": 5036924,
+        "min": 0.0007562921728212023,
+        "p10": 0.016640811012042594,
+        "p25": 0.023998540393148624,
+        "median": 0.03273144046240102,
+        "p75": 0.04180857807872208,
+        "p90": 0.051088105936430386,
+        "max": 0.356529714617864,
+        "mean": 0.03445341211579029
+      },
+      "parent_drop_10m_at_unsupported": {
+        "n": 138808,
+        "min": -0.1207766979932785,
+        "p10": 0.02651405781507493,
+        "p25": 0.04995964094996452,
+        "median": 0.1025133803486824,
+        "p75": 0.1809898018836975,
+        "p90": 0.24635027199983642,
+        "max": 0.29976701736450195,
+        "mean": 0.1194502315547204
+      },
+      "fraction_10m_drop_above_half_threshold": 0.3382513976139704,
+      "fraction_10m_drop_above_zero": 0.9854979540084144,
+      "fraction_10m_drop_above_0p05": 0.7497118321710564,
+      "note": "S = d > k*sigma has no absolute floor, while P needs a 10 m drop above the threshold, so UNSUPPORTED counts SR-visible change that is too small at 10 m to pass P. It is not, by itself, evidence of invented detail"
+    },
+    "observed_split": {
+      "in_largest_parent_component_px": 88335,
+      "outside_largest_parent_component_px": 28734,
+      "in_largest_parent_component_m2": 552093.75,
+      "outside_largest_parent_component_m2": 179587.5,
+      "note": "the component is the 10 m parent-positive object used to crop; OBSERVED outside it is change elsewhere in the crop (residual cloud edges, other clearings), not scar"
+    },
+    "mask_quality": {
+      "post_date": "2024-12-06",
+      "ring_px_10m": 5601,
+      "ring_fraction_scl_invalid_post": 0.1780039278700232,
+      "ring_scl_class_counts_of_invalid_px": {
+        "2": 997
+      },
+      "crop_fraction_scl_invalid_post": 0.02156982421875,
+      "observed_outside_component_px": 28734,
+      "post_scl_class_counts_at_observed_outside_px_2p5m": {
+        "4": 8894,
+        "5": 19719,
+        "7": 121
+      },
+      "post_scl_cloud_class_px_in_crop_10m": 0,
+      "fraction_within_150m_of_post_scl_dark_or_shadow_class": 0.6078513259553142,
+      "crop_base_rate_within_150m_of_post_scl_dark_or_shadow_class": 0.220050048828125,
+      "note": "SCL classes: 2 dark area, 3 cloud shadow, 4 vegetation, 5 bare soil, 7 unclassified, 8/9 cloud, 10 thin cirrus. Ring = 3 px (30 m) around the largest parent component. The base rate is that of a random crop pixel. The cause of OBSERVED patches away from the scar is not established by these numbers."
+    },
+    "spectral_consistency": {
+      "2024-01-16": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0003571418933057102,
+          "B03": 0.00040342904128613224,
+          "B02": 0.0003824650423739183,
+          "B08": 0.002157730639403667
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0003587864123984966,
+          "B03": 0.0004054064935283527,
+          "B02": 0.0003861708953445547,
+          "B08": 0.002168875377960544
+        },
+        "valid_10m_px": 323116,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-01-21": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0004292110343762025,
+          "B03": 0.00046324323600111823,
+          "B02": 0.00046695959752721035,
+          "B08": 0.0026811321119274496
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004307626262133502,
+          "B03": 0.00046562724747750434,
+          "B02": 0.0004686432664539878,
+          "B08": 0.002694885046590527
+        },
+        "valid_10m_px": 320908,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-01-26": {
+        "per_band_mae_identity_run": {
+          "B04": 0.00044751306917139905,
+          "B03": 0.00048706731736920735,
+          "B02": 0.0004476151623689756,
+          "B08": 0.002716416844333961
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004494685496290072,
+          "B03": 0.0004884838609905195,
+          "B02": 0.0004497687326995864,
+          "B08": 0.0027302240875157887
+        },
+        "valid_10m_px": 324620,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      },
+      "2024-12-06": {
+        "per_band_mae_identity_run": {
+          "B04": 0.0004923605581868508,
+          "B03": 0.0005765472328726974,
+          "B02": 0.0005057571871366069,
+          "B08": 0.002881844988178972
+        },
+        "per_band_mae_mean_of_8_runs": {
+          "B04": 0.0004945495261801901,
+          "B03": 0.0005787513851665828,
+          "B02": 0.0005067844471955195,
+          "B08": 0.0028993865013562793
+        },
+        "valid_10m_px": 320612,
+        "reference": "area-mean 4x4 downsample of the SR run vs the 10 m input reflectance (valid SCL pixels only)"
+      }
+    },
+    "spectral_tolerance_mae_reported_against": 0.02
+  },
+  "limitations": [
+    "pretrained SEN2SR-lite (NOT fine-tuned)",
+    "k = 2.0 (NOT calibrated)",
+    "retrospective comparison",
+    "parent threshold provisional (set before viewing data), not calibrated",
+    "no accuracy/F1: no labels were used",
+    "no 2.5 m ground truth exists",
+    "sigma is dihedral + cross-date dispersion, a sensitivity proxy, not a calibrated probability"
+  ],
+  "experiment": "step4",
+  "risk": "step4",
+  "started_utc": "2026-09-29T17:38:39.960736+00:00",
+  "finished_utc": "2026-09-29T17:38:41.937767+00:00",
+  "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08"
+}

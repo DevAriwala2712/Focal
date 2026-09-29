@@ -284,6 +284,14 @@ def test_fit_picks_the_generating_family():
     assert fit_families(binary, 16)['is_binary'] is True
 
 
+def test_free_sigma_gaussian_diagnostic_recovers_the_generating_sigma():
+    from experiments.wayanad_evidence.mask_check import fit_free_gaussian
+    d = np.hypot(*(np.mgrid[0:64, 0:64] - 32))
+    mask = np.exp(-(d ** 2) / (2 * 9.5 ** 2)).astype(np.float32)
+    fit = fit_free_gaussian(mask)
+    assert fit['sigma'] == pytest.approx(9.5, abs=1e-3) and fit['max_abs_diff'] < 1e-6
+
+
 def test_radial_profile_of_isotropic_mask_is_monotone_for_gaussian():
     from experiments.wayanad_evidence.mask_check import families, radial_profile
     prof = radial_profile(families((64, 64), 16)['gaussian']())

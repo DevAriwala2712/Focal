@@ -13,7 +13,7 @@ from experiments.wayanad_evidence import config as C
 from experiments.wayanad_evidence.cogio import write_cog
 from experiments.wayanad_evidence.gate import (CLASS_NAMES, INFERRED, NO_CHANGE, NO_DATA, OBSERVED, UNSUPPORTED, classify,
                                                object_rho, upsample)
-from experiments.wayanad_evidence.geo import label_components, reference_grid, sr_grid
+from experiments.wayanad_evidence.geo import dilate_square, label_components, reference_grid, sr_grid
 from risk.common import write_json
 
 
@@ -96,6 +96,54 @@ def run(cfg, root, config_hash):
               descriptions=['sigma = sqrt(sigma_pre^2 + sigma_post^2)'], tags=tags)
 
     valid_n = int((~nodata).sum())
+    comp_hr = upsample(s1['component'][r0:r1, c0:c1], scale)
+    obs = cls == OBSERVED
+    observed_split = {'in_largest_parent_component_px': int((obs & comp_hr).sum()),
+                      'outside_largest_parent_component_px': int((obs & ~comp_hr).sum()),
+                      'in_largest_parent_component_m2': area((obs & comp_hr).sum()),
+                      'outside_largest_parent_component_m2': area((obs & ~comp_hr).sum()),
+                      'note': 'the component is the 10 m parent-positive object used to crop; OBSERVED outside it is change '
+                              'elsewhere in the crop (residual cloud edges, other clearings), not scar'}
+    # ---- SCL mask quality around the scar and near OBSERVED patches elsewhere (measured, not read off the figure) ----
+    with np.load(cache / f'{post}.npz') as z:
+        scl_post = z['scl'][r0:r1, c0:c1]
+    im = cfg['phase0']['imagery']
+    bad_post = np.isin(scl_post, list(im['cloud_classes']) + list(im['shadow_classes']) + list(im['invalid_classes']))
+    cloudlike = np.isin(scl_post, list(im['cloud_classes']))
+    comp10 = s1['component'][r0:r1, c0:c1]
+    ring = dilate_square(comp10, 3) & ~comp10
+    ring_classes = np.bincount(scl_post[ring & bad_post].ravel(), minlength=12)
+    obs10_out = (cls == OBSERVED) & ~comp_hr
+    near_cloud = dilate_square(cloudlike, 15)
+    near_bad = dilate_square(bad_post, 15)
+    scl_at_obs_out = np.bincount(upsample(scl_post, scale)[obs10_out].ravel(), minlength=12)
+    mask_quality = {
+        'post_date': post, 'ring_px_10m': int(ring.sum()),
+        'ring_fraction_scl_invalid_post': float(bad_post[ring].mean()),
+        'ring_scl_class_counts_of_invalid_px': {str(i): int(n) for i, n in enumerate(ring_classes) if n},
+        'crop_fraction_scl_invalid_post': float(bad_post.mean()),
+        'observed_outside_component_px': int(obs10_out.sum()),
+        'post_scl_class_counts_at_observed_outside_px_2p5m': {str(i): int(n) for i, n in enumerate(scl_at_obs_out) if n},
+        'post_scl_cloud_class_px_in_crop_10m': int(cloudlike.sum()),
+        'fraction_within_150m_of_post_scl_dark_or_shadow_class': float(upsample(near_bad, scale)[obs10_out].mean()) if obs10_out.any() else None,
+        'crop_base_rate_within_150m_of_post_scl_dark_or_shadow_class': float(near_bad.mean()),
+        'note': 'SCL classes: 2 dark area, 3 cloud shadow, 4 vegetation, 5 bare soil, 7 unclassified, 8/9 cloud, 10 thin cirrus. '
+                'Ring = 3 px (30 m) around the largest parent component. The base rate is that of a random crop pixel. '
+                'The cause of OBSERVED patches away from the scar is not established by these numbers.'}
+    drop10_hr = upsample(s1['drop'][r0:r1, c0:c1], scale)
+    uns = cls == UNSUPPORTED
+    thr = cfg['change']['parent_drop_threshold']
+    d10_uns = drop10_hr[uns]
+    unsupported_diag = {
+        'purpose': 'what UNSUPPORTED pixels are: SR-only hallucination, or real but modest NDVI change below the parent threshold',
+        'd_sr_at_unsupported': distribution(d[uns]), 'd_sr_at_observed': distribution(d[cls == OBSERVED]),
+        'sigma_at_unsupported': distribution(sigma[uns]), 'sigma_at_valid': distribution(sigma[~nodata]),
+        'parent_drop_10m_at_unsupported': distribution(d10_uns),
+        'fraction_10m_drop_above_half_threshold': float((d10_uns > 0.5 * thr).mean()) if d10_uns.size else None,
+        'fraction_10m_drop_above_zero': float((d10_uns > 0).mean()) if d10_uns.size else None,
+        'fraction_10m_drop_above_0p05': float((d10_uns > 0.05).mean()) if d10_uns.size else None,
+        'note': 'S = d > k*sigma has no absolute floor, while P needs a 10 m drop above the threshold, so UNSUPPORTED counts '
+                'SR-visible change that is too small at 10 m to pass P. It is not, by itself, evidence of invented detail'}
     measurements = {
         'labels': cfg['labels'], 'k': k, 'pre_dates': pre, 'post_date': post,
         'crop_2p5m_px': list(shape_sr), 'pixel_area_m2': px,
@@ -115,7 +163,7 @@ def run(cfg, root, config_hash):
                              'note': 'scale check only. NRSC maps the main scarp with different data and a different '
                                      'definition; TrustSR areas are NDVI-drop pixels (scarp plus runout vegetation loss) '
                                      'and NRSC is NOT a label'},
-        'rho': rho_report,
+        'rho': rho_report, 'unsupported_diagnostics': unsupported_diag, 'observed_split': observed_split, 'mask_quality': mask_quality,
         'spectral_consistency': step3['sr']['spectral_consistency'],
         'spectral_tolerance_mae_reported_against': cfg['spectral_consistency']['tolerance_mae'],
     }
