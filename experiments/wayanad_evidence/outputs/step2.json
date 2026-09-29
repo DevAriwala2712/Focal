@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "measurements": {
+    "threshold_min_valid_fraction": 0.9,
+    "candidate_rule": "every acquisition date after the event and before the chosen post date with AOI cloud+shadow < 100 % in this AOI's audit (audit_acquisitions.json)",
+    "chosen_post_date": "2024-12-06",
+    "table": [
+      {
+        "date": "2024-08-13",
+        "days_after_event": 14,
+        "aoi_cloud_shadow_pct": 70.21369934082031,
+        "footprint_valid_fraction": 0.11678925651605628,
+        "footprint_valid_px": 4557,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-08-18",
+        "days_after_event": 19,
+        "aoi_cloud_shadow_pct": 74.84626770019531,
+        "footprint_valid_fraction": 0.00461313718957431,
+        "footprint_valid_px": 180,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-08-23",
+        "days_after_event": 24,
+        "aoi_cloud_shadow_pct": 85.74790954589844,
+        "footprint_valid_fraction": 0.14959378764191805,
+        "footprint_valid_px": 5837,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-08-28",
+        "days_after_event": 29,
+        "aoi_cloud_shadow_pct": 99.9786376953125,
+        "footprint_valid_fraction": 0.0,
+        "footprint_valid_px": 0,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-09-02",
+        "days_after_event": 34,
+        "aoi_cloud_shadow_pct": 98.27499389648438,
+        "footprint_valid_fraction": 0.002255311514902996,
+        "footprint_valid_px": 88,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-09-12",
+        "days_after_event": 44,
+        "aoi_cloud_shadow_pct": 95.78018188476562,
+        "footprint_valid_fraction": 0.0838822112304262,
+        "footprint_valid_px": 3273,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-09-22",
+        "days_after_event": 54,
+        "aoi_cloud_shadow_pct": 80.45425415039062,
+        "footprint_valid_fraction": 0.014531382147159076,
+        "footprint_valid_px": 567,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-09-27",
+        "days_after_event": 59,
+        "aoi_cloud_shadow_pct": 99.99771118164062,
+        "footprint_valid_fraction": 0.0,
+        "footprint_valid_px": 0,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-10-02",
+        "days_after_event": 64,
+        "aoi_cloud_shadow_pct": 95.5810546875,
+        "footprint_valid_fraction": 0.0050231938286475816,
+        "footprint_valid_px": 196,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-10-17",
+        "days_after_event": 79,
+        "aoi_cloud_shadow_pct": 99.56703186035156,
+        "footprint_valid_fraction": 0.0029729106332812218,
+        "footprint_valid_px": 116,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-10-27",
+        "days_after_event": 89,
+        "aoi_cloud_shadow_pct": 42.340850830078125,
+        "footprint_valid_fraction": 0.7249545093416028,
+        "footprint_valid_px": 28287,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-11-01",
+        "days_after_event": 94,
+        "aoi_cloud_shadow_pct": 59.88502502441406,
+        "footprint_valid_fraction": 0.4351726082165099,
+        "footprint_valid_px": 16980,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-11-06",
+        "days_after_event": 99,
+        "aoi_cloud_shadow_pct": 34.49668884277344,
+        "footprint_valid_fraction": 0.4652605141085112,
+        "footprint_valid_px": 18154,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-11-11",
+        "days_after_event": 104,
+        "aoi_cloud_shadow_pct": 86.84768676757812,
+        "footprint_valid_fraction": 0.023962684845844334,
+        "footprint_valid_px": 935,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-11-16",
+        "days_after_event": 109,
+        "aoi_cloud_shadow_pct": 88.69247436523438,
+        "footprint_valid_fraction": 0.09882365001665855,
+        "footprint_valid_px": 3856,
+        "footprint_px": 39019,
+        "passes": false
+      },
+      {
+        "date": "2024-11-21",
+        "days_after_event": 114,
+        "aoi_cloud_shadow_pct": 99.52201843261719,
+        "footprint_valid_fraction": 0.0,
+        "footprint_valid_px": 0,
+        "footprint_px": 39019,
+        "passes": false
+      }
+    ],
+    "earliest_passing_date": null,
+    "note": "report only: the post date of this run was NOT switched. The footprint is used for date selection, never as a label."
+  },
+  "limitations": [
+    "SCL cloud/shadow classes are a model-based estimate; footprint-valid does not mean the scar was visible without haze or shadow",
+    "footprint comes from the January-vs-post-date NDVI drop, so it is a circular basis for anything but date selection"
+  ],
+  "experiment": "step2",
+  "risk": "step2",
+  "started_utc": "2026-09-29T17:32:46.588910+00:00",
+  "finished_utc": "2026-09-29T17:32:46.652230+00:00",
+  "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08"
+}

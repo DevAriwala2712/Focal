@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "measurements": {
+    "dates": {
+      "pre": [
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26"
+      ],
+      "post": "2024-12-06",
+      "gap_days_event_to_post": 129,
+      "source": "fallback",
+      "replaced_vs_preferred": {
+        "2024-01-11": "2024-01-16",
+        "2024-01-31": "2024-01-26"
+      }
+    },
+    "aoi": {
+      "bounds_epsg32643": [
+        621400.0,
+        1265300.0,
+        631640.0,
+        1275540.0
+      ],
+      "shape_px": [
+        1024,
+        1024
+      ]
+    },
+    "no_data": {
+      "per_date": {
+        "2024-01-16": {
+          "scl_invalid_px": 29032,
+          "ndvi_undefined_px": 0,
+          "valid_px": 1019544
+        },
+        "2024-01-21": {
+          "scl_invalid_px": 33988,
+          "ndvi_undefined_px": 8,
+          "valid_px": 1014580
+        },
+        "2024-01-26": {
+          "scl_invalid_px": 35512,
+          "ndvi_undefined_px": 50,
+          "valid_px": 1013014
+        },
+        "2024-12-06": {
+          "scl_invalid_px": 53420,
+          "ndvi_undefined_px": 42,
+          "valid_px": 995114
+        }
+      },
+      "union_invalid_px": 104567,
+      "union_invalid_fraction": 0.09972286224365234
+    },
+    "parent": {
+      "threshold": 0.3,
+      "threshold_status": "provisional, set before viewing data",
+      "positive_px_aoi": 18075,
+      "area_m2_aoi": 1807500.0,
+      "component_count": 243,
+      "largest_component_px": 5539,
+      "largest_component_area_m2": 553900.0,
+      "second_largest_px": 3761
+    },
+    "footprint": {
+      "buffer_m": 200,
+      "px": 39019,
+      "area_m2": 3901900.0
+    },
+    "crop": {
+      "rows": [
+        256,
+        896
+      ],
+      "cols": [
+        128,
+        640
+      ],
+      "shape_px": [
+        640,
+        512
+      ],
+      "tiles_128": [
+        5,
+        4
+      ]
+    },
+    "plausibility": {
+      "distance_m_to_published_points": {
+        "crown": 5.743262484100802,
+        "mundakkai": 112.30160892709858,
+        "chooralmala_bridge": 7.60798203157454
+      },
+      "within_radius": {
+        "crown": true,
+        "mundakkai": true,
+        "chooralmala_bridge": true
+      },
+      "radius_m": 1500,
+      "note": "published coordinates used only to check the found component sits at the slide; never a label"
+    },
+    "bytes_received": {
+      "cap_bytes": 300000000,
+      "bytes_received": 1145373,
+      "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic"
+    }
+  },
+  "limitations": [
+    "parent threshold is provisional (set before viewing data), not calibrated",
+    "NDVI drop indicates vegetation disturbance, not uniquely landslide damage",
+    "pre dates are January-May dry season and the post date is 2024-12-06: seasonal/recovery confounding",
+    "retrospective comparison, not a rapid-response result"
+  ],
+  "experiment": "step1",
+  "risk": "step1",
+  "started_utc": "2026-09-29T17:22:31.111851+00:00",
+  "finished_utc": "2026-09-29T17:29:10.800197+00:00",
+  "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08"
+}

@@ -1,0 +1,95 @@
+{
+  "experiment": "wayanad_evidence",
+  "labels": {
+    "model": "pretrained SEN2SR-lite (NOT fine-tuned)",
+    "k": "k = 2.0 (NOT calibrated)",
+    "comparison": "retrospective comparison"
+  },
+  "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08",
+  "event_date": "2024-07-30",
+  "pre_dates": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26"
+  ],
+  "post_date": "2024-12-06",
+  "item_ids": {
+    "2024-01-16": [
+      "S2B_MSIL2A_20240116T052149_R062_T43PFN_20240116T091525"
+    ],
+    "2024-01-21": [
+      "S2A_MSIL2A_20240121T052111_R062_T43PFN_20240121T122000"
+    ],
+    "2024-01-26": [
+      "S2B_MSIL2A_20240126T052109_R062_T43PFN_20240126T093833"
+    ],
+    "2024-12-06": [
+      "S2A_MSIL2A_20241206T052211_R062_T43PFN_20241206T083150"
+    ]
+  },
+  "processing_baselines": {
+    "2024-01-16": [
+      "05.10"
+    ],
+    "2024-01-21": [
+      "05.10"
+    ],
+    "2024-01-26": [
+      "05.10"
+    ],
+    "2024-12-06": [
+      "05.11"
+    ]
+  },
+  "scl_policy": {
+    "classes_invalid": {
+      "cloud_classes": [
+        8,
+        9,
+        10
+      ],
+      "shadow_classes": [
+        2,
+        3
+      ],
+      "invalid_classes": [
+        0,
+        1,
+        11
+      ]
+    },
+    "role": "validity mask only, never a model input",
+    "resampling": "nearest neighbour (20 m -> 10 m replication)",
+    "ndvi_floor": 0.05,
+    "mosaic": "first valid tile wins (sorted item id)"
+  },
+  "radiometry": {
+    "min_processing_baseline": "04.00",
+    "quantification": 10000.0,
+    "boa_add_offset": -1000.0,
+    "clip_min": 0.0,
+    "min_denominator": 0.05
+  },
+  "crs": "EPSG:32643",
+  "grid_transform": [
+    10.0,
+    0.0,
+    621400.0,
+    0.0,
+    -10.0,
+    1275540.0
+  ],
+  "grid_shape": [
+    1024,
+    1024
+  ],
+  "rasters": [
+    "footprint.tif",
+    "parent_drop.tif",
+    "parent_mask.tif",
+    "stack_2024-01-16.tif",
+    "stack_2024-01-21.tif",
+    "stack_2024-01-26.tif",
+    "stack_2024-12-06.tif"
+  ]
+}

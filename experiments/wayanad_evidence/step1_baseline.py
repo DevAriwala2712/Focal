@@ -69,7 +69,8 @@ def run(cfg, root, config_hash):
     buffer_px = int(round(cfg['footprint']['buffer_m'] / 10))
     footprint = dilate_square(component, buffer_px)
     rr, cc = np.nonzero(footprint)
-    crop = snap_crop((rr.min(), rr.max() + 1, cc.min(), cc.max() + 1), shape, cfg['tiling']['tile'])
+    crop = tuple(int(v) for v in snap_crop((int(rr.min()), int(rr.max()) + 1, int(cc.min()), int(cc.max()) + 1), shape,
+                                           cfg['tiling']['tile']))
     distances = published_point_distances(cfg, transform, labels, big)
     near = {k: v <= cfg['aoi']['plausibility_radius_m'] for k, v in distances.items()}
 
