@@ -250,6 +250,176 @@ def test_write_cog_preserves_crs_transform_nodata_and_is_a_real_cog(tmp_path):
             rasterio.transform.array_bounds(600, 700, transform)
 
 
+def test_numpy_mask_families_equal_upstream_tricks():
+    torch = pytest.importorskip('torch')
+    from sen2sr.models import tricks
+    from experiments.wayanad_evidence.mask_check import families
+    shape, radius = (32, 32), 8
+    ours = families(shape, radius)
+    np.testing.assert_allclose(ours['ideal'](), tricks.ideal_filter(shape, radius).numpy(), atol=1e-6)
+    # upstream gaussian_filter cannot run in the pinned sen2sr (torch.exp receives a Python float): compare with a
+    # scalar loop of the formula in its source, exp(-((u-c)^2 + (v-c)^2) / (2 cutoff^2))
+    with pytest.raises(TypeError):
+        tricks.gaussian_filter(shape, radius)
+    import math
+    ref = np.array([[math.exp(-((u - 16) ** 2 + (v - 16) ** 2) / (2 * radius ** 2)) for v in range(32)]
+                    for u in range(32)], dtype=np.float32)
+    np.testing.assert_allclose(ours['gaussian'](), ref, atol=1e-6)
+    np.testing.assert_allclose(ours['butterworth'](3), tricks.butterworth_filter(shape, radius, 3).numpy(), atol=1e-6)
+    with pytest.raises(TypeError):                       # same upstream bug in sigmoid_filter
+        tricks.sigmoid_filter(shape, radius, 2.5)
+    ref = np.array([[1 / (1 + math.exp((math.hypot(u - 16, v - 16) - radius) / 2.5)) for v in range(32)]
+                    for u in range(32)], dtype=np.float32)
+    np.testing.assert_allclose(ours['sigmoid'](2.5), ref, atol=1e-6)
+
+
+def test_fit_picks_the_generating_family():
+    from experiments.wayanad_evidence.mask_check import families, fit_families
+    fam = families((64, 64), 16)
+    for name, param in (('ideal', None), ('gaussian', None), ('butterworth', 4), ('sigmoid', 3.0)):
+        mask = fam[name]() if param is None else fam[name](param)
+        fit = fit_families(mask, 16)
+        assert fit['best_family'] == name and fit['fits'][name]['max_abs_diff'] < 1e-6
+    binary = fam['ideal']()
+    assert fit_families(binary, 16)['is_binary'] is True
+
+
+def test_radial_profile_of_isotropic_mask_is_monotone_for_gaussian():
+    from experiments.wayanad_evidence.mask_check import families, radial_profile
+    prof = radial_profile(families((64, 64), 16)['gaussian']())
+    assert prof[0] == pytest.approx(1.0) and (np.diff(prof[:30]) <= 1e-12).all()
+
+
+class _FakeOOM(Exception):
+    pass
+
+
+def test_oom_policy_retries_once_at_batch_one_after_emptying_cache():
+    from experiments.wayanad_evidence.sr import infer_with_oom_policy
+    calls, cleaned = [], []
+
+    def fn(batch):
+        calls.append(len(batch))
+        if len(batch) > 1:
+            raise _FakeOOM('out of memory')
+        return np.repeat(np.repeat(batch, 4, axis=-2), 4, axis=-1)
+
+    out = infer_with_oom_policy(fn, np.ones((8, 4, 128, 128), 'float32'), 'tile r=0 c=96', _FakeOOM,
+                                cleanup=lambda: cleaned.append(1), memory=lambda: {})
+    assert out.shape == (8, 4, 512, 512) and calls == [8] + [1] * 8 and cleaned == [1]
+
+
+def test_oom_policy_fails_naming_the_tile_when_batch_one_also_ooms():
+    from experiments.wayanad_evidence.sr import infer_with_oom_policy
+
+    def fn(batch):
+        raise _FakeOOM('out of memory')
+
+    with pytest.raises(RuntimeError, match=r'tile r=32 c=64.*batch 1'):
+        infer_with_oom_policy(fn, np.ones((8, 4, 128, 128), 'float32'), 'tile r=32 c=64', _FakeOOM,
+                              cleanup=lambda: None, memory=lambda: {'allocated_mib': 1.0})
+
+
+def test_welford_update_at_region_equals_full_array_update():
+    from experiments.wayanad_evidence.stats import Welford
+    rng = np.random.default_rng(4)
+    samples = rng.normal(size=(6, 10, 12))
+    full, part = Welford((10, 12)), Welford((10, 12))
+    for s in samples:
+        full.update(s)
+        part.update_at((slice(0, 5), slice(0, 12)), s[:5])
+        part.update_at((slice(5, 10), slice(0, 12)), s[5:])
+    np.testing.assert_array_equal(full.mean, part.mean)
+    np.testing.assert_array_equal(full.m2, part.m2)
+
+
+def test_sr_variants_of_an_equivariant_model_are_identical_after_inversion():
+    from experiments.wayanad_evidence.sr import sr_variants
+    rng = np.random.default_rng(9)
+    tile = rng.random((4, 128, 128)).astype('float32')
+    nearest = lambda b: np.repeat(np.repeat(b, 4, axis=-2), 4, axis=-1)
+    out = sr_variants(nearest, tile, 'tile r=0 c=0', _FakeOOM, cleanup=lambda: None, memory=lambda: {})
+    assert out.shape == (8, 4, 512, 512)
+    for k in range(8):
+        np.testing.assert_array_equal(out[k], out[0])
+
+
+def test_sr_variants_apply_the_transform_to_the_input_only():
+    from experiments.wayanad_evidence.sr import sr_variants
+    from experiments.wayanad_evidence.stats import dihedral
+    seen = []
+    model = lambda b: (seen.append(b.copy()), np.repeat(np.repeat(b, 4, axis=-2), 4, axis=-1))[1]
+    tile = np.arange(4 * 128 * 128, dtype='float32').reshape(4, 128, 128)
+    sr_variants(model, tile, 't', _FakeOOM, cleanup=lambda: None, memory=lambda: {})
+    for k in range(8):
+        np.testing.assert_array_equal(seen[0][k], dihedral(tile, k))
+
+
+def test_footprint_valid_fraction_counts_only_footprint_pixels():
+    from experiments.wayanad_evidence.step2_visibility import footprint_valid_fraction
+    im = {'cloud_classes': [8, 9, 10], 'shadow_classes': [2, 3], 'invalid_classes': [0, 1, 11]}
+    scl = np.full((10, 10), 4, 'uint8')
+    scl[0:2, :] = 9                                   # cloud outside the footprint: must not matter
+    footprint = np.zeros((10, 10), bool)
+    footprint[4:8, 4:8] = True
+    assert footprint_valid_fraction(scl, footprint, im) == (1.0, 16, 16)
+    scl[4:6, 4:8] = 3                                 # shadow covering half of the footprint
+    assert footprint_valid_fraction(scl, footprint, im) == (0.5, 8, 16)
+
+
+def test_step3_glue_with_equivariant_fake_model_gives_zero_sigma_and_exact_ndvi(tmp_path):
+    """run_sr end to end on a 256x256 crop with a nearest-neighbour 'model': moments, counts, spectral error, COG grid."""
+    from types import SimpleNamespace
+    import rasterio
+    from experiments.wayanad_evidence.gate import upsample
+    from experiments.wayanad_evidence.geo import reference_grid
+    from experiments.wayanad_evidence.stats import ndvi
+    from experiments.wayanad_evidence.step3_sr import run_sr
+
+    cfg = {'tiling': {'tile': 128, 'crop_margin_px': 16, 'stride': 96, 'scale': 4}, 'radiometry': {'min_denominator': 0.05},
+           'change': {'ddof': 1}, 'seed': 1, 'model': {'device': 'cpu', 'deterministic': True},
+           'aoi': {'crs': 'EPSG:32643', 'longitude': 76.16, 'latitude': 11.49, 'size_m': 10240, 'snap_m': 20},
+           'labels': {'model': 'pretrained SEN2SR-lite (NOT fine-tuned)'}}
+
+    class FakeRunner:
+        oom_type = _FakeOOM
+        torch = SimpleNamespace(cuda=SimpleNamespace(is_available=lambda: False))
+        cleanup = staticmethod(lambda: None)
+        memory = staticmethod(lambda: {'peak_rss_mib': 1.0})
+
+        def __call__(self, batch):
+            assert batch.shape[-2:] == (128, 128)
+            return np.repeat(np.repeat(batch, 4, axis=-2), 4, axis=-1)
+
+    rng = np.random.default_rng(12)
+    dates = ['d1', 'd2', 'd3', 'd4']
+    arrays = {}
+    for d in dates:
+        refl = rng.uniform(0.05, 0.4, (4, 256, 256)).astype('float32')
+        arrays[d] = {'refl': refl, 'valid_scl': np.ones((256, 256), bool)}
+    state = {'dates': np.array(dates), 'pre': np.array(dates[:3]), 'post': np.array('d4'),
+             'valid_all': np.ones((1024, 1024), bool), 'crop': np.array([0, 256, 0, 256])}
+    out, cache = tmp_path / 'out', tmp_path / 'cache'
+    out.mkdir(), cache.mkdir()
+    res = run_sr(cfg, tmp_path, 'hash', FakeRunner(), arrays, state, out, cache)
+    assert res['tiles_per_date'] == 9 and res['forward_passes_total'] == 9 * 8 * 4
+    assert res['determinism']['tile_rerun_bytes_identical'] is True
+    with np.load(cache / 'step3_state.npz') as z:
+        assert (z['pre_count'] == 24).all() and (z['post_count'] == 8).all()
+        nd = [ndvi(arrays[d]['refl'][0], arrays[d]['refl'][3], 0.05) for d in dates]
+        np.testing.assert_allclose(z['post_mean'], upsample(nd[3], 4), atol=1e-12)
+        np.testing.assert_allclose(z['pre_mean'], upsample(np.mean(nd[:3], axis=0), 4), atol=1e-12)
+        assert z['post_std'].max() < 1e-12                                   # 8 identical runs -> sigma 0
+        # pre pool = 8 copies of each of 3 dates: var(ddof=1) = 16/23 * (cross-date var, ddof=1)
+        expected = np.sqrt(16 / 23) * np.std(nd[:3], axis=0, ddof=1)
+        np.testing.assert_allclose(z['pre_std'], upsample(expected, 4), atol=1e-12)
+    for d in dates:
+        assert max(res['spectral_consistency'][d]['per_band_mae_identity_run'].values()) < 1e-6
+    with rasterio.open(out / 'sr_post_2p5m.tif') as sr:
+        base, _ = reference_grid(cfg['aoi'])
+        assert sr.transform == base * Affine.scale(1 / 4) and (sr.height, sr.width) == (1024, 1024)
+
+
 # ---- trust gate ---------------------------------------------------------------------
 
 def _scene():

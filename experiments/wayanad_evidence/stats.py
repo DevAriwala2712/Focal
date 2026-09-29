@@ -37,6 +37,12 @@ class Welford:
         delta2 = np.where(ok, x - self.mean, 0.0)
         self.m2 += delta * delta2
 
+    def update_at(self, region, x, where=None):
+        """Update only `region` (a tuple of slices) in place; the moments outside it are untouched."""
+        view = Welford.__new__(Welford)
+        view.count, view.mean, view.m2 = self.count[region], self.mean[region], self.m2[region]
+        view.update(x, where)
+
     def variance(self, ddof: int = 1):
         out = np.full(self.count.shape, np.nan)
         np.divide(self.m2, self.count - ddof, out=out, where=self.count > ddof)
