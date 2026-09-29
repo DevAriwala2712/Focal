@@ -1,5 +1,11 @@
 # TrustSR source register
 
+## Event-location correction (2026-09-29)
+
+The [NRSC/ISRO Chooralmala impact map](https://bhuvan-app1.nrsc.gov.in/disaster/usrtasks/landslide/doc/Charter_1029_VAP_3_31july2024.pdf) prints 76°8′10.58″E, 11°28′0.347″N for the 30 July 2024 landslide. This is 36.43 km from the task brief's 76.233°E, 11.782°N. See [the correction record](location_correction.md). The original R2 audit and December post-date below apply only to the brief's point; the event-site audit is separate.
+
+For L2A radiometry, the [ESA Level-2A quality report](https://sentinels.copernicus.eu/documents/d/sentinel/ompc-cs-dqr-002-03-2023-i60r0-msi-l2a-dqr-april-2023) specifies `(DN + BOA_ADD_OFFSET) / BOA_QUANTIFICATION_VALUE` for nonzero pixels in baseline 04.00+. TrustSR reads both fields from each selected product's metadata XML. The original `opensr-test` [PyPI distribution](https://pypi.org/project/opensr-test/) is optional; a 1.3.3 installation dry-run found dependencies that would upgrade the pinned SEN2SR environment, so it is not installed in that environment.
+
 ## Execution update (2026-09-26)
 
 The sections below preserve the initial source audit; later verified results are in [RISK_REPORT.md](../RISK_REPORT.md). WorldStrat has measured country-centre counts: 71 India, 125 across the defined eight South Asian countries. R2 queried the live Planetary Computer catalogue and read SCL for all 147 items; first accepted post-event date is 2024-12-06. The arXiv author's Colombia inventory and one real pre/post crop were downloaded. Both original Landslide4Sense training URLs fail DNS resolution locally; a pinned IBM-NASA mirror supplied one genuine sample. R5 completed 50 real-data steps in Colab on 2026-09-29.

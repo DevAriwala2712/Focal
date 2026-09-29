@@ -20,6 +20,14 @@ from risk.r2_imagery import aoi_grid, read_scl, search_items, summarize_scl
 BANDS = ('B04', 'B03', 'B02', 'B08')
 
 
+def validate_cached_aoi(expected, cached):
+    if expected.get('type') != 'Polygon' or cached.get('type') != 'Polygon':
+        raise ValueError('Cached AOI geometry is not a polygon')
+    left, right = np.asarray(expected['coordinates'], dtype=float), np.asarray(cached['coordinates'], dtype=float)
+    if left.shape != right.shape or not np.allclose(left, right, rtol=0, atol=1e-8):
+        raise ValueError('Cached STAC/SCL audit AOI differs from requested AOI')
+
+
 def choose_acquisitions(rows, *, event_date, max_cloud, min_coverage, min_pre, max_pre):
     clear = sorted((row for row in rows if row['coverage_pct'] >= min_coverage
                     and row['cloud_shadow_pct_aoi'] <= max_cloud), key=lambda r: r['date'])
@@ -143,6 +151,8 @@ def fetch(aoi, start, end, *, config_path='configs/pipeline.yaml', output=None, 
     policy = cfg['network']
     if audit:
         catalog = json.loads(Path(audit[0]).read_text(encoding='utf-8'))
+        polygon, _, _ = aoi_grid(settings)
+        validate_cached_aoi(polygon, catalog['aoi'])
         rows = json.loads(Path(audit[1]).read_text(encoding='utf-8'))['rows']
         items = catalog['items']
     else:

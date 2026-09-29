@@ -23,6 +23,12 @@ training:
 imagery:
   stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
   collection: sentinel-2-l2a
+  longitude: 76.136272
+  latitude: 11.466763
+  aoi_size_m: 10000
+  start: '2024-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+  location_source: https://bhuvan-app1.nrsc.gov.in/disaster/usrtasks/landslide/doc/Charter_1029_VAP_3_31july2024.pdf
   crs: EPSG:32643
   audit_resolution_m: 20
   event_date: '2024-07-30'
@@ -35,7 +41,7 @@ imagery:
   page_limit: 100
 fetch:
   max_pre_dates: 3
-  stack: data/wayanad/stack.tif
+  stack: data/wayanad/event_stack.tif
 sr:
   tile_size: 128
   overlap: 16
@@ -44,6 +50,10 @@ change:
   k: 2.0
   parent_drop_threshold: 0.1
   invalid_scl: [0, 1, 2, 3, 8, 9, 10, 11]
+calibration:
+  candidate_k: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0]
 demo:
   output_dir: data/wayanad/demo
   tile_pixels: 128
+  display_max_reflectance: 0.35
+  display_gamma: 0.8

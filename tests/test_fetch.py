@@ -2,7 +2,7 @@ import numpy as np
 import rasterio
 from affine import Affine
 
-from trustsr.fetch import choose_acquisitions, parse_radiometry, write_stack
+from trustsr.fetch import choose_acquisitions, parse_radiometry, write_stack, validate_cached_aoi
 
 
 def test_selects_three_latest_clear_pre_and_first_clear_post():
@@ -46,3 +46,11 @@ def test_stack_is_exact_grid_cog_with_named_dates_and_scl(tmp_path):
         assert ds.tags(ns='IMAGE_STRUCTURE')['LAYOUT'] == 'COG'
         assert ds.descriptions == tuple(f'{date}:{band}' for date in ['2024-05-05', '2024-12-06']
                                         for band in ['B04', 'B03', 'B02', 'B08', 'SCL'])
+
+
+def test_cached_scene_audit_cannot_be_reused_for_another_aoi():
+    import pytest
+    original = {'type': 'Polygon', 'coordinates': [[[76.1, 11.4], [76.2, 11.4], [76.1, 11.4]]]}
+    wrong = {'type': 'Polygon', 'coordinates': [[[76.1, 11.8], [76.2, 11.8], [76.1, 11.8]]]}
+    with pytest.raises(ValueError, match='AOI'):
+        validate_cached_aoi(original, wrong)
