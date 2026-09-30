@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "note": "Synthetic calibration data for demonstration; real run requires A3 placebo pairs",
+  "verdict": "gate_v2 implementation complete; conformal FAR guarantee pending A3",
+  "keep_rule": {
+    "all_tests_pass": true,
+    "conformal_test_far": 0.008,
+    "conformal_test_far_ci": [
+      0.0,
+      0.024
+    ],
+    "test_far_le_alpha": true,
+    "block_sum_consistency_pass": true
+  },
+  "results": {
+    "conformal_calibration": {
+      "n_calibration": 125,
+      "alpha": 0.05,
+      "k": 120,
+      "threshold": 0.04633681884725491,
+      "coverage_lower_bound": 0.047619047619047616
+    },
+    "conformal_test": {
+      "n_test": 125,
+      "n_flagged": 1,
+      "far_empirical": 0.008,
+      "far_bootstrap_ci": {
+        "lower": 0.0,
+        "upper": 0.024,
+        "nominal_coverage": 0.95,
+        "replicates": 2000,
+        "seed": 2024
+      },
+      "threshold": 0.04633681884725491,
+      "alpha_nominal": 0.05,
+      "guarantee": "P(T > 0.046337) <= 0.05 under exchangeability; empirical FAR on test = 0.0080 [0.0000, 0.0240]"
+    },
+    "block_sum_consistency": {
+      "allocated_area_m2": 6250.0,
+      "implied_10m_area_m2": 6250.0,
+      "difference_m2": 0.0,
+      "tolerance_m2": 3.125,
+      "pass": true,
+      "note": "Area conservation: allocated matches 10m implied to within 3.125 m^2 per component"
+    }
+  },
+  "timestamp": "2026-09-30T09:50:24.273472+00:00",
+  "config_sha256": "pending-a3-output"
+}
