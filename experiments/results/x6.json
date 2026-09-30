@@ -1,0 +1,1354 @@
+{
+  "evidence": "real",
+  "status": "FAIL",
+  "decision": {
+    "a_keep_anniversary": false,
+    "b_keep_composite": false
+  },
+  "exp_a": {
+    "audit_window": [
+      "2023-10-15",
+      "2024-01-15"
+    ],
+    "pool_window": [
+      "2023-11-01",
+      "2023-12-31"
+    ],
+    "audited_acquisitions": 18,
+    "audit_table": [
+      {
+        "date": "2023-10-18",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231018T051819_R062_T43PFN_20231018T111806",
+          "S2B_MSIL2A_20231018T051819_R062_T43PFN_20241107T132649"
+        ],
+        "cloud_shadow_pct_aoi": 40.252,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-10-23",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231023T051851_R062_T43PFN_20231023T103011",
+          "S2A_MSIL2A_20231023T051851_R062_T43PFN_20241103T000103"
+        ],
+        "cloud_shadow_pct_aoi": 52.874,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-10-28",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231028T051919_R062_T43PFN_20231028T093227",
+          "S2B_MSIL2A_20231028T051919_R062_T43PFN_20241107T165628"
+        ],
+        "cloud_shadow_pct_aoi": 86.823,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-02",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231102T051951_R062_T43PFN_20231102T115042",
+          "S2A_MSIL2A_20231102T051951_R062_T43PFN_20241028T214724"
+        ],
+        "cloud_shadow_pct_aoi": 53.322,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-07",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231107T052019_R062_T43PFN_20231107T091147"
+        ],
+        "cloud_shadow_pct_aoi": 25.89,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-12",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231112T052041_R062_T43PFN_20231112T094528",
+          "S2A_MSIL2A_20231112T052041_R062_T43PFN_20241025T104503"
+        ],
+        "cloud_shadow_pct_aoi": 88.692,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-17",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231117T052109_R062_T43PFN_20231117T094622",
+          "S2B_MSIL2A_20231117T052109_R062_T43PFN_20241102T220343"
+        ],
+        "cloud_shadow_pct_aoi": 62.721,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-22",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231122T052121_R062_T43PFN_20231122T092244"
+        ],
+        "cloud_shadow_pct_aoi": 60.305,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-11-27",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231127T052139_R062_T43PFN_20231127T091805",
+          "S2B_MSIL2A_20231127T052139_R062_T43PFN_20241109T223304"
+        ],
+        "cloud_shadow_pct_aoi": 39.562,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-02",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231202T052151_R062_T43PFN_20231202T092054"
+        ],
+        "cloud_shadow_pct_aoi": 46.2,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-07",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231207T052209_R062_T43PFN_20231207T091620",
+          "S2B_MSIL2A_20231207T052209_R062_T43PFN_20241031T220714"
+        ],
+        "cloud_shadow_pct_aoi": 76.051,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-12",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231212T052221_R062_T43PFN_20231213T030840",
+          "S2A_MSIL2A_20231212T052221_R062_T43PFN_20241019T213134"
+        ],
+        "cloud_shadow_pct_aoi": 23.99,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-17",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231217T052229_R062_T43PFN_20231220T060912"
+        ],
+        "cloud_shadow_pct_aoi": 100.0,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-22",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20231222T052231_R062_T43PFN_20231222T093744"
+        ],
+        "cloud_shadow_pct_aoi": 90.861,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2023-12-27",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447"
+        ],
+        "cloud_shadow_pct_aoi": 1.026,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "pooled": true
+      },
+      {
+        "date": "2024-01-01",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20240101T052221_R062_T43PFN_20240101T091851"
+        ],
+        "cloud_shadow_pct_aoi": 80.214,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2024-01-06",
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20240106T052219_R062_T43PFN_20240106T091159"
+        ],
+        "cloud_shadow_pct_aoi": 86.839,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      },
+      {
+        "date": "2024-01-11",
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20240111T052201_R062_T43PFN_20240111T092158"
+        ],
+        "cloud_shadow_pct_aoi": 39.054,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "pooled": false
+      }
+    ],
+    "clear_dates_in_audit_window": [
+      "2023-12-27"
+    ],
+    "anniversary_pool_dates": [
+      "2023-12-27"
+    ],
+    "january_pool_dates": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26"
+    ],
+    "post_date": "2024-12-06",
+    "min_pool_dates": 3,
+    "ran": false,
+    "keep": false,
+    "reason": "only 1 clear Nov-Dec 2023 date(s) ['2023-12-27']; need 3. Every audited date and its cloud+shadow percentage is in audit_table.",
+    "exploratory_relaxed_pool": {
+      "label": "EXPLORATORY, post hoc, no keep rule; cannot change the pre-registered verdict",
+      "max_cloud_shadow_pct": 50,
+      "pool_dates": [
+        "2023-11-07",
+        "2023-11-27",
+        "2023-12-02",
+        "2023-12-12",
+        "2023-12-27"
+      ],
+      "pre_dates_union": [
+        "2023-11-07",
+        "2023-11-27",
+        "2023-12-02",
+        "2023-12-12",
+        "2023-12-27",
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26"
+      ],
+      "stable_definition": {
+        "min_valid_dates": 6,
+        "of_pre_dates": 8,
+        "max_ndvi_std": 0.05,
+        "disk_radius_m": 1500,
+        "disk_points": [
+          "crown",
+          "mundakkai",
+          "chooralmala_bridge"
+        ],
+        "footprint_excluded_in_primary": false
+      },
+      "primary": {
+        "convention": {
+          "threshold": 0.15,
+          "ndvi_min_denominator": 0.01,
+          "clip_negative_reflectance": false
+        },
+        "comparable_pixels": 83521,
+        "flagged_a": 1960,
+        "flagged_b": 1903,
+        "fraction_a": 0.023467151973755103,
+        "fraction_b": 0.022784688880640797,
+        "a": {
+          "estimate": 0.023467151973755103,
+          "lo": 0.015248240144637782,
+          "hi": 0.03443922976007567,
+          "numerator": 1960.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "b": {
+          "estimate": 0.022784688880640797,
+          "lo": 0.014514805786709568,
+          "hi": 0.033616556533025456,
+          "numerator": 1903.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "difference": {
+          "estimate": 0.0006824630931143057,
+          "lo": -0.0002657514022740968,
+          "hi": 0.001658054398275861,
+          "numerator": 1960.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "block_px": 32,
+        "blocks_with_data": 703,
+        "stable_pixels": 86075,
+        "suspected_disk_px": 185373,
+        "aoi_px": 1048576,
+        "mean_ndvi_on_comparable": {
+          "anniversary_pool": 0.7640145421028137,
+          "january_pool": 0.7483173608779907,
+          "post": 0.7879038453102112
+        },
+        "mean_signed_drop": {
+          "anniversary_minus_post": -0.02388932555913925,
+          "january_minus_post": -0.039586424827575684
+        },
+        "per_pre_date_mean_ndvi_on_comparable": {
+          "2023-11-07": 0.753876268863678,
+          "2023-11-27": 0.7785929441452026,
+          "2023-12-02": 0.7650326490402222,
+          "2023-12-12": 0.6937625408172607,
+          "2023-12-27": 0.800133466720581,
+          "2024-01-16": 0.717799961566925,
+          "2024-01-21": 0.7513315081596375,
+          "2024-01-26": 0.7758734226226807
+        },
+        "subsets": {
+          "n_subsets": 10,
+          "min": 0.015800571940264015,
+          "median": 0.022758740690520658,
+          "max": 0.02509329382065635,
+          "all": [
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-02"
+              ],
+              "comparable_pixels": 69238,
+              "fraction_anniversary_subset": 0.015800571940264015,
+              "fraction_january": 0.01463069412750224
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 72065,
+              "fraction_anniversary_subset": 0.01971830985915493,
+              "fraction_january": 0.021369596891694997
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 80364,
+              "fraction_anniversary_subset": 0.02239808869643124,
+              "fraction_january": 0.02083022248768105
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 65851,
+              "fraction_anniversary_subset": 0.023644287861991464,
+              "fraction_january": 0.023872074835613735
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 78821,
+              "fraction_anniversary_subset": 0.02421943390720747,
+              "fraction_january": 0.022049961304728437
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 81144,
+              "fraction_anniversary_subset": 0.023119392684610076,
+              "fraction_january": 0.0229345361332939
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 60518,
+              "fraction_anniversary_subset": 0.01906870683102548,
+              "fraction_january": 0.019217422915496215
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 77061,
+              "fraction_anniversary_subset": 0.021203981261597955,
+              "fraction_january": 0.018128495607375974
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 77579,
+              "fraction_anniversary_subset": 0.023833769447917607,
+              "fraction_january": 0.023189265136183763
+            },
+            {
+              "dates": [
+                "2023-12-02",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 72888,
+              "fraction_anniversary_subset": 0.02509329382065635,
+              "fraction_january": 0.024270113050159147
+            }
+          ],
+          "note": "each subset has its own comparable set (pixels valid in that subset pool), so denominators differ slightly from the headline comparison"
+        }
+      },
+      "sensitivity_evidence_conventions": {
+        "convention": {
+          "threshold": 0.3,
+          "ndvi_min_denominator": 0.05,
+          "clip_negative_reflectance": true
+        },
+        "comparable_pixels": 83521,
+        "flagged_a": 1067,
+        "flagged_b": 1020,
+        "fraction_a": 0.012775230181630967,
+        "fraction_b": 0.012212497455729696,
+        "a": {
+          "estimate": 0.012775230181630967,
+          "lo": 0.005661594382107737,
+          "hi": 0.02307466194935947,
+          "numerator": 1067.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "b": {
+          "estimate": 0.012212497455729696,
+          "lo": 0.005329843398764892,
+          "hi": 0.02225492156840356,
+          "numerator": 1020.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "difference": {
+          "estimate": 0.0005627327259012712,
+          "lo": 5.741464119253658e-05,
+          "hi": 0.0012253486573084683,
+          "numerator": 1067.0,
+          "denominator": 83521.0,
+          "blocks": 703,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "block_px": 32,
+        "blocks_with_data": 703,
+        "stable_pixels": 86046,
+        "suspected_disk_px": 185373,
+        "aoi_px": 1048576,
+        "mean_ndvi_on_comparable": {
+          "anniversary_pool": 0.7640145421028137,
+          "january_pool": 0.7483173608779907,
+          "post": 0.7879038453102112
+        },
+        "mean_signed_drop": {
+          "anniversary_minus_post": -0.02388932555913925,
+          "january_minus_post": -0.039586424827575684
+        },
+        "per_pre_date_mean_ndvi_on_comparable": {
+          "2023-11-07": 0.753876268863678,
+          "2023-11-27": 0.7785929441452026,
+          "2023-12-02": 0.7650326490402222,
+          "2023-12-12": 0.6937625408172607,
+          "2023-12-27": 0.800133466720581,
+          "2024-01-16": 0.717799961566925,
+          "2024-01-21": 0.7513315081596375,
+          "2024-01-26": 0.7758734226226807
+        },
+        "subsets": {
+          "n_subsets": 10,
+          "min": 0.006845951645050406,
+          "median": 0.012418951369330876,
+          "max": 0.013524314586214333,
+          "all": [
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-02"
+              ],
+              "comparable_pixels": 69238,
+              "fraction_anniversary_subset": 0.006845951645050406,
+              "fraction_january": 0.006744851093330252
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 72065,
+              "fraction_anniversary_subset": 0.011892041906612087,
+              "fraction_january": 0.012266703670297648
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 80364,
+              "fraction_anniversary_subset": 0.01224428848738241,
+              "fraction_january": 0.011746553183017271
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 65851,
+              "fraction_anniversary_subset": 0.013393874048989386,
+              "fraction_january": 0.013272387663057508
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 78821,
+              "fraction_anniversary_subset": 0.013524314586214333,
+              "fraction_january": 0.01233173900356504
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 81144,
+              "fraction_anniversary_subset": 0.012718130730553091,
+              "fraction_january": 0.012557921719412403
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 60518,
+              "fraction_anniversary_subset": 0.007584520308007535,
+              "fraction_january": 0.007187944082752239
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 77061,
+              "fraction_anniversary_subset": 0.008837154981118854,
+              "fraction_january": 0.007669249036477596
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 77579,
+              "fraction_anniversary_subset": 0.01259361425127934,
+              "fraction_january": 0.012387372871524511
+            },
+            {
+              "dates": [
+                "2023-12-02",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 72888,
+              "fraction_anniversary_subset": 0.013266930084513226,
+              "fraction_january": 0.012663264186148611
+            }
+          ],
+          "note": "each subset has its own comparable set (pixels valid in that subset pool), so denominators differ slightly from the headline comparison"
+        }
+      },
+      "primary_excluding_footprint": {
+        "convention": {
+          "threshold": 0.15,
+          "ndvi_min_denominator": 0.01,
+          "clip_negative_reflectance": false
+        },
+        "comparable_pixels": 83052,
+        "flagged_a": 1881,
+        "flagged_b": 1827,
+        "fraction_a": 0.022648461205028177,
+        "fraction_b": 0.02199826614651062,
+        "a": {
+          "estimate": 0.022648461205028177,
+          "lo": 0.01413692348450038,
+          "hi": 0.03316334923840498,
+          "numerator": 1881.0,
+          "denominator": 83052.0,
+          "blocks": 701,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "b": {
+          "estimate": 0.02199826614651062,
+          "lo": 0.013474732312524761,
+          "hi": 0.032706114899653985,
+          "numerator": 1827.0,
+          "denominator": 83052.0,
+          "blocks": 701,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "difference": {
+          "estimate": 0.0006501950585175581,
+          "lo": -0.0003101100876416325,
+          "hi": 0.0016145703586322373,
+          "numerator": 1881.0,
+          "denominator": 83052.0,
+          "blocks": 701,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "block_px": 32,
+        "blocks_with_data": 701,
+        "stable_pixels": 85552,
+        "suspected_disk_px": 185373,
+        "aoi_px": 1048576,
+        "mean_ndvi_on_comparable": {
+          "anniversary_pool": 0.7640113830566406,
+          "january_pool": 0.7484261393547058,
+          "post": 0.7884589433670044
+        },
+        "mean_signed_drop": {
+          "anniversary_minus_post": -0.024447618052363396,
+          "january_minus_post": -0.04003281891345978
+        },
+        "per_pre_date_mean_ndvi_on_comparable": {
+          "2023-11-07": 0.7537581920623779,
+          "2023-11-27": 0.7787113189697266,
+          "2023-12-02": 0.7651442289352417,
+          "2023-12-12": 0.6937150359153748,
+          "2023-12-27": 0.8001723885536194,
+          "2024-01-16": 0.717911422252655,
+          "2024-01-21": 0.7514297366142273,
+          "2024-01-26": 0.7759914398193359
+        },
+        "subsets": {
+          "n_subsets": 10,
+          "min": 0.014843999883690501,
+          "median": 0.02186397885526582,
+          "max": 0.024206354685924966,
+          "all": [
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-02"
+              ],
+              "comparable_pixels": 68782,
+              "fraction_anniversary_subset": 0.014843999883690501,
+              "fraction_january": 0.01368090488790672
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 71727,
+              "fraction_anniversary_subset": 0.019616044167468316,
+              "fraction_january": 0.021205403822828223
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-11-27",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 79895,
+              "fraction_anniversary_subset": 0.021478190124538457,
+              "fraction_january": 0.02000125164278115
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 65382,
+              "fraction_anniversary_subset": 0.02269737848337463,
+              "fraction_january": 0.022880915236609463
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 78352,
+              "fraction_anniversary_subset": 0.023317847661833774,
+              "fraction_january": 0.02121196651010823
+            },
+            {
+              "dates": [
+                "2023-11-07",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 80675,
+              "fraction_anniversary_subset": 0.02224976758599318,
+              "fraction_january": 0.02212581344902386
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-12"
+              ],
+              "comparable_pixels": 60193,
+              "fraction_anniversary_subset": 0.018939079294934626,
+              "fraction_january": 0.019071985114548204
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-02",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 76605,
+              "fraction_anniversary_subset": 0.020325044057176424,
+              "fraction_january": 0.017296521114809737
+            },
+            {
+              "dates": [
+                "2023-11-27",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 77241,
+              "fraction_anniversary_subset": 0.023743866599344906,
+              "fraction_january": 0.023044756023355473
+            },
+            {
+              "dates": [
+                "2023-12-02",
+                "2023-12-12",
+                "2023-12-27"
+              ],
+              "comparable_pixels": 72419,
+              "fraction_anniversary_subset": 0.024206354685924966,
+              "fraction_january": 0.023377842831301177
+            }
+          ],
+          "note": "each subset has its own comparable set (pixels valid in that subset pool), so denominators differ slightly from the headline comparison"
+        }
+      },
+      "bootstrap": {
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024,
+        "pixel_data": "block",
+        "block_px_10m": 32,
+        "image_data": "paired_by_image"
+      },
+      "items_and_baselines": {
+        "2023-11-07": {
+          "items": [
+            "S2B_MSIL2A_20231107T052019_R062_T43PFN_20231107T091147"
+          ],
+          "processing_baselines": [
+            "05.09"
+          ]
+        },
+        "2023-11-27": {
+          "items": [
+            "S2B_MSIL2A_20231127T052139_R062_T43PFN_20231127T091805",
+            "S2B_MSIL2A_20231127T052139_R062_T43PFN_20241109T223304"
+          ],
+          "processing_baselines": [
+            "05.09",
+            "05.10"
+          ]
+        },
+        "2023-12-02": {
+          "items": [
+            "S2A_MSIL2A_20231202T052151_R062_T43PFN_20231202T092054"
+          ],
+          "processing_baselines": [
+            "05.09"
+          ]
+        },
+        "2023-12-12": {
+          "items": [
+            "S2A_MSIL2A_20231212T052221_R062_T43PFN_20231213T030840",
+            "S2A_MSIL2A_20231212T052221_R062_T43PFN_20241019T213134"
+          ],
+          "processing_baselines": [
+            "05.09",
+            "05.10"
+          ]
+        },
+        "2023-12-27": {
+          "items": [
+            "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447"
+          ],
+          "processing_baselines": [
+            "05.10"
+          ]
+        },
+        "2024-01-16": {
+          "items": [
+            "S2B_MSIL2A_20240116T052149_R062_T43PFN_20240116T091525"
+          ],
+          "processing_baselines": [
+            "05.10"
+          ]
+        },
+        "2024-01-21": {
+          "items": [
+            "S2A_MSIL2A_20240121T052111_R062_T43PFN_20240121T122000"
+          ],
+          "processing_baselines": [
+            "05.10"
+          ]
+        },
+        "2024-01-26": {
+          "items": [
+            "S2B_MSIL2A_20240126T052109_R062_T43PFN_20240126T093833"
+          ],
+          "processing_baselines": [
+            "05.10"
+          ]
+        },
+        "2024-12-06": {
+          "items": [
+            "S2A_MSIL2A_20241206T052211_R062_T43PFN_20241206T083150"
+          ],
+          "processing_baselines": [
+            "05.11"
+          ]
+        }
+      }
+    }
+  },
+  "exp_b": {
+    "composite_dates": [
+      "2024-10-27",
+      "2024-11-01",
+      "2024-11-06"
+    ],
+    "per_date": {
+      "2024-10-27": {
+        "footprint_valid_fraction": 0.7249545093416028,
+        "footprint_valid_px": 28287,
+        "aoi_cloud_shadow_pct": 42.340850830078125,
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20241027T051921_R062_T43PFN_20241027T091505"
+        ],
+        "days_after_event": 89,
+        "step2_footprint_valid_fraction": 0.7249545093416028,
+        "reproduces_step2": true
+      },
+      "2024-11-01": {
+        "footprint_valid_fraction": 0.4351726082165099,
+        "footprint_valid_px": 16980,
+        "aoi_cloud_shadow_pct": 59.88502502441406,
+        "platform": "Sentinel-2B",
+        "orbit": 62,
+        "item_ids": [
+          "S2B_MSIL2A_20241101T051859_R062_T43PFN_20241101T074458"
+        ],
+        "days_after_event": 94,
+        "step2_footprint_valid_fraction": 0.4351726082165099,
+        "reproduces_step2": true
+      },
+      "2024-11-06": {
+        "footprint_valid_fraction": 0.4652605141085112,
+        "footprint_valid_px": 18154,
+        "aoi_cloud_shadow_pct": 34.49668884277344,
+        "platform": "Sentinel-2A",
+        "orbit": 62,
+        "item_ids": [
+          "S2A_MSIL2A_20241106T052011_R062_T43PFN_20241106T090952"
+        ],
+        "days_after_event": 99,
+        "step2_footprint_valid_fraction": 0.4652605141085112,
+        "reproduces_step2": true
+      }
+    },
+    "footprint_px": 39019,
+    "composite_footprint_valid_px": 31456,
+    "composite_footprint_validity": 0.8061713524180527,
+    "footprint_px_by_source_date": {
+      "2024-10-27": 28287,
+      "2024-11-01": 607,
+      "2024-11-06": 2562
+    },
+    "latest_contributing_date_footprint": "2024-11-06",
+    "gap_days_footprint": 99,
+    "latest_contributing_date_aoi": "2024-11-06",
+    "gap_days_aoi": 99,
+    "aoi_px_by_source_date": {
+      "2024-10-27": 604600,
+      "2024-11-01": 89308,
+      "2024-11-06": 216576
+    },
+    "aoi_composite_valid_fraction": 0.8683052062988281,
+    "per_pixel_gap_days_footprint": {
+      "n": 31456,
+      "min": 89,
+      "median": 89.0,
+      "max": 99,
+      "mean": 89.91095498474058
+    },
+    "gap_days_current_post": 129,
+    "rule": "footprint validity >= 0.9 AND gap <= 99 days",
+    "keep": false,
+    "exploratory_cumulative_curve": {
+      "label": "EXPLORATORY, no keep rule: first-valid composite of ALL post-event acquisitions up to each date, from cached SCL",
+      "first_date_reaching_min_validity": {
+        "up_to_date": "2024-12-06",
+        "days_after_event": 129,
+        "footprint_validity": 0.9709372357056818,
+        "latest_contributing_date_footprint": "2024-12-06",
+        "gap_days_footprint": 129,
+        "median_pixel_gap_days": 89.0
+      },
+      "curve": [
+        {
+          "up_to_date": "2024-08-03",
+          "days_after_event": 4,
+          "footprint_validity": 0.0,
+          "latest_contributing_date_footprint": null,
+          "gap_days_footprint": null,
+          "median_pixel_gap_days": null
+        },
+        {
+          "up_to_date": "2024-08-08",
+          "days_after_event": 9,
+          "footprint_validity": 0.0,
+          "latest_contributing_date_footprint": null,
+          "gap_days_footprint": null,
+          "median_pixel_gap_days": null
+        },
+        {
+          "up_to_date": "2024-08-13",
+          "days_after_event": 14,
+          "footprint_validity": 0.11678925651605628,
+          "latest_contributing_date_footprint": "2024-08-13",
+          "gap_days_footprint": 14,
+          "median_pixel_gap_days": 14.0
+        },
+        {
+          "up_to_date": "2024-08-18",
+          "days_after_event": 19,
+          "footprint_validity": 0.12140239370563059,
+          "latest_contributing_date_footprint": "2024-08-18",
+          "gap_days_footprint": 19,
+          "median_pixel_gap_days": 14.0
+        },
+        {
+          "up_to_date": "2024-08-23",
+          "days_after_event": 24,
+          "footprint_validity": 0.24582895512442657,
+          "latest_contributing_date_footprint": "2024-08-23",
+          "gap_days_footprint": 24,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-08-28",
+          "days_after_event": 29,
+          "footprint_validity": 0.24582895512442657,
+          "latest_contributing_date_footprint": "2024-08-23",
+          "gap_days_footprint": 24,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-09-02",
+          "days_after_event": 34,
+          "footprint_validity": 0.24808426663932956,
+          "latest_contributing_date_footprint": "2024-09-02",
+          "gap_days_footprint": 34,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-09-07",
+          "days_after_event": 39,
+          "footprint_validity": 0.24808426663932956,
+          "latest_contributing_date_footprint": "2024-09-02",
+          "gap_days_footprint": 34,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-09-12",
+          "days_after_event": 44,
+          "footprint_validity": 0.31182244547528126,
+          "latest_contributing_date_footprint": "2024-09-12",
+          "gap_days_footprint": 44,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-09-22",
+          "days_after_event": 54,
+          "footprint_validity": 0.3209718342346037,
+          "latest_contributing_date_footprint": "2024-09-22",
+          "gap_days_footprint": 54,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-09-27",
+          "days_after_event": 59,
+          "footprint_validity": 0.3209718342346037,
+          "latest_contributing_date_footprint": "2024-09-22",
+          "gap_days_footprint": 54,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-02",
+          "days_after_event": 64,
+          "footprint_validity": 0.3224070324713601,
+          "latest_contributing_date_footprint": "2024-10-02",
+          "gap_days_footprint": 64,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-07",
+          "days_after_event": 69,
+          "footprint_validity": 0.3224070324713601,
+          "latest_contributing_date_footprint": "2024-10-02",
+          "gap_days_footprint": 64,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-12",
+          "days_after_event": 74,
+          "footprint_validity": 0.3224070324713601,
+          "latest_contributing_date_footprint": "2024-10-02",
+          "gap_days_footprint": 64,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-17",
+          "days_after_event": 79,
+          "footprint_validity": 0.3229196032702017,
+          "latest_contributing_date_footprint": "2024-10-17",
+          "gap_days_footprint": 79,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-22",
+          "days_after_event": 84,
+          "footprint_validity": 0.3229196032702017,
+          "latest_contributing_date_footprint": "2024-10-17",
+          "gap_days_footprint": 79,
+          "median_pixel_gap_days": 24.0
+        },
+        {
+          "up_to_date": "2024-10-27",
+          "days_after_event": 89,
+          "footprint_validity": 0.8194213075681078,
+          "latest_contributing_date_footprint": "2024-10-27",
+          "gap_days_footprint": 89,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-01",
+          "days_after_event": 94,
+          "footprint_validity": 0.8306209795227966,
+          "latest_contributing_date_footprint": "2024-11-01",
+          "gap_days_footprint": 94,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-06",
+          "days_after_event": 99,
+          "footprint_validity": 0.846228760347523,
+          "latest_contributing_date_footprint": "2024-11-06",
+          "gap_days_footprint": 99,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-11",
+          "days_after_event": 104,
+          "footprint_validity": 0.846228760347523,
+          "latest_contributing_date_footprint": "2024-11-06",
+          "gap_days_footprint": 99,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-16",
+          "days_after_event": 109,
+          "footprint_validity": 0.8528921807324636,
+          "latest_contributing_date_footprint": "2024-11-16",
+          "gap_days_footprint": 109,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-21",
+          "days_after_event": 114,
+          "footprint_validity": 0.8528921807324636,
+          "latest_contributing_date_footprint": "2024-11-16",
+          "gap_days_footprint": 109,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-11-26",
+          "days_after_event": 119,
+          "footprint_validity": 0.8528921807324636,
+          "latest_contributing_date_footprint": "2024-11-16",
+          "gap_days_footprint": 109,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-12-01",
+          "days_after_event": 124,
+          "footprint_validity": 0.8528921807324636,
+          "latest_contributing_date_footprint": "2024-11-16",
+          "gap_days_footprint": 109,
+          "median_pixel_gap_days": 89.0
+        },
+        {
+          "up_to_date": "2024-12-06",
+          "days_after_event": 129,
+          "footprint_validity": 0.9709372357056818,
+          "latest_contributing_date_footprint": "2024-12-06",
+          "gap_days_footprint": 129,
+          "median_pixel_gap_days": 89.0
+        }
+      ]
+    },
+    "composite_written": false,
+    "composite_not_written_reason": "keep rule (b) failed; nothing was fetched for the composite"
+  },
+  "stac": {
+    "collection": "sentinel-2-l2a",
+    "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1",
+    "anniversary_window_items": {
+      "2023-10-18": [
+        "S2B_MSIL2A_20231018T051819_R062_T43PFN_20231018T111806",
+        "S2B_MSIL2A_20231018T051819_R062_T43PFN_20241107T132649"
+      ],
+      "2023-10-23": [
+        "S2A_MSIL2A_20231023T051851_R062_T43PFN_20231023T103011",
+        "S2A_MSIL2A_20231023T051851_R062_T43PFN_20241103T000103"
+      ],
+      "2023-10-28": [
+        "S2B_MSIL2A_20231028T051919_R062_T43PFN_20231028T093227",
+        "S2B_MSIL2A_20231028T051919_R062_T43PFN_20241107T165628"
+      ],
+      "2023-11-02": [
+        "S2A_MSIL2A_20231102T051951_R062_T43PFN_20231102T115042",
+        "S2A_MSIL2A_20231102T051951_R062_T43PFN_20241028T214724"
+      ],
+      "2023-11-07": [
+        "S2B_MSIL2A_20231107T052019_R062_T43PFN_20231107T091147"
+      ],
+      "2023-11-12": [
+        "S2A_MSIL2A_20231112T052041_R062_T43PFN_20231112T094528",
+        "S2A_MSIL2A_20231112T052041_R062_T43PFN_20241025T104503"
+      ],
+      "2023-11-17": [
+        "S2B_MSIL2A_20231117T052109_R062_T43PFN_20231117T094622",
+        "S2B_MSIL2A_20231117T052109_R062_T43PFN_20241102T220343"
+      ],
+      "2023-11-22": [
+        "S2A_MSIL2A_20231122T052121_R062_T43PFN_20231122T092244"
+      ],
+      "2023-11-27": [
+        "S2B_MSIL2A_20231127T052139_R062_T43PFN_20231127T091805",
+        "S2B_MSIL2A_20231127T052139_R062_T43PFN_20241109T223304"
+      ],
+      "2023-12-02": [
+        "S2A_MSIL2A_20231202T052151_R062_T43PFN_20231202T092054"
+      ],
+      "2023-12-07": [
+        "S2B_MSIL2A_20231207T052209_R062_T43PFN_20231207T091620",
+        "S2B_MSIL2A_20231207T052209_R062_T43PFN_20241031T220714"
+      ],
+      "2023-12-12": [
+        "S2A_MSIL2A_20231212T052221_R062_T43PFN_20231213T030840",
+        "S2A_MSIL2A_20231212T052221_R062_T43PFN_20241019T213134"
+      ],
+      "2023-12-17": [
+        "S2B_MSIL2A_20231217T052229_R062_T43PFN_20231220T060912"
+      ],
+      "2023-12-22": [
+        "S2A_MSIL2A_20231222T052231_R062_T43PFN_20231222T093744"
+      ],
+      "2023-12-27": [
+        "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447"
+      ],
+      "2024-01-01": [
+        "S2A_MSIL2A_20240101T052221_R062_T43PFN_20240101T091851"
+      ],
+      "2024-01-06": [
+        "S2B_MSIL2A_20240106T052219_R062_T43PFN_20240106T091159"
+      ],
+      "2024-01-11": [
+        "S2A_MSIL2A_20240111T052201_R062_T43PFN_20240111T092158"
+      ]
+    },
+    "composite_items": {
+      "2024-10-27": [
+        "S2A_MSIL2A_20241027T051921_R062_T43PFN_20241027T091505"
+      ],
+      "2024-11-01": [
+        "S2B_MSIL2A_20241101T051859_R062_T43PFN_20241101T074458"
+      ],
+      "2024-11-06": [
+        "S2A_MSIL2A_20241106T052011_R062_T43PFN_20241106T090952"
+      ]
+    }
+  },
+  "bytes": {
+    "cap_bytes": 300000000,
+    "total_received_all_x6_processes": 44571739,
+    "per_process": [
+      {
+        "label": "process",
+        "cap_bytes": 300000000,
+        "bytes_received": 2894811,
+        "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic"
+      },
+      {
+        "label": "process",
+        "cap_bytes": 297105189,
+        "bytes_received": 41247370,
+        "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic"
+      },
+      {
+        "label": "process",
+        "cap_bytes": 255857819,
+        "bytes_received": 429558,
+        "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic"
+      },
+      {
+        "label": "process",
+        "cap_bytes": 255428261,
+        "bytes_received": 0,
+        "method": "per-process bytes_in via nettop for this PID (macOS); excludes unrelated traffic"
+      }
+    ],
+    "method": "nettop per-PID bytes_in; cumulative across X6 reruns"
+  },
+  "output_sha256": {
+    "data_a6/cogs/anniversary_2023-11-07_crop.tif": "1035337895e906b956eccf0e19368f2431e81687dd817c9e123018f3ea523cbc",
+    "data_a6/cogs/anniversary_2023-11-27_crop.tif": "da614588ce823b1367d5f6712371ffe60849403060d5c3aa0bdc69c408c1ad91",
+    "data_a6/cogs/anniversary_2023-12-02_crop.tif": "d28406a0cf6b1a6459a5fe301e6490dbdbf4e942c29be8fc4cf767b9c42a6cee",
+    "data_a6/cogs/anniversary_2023-12-12_crop.tif": "ac95a46f19170dc96324212deaf30ff05a0f589dabf7554973bf1cb54d3a730f",
+    "data_a6/cogs/anniversary_2023-12-27_crop.tif": "fecd678cfcb568270a7d9c3f29c68ca78cbfcabaf3b32b0738a3aa95f8727ce1"
+  },
+  "config_sha256_files": {
+    "x6": "e1f0036d1cd6428b31d6c663b70fcf0d5939cd710f102d8d86a24f43f9bb8b55",
+    "exceptional": "57e4573227c6a628a874741d466d25ee6e5c838e74d6438a84afb2f6d10826e1",
+    "wayanad_evidence": "c281c3629375ec0588c028b85da1440b2b1f76352975fad63ccc27685b95a7ed",
+    "experiments": "b039d236d6e1ef25e39e11899066e544ae9343c5a0a1ef9bc2cb6e288a276f9f",
+    "phase0": "8aa8ae85873f4a698b548b647a3e7b09eb648d4126e9fc75a2a88238e5ffe0d2"
+  },
+  "limitations": [
+    "Single AOI, single post date (2024-12-06), one year pair: one comparison, not a general result.",
+    "Stable pixels are seasonally steady vegetation by construction (NDVI std <= 0.05 across the pre dates); the result does not speak for paddy, bare soil or plantation clearings.",
+    "No detection labels were used: a lower false-drop fraction is not a detection gain.",
+    "SCL validity is a model estimate and does not mean haze-free; the composite applies NO radiometric harmonisation between dates.",
+    "The footprint comes from the January-vs-December NDVI drop, so validity is measured on an outcome-derived region used for date selection only."
+  ],
+  "experiment": "x6",
+  "risk": "x6",
+  "started_utc": "2026-09-30T09:33:19.296505+00:00",
+  "finished_utc": "2026-09-30T09:33:24.002678+00:00",
+  "config_sha256": "7aba86b567bf1137dda2b243327ee7fb914d6647c83376f529c5648f5b4fc985",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
+}
