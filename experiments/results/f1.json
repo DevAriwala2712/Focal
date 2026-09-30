@@ -1,0 +1,1839 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "wayanad_evidence_config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08",
+  "aoi_center": {
+    "lat": 11.49,
+    "lon": 76.16
+  },
+  "crop_10m_rows_cols": [
+    256,
+    896,
+    128,
+    640
+  ],
+  "event_date": "2024-07-30",
+  "hard_guard_verified": true,
+  "sr_pool_dates": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26"
+  ],
+  "ten_m_pool_dates": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26",
+    "2024-02-05",
+    "2024-02-10",
+    "2024-02-15"
+  ],
+  "checkerboard": {
+    "tile_px_2p5m": 128,
+    "seed": 2024,
+    "deterministic_check": "PASS"
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "ci": 0.95,
+    "seed": 2024
+  },
+  "stac_audit": {
+    "source": "experiments/wayanad_evidence/outputs/audit_acquisitions.json (cached, real Planetary Computer STAC + 20 m SCL reads from the v1 pipeline run, corrected AOI 11.490N 76.160E)",
+    "rule": "SAME rule as experiments.x6_season_latency.clear_dates_in_window (cited, not redefined): best per-date acquisition passes cloud_shadow_pct_aoi <= max_cloud_shadow_pct AND coverage_pct >= min_coverage_pct",
+    "thresholds": {
+      "max_cloud_shadow_pct": 10,
+      "min_coverage_pct": 99
+    },
+    "window": [
+      "2024-01-01",
+      "2024-06-30"
+    ],
+    "dates_audited": 37,
+    "clear_dates": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26",
+      "2024-02-05",
+      "2024-02-10",
+      "2024-02-15",
+      "2024-02-20",
+      "2024-03-01",
+      "2024-03-06",
+      "2024-03-11",
+      "2024-03-26"
+    ],
+    "table": [
+      {
+        "date": "2024-01-01",
+        "cloud_shadow_pct_aoi": 80.214,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-01-06",
+        "cloud_shadow_pct_aoi": 86.839,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-01-11",
+        "cloud_shadow_pct_aoi": 39.054,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-01-16",
+        "cloud_shadow_pct_aoi": 2.769,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": true,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-01-21",
+        "cloud_shadow_pct_aoi": 3.241,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": true,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-01-26",
+        "cloud_shadow_pct_aoi": 3.387,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": true,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-01-31",
+        "cloud_shadow_pct_aoi": 11.444,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-02-05",
+        "cloud_shadow_pct_aoi": 1.063,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-02-10",
+        "cloud_shadow_pct_aoi": 1.041,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-02-15",
+        "cloud_shadow_pct_aoi": 2.301,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": true,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": null
+      },
+      {
+        "date": "2024-02-20",
+        "cloud_shadow_pct_aoi": 9.457,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "clear but real-band fetch/SR product not built in this run (time budget)"
+      },
+      {
+        "date": "2024-02-25",
+        "cloud_shadow_pct_aoi": 33.196,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-03-01",
+        "cloud_shadow_pct_aoi": 2.164,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "clear but real-band fetch/SR product not built in this run (time budget)"
+      },
+      {
+        "date": "2024-03-06",
+        "cloud_shadow_pct_aoi": 1.895,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "clear but real-band fetch/SR product not built in this run (time budget)"
+      },
+      {
+        "date": "2024-03-11",
+        "cloud_shadow_pct_aoi": 9.386,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "clear but real-band fetch/SR product not built in this run (time budget)"
+      },
+      {
+        "date": "2024-03-16",
+        "cloud_shadow_pct_aoi": 51.717,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-03-21",
+        "cloud_shadow_pct_aoi": 25.28,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-03-26",
+        "cloud_shadow_pct_aoi": 6.95,
+        "coverage_pct": 100.0,
+        "clear": true,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "clear but real-band fetch/SR product not built in this run (time budget)"
+      },
+      {
+        "date": "2024-03-31",
+        "cloud_shadow_pct_aoi": 24.655,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-05",
+        "cloud_shadow_pct_aoi": 73.156,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-10",
+        "cloud_shadow_pct_aoi": 13.211,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-15",
+        "cloud_shadow_pct_aoi": 80.856,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-20",
+        "cloud_shadow_pct_aoi": 100.0,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-25",
+        "cloud_shadow_pct_aoi": 24.267,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-04-30",
+        "cloud_shadow_pct_aoi": 91.501,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-05",
+        "cloud_shadow_pct_aoi": 67.867,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-10",
+        "cloud_shadow_pct_aoi": 100.0,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-15",
+        "cloud_shadow_pct_aoi": 20.889,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-20",
+        "cloud_shadow_pct_aoi": 100.0,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-25",
+        "cloud_shadow_pct_aoi": 100.0,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-05-30",
+        "cloud_shadow_pct_aoi": 75.313,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-04",
+        "cloud_shadow_pct_aoi": 96.001,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-09",
+        "cloud_shadow_pct_aoi": 99.811,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-14",
+        "cloud_shadow_pct_aoi": 99.652,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-19",
+        "cloud_shadow_pct_aoi": 98.605,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-24",
+        "cloud_shadow_pct_aoi": 99.979,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      },
+      {
+        "date": "2024-06-29",
+        "cloud_shadow_pct_aoi": 99.979,
+        "coverage_pct": 100.0,
+        "clear": false,
+        "kept_in_10m_pool": false,
+        "kept_in_sr_pool": false,
+        "reason_not_kept": "fails AOI clear test (cloud+shadow<= 10%, coverage>= 99%)"
+      }
+    ],
+    "live_stac_reachability_check": "confirmed: 3 new dates (2024-02-05, 2024-02-10, 2024-02-15) fetched over the network from Planetary Computer STAC during this run (real B04/B03/B02/B08 DN + SCL, same experiments/wayanad_evidence/fetch.py code path)",
+    "proxy_pair_2023_12_27": {
+      "status": "BLOCKED",
+      "reason": "2023-12-27 is not cached for the corrected AOI (the A6/x6 anniversary cache is for the OLD/wrong-AOI comparison logic and was not re-run here); fetching + building an SR product for it was out of this run's time budget. The proxy_pair is reported as BLOCKED, not fabricated or estimated."
+    }
+  },
+  "gates": {
+    "rule_10m": {
+      "pool": "ten_m_only_6_dates",
+      "test_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0001592800541552184,
+              "lo": 0.0,
+              "hi": 0.0004948569701087959,
+              "numerator": 192.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.01875,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 416,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0011282337169327972,
+              "lo": 0.0,
+              "hi": 0.0028237538219090643,
+              "numerator": 1360.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.01529051987767584,
+              "lo": 0.0,
+              "hi": 0.037573386848351965,
+              "numerator": 5.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2240,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0001460067163089502,
+              "lo": 0.0,
+              "hi": 0.00045004225045031077,
+              "numerator": 176.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018691588785046728,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 336,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-05",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 0,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-10",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 9.291336492387741e-05,
+              "lo": 0.0,
+              "hi": 0.0002961163339364711,
+              "numerator": 112.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0030581039755351682,
+              "lo": 0.0,
+              "hi": 0.009524567788898996,
+              "numerator": 1.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 1264,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-15",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 6.636668923134101e-05,
+              "lo": 0.0,
+              "hi": 0.00021151166709747936,
+              "numerator": 80.0,
+              "denominator": 1205424.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0030581039755351682,
+              "lo": 0.0,
+              "hi": 0.009524567788898996,
+              "numerator": 1.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 1504,
+            "n_valid_px": 2405584
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.00026546675692536403,
+          "lo": 6.536235764960485e-05,
+          "hi": 0.0005631927301782178,
+          "numerator": 1920.0,
+          "denominator": 7232544.0,
+          "blocks": 546,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.0056065239551478085,
+          "lo": 0.002006999422753962,
+          "hi": 0.010736333610531435,
+          "numerator": 11.0,
+          "denominator": 1962.0,
+          "blocks": 546,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 6
+      },
+      "calibration_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.00018664178109585388,
+              "lo": 0.0,
+              "hi": 0.0005871914667350932,
+              "numerator": 224.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 416,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0007332355685908546,
+              "lo": 0.0,
+              "hi": 0.002101186395350284,
+              "numerator": 880.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.009174311926605505,
+              "lo": 0.0,
+              "hi": 0.0243161094224924,
+              "numerator": 3.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2240,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-02-05",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0001333155579256099,
+              "lo": 0.0,
+              "hi": 0.0004147613893978121,
+              "numerator": 160.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 336,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-05",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-10",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 0,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-10",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-15"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0009598720170643914,
+              "lo": 0.0,
+              "hi": 0.0030800447390130293,
+              "numerator": 1152.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.01935640463513936,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 1264,
+            "n_valid_px": 2405584
+          },
+          {
+            "held_out": "2024-02-15",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21",
+              "2024-01-26",
+              "2024-02-05",
+              "2024-02-10"
+            ],
+            "n_pre": 5,
+            "pixel_far": {
+              "estimate": 0.0011865084655379283,
+              "lo": 0.0,
+              "hi": 0.003707545753088027,
+              "numerator": 1424.0,
+              "denominator": 1200160.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.009174311926605505,
+              "lo": 0.0,
+              "hi": 0.025078369905956112,
+              "numerator": 3.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 1504,
+            "n_valid_px": 2405584
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.0005332622317024396,
+          "lo": 8.572843251760886e-05,
+          "hi": 0.0010877117004270298,
+          "numerator": 3840.0,
+          "denominator": 7200960.0,
+          "blocks": 546,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.0061162079510703364,
+          "lo": 0.0020304568527918783,
+          "hi": 0.01116255645826849,
+          "numerator": 12.0,
+          "denominator": 1962.0,
+          "blocks": 546,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 6
+      }
+    },
+    "ungated_S_v1_sigma": {
+      "pool": "sr_3_dates",
+      "test_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.9526468539586719,
+              "lo": 0.9344790834205218,
+              "hi": 0.9677617921025911,
+              "numerator": 1148854.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 327.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2288497,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.2356048293475737,
+              "lo": 0.19432431849643259,
+              "hi": 0.2779757311173727,
+              "numerator": 284130.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.9908256880733946,
+              "lo": 0.9787862669245648,
+              "hi": 1.0,
+              "numerator": 324.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 580789,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.021618461640518758,
+              "lo": 0.013494746938465342,
+              "hi": 0.03152414899076706,
+              "numerator": 26071.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.5688073394495413,
+              "lo": 0.49253274909854394,
+              "hi": 0.6415821543052944,
+              "numerator": 186.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 53663,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.4032900483155881,
+          "lo": 0.3547891780491731,
+          "hi": 0.4592942442443348,
+          "numerator": 1459055.0,
+          "denominator": 3617880.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.8532110091743119,
+          "lo": 0.8182761674336227,
+          "hi": 0.8864120695877251,
+          "numerator": 837.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      },
+      "calibration_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.949424793247975,
+              "lo": 0.9326716032893771,
+              "hi": 0.9638808645359872,
+              "numerator": 1139643.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 327.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2288497,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.24714354384675816,
+              "lo": 0.20057096872638247,
+              "hi": 0.2981213509928393,
+              "numerator": 296659.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.9969418960244648,
+              "lo": 0.9905660377358491,
+              "hi": 1.0,
+              "numerator": 326.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 580789,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.022986609749981464,
+              "lo": 0.012695020839572198,
+              "hi": 0.035740224650620094,
+              "numerator": 27592.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.5535168195718655,
+              "lo": 0.475291597567717,
+              "hi": 0.629862053369516,
+              "numerator": 181.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 53663,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.40651831561490487,
+          "lo": 0.35490265847379715,
+          "hi": 0.4615384241397739,
+          "numerator": 1463894.0,
+          "denominator": 3601053.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.8501529051987767,
+          "lo": 0.8149564702316997,
+          "hi": 0.8866200235025813,
+          "numerator": 834.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      }
+    },
+    "gate_v1": {
+      "pool": "sr_3_dates",
+      "test_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.00014594182228266277,
+              "lo": 0.0,
+              "hi": 0.0004535151260169953,
+              "numerator": 176.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.01875,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 400,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0010879299479253043,
+              "lo": 0.0,
+              "hi": 0.002863529420441568,
+              "numerator": 1312.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.009174311926605505,
+              "lo": 0.0,
+              "hi": 0.02108433734939759,
+              "numerator": 3.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2016,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0002520813293973266,
+              "lo": 0.0,
+              "hi": 0.0007770856210877555,
+              "numerator": 304.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018691588785046728,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 512,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.0004953176998684312,
+          "lo": 8.538559519841478e-05,
+          "hi": 0.0010969538995693085,
+          "numerator": 1792.0,
+          "denominator": 3617880.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.007135575942915392,
+          "lo": 0.0010351966873706005,
+          "hi": 0.014374085946848268,
+          "numerator": 7.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      },
+      "calibration_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.00018661208263249667,
+              "lo": 0.0,
+              "hi": 0.0005870619796616994,
+              "numerator": 224.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 400,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0005864951168449896,
+              "lo": 0.0,
+              "hi": 0.0018255844261608938,
+              "numerator": 704.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018808777429467086,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2016,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0001732826481587469,
+              "lo": 0.0,
+              "hi": 0.0005391015806194403,
+              "numerator": 208.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 512,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.00031546328254541104,
+          "lo": 0.0,
+          "hi": 0.0008207274909427562,
+          "numerator": 1136.0,
+          "denominator": 3601053.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.0061162079510703364,
+          "lo": 0.0,
+          "hi": 0.014098690835850957,
+          "numerator": 6.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      }
+    },
+    "gate_v1_with_a5_sigma": {
+      "pool": "sr_3_dates",
+      "test_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.00014594182228266277,
+              "lo": 0.0,
+              "hi": 0.0004535151260169953,
+              "numerator": 176.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.01875,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 400,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0010879299479253043,
+              "lo": 0.0,
+              "hi": 0.002863529420441568,
+              "numerator": 1312.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.009174311926605505,
+              "lo": 0.0,
+              "hi": 0.02108433734939759,
+              "numerator": 3.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2016,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0002520813293973266,
+              "lo": 0.0,
+              "hi": 0.0007770856210877555,
+              "numerator": 304.0,
+              "denominator": 1205960.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018691588785046728,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 512,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.0004953176998684312,
+          "lo": 8.538559519841478e-05,
+          "hi": 0.0010969538995693085,
+          "numerator": 1792.0,
+          "denominator": 3617880.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.007135575942915392,
+          "lo": 0.0010351966873706005,
+          "hi": 0.014374085946848268,
+          "numerator": 7.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      },
+      "calibration_split": {
+        "per_fold": [
+          {
+            "held_out": "2024-01-16",
+            "pre_dates": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.00018661208263249667,
+              "lo": 0.0,
+              "hi": 0.0005870619796616994,
+              "numerator": 224.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 400,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-21",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0005864951168449896,
+              "lo": 0.0,
+              "hi": 0.0018255844261608938,
+              "numerator": 704.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018808777429467086,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 2016,
+            "n_valid_px": 2406311
+          },
+          {
+            "held_out": "2024-01-26",
+            "pre_dates": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre": 2,
+            "pixel_far": {
+              "estimate": 0.0001732826481587469,
+              "lo": 0.0,
+              "hi": 0.0005391015806194403,
+              "numerator": 208.0,
+              "denominator": 1200351.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "pixel",
+              "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+            },
+            "window_far": {
+              "estimate": 0.0061162079510703364,
+              "lo": 0.0,
+              "hi": 0.018867924528301886,
+              "numerator": 2.0,
+              "denominator": 327.0,
+              "blocks": 91,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024,
+              "unit": "window",
+              "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+              "window_px_2p5m": 64
+            },
+            "n_flagged_px": 512,
+            "n_valid_px": 2406311
+          }
+        ],
+        "pooled_pixel_far": {
+          "estimate": 0.00031546328254541104,
+          "lo": 0.0,
+          "hi": 0.0008207274909427562,
+          "numerator": 1136.0,
+          "denominator": 3601053.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "pooled_window_far": {
+          "estimate": 0.0061162079510703364,
+          "lo": 0.0,
+          "hi": 0.014098690835850957,
+          "numerator": 6.0,
+          "denominator": 981.0,
+          "blocks": 273,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "n_folds": 3
+      }
+    },
+    "gate_v2": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED"
+    }
+  },
+  "keep_rule": {
+    "a_point_estimate_inside_ci": true,
+    "checks": {
+      "rule_10m": {
+        "test_pixel": true,
+        "test_window": true
+      },
+      "ungated_S_v1_sigma": {
+        "test_pixel": true,
+        "test_window": true
+      },
+      "gate_v1": {
+        "test_pixel": true,
+        "test_window": true
+      },
+      "gate_v1_with_a5_sigma": {
+        "test_pixel": true,
+        "test_window": true
+      }
+    },
+    "b_gates_differ": "see tests/test_f1_placebo.py::test_gates_differ_on_synthetic_fixture (PASS); on THIS real crop, gate_v1/_a5/rule_10m coincide by construction -- see note",
+    "c_window_far_changes_with_flag_map": "see tests/test_f1_placebo.py::test_window_far_changes_with_flag_map (PASS)",
+    "far_reduction_vs_ungated_pixel_test_split": {
+      "rule_10m": -0.4030245815586628,
+      "gate_v1": -0.4027947306157197,
+      "gate_v1_with_a5_sigma": -0.4027947306157197
+    }
+  },
+  "calibration_scores_export": {
+    "path": "data/experiments-cache/f1_calibration_scores.npz",
+    "sha256": "53a2fe8a3a7852d7648d6d8d17abaf982b1435d23ffb0afcd9fda8effd2679e4",
+    "n_scores": 981,
+    "definition": "per-160m-window max(d / sigma_v1) over the SR folds' calibration (even-tile) split; consumed by F2 as the population for tau = ceil((n+1)(1-alpha))-th order statistic"
+  },
+  "limitations": [
+    "SR-dependent gates (ungated_S_v1_sigma, gate_v1, gate_v1_with_a5_sigma) scored on only N=3 pool dates (2024-01-16, 2024-01-21, 2024-01-26): the 2.5 m dihedral SR product exists only for these from the already-audited v1 pipeline run. Each fold's reference is the mean of the other 2 dates -- very few independent degrees of freedom; the pooled CI below does not correct for the fact that the SAME crop/AOI is reused across all 3 folds (serial + spatial correlation across folds is not modelled).",
+    "rule_10m scored on N=6 pool dates (adds 2024-02-05, 2024-02-10, 2024-02-15, fetched fresh this run) since it needs no SR product; its pool is 2x the SR gates', so its FAR is not on equal footing with them.",
+    "proxy_pair (2023-12-27 vs January 2024) is BLOCKED: not cached for the corrected AOI, not fetched this run.",
+    "exchangeability of 160 m windows across a single crop is assumed, not proven (configs/fix.yaml units.window_caveat).",
+    "v1's classify() defines flagged = OBSERVED union INFERRED = the parent mask restricted to finite (d, sigma) pixels, REGARDLESS of S (see experiments/wayanad_evidence/gate.py). So on real data with no NaN d/sigma inside the parent mask, gate_v1, gate_v1_with_a5_sigma and rule_10m report IDENTICAL flagged FAR; only ungated_S_v1_sigma (no parent gating at all) differs. This is a property of the v1 gate design, verified in code (not a B2 regression: the three functions are NOT aliases -- they diverge whenever a gated pixel has non-finite sigma, exercised in tests/test_f1_placebo.py::test_gates_differ_on_synthetic_fixture)."
+  ],
+  "b_ids_fixed": {
+    "B1": "guarded_load_date raises for date>=2024-07-30; every reference is the mean of the OTHER pool dates",
+    "B2": "five distinct gate functions (trustsr/placebo_v2.py); gate_v2 explicitly BLOCKED, not aliased",
+    "B3": "compute_far_window_v2 takes each gate's own flagged array (test: window FAR changes with flag map)",
+    "B4": "pool_fold_blocks concatenates all folds' blocks before one bootstrap call; CI matches the reported point estimate",
+    "B5": "flagged_v1 = OBSERVED union INFERRED only; UNSUPPORTED reported separately, never counted"
+  },
+  "fix_yaml_syntax_note": "configs/fix.yaml f9_checks was invalid YAML (a block sequence followed by sibling mapping keys at the same indent); nested under f9_checks.checks so it parses. No value changed. config_sha256 above is of the CORRECTED file.",
+  "experiment": "f1_placebo",
+  "started_utc": "2026-09-30T15:12:12.599805+00:00",
+  "finished_utc": "2026-09-30T15:12:17.660052+00:00"
+}
