@@ -65,6 +65,7 @@ def run_sr(cfg, root, config_hash, runner, arrays_by_date, state, out, cache):
     valid_hr = upsample(valid_all, scale)
     floor = cfg['radiometry']['min_denominator']
     acc = {'pre': Welford((hc * scale, wc * scale)), 'post': Welford((hc * scale, wc * scale))}
+    per_date_acc = {}  # Track per-date dihedral NDVI means for A3 leave-one-out
     plan = tile_plan((hc, wc), tile, margin, stride)
     tile_log, spectral, negative = [], {}, {}
     for date in pre + [post]:
@@ -75,6 +76,7 @@ def run_sr(cfg, root, config_hash, runner, arrays_by_date, state, out, cache):
         sr_id = np.zeros((4, hc * scale, wc * scale), np.float32)
         err_sum, err_cnt, neg_cnt, tot = np.zeros((8, 4)), np.zeros(4), 0, 0
         target = acc['post'] if date == post else acc['pre']
+        per_date_dihedral_ndvi = np.zeros((8, hc * scale, wc * scale), dtype=np.float32)  # Store all 8 runs for this date
         for n, t in enumerate(plan):
             r0, c0 = t['r0'], t['c0']
             (rl, rh), (cl, ch) = t['keep_r'], t['keep_c']
@@ -89,6 +91,7 @@ def run_sr(cfg, root, config_hash, runner, arrays_by_date, state, out, cache):
             nd = ndvi(v[:, 0], v[:, 3], floor)                                   # NDVI per run, then moments
             for k in range(8):
                 target.update_at(out_region, nd[k], where=valid_hr[out_region])
+                per_date_dihedral_ndvi[k, out_region[0], out_region[1]] = nd[k]  # Store per-date per-run NDVI
             sr_id[:, out_region[0], out_region[1]] = v[0]
             kh, kw = rh - rl, ch - cl
             down = v.reshape(8, 4, kh, scale, kw, scale).mean(axis=(3, 5))
@@ -106,6 +109,12 @@ def run_sr(cfg, root, config_hash, runner, arrays_by_date, state, out, cache):
                                                                        'reflectance (valid SCL pixels only)'}
         negative[date] = neg_cnt / tot
         np.save(cache / f'sr_identity_{date}.npy', sr_id)
+        # Cache per-date dihedral NDVI means for A3 leave-one-out validation
+        per_date_dir = cache / 'per_date_ndvi'
+        per_date_dir.mkdir(parents=True, exist_ok=True)
+        np.save(per_date_dir / f'{date}_dihedral_means.npy', per_date_dihedral_ndvi)
+        per_date_acc[date] = {'dihedral_means_shape': per_date_dihedral_ndvi.shape,
+                              'dihedral_means_dtype': str(per_date_dihedral_ndvi.dtype)}
     # ---- determinism: one tile twice, byte-identical ----
     t = plan[0]
     a_ = arrays_by_date[post]['refl'][:, r0c:r1c, c0c:c1c]
@@ -137,7 +146,8 @@ def run_sr(cfg, root, config_hash, runner, arrays_by_date, state, out, cache):
             'determinism': {'seed': cfg['seed'], 'deterministic_algorithms': cfg['model']['deterministic'],
                             'tile_rerun_bytes_identical': h1 == h2, 'sha256_first_tile_8_runs': h1},
             'tile_log_file': 'step3_tile_log.json', 'tile_log': tile_log,
-            'stats_files': ['cache/step3_state.npz'], 'sr_cog': 'sr_post_2p5m.tif',
+            'stats_files': ['cache/step3_state.npz'], 'per_date_ndvi_files': {date: f'cache/per_date_ndvi/{date}_dihedral_means.npy' for date in dates},
+            'sr_cog': 'sr_post_2p5m.tif',
             'pre_pool': {'dates': pre, 'runs_per_date': 8, 'samples_per_pixel_max': int(acc['pre'].count.max())},
             'post': {'date': post, 'samples_per_pixel_max': int(acc['post'].count.max())}}
 

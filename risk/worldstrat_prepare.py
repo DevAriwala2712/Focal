@@ -85,6 +85,32 @@ class RemoteZip(io.RawIOBase):
         return b''.join(parts)
 
 
+class _LazyArchiveIndex(dict):
+    """Lazy dict that loads from JSON only on first access. Avoids holding entire index in memory."""
+    def __init__(self, path):
+        self.path = path
+        self._loaded = False
+        super().__init__()
+
+    def _ensure_loaded(self):
+        if not self._loaded:
+            records = json.loads(self.path.read_text(encoding='utf-8'))
+            super().update({i['name']: i for i in records})
+            self._loaded = True
+
+    def __getitem__(self, key):
+        self._ensure_loaded()
+        return super().__getitem__(key)
+
+    def __contains__(self, key):
+        self._ensure_loaded()
+        return super().__contains__(key)
+
+    def get(self, key, default=None):
+        self._ensure_loaded()
+        return super().get(key, default)
+
+
 def archive_index(archive, cache, policy):
     path = cache / (archive['name'] + '.index.json')
     if not path.exists():
@@ -92,7 +118,7 @@ def archive_index(archive, cache, policy):
             records = [{'name': i.filename, 'size': i.file_size,
                         'compressed_size': i.compress_size, 'offset': i.header_offset} for i in z.infolist()]
         path.write_text(json.dumps(records), encoding='utf-8')
-    return {i['name']: i for i in json.loads(path.read_text(encoding='utf-8'))}
+    return _LazyArchiveIndex(path)
 
 
 def get_member(archive, index, name, target, policy):
