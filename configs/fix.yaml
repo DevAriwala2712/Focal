@@ -136,15 +136,19 @@ f8_gpu:
 
 # ---------------------------------------------------------------- F9 adversarial verifier checks (mandatory, all recorded pass/fail)
 f9_checks:
-  - point_estimate_inside_its_ci
-  - no_placebo_code_path_reads_post_event_date
-  - every_loaded_threshold_is_used_mutation_test
-  - no_test_compares_quantity_with_itself
-  - every_result_carries_fix_yaml_hash
-  - gates_in_a_table_differ_in_code
-  - denominators_stated
-  - no_row_compares_classes_with_different_definitions
-  - negative_results_present_in_claim_table
+  # NOTE (F1, 2026-09-30): this block was a YAML block-sequence directly followed by sibling mapping keys at
+  # the same indent, which is not valid YAML (yaml.safe_load raised a ParserError on this file). Nested the
+  # list under `checks:` so the file parses. No check name, value, or semantic was added, removed or changed.
+  checks:
+    - point_estimate_inside_its_ci
+    - no_placebo_code_path_reads_post_event_date
+    - every_loaded_threshold_is_used_mutation_test
+    - no_test_compares_quantity_with_itself
+    - every_result_carries_fix_yaml_hash
+    - gates_in_a_table_differ_in_code
+    - denominators_stated
+    - no_row_compares_classes_with_different_definitions
+    - negative_results_present_in_claim_table
   verdict_per_claim: [keep, downgrade, drop]
   arithmetic_checked_by: code, not prose
   stop_rule: "a tautological test or an unused loaded parameter -> that claim is DROPPED, not downgraded"
