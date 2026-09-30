@@ -1,0 +1,690 @@
+{
+  "status": "FAIL",
+  "caveat": "THE EXPERIMENT RAN CORRECTLY; THE DETECTOR IT MEASURES DID NOT PASS ITS OWN KEEP RULE. F7 executed end to end on real data -- real tiled SR (1120 real forward passes), a tau recomputed from placebo folds only, a block-sum test that passes on this production map -- but the gate it runs is F2's gate v2, whose pre-registered detection keep rule FAILED: window FAR 0.0652 [0.0478, 0.0850] against a required <= 0.05. Every class count, area and comparison in this report describes WHAT THIS GATE CONFIGURATION PRODUCES on the real Wayanad scene. None of it is a validated detection, and none of it may be quoted as one. Status is FAIL for exactly this reason. F5 (experiments/results/f5.json) found that under REALISTIC (unmixing-based, non-oracle) fraction estimation, SR-ranked sub-pixel allocation was substantially WORSE than naive blocky assignment (paired IoU -0.313). F7 allocates with realistic, unmixing-derived fractions, so F5 is a direct prior signal that the sub-pixel allocation quality in this map is not to be relied on.",
+  "evidence": "real",
+  "experiment": "f7_wayanad_v2",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "wayanad_evidence_config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08",
+  "replaces": {
+    "invalidated": "experiments/x9_v2_production.py, experiments/results/x9.json, experiments/x9_REPORT.md",
+    "see": "experiments/results/INVALIDATED.md (B9-B12); x9 files are untouched by F7"
+  },
+  "gate_v2_keep_rule_failure": {
+    "what": "gate v2's window false-alarm rate on F1's placebo TEST split",
+    "estimate": 0.0652,
+    "ci": [
+      0.0478,
+      0.085
+    ],
+    "alpha": 0.05,
+    "keep_rule": "window FAR <= 0.05",
+    "verdict": "NOT MET",
+    "meaning": "The detector whose output this map is was measured, on null-event data, to raise false alarms in about 6.5 % of 160 m windows where the pre-registered ceiling was 5 %. F7 is therefore reported as FAIL. These class counts describe what THIS gate configuration produces on the real landslide; they are not a validated detection.",
+    "source": "experiments/results/f2.json keep_rule.window_far_test; docs/adr-f2-gate-v2.md"
+  },
+  "f5_realistic_fraction_finding": "F5 (experiments/results/f5.json) found that under REALISTIC (unmixing-based, non-oracle) fraction estimation, SR-ranked sub-pixel allocation was substantially WORSE than naive blocky assignment (paired IoU -0.313). F7 allocates with realistic, unmixing-derived fractions, so F5 is a direct prior signal that the sub-pixel allocation quality in this map is not to be relied on.",
+  "aoi_center": {
+    "lat": 11.49,
+    "lon": 76.16
+  },
+  "crop_10m_rows_cols": [
+    256,
+    896,
+    128,
+    640
+  ],
+  "grid": {
+    "blocks_10m": [
+      640,
+      512
+    ],
+    "px_2p5m": [
+      2560,
+      2048
+    ],
+    "window_10m_px": 16,
+    "m2_per_2p5m_px": 6.25,
+    "crop_area_km2": 32.768
+  },
+  "dates": {
+    "pre": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26"
+    ],
+    "post": "2024-12-06",
+    "event": "2024-07-30",
+    "fourth_pre_date": {
+      "candidate": "2023-12-27",
+      "preregistered_as_allowed": true,
+      "paths_checked": {
+        "10m_bands_npz": "data/experiments-cache/wayanad_evidence/2023-12-27.npz",
+        "sr_dihedral_ndvi": "data/experiments-cache/wayanad_evidence/per_date_ndvi/2023-12-27_dihedral_means.npy",
+        "sr_identity": "data/experiments-cache/wayanad_evidence/sr_identity_2023-12-27.npy"
+      },
+      "present": {
+        "10m_bands_npz": false,
+        "sr_dihedral_ndvi": false,
+        "sr_identity": false
+      },
+      "scl20_files_matching_this_date": [],
+      "available": false,
+      "decision": "2023-12-27 is NOT cached for the corrected AOI (no 10 m bands, no SCL, no SR product) and this run does not fetch imagery. F7 therefore uses the 3 pre-registered pre dates only. No substitute date was used and none was invented. This matches F1's report, which recorded the same absence."
+    },
+    "post_event_date_is_read_here_deliberately": "F7 is the production map, so the post-event image IS an input. F1's P.guarded_load_date guard remains active in the tau path (recompute_tau), which is the only place a threshold is fitted; the production path loads the post date through experiments.wayanad_evidence.data.load_date instead."
+  },
+  "sr_run": {
+    "is_real_inference": true,
+    "method": "pinned SEN2SR-lite, 35 native 128 px tiles per date (crop margin 16 px, stride 96), 8 dihedral variants per tile, NDVI per run after inverting the transform",
+    "device": "cpu",
+    "tiles_per_date": 35,
+    "dates_run": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26",
+      "2024-12-06"
+    ],
+    "forward_passes_total": 1120,
+    "seconds_per_date": {
+      "2024-01-16": 11.39,
+      "2024-01-21": 11.37,
+      "2024-01-26": 11.39,
+      "2024-12-06": 11.45
+    },
+    "ran_on": "the real cached crop rows 256:896, cols 128:640 of the 1024x1024 corrected-AOI 10 m grid = 640x512 at 10 m -> 2560x2048 at 2.5 m. This is exactly the region v1, F1 and F2 use, which is what makes the v1-vs-v2 comparison below well defined. The full 1024x1024 AOI was NOT super-resolved in this run.",
+    "reproduction_check": {
+      "cached_per_date_ndvi": {
+        "2024-01-16": {
+          "cached_file_present": true,
+          "shape": [
+            8,
+            2560,
+            2048
+          ],
+          "identical_including_nan_placement": true,
+          "bytes_identical_strict_nan_ne_nan": false,
+          "max_abs_diff_where_both_finite": 0.0,
+          "n_finite_disagreements": 0
+        },
+        "2024-01-21": {
+          "cached_file_present": true,
+          "shape": [
+            8,
+            2560,
+            2048
+          ],
+          "identical_including_nan_placement": true,
+          "bytes_identical_strict_nan_ne_nan": false,
+          "max_abs_diff_where_both_finite": 0.0,
+          "n_finite_disagreements": 0
+        },
+        "2024-01-26": {
+          "cached_file_present": true,
+          "shape": [
+            8,
+            2560,
+            2048
+          ],
+          "identical_including_nan_placement": true,
+          "bytes_identical_strict_nan_ne_nan": false,
+          "max_abs_diff_where_both_finite": 0.0,
+          "n_finite_disagreements": 0
+        },
+        "2024-12-06": {
+          "cached_file_present": true,
+          "shape": [
+            8,
+            2560,
+            2048
+          ],
+          "identical_including_nan_placement": true,
+          "bytes_identical_strict_nan_ne_nan": false,
+          "max_abs_diff_where_both_finite": 0.0,
+          "n_finite_disagreements": 0
+        }
+      },
+      "v1_step3_moments": {
+        "pre_mean": 0.0,
+        "pre_std": 0.0,
+        "post_mean": 0.0,
+        "post_std": 0.0,
+        "counts_identical": true,
+        "note": "max |this run - cached v1 step3_state.npz| per moment field, over pixels finite in both"
+      }
+    },
+    "sr_score_blocks_with_within_block_variation_fraction": 0.9609039306640625,
+    "b9_guard": "trustsr.gate_v2.assert_sr_score_is_not_replicated ran on the production d_SR and passed; x9's np.repeat(np.repeat(d_10m,4),4) would raise"
+  },
+  "tau": {
+    "value": 3.8891176504391876,
+    "n_calibration": 981,
+    "alpha": 0.05,
+    "k": 933,
+    "tau": 3.8891176504391876,
+    "exceedance_upper_bound": 0.04989816700610998,
+    "formula": "tau = T_(k), k = ceil((n+1)(1-alpha)) (split conformal, one-sided)",
+    "n_pre_dates_in_calibration": 2,
+    "ndvi_low_used": 0.3,
+    "provenance": "ceil((n+1)(1-alpha))-th order statistic of the per-160 m-window max of gate_v2's OWN score s = f/sigma_f, over F1's three leave-one-date-out PLACEBO folds, restricted to the CALIBRATION (even-tile) half of F1's checkerboard split. Null-event data only (P.guarded_load_date blocks the post-event date in this path).",
+    "f1_export_consumed": {
+      "path": "data/experiments-cache/f1_calibration_scores.npz",
+      "sha256": "53a2fe8a3a7852d7648d6d8d17abaf982b1435d23ffb0afcd9fda8effd2679e4",
+      "sha256_matches_f1_json": true,
+      "n_scores": 981,
+      "tau_if_taken_verbatim": 119.90589141845703,
+      "why_not_verbatim": "F1 exported max(d/sigma_v1), an SR-NDVI z-score on a different scale (-25.86 to 255.60) from gate_v2's unmixing score f/sigma_f. Split conformal is valid only when calibration and test scores come from the same score function. F7 follows F2's reasoning (docs/adr-f2-gate-v2.md section 3) rather than diverging; the verbatim number is reported for transparency and would flag nothing."
+    },
+    "f2_json_value": 3.8891176504391876,
+    "matches_f2": true
+  },
+  "n_pre_mismatch_between_calibration_and_production": {
+    "calibration_n_pre": 2,
+    "production_n_pre": 3,
+    "why_it_matters": "sigma_f = sqrt(Var(a)(1/n_pre + 1)), so with 3 pre dates sigma_f is SMALLER than in the 2-pre-date placebo folds tau was calibrated on. The same physical change therefore scores HIGHER here than it would have in calibration: the production gate is slightly MORE sensitive than the threshold was calibrated for, which pushes the true false-alarm rate ABOVE the already-failing 0.0652.",
+    "median_sigma_f_ratio_2pre_over_3pre": 1.0606601717798212,
+    "flagged_px_at_tau": 256770,
+    "flagged_px_at_tau_rescaled_to_match_calibration_sensitivity": 246911,
+    "headline_uses": "tau as calibrated (no rescaling); the rescaled count is reported as a sensitivity, not substituted for the headline"
+  },
+  "lambda": {
+    "value": 0.0,
+    "source": "experiments/results/f2.json lambda.value, fitted on F1's calibration split by split-half dihedral reproducibility; not refitted here (refitting on production data would use the event)"
+  },
+  "endmembers": {
+    "e_v": [
+      0.024033333485325176,
+      0.040966667234897614,
+      0.028066667417685192,
+      0.25659999748071033
+    ],
+    "e_b": [
+      0.11133333419760069,
+      0.09586666772762933,
+      0.07623333359758058,
+      0.1819000020623207
+    ],
+    "e_v_robust_sd": [
+      0.005189100390300151,
+      0.008450817611068483,
+      0.006671701553836468,
+      0.048728127434849736
+    ],
+    "e_b_robust_sd": [
+      0.04487335925474764,
+      0.0364472502209246,
+      0.024289930621534582,
+      0.07086827928125856
+    ],
+    "e_v_count": 178141,
+    "e_b_count": 332,
+    "n_valid_outside_exclusion": 801632,
+    "rules": {
+      "e_v": "valid on all 3 pre dates, outside exclusion, mean pre NDVI >= 0.8, per-pixel NDVI std across pre dates <= 0.05",
+      "e_b": "valid on all 3 pre dates, outside exclusion, NDVI <= 0.3 on EVERY pre date",
+      "statistic": "per-band median of the temporal-mean reflectance over the selected pixels; robust SD = 1.4826 * MAD",
+      "never_from_labels": "no label, class map or post-event array is an argument of estimate_endmembers"
+    },
+    "ndvi_low_used": 0.3,
+    "ndvi_low_ceiling_table": [
+      {
+        "ndvi_low": 0.2,
+        "e_b_count": 8,
+        "e_b": null,
+        "meets_min_count": false
+      },
+      {
+        "ndvi_low": 0.25,
+        "e_b_count": 80,
+        "e_b": null,
+        "meets_min_count": false
+      },
+      {
+        "ndvi_low": 0.3,
+        "e_b_count": 332,
+        "e_b": [
+          0.11133333419760069,
+          0.09586666772762933,
+          0.07623333359758058,
+          0.1819000020623207
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.35,
+        "e_b_count": 1182,
+        "e_b": [
+          0.08853333195050557,
+          0.07649999981125197,
+          0.06363333202898502,
+          0.16290000081062317
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.4,
+        "e_b_count": 2554,
+        "e_b": [
+          0.08290000011523566,
+          0.07419999937216441,
+          0.06066666605571906,
+          0.1652000000079473
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.45,
+        "e_b_count": 5094,
+        "e_b": [
+          0.07813333347439766,
+          0.07125000034769377,
+          0.058200000474850334,
+          0.17226666708787283
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.5,
+        "e_b_count": 9455,
+        "e_b": [
+          0.07316666593154271,
+          0.06846666584412257,
+          0.055266667157411575,
+          0.17933333416779837
+        ],
+        "meets_min_count": true
+      }
+    ],
+    "estimated_on": "the whole 1024x1024 10 m AOI, PRE-EVENT dates only, outside the 1500 m plausibility disks and the landslide footprint",
+    "exclusion_is_not_a_label": {
+      "apply_gate_v2_params": [
+        "y_pre",
+        "y_post",
+        "d_sr",
+        "e_v",
+        "e_b",
+        "sigma_bands",
+        "nodata",
+        "tau",
+        "lam",
+        "window_size",
+        "k_unsupported",
+        "sigma_sr",
+        "bands_indices",
+        "scale",
+        "check_sr"
+      ],
+      "tau_is_required_positional": true,
+      "estimate_endmembers_params": [
+        "refl_pre",
+        "valid_pre",
+        "ndvi_pre",
+        "exclude",
+        "ndvi_high",
+        "ndvi_low",
+        "stable_std_max",
+        "min_count"
+      ],
+      "estimate_endmembers_has_no_label_argument": true
+    },
+    "sensitivity_plus_minus_1_robust_sd": {
+      "baseline": 256770.0,
+      "perturbations": {
+        "e_v_plus_1sd": {
+          "value": 334568.0,
+          "delta": 77798.0,
+          "relative_delta": 0.3029871090859524
+        },
+        "e_v_minus_1sd": {
+          "value": 146732.0,
+          "delta": -110038.0,
+          "relative_delta": -0.4285469486310706
+        },
+        "e_b_plus_1sd": {
+          "value": 124022.0,
+          "delta": -132748.0,
+          "relative_delta": -0.516991860419831
+        },
+        "e_b_minus_1sd": {
+          "value": 242712.0,
+          "delta": -14058.0,
+          "relative_delta": -0.05474938661058535
+        }
+      },
+      "max_abs_delta": 132748.0,
+      "max_relative_delta": 0.516991860419831,
+      "bands_indices": [
+        0,
+        3
+      ],
+      "note": "flagged (CORE|ALLOCATED) 2.5 m px on THIS production map with tau and lambda fixed, recomputed with each endmember shifted by +/- 1 robust SD in every band"
+    },
+    "preregistration_deviation_inherited_from_f2": "configs/fix.yaml pre-registers e_b as NDVI <= 0.20; that selects 8 px over the whole evergreen AOI. F2 escalated the ceiling deterministically in 0.05 steps to 0.3; F7 reuses the same rule and the same table. e_b is therefore the darkest land cover present, not true bare ground, so f is upper-leaning and is NOT a calibrated area."
+  },
+  "normalisation_f3": {
+    "applied": true,
+    "why": "configs/fix.yaml f3_noise_v2.interaction_test -- F3 PASSED and was kept, so the same per-date robust median-offset normalisation is applied here",
+    "method": "experiments.f3_noise_v2.normalise_dates, per band, reference = per-pixel median over the 3 pre dates, offsets fit on stable pixels (NDVI std <= 0.05 across pre dates) outside the 1500 m disks + footprint; the post date's offset is fit exactly as a deployed date's would be",
+    "stable_px_10m": 119158,
+    "offsets": {
+      "band0": {
+        "pre_pool": [
+          0.006599999964237213,
+          0.0,
+          -0.0028999987989664078
+        ],
+        "post": -0.006200000643730164
+      },
+      "band1": {
+        "pre_pool": [
+          0.008899997919797897,
+          0.0,
+          -0.002499999478459358
+        ],
+        "post": -0.005199998617172241
+      },
+      "band2": {
+        "pre_pool": [
+          0.012699998915195465,
+          0.0,
+          -0.0013999994844198227
+        ],
+        "post": -0.006099998950958252
+      },
+      "band3": {
+        "pre_pool": [
+          0.0,
+          -0.0010000020265579224,
+          0.0
+        ],
+        "post": -0.009999990463256836
+      }
+    },
+    "band_order": [
+      "B04",
+      "B03",
+      "B02",
+      "B08"
+    ]
+  },
+  "no_data": {
+    "source": "experiments.wayanad_evidence.data.scl_valid on EVERY one of the 4 dates, AND-ed, nearest-neighbour to 2.5 m, union pixels where the SR product is non-finite",
+    "exclusion_geometry_is_NOT_included": "the 1500 m disks and the landslide footprint are used ONLY to keep the event out of the endmember sample. Making them NO_DATA would delete the scar this map exists to show.",
+    "px": 205956,
+    "km2": 1.287225,
+    "valid_px": 5036924
+  },
+  "class_report": {
+    "NO_CHANGE": {
+      "pixels_2p5m": 4733514,
+      "m2": 29584462.5,
+      "km2": 29.5844625
+    },
+    "CORE": {
+      "pixels_2p5m": 17648,
+      "m2": 110300.0,
+      "km2": 0.1103
+    },
+    "ALLOCATED": {
+      "pixels_2p5m": 239122,
+      "m2": 1494512.5,
+      "km2": 1.4945125
+    },
+    "UNSUPPORTED": {
+      "pixels_2p5m": 46640,
+      "m2": 291500.0,
+      "km2": 0.2915
+    },
+    "NO_DATA": {
+      "pixels_2p5m": 205956,
+      "m2": 1287225.0,
+      "km2": 1.287225
+    }
+  },
+  "class_report_denominator": {
+    "total_2p5m_px": 5242880,
+    "total_km2": 32.768,
+    "valid_2p5m_px": 5036924,
+    "note": "percentages of a class should be taken against valid_2p5m_px, not the total"
+  },
+  "mapped_change_v2": {
+    "flagged_definition": "CORE union ALLOCATED (configs/fix.yaml units.flagged_definition.v2); UNSUPPORTED is never counted as flagged",
+    "px": 256770,
+    "m2": 1604812.5,
+    "km2": 1.6048125
+  },
+  "block_sum_test": {
+    "max_abs_deviation_all_blocks": 0,
+    "max_abs_deviation_detected_blocks": 0,
+    "mean_abs_deviation_all_blocks": 0.0,
+    "n_blocks": 327680,
+    "n_detected_blocks": 81549,
+    "n_blocks_touching_nodata": 13009,
+    "n_blocks_with_nonzero_deviation": 0,
+    "worst_block_rc": [
+      0,
+      0
+    ],
+    "worst_block_observed": 0,
+    "worst_block_expected": 0,
+    "pass": true,
+    "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7).",
+    "recomputed_independently_of_the_gate": true,
+    "scope": "THIS production map on the real AOI crop -- not F2's placebo folds"
+  },
+  "detection": {
+    "tau": 3.8891176504391876,
+    "alpha": 0.05,
+    "n_windows_valid": 1273,
+    "n_windows_detected": 810,
+    "window_size_10m_px": 16,
+    "n_blocks_detected": 200814,
+    "tau_mutation_on_the_real_map": {
+      "tau_times_0p5": {
+        "tau": 1.9445588252195938,
+        "flagged_px": 287477
+      },
+      "tau_fitted": {
+        "tau": 3.8891176504391876,
+        "flagged_px": 256770
+      },
+      "tau_times_2": {
+        "tau": 7.778235300878375,
+        "flagged_px": 123803
+      }
+    },
+    "tau_changes_the_output_map": true
+  },
+  "sigma_f": {
+    "method": "first-order error propagation; Var(f) = Var(a)(1/n_pre + 1)",
+    "sigma_band_floor_per_band": [
+      0.002868797686280282,
+      0.008875435638130057
+    ],
+    "n_pre": 3
+  },
+  "v1_vs_v2": {
+    "preamble": "Only quantities with IDENTICAL definitions on both sides are compared. The guard `assert_well_defined_comparison` raises on any other pair; see INCOMPARABLE_PAIRS and tests/test_f7_wayanad_v2.py.",
+    "v1_source": "experiments/wayanad_evidence/outputs/class_map_2p5m.tif (v1 pipeline, SOUND, unmodified), same crop, same 4 dates",
+    "comparisons": {
+      "mapped_change_area": {
+        "quantity": "mapped change area: the set of 2.5 m pixels the product maps as change. v1 flagged = OBSERVED union INFERRED; v2 flagged = CORE union ALLOCATED (configs/fix.yaml units.flagged_definition). Same grid, same crop, same dates, same denominator.",
+        "grid_2p5m": [
+          2560,
+          2048
+        ],
+        "m2_per_px": 6.25,
+        "a_name": "v1:OBSERVED|INFERRED",
+        "a_px": 117584,
+        "a_m2": 734900.0,
+        "a_km2": 0.7349,
+        "b_name": "v2:CORE|ALLOCATED",
+        "b_px": 256770,
+        "b_m2": 1604812.5,
+        "b_km2": 1.6048125,
+        "b_minus_a_px": 139186,
+        "b_minus_a_km2": 0.8699125,
+        "b_over_a": 2.1837154714927203,
+        "intersection_px": 73624,
+        "union_px": 300730,
+        "iou": 0.24481761048116252,
+        "in_a_not_b_px": 43960,
+        "in_b_not_a_px": 183146
+      },
+      "no_data": {
+        "quantity": "NO_DATA: 10 m pixels invalid in SCL (cloud / shadow / invalid / not acquired) or with undefined NDVI on ANY of the four dates, replicated to 2.5 m, union pixels where the SR product is non-finite. Identical construction on both sides (v1 step4_gate.py; v2 gate_v2.nodata_from_scl).",
+        "grid_2p5m": [
+          2560,
+          2048
+        ],
+        "m2_per_px": 6.25,
+        "a_name": "v1:NO_DATA",
+        "a_px": 205956,
+        "a_m2": 1287225.0,
+        "a_km2": 1.287225,
+        "b_name": "v2:NO_DATA",
+        "b_px": 205956,
+        "b_m2": 1287225.0,
+        "b_km2": 1.287225,
+        "b_minus_a_px": 0,
+        "b_minus_a_km2": 0.0,
+        "b_over_a": 1.0,
+        "intersection_px": 205956,
+        "union_px": 205956,
+        "iou": 1.0,
+        "in_a_not_b_px": 0,
+        "in_b_not_a_px": 0
+      },
+      "boundary_allocation_divergence": {
+        "definition": "A 10 m pixel is a BOUNDARY pixel if its 4-neighbourhood is not constant in v1's 10 m parent mask. The \"blocky parent\" is that 10 m parent decision replicated 4x4 to 2.5 m -- exactly what a no-SR product would emit. A boundary pixel COUNTS if v2's 16 sub-pixel flagged labels are not all equal to the blocky parent value there. Blocks touching NO_DATA are excluded from both sides.",
+        "n_10m_blocks_scored": 314671,
+        "n_10m_boundary_blocks": 4412,
+        "n_10m_boundary_blocks_whose_2p5m_allocation_differs_from_blocky_parent": 3946,
+        "fraction_of_boundary_blocks_differing": 0.8943789664551224,
+        "n_10m_blocks_anywhere_differing_from_blocky_parent": 80704,
+        "n_10m_blocks_with_genuine_subpixel_structure_0_lt_n_lt_16": 80446,
+        "caveat": "F5 (experiments/results/f5.json) found that under REALISTIC (unmixing-based, non-oracle) fraction estimation, SR-ranked sub-pixel allocation was substantially WORSE than naive blocky assignment (paired IoU -0.313). F7 allocates with realistic, unmixing-derived fractions, so F5 is a direct prior signal that the sub-pixel allocation quality in this map is not to be relied on."
+      }
+    },
+    "unsupported_not_compared": {
+      "compared": false,
+      "reason": "DIFFERENT DEFINITIONS -- not compared. v1 UNSUPPORTED = (d_SR > k*sigma_SR) AND NOT parent, where 'parent' is a fixed 0.30 NDVI-drop threshold on the 10 m image. v2 UNSUPPORTED = (d_SR > k*sigma_SR) AND the 10 m block allocated zero sub-pixels, where 'allocated zero' comes from a conformal window detection on the unmixing score plus round(16f) = 0. The gating predicate is a different function of different inputs, so the two counts are not two measurements of one quantity. Both are reported separately, neither is differenced against the other.",
+      "v1": {
+        "name": "v1:UNSUPPORTED",
+        "px": 138808,
+        "km2": 0.86755,
+        "definition": "d_SR > k*sigma_SR AND NOT parent-positive (parent = 10 m NDVI drop > 0.30)"
+      },
+      "v2": {
+        "name": "v2:UNSUPPORTED",
+        "px": 46640,
+        "km2": 0.2915,
+        "definition": "d_SR > k*sigma_SR AND the 10 m block allocated zero sub-pixels (no conformal window detection, or round(16f) = 0)"
+      },
+      "enforced_by": "experiments.f7_wayanad_v2.assert_well_defined_comparison raises on this pair"
+    },
+    "v1_class_counts_px": {
+      "NO_CHANGE": 4780532,
+      "OBSERVED": 117069,
+      "INFERRED": 515,
+      "UNSUPPORTED": 138808,
+      "NO_DATA": 205956
+    },
+    "v2_class_counts_px": {
+      "NO_CHANGE": 4733514,
+      "CORE": 17648,
+      "ALLOCATED": 239122,
+      "UNSUPPORTED": 46640,
+      "NO_DATA": 205956
+    }
+  },
+  "e5_cascade": {
+    "source": "experiments/e5_parent_cascade.py::select_tiles, applied to the REAL 10 m parent mask of this crop over the real tile grid of the SR run above",
+    "parameters": {
+      "min_parent_pixels": 64,
+      "rings": 1,
+      "audit_fraction": 0.25,
+      "seed": 2024,
+      "dihedral_runs_per_tile": 8,
+      "dates": 4
+    },
+    "tiles": {
+      "total": 35,
+      "fired": 22,
+      "ring": 13,
+      "audit": 0,
+      "processed": 35,
+      "skipped": 0
+    },
+    "forward_passes": {
+      "full_rerun_baseline": 1120,
+      "cascade": 1120,
+      "saved": 0,
+      "saved_fraction": 0.0,
+      "ratio": 1.0,
+      "definition": "tiles x 8 dihedral runs x 4 dates; the full baseline is exactly what this script ran"
+    },
+    "cost_of_the_saving": {
+      "unreconstructed_2p5m_px": 0,
+      "unreconstructed_fraction_of_crop": 0.0,
+      "v2_flagged_px_inside_skipped_tiles": 0,
+      "v2_flagged_px_total": 256770,
+      "fraction_of_v2_flagged_lost": 0.0,
+      "nodata_px_inside_skipped_tiles": 0,
+      "note": "v1 stitching gives every 2.5 m pixel exactly one owning tile, so a skipped tile leaves its keep-window with no SR at all. The cascade's recall is bounded by the 10 m parent mask by construction (E5's own stated limitation)."
+    },
+    "crop_note": "This crop is a 6.4 x 5.1 km box CENTRED ON THE SCAR, so nearly every tile is parent-positive or in the buffer ring: the cascade processes all of them and saves nothing here. That is a fact about the crop, not about the cascade. The full-AOI selection below is the honest scale at which the cascade has anything to skip.",
+    "full_aoi_selection_for_context": {
+      "scope": "the full 1024x1024 10 m AOI parent mask (experiments/wayanad_evidence step1_state.npz), same E5 parameters, same 8 runs x 4 dates cost model",
+      "sr_was_not_run_at_this_scale_in_f7": true,
+      "tiles": {
+        "total": 121,
+        "fired": 34,
+        "ring": 46,
+        "audit": 11,
+        "processed": 91,
+        "skipped": 30
+      },
+      "forward_passes": {
+        "full_rerun_baseline": 3872,
+        "cascade": 2912,
+        "saved": 960,
+        "saved_fraction": 0.24793388429752067
+      },
+      "parent_positive_10m_px_in_aoi": 18075
+    }
+  },
+  "wow_figure": {
+    "window_2p5m_rowcol": [
+      512,
+      1536
+    ],
+    "window_px": 64,
+    "window_m": 160.0,
+    "window_selected_by": "the 160 m window containing the most 10 m parent-mask boundary blocks (the scar margin), ties broken on ALLOCATED pixel count",
+    "parent_boundary_blocks_in_window": 130,
+    "allocated_px_in_window": 1502,
+    "caption": "Wayanad, corrected AOI 11.490 N 76.160 E, AT THE SCAR MARGIN. Pre 2024-01-16, 2024-01-21, 2024-01-26  ->  post 2024-12-06. MIDDLE: the 10 m parent decision replicated 4x4 (blocky) -- the slider's 'before'. RIGHT: gate v2's 2.5 m map -- the slider's 'after'. pretrained SEN2SR-lite, NOT fine-tuned (F4 has not shipped). Model reconstruction, not observation. NOT A VALIDATED DETECTOR: this gate's window false-alarm rate on F1's placebo test split is 0.0652 [0.0478, 0.0850], above the pre-registered ceiling of 0.05 -- the keep rule FAILED.",
+    "arrays_npz": "experiments/results/f7_wow_figure.npz",
+    "png": "experiments/results/f7_wow_figure.png",
+    "rendered": true
+  },
+  "limitations": [
+    "THE GATE FAILED ITS OWN FAR KEEP RULE (0.0652 [0.0478, 0.0850] vs <= 0.05). This map is what that gate produces, not a validated detection.",
+    "F5 (experiments/results/f5.json) found that under REALISTIC (unmixing-based, non-oracle) fraction estimation, SR-ranked sub-pixel allocation was substantially WORSE than naive blocky assignment (paired IoU -0.313). F7 allocates with realistic, unmixing-derived fractions, so F5 is a direct prior signal that the sub-pixel allocation quality in this map is not to be relied on.",
+    "Only 3 pre dates. 2023-12-27 is pre-registered as an allowed 4th pre date but is not cached for the corrected AOI and this run fetches no imagery; see dates.fourth_pre_date for every path checked. No substitute was used.",
+    "One post-event date (2024-12-06), 4 months after the 2024-07-30 event: regrowth, seasonality and illumination differences between a January pre-pool and a December post date are confounded with the landslide. There is no second post date to separate them.",
+    "tau was calibrated on 2-pre-date placebo folds and applied to a 3-pre-date production score. sigma_f shrinks with n_pre, so the production gate is slightly MORE sensitive than the threshold was calibrated for -- pushing the true FAR further above the already-failing value. Measured and reported in n_pre_mismatch_between_calibration_and_production, not corrected.",
+    "SR ran on the 640x512 (10 m) crop, not the full 1024x1024 AOI. Stated exactly in sr_run.ran_on.",
+    "e_b is the darkest land cover in the AOI, not true bare ground (the pre-registered NDVI <= 0.20 rule selects 8 px). f is upper-leaning and is NOT a calibrated area.",
+    "The gate remains highly sensitive to the endmembers; see endmembers.sensitivity_plus_minus_1_robust_sd for the effect on THIS map.",
+    "v2 UNSUPPORTED and v1 UNSUPPORTED have different definitions and are NOT differenced anywhere; both are reported with their definitions.",
+    "The E5 cascade numbers are a tile-selection and forward-pass count on the real parent mask, plus a measurement of what the skipped tiles would have cost. The cascade's recall is bounded by the 10 m parent mask by construction.",
+    "No labels were used and no 2.5 m ground truth exists, so no accuracy, F1 or IoU-against-truth is reported anywhere. The IoU in v1_vs_v2 is agreement between two products, not accuracy.",
+    "pretrained SEN2SR-lite (NOT fine-tuned)",
+    "k = 2.0 (NOT calibrated)",
+    "retrospective comparison",
+    "pixels and neighbouring windows are spatially correlated; exchangeability assumed across windows, not proven"
+  ],
+  "started_utc": "2026-09-30T16:16:48.410545+00:00",
+  "finished_utc": "2026-09-30T16:17:42.547981+00:00"
+}
