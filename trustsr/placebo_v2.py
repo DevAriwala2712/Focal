@@ -82,6 +82,11 @@ class Fold:
     sigma_v1: np.ndarray = None        # (H,W) float; None if not has_sr
     sigma_a5: np.ndarray = None        # (H,W) float; None if not has_sr
     n_pre: int = 0
+    # ---- F2 additions (gate_v2 only; every field defaults to None so F1's behaviour is unchanged) ----
+    refl_pre: np.ndarray = None        # (n_pre,h,w,4) 10 m reflectance on the crop grid, model band order
+    refl_post: np.ndarray = None       # (h,w,4) held-out date's 10 m reflectance
+    valid_10m: np.ndarray = None       # (n_pre+1,h,w) bool per-date SCL validity on the crop grid (B11)
+    gate_v2_params: dict = None        # endmembers, tau, lam, sigma_bands -- attached by experiments/f2_gate_v2.py
 
 
 def _crop_10m(a, crop):
@@ -205,10 +210,33 @@ def gate_v1_with_a5_sigma(fold: Fold, k: float) -> np.ndarray:
     return flagged_v1(cls)
 
 
-def gate_v2_blocked(fold: Fold, k: float) -> np.ndarray:
-    """gate_v2 does not exist yet (lands in F2). NEVER a copy of gate_v1's output — raises."""
-    raise NotImplementedError('gate_v2 is BLOCKED until F2 lands (configs/fix.yaml f2_gate_v2); '
-                              'this function must never be aliased to gate_v1')
+def gate_v2(fold: Fold, k: float) -> np.ndarray:
+    """F2's real gate v2: flagged = CORE union ALLOCATED (configs/fix.yaml units.flagged_definition.v2).
+
+    NOT a copy of gate_v1 — it runs trustsr.gate_v2.apply_gate_v2 (unmixing fraction, conformal window
+    detection at tau, exact-count SR-ranked sub-pixel allocation) and needs per-fold parameters that only
+    F2 can supply: the data-estimated endmembers, tau from F1's calibration split, lam, and the per-band
+    reflectance sigma. A fold without `gate_v2_params` raises rather than silently degrading to some
+    other gate's output.
+    """
+    from trustsr.gate_v2 import apply_gate_v2, flagged_v2
+    p = fold.gate_v2_params
+    if p is None:
+        raise NotImplementedError(
+            'gate_v2 requires fold.gate_v2_params (endmembers, tau, lam, sigma_bands) attached by '
+            'experiments/f2_gate_v2.py; it must never be aliased to gate_v1 or run with a default tau (B10)')
+    class_map, meta = apply_gate_v2(
+        fold.refl_pre, fold.refl_post, fold.d, p['e_v'], p['e_b'], p['sigma_bands'], fold.nodata, p['tau'],
+        lam=p.get('lam', 0.0), window_size=p.get('window_size', 16),
+        k_unsupported=p.get('k_unsupported', k), sigma_sr=p.get('sigma_sr'))
+    fold.gate_v2_params['last_meta'] = meta
+    return flagged_v2(class_map)
+
+
+# legacy name kept so F1's regression test (tests/test_f1_placebo.py::test_gate_v2_is_not_an_alias_of_gate_v1)
+# still exercises the same object: on a fold with no gate_v2_params it raises NotImplementedError, exactly as
+# the BLOCKED stub did. It is NOT an alias of gate_v1.
+gate_v2_blocked = gate_v2
 
 
 GATES = {
@@ -216,7 +244,7 @@ GATES = {
     'ungated_S_v1_sigma': gate_ungated_s_v1_sigma,
     'gate_v1': gate_v1,
     'gate_v1_with_a5_sigma': gate_v1_with_a5_sigma,
-    'gate_v2': gate_v2_blocked,
+    'gate_v2': gate_v2,
 }
 SR_REQUIRED_GATES = ('ungated_S_v1_sigma', 'gate_v1', 'gate_v1_with_a5_sigma', 'gate_v2')
 
