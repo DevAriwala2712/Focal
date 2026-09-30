@@ -23,6 +23,9 @@ from numpy.lib.stride_tricks import sliding_window_view
 from trustsr.bootstrap import paired_bootstrap_ci
 
 BASELINES = ('nearest', 'bicubic', 'lanczos')
+# `resample` also accepts 'bilinear' (added for A8/F5's naive ranking baseline). It is deliberately NOT in BASELINES:
+# `evaluate_sr_fn` scores exactly the A2 baseline set and that set must not change.
+RESAMPLE_METHODS = BASELINES + ('bilinear',)
 PSNR_CAP_DB = 120.0
 _MSE_FLOOR = 1e-12
 
@@ -44,24 +47,28 @@ def _lanczos(t, a=3):
     return np.where(np.abs(t) < a, np.sinc(t) * np.sinc(t / a), 0.0)
 
 
+def _linear(t):
+    return np.clip(1.0 - np.abs(np.asarray(t, dtype=np.float64)), 0.0, None)
+
+
 def _weights(n_in: int, scale: int, method: str):
     """(index[n_out, taps], weight[n_out, taps]) for one axis."""
     n_out = n_in * scale
     x = (np.arange(n_out) + 0.5) / scale - 0.5
     if method == 'nearest':
         return (np.arange(n_out) // scale)[:, None], np.ones((n_out, 1))
-    radius = 2 if method == 'bicubic' else 3
+    radius = {'bilinear': 1, 'bicubic': 2, 'lanczos': 3}[method]
     base = np.floor(x).astype(int)
     taps = base[:, None] + np.arange(-radius + 1, radius + 1)[None, :]
-    w = (_cubic if method == 'bicubic' else _lanczos)(taps - x[:, None])
+    w = {'bilinear': _linear, 'bicubic': _cubic, 'lanczos': _lanczos}[method](taps - x[:, None])
     if method == 'lanczos':
         w = w / w.sum(axis=1, keepdims=True)
     return np.clip(taps, 0, n_in - 1), w
 
 
 def resample(x, scale: int, method: str) -> np.ndarray:
-    """(C,h,w) -> (C,h*scale,w*scale) on the exact subdivision grid. method in BASELINES."""
-    if method not in BASELINES:
+    """(C,h,w) -> (C,h*scale,w*scale) on the exact subdivision grid. method in RESAMPLE_METHODS."""
+    if method not in RESAMPLE_METHODS:
         raise ValueError(f'unknown method {method!r}')
     x = np.asarray(x, dtype=np.float64)
     if x.ndim != 3:
