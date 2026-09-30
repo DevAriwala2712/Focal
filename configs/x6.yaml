@@ -1,0 +1,49 @@
+# X6 (agent A6): season matching and latency. Values fixed per docs/adr-x6-season-latency.md BEFORE any run.
+# Keep rules live in configs/exceptional.yaml (a6); the numbers below only instantiate them. Do not edit after a result is seen.
+schema_version: 1
+exceptional_config: configs/exceptional.yaml
+evidence_config: configs/wayanad_evidence.yaml
+experiments_config: configs/experiments.yaml
+paths:
+  main_cache: data_main/experiments-cache/wayanad_evidence   # existing caches, READ-ONLY (symlink to the main checkout's data/)
+  a6_cache: data_a6/cache                                     # new downloads, uncommitted
+  a6_cogs: data_a6/cogs                                       # new per-date COGs, uncommitted
+  outputs: experiments/results/x6_outputs                     # small committed COGs (< 5 MB each) and manifest
+  results: experiments/results
+  footprint: experiments/wayanad_evidence/outputs/footprint.tif
+  step1_state_crop_from: experiments/wayanad_evidence/outputs/step1.json
+exp_a:
+  audit_start: '2023-10-15T00:00:00Z'
+  audit_end: '2024-01-15T23:59:59Z'
+  pool_window: ['2023-11-01', '2023-12-31']
+  min_pool_dates: 3
+  january_pool: ['2024-01-16', '2024-01-21', '2024-01-26']
+  post_date: '2024-12-06'
+  stable_allowed_missing_dates: 2       # E6: >= 10 of 12 valid
+  stable_max_std: 0.05                  # E6
+  pool_min_valid: 2                     # E6
+  primary:                              # E6 exact conventions
+    threshold: 0.15
+    ndvi_min_denominator: 0.01
+    clip_negative_reflectance: false
+  sensitivity:                          # wayanad-evidence conventions
+    threshold: 0.30
+    ndvi_min_denominator: 0.05
+    clip_negative_reflectance: true
+  disk_radius_m: 1500
+  disk_points: [crown, mundakkai, chooralmala_bridge]   # keys of wayanad_evidence.yaml aoi.plausibility_points
+  fetch_bands_full_aoi: [B04, B08]
+  fetch_bands_crop_only: [B03, B02]
+exp_b:
+  composite_dates: ['2024-10-27', '2024-11-01', '2024-11-06']
+  min_footprint_valid: 0.90
+  max_gap_days: 99
+  # crop window on the AOI grid (rows, cols), exclusive end; from experiments/wayanad_evidence/outputs/step1.json measurements.crop
+  crop_rows: [256, 896]
+  crop_cols: [128, 640]
+  max_source_cog_bytes: 5000000
+# ---- added AFTER the first (pre-registered) run, see ADR deviations log item 2. Exploratory only: no keep rule, post hoc.
+exploratory:
+  relaxed_pool_max_cloud_shadow_pct: 50       # post hoc: chosen after the audit percentages were seen
+  cumulative_composite_from: '2024-07-31'     # first post-event day
+  cumulative_composite_until: '2024-12-06'    # current post date
