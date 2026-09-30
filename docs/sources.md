@@ -101,3 +101,39 @@ Not yet verified: GPU inference/fine-tuning, large data/weight downloads, region
 
 - Landslide4Sense redistribution: https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense at revision 4b291891badf301b5c75c2153f0f8fe00eeb1435. Actual training image/mask downloaded and inspected; see R4 hashes. Original IARAI host still fails DNS. Single-date binary segmentation, not temporal damage labels.
 - Publisher WorldStrat ZIP release: https://zenodo.org/records/15382551. HTTP byte ranges supported in the HR ZIP probe. This release is separate from the earlier R3 tarball inventory; do not mix archive sizes or metadata hashes.
+
+
+## A1 prior-art pass, 2026-09-30
+
+Accessed 2026-09-30 by agent A1. "Read" = page or file text retrieved; "not read" = fetch failed (reason given). Nothing was downloaded beyond page/README/model-card text and two small PDFs saved by the fetch tool for local text extraction (TU Wien thesis, ESA Gascon slides, Angelopoulos and Bates).
+
+Read and verified:
+- https://github.com/ESAOpenSR/SEN2SR (README: model variants, CC0 badge, tiling with margins, LAM tool; no metrics).
+- https://pypi.org/project/sen2sr/ (variants; licence stated MIT, conflicts with the CC0 badge).
+- https://github.com/ESAOpenSR/SEN2SR/blob/main/pyproject.toml (version 0.8.5, Python >=3.10).
+- https://huggingface.co/tacofoundation/SEN2SR and /tree/main (CC0-1.0, 583 to 609 MB) and https://huggingface.co/tacofoundation/SEN2SR/resolve/main/SEN2SR/NonReference_RGBN_x4/mlm.json (MambaSRv1, 13,759,444 params, CUDA and mamba_ssm, "memory requirement 1 GB", SEN2NAIPv2).
+- https://huggingface.co/tacofoundation/sen2sr/resolve/main/SEN2SRLite/NonReference_RGBN_x4/mlm.json (SPAN, 472,496 params, 1 GB declared, SEN2NAIPv2).
+- https://github.com/ESAOpenSR/opensr-model (LDSR-S2 README, uncertainty demo, JSTARS citation) and https://github.com/ESAOpenSR/opensr-test (metric definitions, datasets and counts, MIT) and https://github.com/ESAOpenSR (repository list).
+- https://cin.philab.esa.int/databases/projects/towards-explainable-ai-application-to-trustworthy-super-resolution-opensr-robust-accountable-super-resolution-for-sentinel-2-and-beyond (sampling-based uncertainty, 10 to 20 times cost, wider intervals in high-texture areas).
+- https://github.com/ESAOpenSR/Segmentation-Models-Benchmark and https://github.com/ESAOpenSR/opensr-usecases (building segmentation validation tooling; no change detection; no real results).
+- https://arxiv.org/html/2511.10461v1 (OpenSR-SRGAN: PSNR 31.45, SSIM 0.81, dual A100, no uncertainty).
+- https://arxiv.org/html/2506.11764v2 (DiffFuSR: OpenSR benchmark rank 2.85; SEN2SR and LDSR-S2 not evaluated).
+- https://arxiv.org/html/2505.24799v2 (Sen4x: 74.6 % OA, 51.6 % mIoU, 189.6 ms per 64x64 patch, code promised) and https://arxiv.org/abs/2404.16409 (BreizhSR multi-image SR, abstract).
+- https://github.com/calebrob6/s2-superres (MIT; own limitation statements) and https://github.com/remicres/sr4rs (MIT; no validation metrics in README).
+- https://github.com/Mir-Sadat/S2DR3_Model (community README/notebook only, no licence or weights).
+- TU Wien thesis, Hollendonner 2025, "Evaluating Sentinel-2 Super-Resolution Algorithms for Automated Building Delineation": https://repositum.tuwien.at/bitstream/20.500.12708/221077/1/Hollendonner%20Samuel%20-%202025%20-%20Evaluating%20Sentinel-2%20Super-Resolution%20Algorithms...pdf (full text extracted locally; Table 4.2 numbers; secondary descriptions of SEN2SR, LDSR-S2, SEN2NAIP).
+- https://arxiv.org/html/2405.20161v1 (BBUnet, 34,920 polygons, Haiti F1 0.348).
+- https://zenodo.org/records/10800338 (GLaD4CD v1: 2.0 GB, B02/B03/B04/B08/CLM, CC BY 4.0) and https://zenodo.org/records/14226448 (v2: 294.7 MB listed, 13 bands, change maps for 17 TEST pairs; size discrepancy unexplained).
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12606323/ (Sen12Landslides: 128x128, 15 timesteps, B02-B12, CC BY 4.0, F1 0.83).
+- https://github.com/iarai/Landslide4Sense-2022 (patch spec, MIT, U-Net baseline F1 57.82 %).
+- Gascon, "Sentinel-2 Algorithms and Cal/Val Plan", ESA, 28 Jan 2014: https://earth.esa.int/eogateway/documents/20142/37627/Gascon_S2_LPVE_V4.pdf/bcaae40a-0a1c-4dfd-1fa1-2bf7fc51be7c (MTF 0.15 to 0.3 for 10 m bands; multi-temporal registration 0.3 px 2 sigma goal; radiometric 3 %/5 %; requirements and goals, not measurements).
+- Angelopoulos and Bates, https://arxiv.org/abs/2107.07511 (PDF text extracted: Beta(n+1-l, l) coverage, about 1000 calibration points, exchangeability, non-exchangeable time-series example).
+- Bates, Candes, Lei, Romano, Sesia, https://arxiv.org/abs/2104.08279 (conformal p-values, FDR; abstract). Mao, Martin, Reich, https://arxiv.org/abs/2006.15640 (spatial conformal; abstract). Iagaru et al., https://arxiv.org/abs/2605.13146 (hallucination limits; abstract). Zheng, Dewil, Arias, https://arxiv.org/abs/2603.14074 (self-supervised SR uncertainty; abstract). Chakraborti and Dey, https://proceedings.mlr.press/v266/chakraborti25a.html (conformal SR; abstract).
+- Jiang et al. 2006, RSE 101(3):366-378, https://opus.lib.uts.edu.au/handle/10453/9236 (NDVI nonlinearity and scale dependence; SDVI; abstract).
+- Wang, Atkinson, Shi 2015, IEEE TGRS 53(4), https://research.polyu.edu.hk/en/publications/fast-subpixel-mapping-algorithms-for-subpixel-resolution-change-d/ (five fast SPM algorithms for change detection; abstract).
+
+Seen only via search-result snippets (not read on the primary page): Atkinson 2005 pixel-swapping abstract (Southampton eprints 403); Ling and Foody 2019 DeepSRM (403); Angelopoulos et al. ICML 2022 image-to-image UQ (https://proceedings.mlr.press/v162/angelopoulos22a.html); SEN2NAIP construction (Sci. Data; Nature redirected to a login, not followed; used TU Wien's description).
+
+Not readable (403, anti-bot, or no text): SEN2SR RSE paper (https://doi.org/10.1016/j.rse.2025.115222) and SSRN preprint 5247739; LDSR-S2 JSTARS paper (DOI 10.1109/JSTARS.2025.3542220); S2DR3 author Medium page; ESA sentinel.esa.int technical guide (DNS failure); MuS2 PDF (size cap); LPS25 slides (certificate error).
+
+Synthetic calculation: docs/evidence/v2_synthetic_checks.py (assumed endmembers and Gaussian PSF; not measurements).
