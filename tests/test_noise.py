@@ -16,29 +16,8 @@ from trustsr import noise as N
 N_PRE, RUNS = 3, 8
 
 
-def simulate(n_px=120_000, n_pre=N_PRE, runs=RUNS, seed=0, nu_true=10.0, delta_ratio=0.07, n_levels=8):
-    """Heterogeneous tau_i^2 = level_scale(u_i) * g_i with g_i ~ scaled-inverse-chi2(nu_true), mean 1; u observable."""
-    rng = np.random.default_rng(seed)
-    u = rng.random(n_px)
-    level_scale = (0.5 + 3.0 * np.floor(u * n_levels) / (n_levels - 1)) * 1e-3          # 5e-4 .. 3.5e-3 in variance
-    g = (nu_true - 2.0) / rng.chisquare(nu_true, n_px)                                  # E[g] = 1
-    tau2 = level_scale * g
-    delta = delta_ratio * math.sqrt(tau2.mean())
-    a = rng.standard_normal((n_pre + 1, n_px)) * np.sqrt(tau2)                          # date effects; last = the new date
-    eps = rng.standard_normal((n_pre + 1, runs, n_px)) * delta
-    x = a[:, None, :] + eps                                                             # (T, R, N) NDVI of every run
-    true_var = (tau2 + delta ** 2 / runs) * (1.0 + 1.0 / n_pre)
-    return {'u': u, 'x': x, 'tau2': tau2, 'delta2': delta ** 2, 'true_var': true_var, 'n_pre': n_pre, 'runs': runs}
-
-
-def moments_from_runs(x):
-    """Per-date mean and dihedral variance (ddof 1) from (T, R, N) runs via the streaming accumulators."""
-    T, _, n = x.shape
-    dm = N.DateMoments((n,), [str(t) for t in range(T)])
-    for t in range(T):
-        for r in range(x.shape[1]):
-            dm.update(str(t), x[t, r])
-    return dm.mean_stack(), dm.var_stack(), dm
+simulate = N.simulate_dates                     # generator lives in the module so the script can label a synthetic bias table
+moments_from_runs = N.moments_from_runs
 
 
 @pytest.fixture(scope='module')
@@ -47,7 +26,6 @@ def sim():
     means, dvar, _ = moments_from_runs(s['x'])
     s.update(means=means, dvar=dvar)
     s['d'] = means[-1] - means[:-1].mean(axis=0)
-    s['level'] = means[:-1].mean(axis=0) * 0 + s['u']                                  # observable covariate for strata
     return s
 
 

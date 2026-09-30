@@ -100,4 +100,16 @@ three January dates. It does not test power (sensitivity) and does not calibrate
 
 ## Outcome (appended after the run)
 
-(see `experiments/results/x5_REPORT.md` and `x5.json`)
+Numbers: `experiments/results/x5_REPORT.md`, `x5.json`. Diagnostics marked "post hoc" were added after the first run showed the headline
+miss; no decision, threshold or estimator choice was changed.
+
+* Selection (E6, no Wayanad pixel): eb_stratified wins (NLL -0.60 vs window -0.36, raw 1.65); paired CI excludes 0.
+* Keep rule MISSED. Pooled leave-one-date-out coverage of |d| <= 2 sigma for eb_stratified is 88.0 % [86.7, 89.1], gap -7.5 pp; v1 is 54.1 %.
+  k_eff = 2.59 [2.52, 2.67].
+* Cause (measured): scene-coherent date offsets. Stable-pixel median NDVI is 0.751 / 0.802 / 0.831 on 16 / 21 / 26 Jan; the offset is 77 %
+  and 70 % of mean d^2 in the two outer folds (coverage 66.8 % and 97.4 %; middle fold 99.6 %). Removing the fold median (post hoc) lifts
+  eb_stratified to 99.3 %. Per-pixel variance from 2-3 dates cannot predict a new date's scene offset. Failure mode 2 (coherent date effects) confirmed; EB nu0 hits its cap.
+* "sigma is 35-40 % too small": the structural part is verified (median sigma_new/sigma_v1 = 1.38 for raw at n_pre = 3, analytic 1.384) but
+  the mechanism differs from the brief (pooling does contain between-date spread; dihedral terms are < 1 % of sigma^2). The real-data deficit is much larger
+  (v1 k_eff 12.1 in leave-one-date-out).
+* Suggested next hypothesis (NOT tested here): per-pair robust offset removal or a same-pair stable-pixel empirical sigma (98.4 % at k = 2, k_eff 1.63).

@@ -349,3 +349,37 @@ def effective_k(d, sigma, nominal: float = NOMINAL_2SIGMA, mask=None) -> float:
     if not ok.any():
         raise ValueError('no usable calibration pixels for k_eff')
     return float(np.quantile(np.abs(d[ok]) / sigma[ok], nominal))
+
+
+# ---- synthetic generator (tests and the script's labelled-synthetic bias table) --------------------------------------------
+
+def simulate_dates(n_px: int = 120_000, n_pre: int = 3, runs: int = 8, seed: int = 0, nu_true: float = 10.0,
+                   delta_ratio: float = 0.07, n_levels: int = 8):
+    """SYNTHETIC per-run NDVI with a known truth, for bias checks (never real-data evidence).
+
+    Pixel i has date-effect variance tau_i^2 = level_scale(u_i) * g_i, g_i ~ scaled-inverse-chi2(nu_true) with mean 1, where the
+    observable u_i sets the level (8 levels, 0.5e-3 .. 3.5e-3). Run j of date t is a_t + eps_tj with a_t ~ N(0, tau_i^2) shared by
+    all runs of the date and eps ~ N(0, delta^2) independent (delta = delta_ratio x mean tau). The LAST of the n_pre + 1 dates is the
+    new date. True predictive variance of d = mean_runs(new) - mean_dates(mean_runs(pre)) is (tau^2 + delta^2/runs)(1 + 1/n_pre).
+    """
+    rng = np.random.default_rng(seed)
+    u = rng.random(n_px)
+    level_scale = (0.5 + 3.0 * np.floor(u * n_levels) / (n_levels - 1)) * 1e-3
+    g = (nu_true - 2.0) / rng.chisquare(nu_true, n_px)
+    tau2 = level_scale * g
+    delta = delta_ratio * math.sqrt(tau2.mean())
+    a = rng.standard_normal((n_pre + 1, n_px)) * np.sqrt(tau2)
+    eps = rng.standard_normal((n_pre + 1, runs, n_px)) * delta
+    x = a[:, None, :] + eps
+    true_var = (tau2 + delta ** 2 / runs) * (1.0 + 1.0 / n_pre)
+    return {'u': u, 'x': x, 'tau2': tau2, 'delta2': delta ** 2, 'true_var': true_var, 'n_pre': n_pre, 'runs': runs}
+
+
+def moments_from_runs(x):
+    """Per-date mean, dihedral variance and the accumulator from (T, R, N) run values via `DateMoments`."""
+    T, R, n = x.shape
+    dm = DateMoments((n,), [str(t) for t in range(T)])
+    for t in range(T):
+        for r in range(R):
+            dm.update(str(t), x[t, r])
+    return dm.mean_stack(), dm.var_stack(), dm
