@@ -1,3 +1,7 @@
+> **INVALIDATED (2026-09-30):** the claims below rest on x3, x4, x9, x10 and x11, all of which are
+> quarantined. See `experiments/results/INVALIDATED.md` for the B-IDs and `RESULTS_V2.md` (once F10
+> lands) for the replacement claim table. Do not cite this file.
+
 # TrustSR: A10-Approved Claims Table (SIH26142 Grand Finale)
 
 **Status: CONDITIONAL PASS** | **Verifier: A10** | **Integrator: A11** | **Date: 2026-09-30**

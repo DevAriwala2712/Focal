@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "F0 quarantine, experiments/fix-v2",
+  "note": "Sidecar record only. Original result files listed here are unmodified.",
+  "invalidated": [
+    {
+      "file": "experiments/results/x3.json",
+      "report": "experiments/x3_REPORT.md",
+      "script": "experiments/x3_placebo.py",
+      "invalidated_reason": "B1: placebo pairs use pre_mean_fold minus the real post-event date (2024-12-06), not a null pair. B2: gate_v1_with_a5_sigma and gate_v2_placeholder both call gate_v1_trust, so 3 of 5 'gates' are identical code. B3: window FAR is computed from parent_crop for every gate, independent of that gate's own output, so all gates and folds share one number (0.1177) by construction. B4: the reported CI is fold 0's CI shown beside the 3-fold pooled point estimate, which the CI does not contain. B5: FAR flags every class not in {0, 255} rather than the classes each gate maps as change.",
+      "superseded_by": null,
+      "superseded_by_pending": "experiments/results/f1.json"
+    },
+    {
+      "file": "experiments/results/x4.json",
+      "report": "experiments/results/x4_REPORT.md",
+      "script": "experiments/x4_calibration.py",
+      "invalidated_reason": "B6: conformal calibration scores are pre_mean - post_mean on the real event pair with valid=ones, so tau_win=0.327 is calibrated on data containing the event; the split-conformal guarantee does not hold. B7: check_block_sum_consistency compares h*w*100 m^2 against itself, so the reported PASS is a tautology and the real block-sum test never ran. B8: config_sha256 is the literal string 'pending-a3-output', not a hash.",
+      "superseded_by": null,
+      "superseded_by_pending": "trustsr/gate_v2.py rebuild (F2), result pending"
+    },
+    {
+      "file": "experiments/results/x9.json",
+      "report": "experiments/results/x9_REPORT.md",
+      "script": "experiments/x9_v2_production.py",
+      "invalidated_reason": "B9: d_sr is np.repeat(np.repeat(d_10m,4),4) -- the '2.5 m SR change score' is the 10 m difference nearest-neighbour-replicated; no SR signal enters allocation (2.8s runtime is consistent with no SR forward pass). B10: tau_win is loaded from x4.json but never passed into apply_gate_v2 (kappa=None; the function signature has no tau argument), so there is no detection step -- every block with f>0 is ALLOCATED. B11: NO_DATA is derived only from NaN pixels, ignoring the SCL validity mask (512 px vs v1's 205,956), so cloud/shadow-contaminated pixels are being mapped as change. B12: unmixing endmembers (e_v, e_b) are hard-coded constants rather than estimated from stable pre-event pixels as required by v2_design.md.",
+      "superseded_by": null,
+      "superseded_by_pending": "experiments/results/f7.json (F7, depends on F2 passing block-sum)"
+    },
+    {
+      "file": "experiments/results/x10.json",
+      "report": "experiments/results/x10_REPORT.md",
+      "script": null,
+      "invalidated_reason": "B13: the verifier skipped the required clean-clone rerun of x1-x9, missed all of B1-B12, and its own keep-count is internally inconsistent (overall_pass_rate/summary states 3/5 KEEP while claims_keep lists 2 entries).",
+      "superseded_by": null,
+      "superseded_by_pending": "experiments/results/f9.json (F9)"
+    },
+    {
+      "file": "RESULTS_EXCEPTIONAL.md",
+      "report": "experiments/results/x11.json",
+      "script": null,
+      "invalidated_reason": "B13: the integrator (A11) marked overall CONDITIONAL PASS on top of the invalid A10 audit, so it inherits every defect in x3/x4/x9 without disclosing them. B14: it omits A2's pooled result (-0.097 dB [-0.157, -0.037], 178 images) and the Venus result (-0.559 dB), reporting only the two datasets where SR beat bicubic.",
+      "superseded_by": null,
+      "superseded_by_pending": "RESULTS_V2.md (F10)"
+    }
+  ]
+}
