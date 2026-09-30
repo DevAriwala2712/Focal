@@ -1,0 +1,111 @@
+schema_version: 1
+phase0_config: configs/phase0.yaml
+paths:
+  results: experiments/results
+  cache: data/experiments-cache
+seed: 2024
+environment:
+  pinned_torch: 2.8.0+cu126
+  deviation_note: >-
+    macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings
+    are specific to this platform and torch build.
+e7:
+  run_counts: [8, 32, 96]
+  shape: [4, 128, 128]
+  ddof: 0
+  max_abs_error: 1.0e-6
+  ram_growth_tolerance: 1.5
+e1:
+  tile: 128
+  stride: 96
+  feather: 32                    # input px; equals the default 128-96 overlap
+  aoi_sizes: [128, 300, 517, 1000]
+  affine: [10.0, 0.0, 500000.0, 0.0, -10.0, 1300000.0]   # synthetic reference grid, EPSG:32643-like
+  # Fixed before any model output was inspected: per-band RMSE of (SR block-mean to 10 m) - input.
+  spectral_rmse_tolerance: 0.01
+  tolerance_rationale: >-
+    0.01 reflectance is about 5% of a 0.2 reflectance target, the order of Sentinel-2 L2A absolute
+    radiometric uncertainty. A project choice fixed before measurement, not a published pass mark.
+    Per-band max and p99 are reported, alongside a no-model bicubic control.
+  real_crop:
+    path: data/experiments-cache/real_rgbn_10m.tif       # 4-band B04,B03,B02,B08, 10 m
+    dn_scale: null                                       # must be set from the provider asset
+    dn_offset: null
+ndvi:
+  min_denominator: 0.01          # red+nir below this is water/shadow: NDVI undefined -> NaN
+e2:
+  aoi_px: 517
+  offsets: [0, 32]
+  hard_cut_feather: 1            # control: near-hard seams
+  control_bias: 0.05             # positive control: step per unit of (tile number % period); must exceed the scene's natural gradient (~0.007)
+  control_period: 5              # coprime with 6 tiles/row so both horizontal and vertical neighbours differ
+  edge_distance_bins: [0, 2, 4, 8, 16, 32, 64]   # raw tile-pair overlap error, input px to the nearer tile edge
+  # Fixed before any E2 output was inspected. Twice E1's RMSE tolerance because a max over ~17M
+  # values is a harsher statistic than an RMSE.
+  interior_max_tolerance: 0.02
+  tolerance_rationale: >-
+    0.02 reflectance = twice the E1 per-band RMSE tolerance (0.01); project choice fixed before
+    measurement. NDVI deltas and seam-zone deltas are reported but are not part of the keep rule.
+e3:
+  aoi_px: 517
+  cpu_runs: 2
+  cpu_threads: [1, 4]            # each setting is run in fresh processes; cross-setting equality is a finding
+  gpu_runs: 2
+e4:
+  aoi_px: 1000
+  cap_gib: 4.0                   # torch.cuda.set_per_process_memory_fraction; NOT a physical 4 GB GPU
+change:
+  k: 2.0                         # design default, uncalibrated
+  parent_drop_threshold: 0.15    # uncalibrated placeholder for mechanics; calibration is a later decision
+e8:
+  tiles: 4
+  ddof: 1
+  min_spearman: 0.95
+  min_class_agreement: 0.99
+  square: [40, 48, 32, 32]       # synthetic changed square (r0, c0, h, w) in 10 m px
+  noise: 0.004
+  real_pre:
+    path: data/experiments-cache/real_pre_10m.tif      # 4-band B04,B03,B02,B08 at 10 m
+    dn_scale: null
+    dn_offset: null
+  real_post:
+    path: data/experiments-cache/real_post_10m.tif     # same grid as real_pre
+    dn_scale: null
+    dn_offset: null
+e5:
+  aoi_px: 517
+  transforms: 4                  # dihedral ensemble size per tile (identity, rot90, rot180, rot270)
+  # red+nir below this is water/deep shadow, where NDVI is ill-conditioned (noise alone crosses the parent threshold:
+  # measured on the synthetic scene). Stands in for SCL water/shadow masking on real data; E5-local on purpose.
+  min_denominator: 0.05
+  ddof: 1
+  rings: 1
+  min_parent_pixels: 64          # parent-drop pixels needed inside a tile footprint to fire it
+  audit_fraction: 0.25           # fraction of skipped tiles processed anyway; seeded by the top-level seed
+  square: [200, 280, 64, 64]     # synthetic changed square (r0, c0, h, w), 10 m px
+  noise: 0.004
+  real_pre:
+    path: data/experiments-cache/wayanad_pre_10m.tif   # 4-band B04,B03,B02,B08 at 10 m, cloud-screened pre date
+    dn_scale: null
+    dn_offset: null
+  real_post:
+    path: data/experiments-cache/wayanad_post_10m.tif  # 2024-12-06 post date on the same grid
+    dn_scale: null
+    dn_offset: null
+e6:
+  r2_result: risk/results/r2.json                # pre_dates and first_post_date come from R2
+  catalog: risk/results/r2_catalog.json          # item ids/hrefs already recorded by R2
+  max_fetch_bytes: 250000000                     # hard stop for the E6 fetch (13 dates x 2 items x B04/B08/SCL, AOI window)
+  cache_subdir: e6                               # under paths.cache; per-date .npz of B04/B08/SCL at 10 m
+  january_dates: ['2024-01-11', '2024-01-21', '2024-01-31']
+  min_processing_baseline: '04.00'
+  radiometry: {quantification: 10000.0, boa_add_offset: -1000.0}   # ESA convention for baseline >= 04.00
+  # Stable-pixel definition, fixed before any real result was seen:
+  stable_min_valid_dates: 10                     # of the 12 pre dates
+  stable_max_std: 0.05                           # NDVI std across the valid pre dates
+  suspected_areas:                               # no labelled polygons are cached; the project's stated event point
+    - {lon: 76.233, lat: 11.782, radius_m: 1500}
+  pool_min_valid: 2                              # valid dates required in a pool for a pixel to enter the comparison
+  bootstrap_block_px: 50
+  bootstrap_n: 500
+  require_ci_excluding_zero: true                # stricter than "lower": a lower point estimate inside noise is not a keep

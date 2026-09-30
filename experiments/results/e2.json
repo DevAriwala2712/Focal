@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "criteria": {
+    "interior_max_abs_tolerance_reflectance": 0.02,
+    "applies_to": "interior_different_tile",
+    "tolerance_rationale": "0.02 reflectance = twice the E1 per-band RMSE tolerance (0.01); project choice fixed before measurement. NDVI deltas and seam-zone deltas are reported but are not part of the keep rule.",
+    "offsets_px": [
+      0,
+      32
+    ],
+    "aoi_px": 517
+  },
+  "measurements": {
+    "interior_different_tile_reflectance": {
+      "count": 1044480,
+      "max_abs": 3.2782554626464844e-07,
+      "p99_abs": 1.341104507446289e-07,
+      "mean_abs": 2.7772414865449166e-08
+    },
+    "interior_same_tile_reflectance_sanity": {
+      "count": 87616,
+      "max_abs": 0.0,
+      "p99_abs": 0.0,
+      "mean_abs": 0.0
+    },
+    "seam_reflectance": {
+      "count": 15974400,
+      "max_abs": 0.00043579936027526855,
+      "p99_abs": 4.4152140617370605e-05,
+      "mean_abs": 3.291022660251356e-06
+    },
+    "interior_different_tile_ndvi": {
+      "count": 260033,
+      "max_abs": 2.682209014892578e-05,
+      "p99_abs": 4.565501585602759e-06,
+      "mean_abs": 4.950031847051262e-07
+    },
+    "seam_ndvi": {
+      "count": 3985009,
+      "max_abs": 0.021298348903656006,
+      "p99_abs": 0.0006362789869308466,
+      "mean_abs": 3.1765829736149395e-05
+    },
+    "zone_fractions": {
+      "interior_different_tile": 0.061057507042938546,
+      "interior_same_tile": 0.005121797006236695,
+      "seam": 0.9338206959508247
+    },
+    "seam_score_ratio": {
+      "offset_0": {
+        "seam_mean": 0.007452193365336543,
+        "elsewhere_mean": 0.007216057608060452,
+        "ratio": 1.0327236519027125,
+        "seam_lines": 20
+      },
+      "offset_32": {
+        "seam_mean": 0.007693188839327111,
+        "elsewhere_mean": 0.007212233418517748,
+        "ratio": 1.0666860586589568,
+        "seam_lines": 18
+      }
+    },
+    "seam_score_known_seam_controls": {
+      "bias_reflectance": 0.05,
+      "bias_period": 5,
+      "known_seam_feathered": {
+        "seam_mean": 0.007452935107661815,
+        "elsewhere_mean": 0.007233380411643522,
+        "ratio": 1.0303529862282477,
+        "seam_lines": 20
+      },
+      "known_seam_hard_cut": {
+        "seam_mean": 0.010388514510940725,
+        "elsewhere_mean": 0.0072056155064209775,
+        "ratio": 1.4417247911276203,
+        "seam_lines": 20
+      }
+    },
+    "raw_tile_pair_disagreement_by_edge_distance_input_px": {
+      "offset_0": [
+        {
+          "bin": "[0,2)",
+          "count": 1966080,
+          "max_abs": 0.17913831770420074,
+          "p99_abs": 0.026302797831594917
+        },
+        {
+          "bin": "[2,4)",
+          "count": 1966080,
+          "max_abs": 0.01934613287448883,
+          "p99_abs": 0.004154372736811636
+        },
+        {
+          "bin": "[4,8)",
+          "count": 3932160,
+          "max_abs": 0.0024156570434570312,
+          "p99_abs": 0.0005865246057510376
+        },
+        {
+          "bin": "[8,16)",
+          "count": 7864320,
+          "max_abs": 3.5762786865234375e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[16,32)",
+          "count": 3145728,
+          "max_abs": 3.2782554626464844e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[32,64)",
+          "count": 5799936,
+          "max_abs": 3.5762786865234375e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[64,inf)",
+          "count": 0,
+          "max_abs": null,
+          "p99_abs": null
+        }
+      ],
+      "offset_32": [
+        {
+          "bin": "[0,2)",
+          "count": 1966080,
+          "max_abs": 0.17367330566048622,
+          "p99_abs": 0.028057587072253205
+        },
+        {
+          "bin": "[2,4)",
+          "count": 1966080,
+          "max_abs": 0.019668281078338623,
+          "p99_abs": 0.004420406669378277
+        },
+        {
+          "bin": "[4,8)",
+          "count": 3932160,
+          "max_abs": 0.0024268627166748047,
+          "p99_abs": 0.0006027282774448417
+        },
+        {
+          "bin": "[8,16)",
+          "count": 7864320,
+          "max_abs": 3.5762786865234375e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[16,32)",
+          "count": 5799936,
+          "max_abs": 3.2782554626464844e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[32,64)",
+          "count": 3145728,
+          "max_abs": 3.2782554626464844e-07,
+          "p99_abs": 1.1920928955078125e-07
+        },
+        {
+          "bin": "[64,inf)",
+          "count": 0,
+          "max_abs": null,
+          "p99_abs": null
+        }
+      ]
+    },
+    "tiles": {
+      "offset_0": 36,
+      "offset_32": 36
+    }
+  },
+  "limitations": [
+    "Synthetic scene; the numbers characterise this model on this scene, not real imagery.",
+    "A learned CNN plus a global Fourier constraint is not tile-invariant; nonzero deltas are expected.",
+    "interior_different_tile is a small fraction of the image (see zone_fractions); the interior_same_tile check exists because pixels computed by an identical tile in both runs would otherwise make the interior look perfect.",
+    "The seam score is a same-phase gradient ratio, not a perceptual or accuracy metric; the known-seam controls show it detects an injected step (and that feathering softens it).",
+    "CPU only."
+  ],
+  "experiment": "e2",
+  "risk": "e2",
+  "started_utc": "2026-09-29T13:17:09.226744+00:00",
+  "finished_utc": "2026-09-29T13:17:17.224851+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
+}

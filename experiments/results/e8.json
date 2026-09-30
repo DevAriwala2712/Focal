@@ -1,0 +1,60 @@
+{
+  "status": "BLOCKED",
+  "evidence": "real",
+  "reason": "real 10 m RGBN crop not cached: expected data/experiments-cache/real_pre_10m.tif (4-band B04,B03,B02,B08 GeoTIFF, 10 m). The keep/drop verdict stays BLOCKED here: it needs real 10 m tiles run through the real model on the RTX 4050 machine.",
+  "mechanics_synthetic": {
+    "tile_pairs": 4,
+    "comparable_pixels": 1039751,
+    "valid_only_with_4_transforms": 1668,
+    "valid_only_with_8_transforms": 0,
+    "spearman_sigma4_sigma8": 0.9642006506510583,
+    "five_class_agreement": 0.9713546801109112,
+    "disagreeing_pixels": 29784,
+    "class_counts_8": {
+      "NO_CHANGE": 714205,
+      "OBSERVED": 84758,
+      "INFERRED": 9138,
+      "UNSUPPORTED": 231650
+    },
+    "confusion_4_to_8": {
+      "NO_CHANGE->UNSUPPORTED": 12652,
+      "OBSERVED->INFERRED": 680,
+      "INFERRED->OBSERVED": 512,
+      "UNSUPPORTED->NO_CHANGE": 15940
+    },
+    "sigma_median": {
+      "4": 0.006326086673456407,
+      "8": 0.0064752346506913964
+    },
+    "k": 2.0,
+    "would_keep_4": false,
+    "note": "mechanics only; NOT a verdict on 4 vs 8"
+  },
+  "measurements": {},
+  "criteria": {
+    "keep_4_if": "spearman >= 0.95 and five-class agreement >= 0.99 at k = 2.0; otherwise keep 8",
+    "ddof": 1,
+    "parent_drop_threshold_uncalibrated_placeholder": 0.15
+  },
+  "limitations": [
+    "The parent-drop threshold is an uncalibrated placeholder chosen for mechanics, not a calibrated value; k = 2.0 is the design default, also uncalibrated.",
+    "Synthetic tiles test mechanics only. NDVI sigma from a dihedral ensemble is a sensitivity proxy, not calibrated probability or accuracy.",
+    "CPU run of the real pinned model."
+  ],
+  "experiment": "e8",
+  "risk": "e8",
+  "started_utc": "2026-09-29T13:18:00.215202+00:00",
+  "finished_utc": "2026-09-29T13:18:05.351583+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
+}

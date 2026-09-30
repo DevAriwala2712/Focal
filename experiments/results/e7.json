@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic",
+  "criteria": {
+    "max_abs_error": 1e-06,
+    "ram_growth_tolerance": 1.5,
+    "ddof": 0,
+    "accumulation_dtype": "float64"
+  },
+  "measurements": {
+    "per_run_count": [
+      {
+        "runs": 8,
+        "max_abs_error_mean": 5.551115123125783e-17,
+        "max_abs_error_var": 1.3877787807814457e-17,
+        "streaming_peak_bytes": 3049160,
+        "stacked_peak_bytes": 10029331
+      },
+      {
+        "runs": 32,
+        "max_abs_error_mean": 2.220446049250313e-16,
+        "max_abs_error_var": 2.42861286636753e-17,
+        "streaming_peak_bytes": 2426736,
+        "stacked_peak_bytes": 35194992
+      },
+      {
+        "runs": 96,
+        "max_abs_error_mean": 3.885780586188048e-16,
+        "max_abs_error_var": 4.163336342344337e-17,
+        "streaming_peak_bytes": 2426728,
+        "stacked_peak_bytes": 102303856
+      }
+    ],
+    "error_ok": true,
+    "ram_flat": true
+  },
+  "limitations": [
+    "Synthetic Gaussian stacks prove the accumulator mechanics only.",
+    "tracemalloc counts Python/numpy allocations, not process RSS or GPU memory.",
+    "Inputs are float32 (as model output would be); both methods see the same float32 values."
+  ],
+  "experiment": "e7",
+  "risk": "e7",
+  "started_utc": "2026-09-29T13:16:58.862094+00:00",
+  "finished_utc": "2026-09-29T13:16:58.999445+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
+}

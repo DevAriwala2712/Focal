@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "phase0_config": "configs/phase0.yaml",
+  "paths": {
+    "results": "experiments/results",
+    "cache": "data/experiments-cache"
+  },
+  "seed": 2024,
+  "e7": {
+    "run_counts": [
+      8,
+      32,
+      96
+    ],
+    "shape": [
+      4,
+      128,
+      128
+    ],
+    "ddof": 0,
+    "max_abs_error": 1e-06,
+    "ram_growth_tolerance": 1.5
+  },
+  "phase0": {
+    "schema_version": 1,
+    "paths": {
+      "cache": "data/risk-cache",
+      "results": "risk/results",
+      "model": "models/SEN2SRLite_RGBN"
+    },
+    "network": {
+      "retries": 3,
+      "backoff_seconds": 2,
+      "timeout_seconds": 45,
+      "max_download_bytes": 40000000
+    },
+    "model": {
+      "repository": "tacofoundation/SEN2SR",
+      "revision": "469e9b3a049f9320ba66b3a39b9655dbd31480b3",
+      "sha256": {
+        "mlm.json": "419d562511737b0e465a34983d634944f6e84f97ad9207a86dd94d8e430ca606",
+        "load.py": "4b6c836b1f73078c62c84d4374b2d8daee5345f6239f64e0b6be29432383bac6",
+        "model.safetensor": "479aa796d5068d0b1206118ccbca27bd3223df0214db1a9b31a1e18349ed1c7e",
+        "hard_constraint.safetensor": "fbad981519066387c413ead1d6af7ef3e0d2947c34147ba90163fc79ae539239"
+      },
+      "variant": "SEN2SRLite/NonReference_RGBN_x4",
+      "base_url": "https://huggingface.co/tacofoundation/SEN2SR/resolve/469e9b3a049f9320ba66b3a39b9655dbd31480b3/SEN2SRLite/NonReference_RGBN_x4",
+      "bands": [
+        "B04",
+        "B03",
+        "B02",
+        "B08"
+      ],
+      "scale": 4,
+      "native_tile": 128,
+      "min_tile": 64,
+      "benchmark_sizes": [
+        128,
+        512,
+        64
+      ],
+      "repeats": 3,
+      "warmups": 1,
+      "budget_gib": 4.0,
+      "seed": 2024
+    },
+    "imagery": {
+      "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "collection": "sentinel-2-l2a",
+      "longitude": 76.233,
+      "latitude": 11.782,
+      "crs": "EPSG:32643",
+      "aoi_size_m": 10000,
+      "audit_resolution_m": 20,
+      "start": "2024-01-01T00:00:00Z",
+      "end": "2024-12-31T23:59:59Z",
+      "event_date": "2024-07-30",
+      "max_cloud_shadow_pct": 10,
+      "min_coverage_pct": 99,
+      "min_pre_dates": 3,
+      "cloud_classes": [
+        8,
+        9,
+        10
+      ],
+      "shadow_classes": [
+        2,
+        3
+      ],
+      "invalid_classes": [
+        0,
+        1,
+        11
+      ],
+      "page_limit": 100
+    },
+    "worldstrat": {
+      "record_url": "https://zenodo.org/api/records/6810792",
+      "record_page": "https://zenodo.org/records/6810792",
+      "metadata_url": "https://zenodo.org/records/6810792/files/metadata.csv?download=1",
+      "metadata_md5": "dfeb3348e79b719bf03c230d5d258839",
+      "license_url": "https://zenodo.org/records/6810792/files/LICENSE.txt?download=1",
+      "boundaries_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson",
+      "south_asia": [
+        "Afghanistan",
+        "Bangladesh",
+        "Bhutan",
+        "India",
+        "Maldives",
+        "Nepal",
+        "Pakistan",
+        "Sri Lanka"
+      ]
+    },
+    "labels": {
+      "repository": "https://github.com/links-ads/igarss-landslide-delineation",
+      "revision": "ce34d3ac02b80d4db7e542203b7e534649a46352",
+      "inventory_url": "https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/inventories/colombia_landslides.gpkg",
+      "notebook_url": "https://raw.githubusercontent.com/links-ads/igarss-landslide-delineation/ce34d3ac02b80d4db7e542203b7e534649a46352/processing/processing_colombia.ipynb",
+      "l4s_training_share": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm",
+      "l4s_download_url": "https://cloud.iarai.ac.at/index.php/s/KrwKngeXN7KjkFm/download",
+      "l4s_mirror": {
+        "repository": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense",
+        "revision": "4b291891badf301b5c75c2153f0f8fe00eeb1435",
+        "image_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/images/train/image_1.h5",
+        "mask_url": "https://huggingface.co/datasets/ibm-nasa-geospatial/Landslide4sense/resolve/4b291891badf301b5c75c2153f0f8fe00eeb1435/annotations/train/mask_1.h5",
+        "band_indices": [
+          3,
+          2,
+          1,
+          7
+        ]
+      },
+      "sample_crs": "EPSG:32618",
+      "sample_pixels": 128,
+      "sample_resolution_m": 10,
+      "sample_pre_days": 360,
+      "sample_post_days": 90,
+      "sample_max_candidates": 8,
+      "sample_max_cloud_shadow_pct": 10,
+      "sample_min_coverage_pct": 99
+    },
+    "training": {
+      "min_pairs": 3,
+      "pair_manifest": "data/worldstrat/pairs.json",
+      "steps": 50,
+      "learning_rate": 1e-05,
+      "checkpoint": "checkpoints/r5-smoke.safetensors",
+      "comparison_window": 5,
+      "reload_atol": 1e-06
+    },
+    "preparation": {
+      "cache": "data/risk-cache/worldstrat-zip",
+      "metadata": {
+        "name": "metadata.csv",
+        "url": "https://zenodo.org/records/15382551/files/metadata.csv?download=1",
+        "sha256": "36f72dc43290ff79b6722e2654e605a41f32f1a7feb7807f0dbcbc7286214bdb"
+      },
+      "split": {
+        "name": "stratified_train_val_test_split.csv",
+        "url": "https://zenodo.org/records/15382551/files/stratified_train_val_test_split.csv?download=1",
+        "sha256": "67a38f84fb122627bf8c89de6ca92004af22f30f001aa46fbe1da432c78a9a0b"
+      },
+      "archives": {
+        "hr": {
+          "name": "hr_dataset.zip",
+          "url": "https://zenodo.org/records/15382551/files/hr_dataset.zip?download=1",
+          "bytes": 40829062202
+        },
+        "lr": {
+          "name": "lr_dataset_l2a.zip",
+          "url": "https://zenodo.org/records/15382551/files/lr_dataset_l2a.zip?download=1",
+          "bytes": 25493197186
+        }
+      },
+      "max_date_gap_days": 3,
+      "max_metadata_cloud_pct": 1,
+      "land_cover_classes": [
+        "Forest",
+        "Cropland",
+        "Grassland",
+        "Settlement"
+      ],
+      "land_scl_classes": [
+        4,
+        5,
+        7
+      ],
+      "min_land_fraction": 0.8,
+      "max_candidates": 30,
+      "min_band_correlation": 0.5
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "status": "FAIL",
+  "evidence": "real",
+  "criteria": {
+    "rule": "January pooling has a lower false-drop fraction AND the block-bootstrap CI of (all12 - january) excludes zero",
+    "stable_definition": {
+      "min_valid_dates": 10,
+      "max_ndvi_std_across_pre_dates": 0.05,
+      "suspected_areas_excluded": [
+        {
+          "lon": 76.233,
+          "lat": 11.782,
+          "radius_m": 1500
+        }
+      ]
+    },
+    "parent_drop_threshold_uncalibrated_placeholder": 0.15,
+    "pre_dates_all": [
+      "2024-01-11",
+      "2024-01-21",
+      "2024-01-31",
+      "2024-02-05",
+      "2024-02-10",
+      "2024-02-15",
+      "2024-03-01",
+      "2024-03-06",
+      "2024-03-31",
+      "2024-04-05",
+      "2024-04-30",
+      "2024-05-05"
+    ],
+    "pre_dates_january": [
+      "2024-01-11",
+      "2024-01-21",
+      "2024-01-31"
+    ],
+    "post_date": "2024-12-06"
+  },
+  "measurements": {
+    "stable_pixels": 187388,
+    "aoi_pixels": 1000000,
+    "comparable_pixels": 186843,
+    "false_drop_fraction_all_pre_dates": 0.008119116049303425,
+    "false_drop_fraction_january": 0.009467841984982043,
+    "difference_all_minus_january": -0.0013487259356786182,
+    "bootstrap_ci95_all_minus_january": [
+      -0.0020127928592512606,
+      -0.000806335614608065
+    ],
+    "january_lower": false
+  },
+  "limitations": [
+    "Single post date, single AOI, single season pair: one comparison, not a general result.",
+    "The AOI centre may not contain the landslide (see report); if so nearly every flagged pixel is a false drop by construction, which suits this test but not a detection claim.",
+    "No labelled slide polygons were available; suspected areas are configured disks, not labels.",
+    "NDVI drop flags vegetation change, not landslides; the threshold is an uncalibrated placeholder."
+  ],
+  "experiment": "e6",
+  "risk": "e6",
+  "started_utc": "2026-09-29T13:17:59.070320+00:00",
+  "finished_utc": "2026-09-29T13:17:59.479043+00:00",
+  "config_sha256": "b55e2eaf039ac14bb9085c3a8fcca6a9d346c2f42cdb2e36a6715f13fc70d4f0",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": "2.8.0+cu126",
+    "torch_matches_pin": false,
+    "cuda_available": false,
+    "deviation_note": "macOS arm64 has no +cu126 build; torch 2.8.0 (CPU/macOS) was used, all other pins unchanged. CPU hashes and timings are specific to this platform and torch build."
+  }
+}
