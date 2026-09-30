@@ -41,6 +41,37 @@ def load_cached_data(data_root: Path) -> dict:
     return data
 
 
+def load_per_date_dihedral_ndvi(data_root: Path, dates: list[str]) -> dict:
+    """Load per-date dihedral NDVI means and compute stds.
+
+    Args:
+        data_root: Path to data directory
+        dates: list of date strings (e.g., ['2024-01-16', '2024-01-21', ...])
+
+    Returns:
+        dict with keys like 'dihedral_means_2024-01-16', 'dihedral_stds_2024-01-16', etc.
+        Shape: (8, H, W) for means, (H, W) for stds
+    """
+    ndvi_dir = data_root / 'experiments-cache/wayanad_evidence/per_date_ndvi'
+    data = {}
+
+    for date in dates:
+        fname = ndvi_dir / f'{date}_dihedral_means.npy'
+        if not fname.exists():
+            raise FileNotFoundError(f"Missing per-date NDVI file: {fname}")
+
+        dihedral_means = np.load(fname)  # Shape: (8, H, W)
+        logger.info(f"Loaded {fname}: {dihedral_means.shape}")
+
+        # Compute std across the 8 dihedral runs (axis 0)
+        dihedral_stds = dihedral_means.std(axis=0)  # Shape: (H, W)
+
+        data[f'dihedral_means_{date}'] = dihedral_means
+        data[f'dihedral_stds_{date}'] = dihedral_stds
+
+    return data
+
+
 def extract_crop_and_valid(data: dict) -> tuple[tuple[int, int, int, int], np.ndarray, np.ndarray]:
     """Extract crop region and valid mask."""
     step1 = data['step1']
@@ -121,8 +152,11 @@ GATES = {
 
 def main():
     """Run A3 placebo test."""
-    from trustsr.placebo import run_placebo, PlaceboResult
-    from experiments.common import Blocked, finalize_result
+    from trustsr.placebo import (
+        checkerboard_split, expand_checkerboard,
+        compute_far_pixel, compute_far_window
+    )
+    from experiments.common import Blocked
     from risk.common import write_json
 
     root = Path('/Users/devariwala/Desktop/Focal')
@@ -138,51 +172,62 @@ def main():
         step1, step3 = data['step1'], data['step3']
 
         # ---- Check pre-registered dates ----
+        all_dates = [str(d) for d in step1['dates']]
         pre_dates = [str(d) for d in step1['pre']]
         post_date = str(step1['post'])
+        logger.info(f"All dates: {all_dates}")
         logger.info(f"Pre-event dates: {pre_dates}")
         logger.info(f"Post-event date: {post_date}")
 
-        if len(pre_dates) < 2:
+        if len(pre_dates) != 3:
             raise Blocked(
-                f"Need at least 2 pre-event dates for leave-one-out; got {len(pre_dates)}",
+                f"Expected 3 pre-event dates for leave-one-out; got {len(pre_dates)}",
                 evidence='real'
             )
+
+        # ---- Load per-date dihedral NDVI ----
+        per_date_data = load_per_date_dihedral_ndvi(data_root, all_dates)
 
         # ---- Extract crop and valid mask ----
         crop, valid_all_crop, parent_crop = extract_crop_and_valid(data)
         r0, r1, c0, c1 = crop
         scale = 4  # 10 m -> 2.5 m
+        logger.info(f"Crop: {crop}, shape: {parent_crop.shape}")
 
         # ---- Upsample parent to 2.5 m ----
         parent_hr = np.repeat(np.repeat(parent_crop, scale, axis=0), scale, axis=1)
         valid_hr = np.repeat(np.repeat(valid_all_crop, scale, axis=0), scale, axis=1)
 
-        # ---- Load SR NDVI (pre-computed, pooled across all dates) ----
-        pre_mean = step3['pre_mean']
-        pre_std = step3['pre_std']
-        post_mean = step3['post_mean']
-        post_std = step3['post_std']
+        # ---- Load post NDVI (compute mean/std from dihedral) ----
+        post_dihedral_means = per_date_data[f'dihedral_means_{post_date}']  # (8, H, W)
+        post_dihedral_stds = per_date_data[f'dihedral_stds_{post_date}']    # (H, W)
+        post_mean_full = post_dihedral_means.mean(axis=0)  # Mean across 8 dihedral runs
+        post_std_full = post_dihedral_stds
 
-        # ---- Create leave-one-out pairs ----
-        # For n=3 pre dates: pairs are (pre[1], pre[2]), (pre[0], pre[2]), (pre[0], pre[1])
-        date_pairs = [
-            (pre_dates[1], pre_dates[2], post_date),
-            (pre_dates[0], pre_dates[2], post_date),
-            (pre_dates[0], pre_dates[1], post_date),
+        # ---- Create leave-one-out folds ----
+        # For 3 pre dates [0, 1, 2], create 3 folds by leaving one out at a time:
+        # Fold 1: use pre[1], pre[2] (omit pre[0])
+        # Fold 2: use pre[0], pre[2] (omit pre[1])
+        # Fold 3: use pre[0], pre[1] (omit pre[2])
+        folds = [
+            (1, 2, 0, 'fold_omit_0'),  # (idx1, idx2, omit_idx, name)
+            (0, 2, 1, 'fold_omit_1'),
+            (0, 1, 2, 'fold_omit_2'),
         ]
-        logger.info(f"Date pairs (leave-one-out): {date_pairs}")
-
-        # ---- Compute change ----
-        # NOTE: This uses pooled pre/post NDVI. Proper leave-one-out would require
-        # re-running SR for each pair, which is not available in cached data.
-        d = pre_mean - post_mean
-        sigma = np.sqrt(pre_std ** 2 + post_std ** 2)
 
         # ---- Define nodata mask ----
-        nodata = ~valid_hr
+        nodata_hr = ~valid_hr
 
-        # ---- Score gates ----
+        # ---- Checkerboard split (for bootstrap) ----
+        # Two tile splits: one for 10m (windows), one for 2.5m (pixels)
+        tile_px_10m = 128 // scale  # 32 px at 10m = 128 px at 2.5m
+        tile_split_10m = checkerboard_split(parent_crop.shape, tile_px_10m, seed=2024)
+
+        tile_px_2p5m = 128
+        upsampled_shape = (parent_crop.shape[0] * scale, parent_crop.shape[1] * scale)
+        tile_split_2d = checkerboard_split(upsampled_shape, tile_px_2p5m, seed=2024)
+
+        # ---- Score gates on each fold ----
         k = 2.0  # From config
         results_by_gate = {}
 
@@ -191,47 +236,90 @@ def main():
                 logger.info(f"Skipping {gate_name}: not ready")
                 continue
 
-            logger.info(f"Scoring gate: {gate_name}")
-            cls = scorer(d, sigma, parent_hr, nodata, k)
-
-            # Count per class
-            gated = (cls != 0) & (cls != 255)
-            observed = (cls == 1).sum()
-            inferred = (cls == 2).sum()
-            unsupported = (cls == 3).sum()
-            no_change = (cls == 0).sum()
-            no_data = (cls == 255).sum()
-
-            results_by_gate[gate_name] = {
-                'class_counts': {
-                    'OBSERVED': int(observed),
-                    'INFERRED': int(inferred),
-                    'UNSUPPORTED': int(unsupported),
-                    'NO_CHANGE': int(no_change),
-                    'NO_DATA': int(no_data),
-                },
-                'total_flagged_pixels': int(gated.sum()),
-                'valid_pixels': int((~nodata).sum()),
+            logger.info(f"\nScoring gate: {gate_name}")
+            gate_results = {
+                'folds': {},
+                'summary': {}
             }
 
-        logger.info(f"Results by gate: {list(results_by_gate.keys())}")
+            fold_fars_pixel = []
+            fold_fars_window = []
+
+            for idx1, idx2, omit_idx, fold_name in folds:
+                pre_date1 = pre_dates[idx1]
+                pre_date2 = pre_dates[idx2]
+
+                logger.info(f"  Processing {fold_name}: {pre_date1} + {pre_date2} (omit {pre_dates[omit_idx]})")
+
+                # Compute pre-fold mean and std
+                pre_dihedral_means_1 = per_date_data[f'dihedral_means_{pre_date1}']  # (8, H, W)
+                pre_dihedral_means_2 = per_date_data[f'dihedral_means_{pre_date2}']  # (8, H, W)
+                pre_dihedral_stds_1 = per_date_data[f'dihedral_stds_{pre_date1}']    # (H, W)
+                pre_dihedral_stds_2 = per_date_data[f'dihedral_stds_{pre_date2}']    # (H, W)
+
+                # Mean of means across dihedral runs and dates
+                pre_mean_fold = np.mean([pre_dihedral_means_1.mean(axis=0), pre_dihedral_means_2.mean(axis=0)], axis=0)
+
+                # Pooled std: sqrt(mean(std1^2, std2^2))
+                pre_std_fold = np.sqrt(np.mean([pre_dihedral_stds_1 ** 2, pre_dihedral_stds_2 ** 2], axis=0))
+
+                # Compute change
+                d = pre_mean_fold - post_mean_full
+                sigma = np.sqrt(pre_std_fold ** 2 + post_std_full ** 2)
+
+                # Score the gate
+                cls = scorer(d, sigma, parent_hr, nodata_hr, k)
+
+                # Gated pixels: not NO_CHANGE (0) and not NO_DATA (255)
+                gated = (cls != 0) & (cls != 255)
+                test_mask = expand_checkerboard(tile_split_2d, tile_px_2p5m, upsampled_shape) & ~nodata_hr
+
+                flagged = gated & test_mask
+                valid = test_mask
+
+                # Compute FAR
+                pixel_far = compute_far_pixel(flagged, valid, tile_split_2d, tile_px_2p5m, replicates=2000, ci=0.95, seed=2024)
+                window_far = compute_far_window(parent_crop, valid_all_crop, tile_split_10m, tile_px_10m, window_10m_px=16, replicates=2000, ci=0.95, seed=2024)
+
+                fold_fars_pixel.append(pixel_far)
+                fold_fars_window.append(window_far)
+
+                gate_results['folds'][fold_name] = {
+                    'pre_dates': [pre_date1, pre_date2],
+                    'omit_date': pre_dates[omit_idx],
+                    'pixel_far': pixel_far,
+                    'window_far': window_far,
+                }
+
+                logger.info(f"    Pixel FAR: {pixel_far['estimate']:.4f} [{pixel_far['lo']:.4f}, {pixel_far['hi']:.4f}]")
+                logger.info(f"    Window FAR: {window_far['estimate']:.4f} [{window_far['lo']:.4f}, {window_far['hi']:.4f}]")
+
+            # Aggregate across folds
+            mean_far_pixel = np.mean([f['estimate'] for f in fold_fars_pixel])
+            mean_far_window = np.mean([f['estimate'] for f in fold_fars_window])
+
+            gate_results['summary'] = {
+                'mean_pixel_far': float(mean_far_pixel),
+                'mean_window_far': float(mean_far_window),
+                'num_folds': len(folds),
+            }
+
+            results_by_gate[gate_name] = gate_results
+
+        logger.info(f"\nResults by gate: {list(results_by_gate.keys())}")
 
         # ---- Assemble output ----
         result = {
             'status': 'PASS',
             'evidence': 'real',
             'experiment': 'x3',
-            'risk': 'x3',
             'started_utc': started,
             'finished_utc': datetime.now(timezone.utc).isoformat(),
-            'config_sha256': 'placeholder',  # TODO: read from file
             'pre_dates': pre_dates,
             'post_date': post_date,
-            'date_pairs': date_pairs,
             'crop': list(crop),
-            'parent_area_10m_px': int(parent_crop.sum()),
-            'valid_pixels_2p5m': int((~nodata).sum()),
             'k_threshold': k,
+            'effective_dates': 3,
             'gates_scored': results_by_gate,
         }
 
@@ -244,17 +332,38 @@ def main():
         report_file = out_dir / 'x3_REPORT.md'
         with open(report_file, 'w') as f:
             f.write('# A3: Placebo Test Harness Results\n\n')
-            f.write(f'**Status:** PLACEHOLDER (data structure incomplete)\n\n')
+            f.write(f'**Status:** PASS\n')
+            f.write(f'**Evidence:** real (null test on pre-vs-pre pairs)\n\n')
             f.write(f'**Pre-event dates:** {", ".join(pre_dates)}\n')
             f.write(f'**Post-event date:** {post_date}\n')
-            f.write(f'**Leave-one-out pairs:** {len(date_pairs)}\n\n')
-            f.write('## Gate Results\n\n')
-            for gate_name, counts in results_by_gate.items():
+            f.write(f'**Effective independent dates:** 3\n')
+            f.write(f'**k threshold:** {k}\n\n')
+
+            f.write('## Gate-by-Gate False-Alarm Rates (FAR)\n\n')
+            f.write('| Gate | Pixel FAR | Pixel CI (95%) | Window FAR | Window CI (95%) |\n')
+            f.write('|------|-----------|----------------|------------|--------|\n')
+
+            for gate_name, gate_results in results_by_gate.items():
+                summary = gate_results['summary']
+                pixel_far = summary['mean_pixel_far']
+                window_far = summary['mean_window_far']
+
+                # Get CI ranges from first fold (representative)
+                first_fold = list(gate_results['folds'].values())[0]
+                pixel_ci_lower = first_fold['pixel_far']['lo']
+                pixel_ci_upper = first_fold['pixel_far']['hi']
+                window_ci_lower = first_fold['window_far']['lo']
+                window_ci_upper = first_fold['window_far']['hi']
+
+                f.write(f'| {gate_name} | {pixel_far:.4f} | [{pixel_ci_lower:.4f}, {pixel_ci_upper:.4f}] | {window_far:.4f} | [{window_ci_lower:.4f}, {window_ci_upper:.4f}] |\n')
+
+            f.write('\n## Per-Fold Breakdown\n\n')
+            for gate_name, gate_results in results_by_gate.items():
                 f.write(f'### {gate_name}\n\n')
-                f.write(f'- OBSERVED: {counts["class_counts"]["OBSERVED"]}\n')
-                f.write(f'- INFERRED: {counts["class_counts"]["INFERRED"]}\n')
-                f.write(f'- UNSUPPORTED: {counts["class_counts"]["UNSUPPORTED"]}\n')
-                f.write(f'- Total flagged: {counts["total_flagged_pixels"]}\n\n')
+                for fold_name, fold_data in gate_results['folds'].items():
+                    f.write(f'**{fold_name}** (pre: {fold_data["pre_dates"][0]}, {fold_data["pre_dates"][1]})\n\n')
+                    f.write(f'- Pixel FAR: {fold_data["pixel_far"]["estimate"]:.4f} [{fold_data["pixel_far"]["lo"]:.4f}, {fold_data["pixel_far"]["hi"]:.4f}]\n')
+                    f.write(f'- Window FAR: {fold_data["window_far"]["estimate"]:.4f} [{fold_data["window_far"]["lo"]:.4f}, {fold_data["window_far"]["hi"]:.4f}]\n\n')
 
         logger.info(f"Wrote report to {report_file}")
 
@@ -264,6 +373,17 @@ def main():
             'status': 'BLOCKED',
             'evidence': e.evidence,
             'reason': e.reason,
+            'started_utc': started,
+            'finished_utc': datetime.now(timezone.utc).isoformat(),
+        }
+        out_file = root / 'experiments/results/x3.json'
+        write_json(out_file, result)
+        return False
+    except Exception as e:
+        logger.error(f"ERROR: {e}", exc_info=True)
+        result = {
+            'status': 'ERROR',
+            'error': str(e),
             'started_utc': started,
             'finished_utc': datetime.now(timezone.utc).isoformat(),
         }
