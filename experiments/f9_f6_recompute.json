@@ -1,0 +1,170 @@
+{
+ "n_images_in_x2_per_image": 178,
+ "n_datasets": 5,
+ "images_per_dataset": {
+  "naip": 62,
+  "spain_crops": 28,
+  "spain_urban": 20,
+  "spot": 9,
+  "venus": 59
+ },
+ "pooled_point_estimate": {
+  "numpy_vectorised": -0.09707162370791389,
+  "longhand_loop": -0.0970716237079139,
+  "per_dataset_weighted_recombination": -0.0970716237079139,
+  "all_three_agree_to_1e_12": true
+ },
+ "pooled_ci": {
+  "f9_independent_bootstrap_lo": -0.1574637956167713,
+  "f9_independent_bootstrap_hi": -0.03696577159967953,
+  "f9_normal_approx_lo": -0.15834359646360158,
+  "f9_normal_approx_hi": -0.035799650952226196
+ },
+ "f6_json_pooled": {
+  "recomputed": {
+   "mean": -0.09707162370791389,
+   "lo": -0.1574637956167713,
+   "hi": -0.03696577159967953,
+   "n": 178,
+   "replicates": 2000,
+   "ci": 0.95,
+   "seed": 2024
+  },
+  "matches_x2_json_pooled_block": true,
+  "x2_json_pooled_block": {
+   "mean": -0.09707162370791389,
+   "lo": -0.1574637956167713,
+   "hi": -0.03696577159967953,
+   "n": 178,
+   "replicates": 2000,
+   "ci": 0.95,
+   "seed": 2024
+  },
+  "matches_audit_quoted_claim_3dp": true,
+  "audit_quoted_claim": {
+   "mean": -0.097,
+   "lo": -0.157,
+   "hi": -0.037,
+   "n": 178
+  }
+ },
+ "x2_own_pooled": {
+  "mean": -0.09707162370791389,
+  "lo": -0.1574637956167713,
+  "hi": -0.03696577159967953,
+  "n": 178,
+  "replicates": 2000,
+  "ci": 0.95,
+  "seed": 2024
+ },
+ "agreement": {
+  "f9_point_vs_prereg_claim_-0.097_within_0.001": true,
+  "f9_point_vs_x2_own": true,
+  "f9_point_rounded_3dp": -0.097,
+  "f9_ci_rounded_3dp": [
+   -0.157,
+   -0.037
+  ],
+  "prereg_ci_claim": [
+   -0.157,
+   -0.037
+  ],
+  "f9_ci_matches_prereg_at_3dp": true
+ },
+ "naip_excluded": {
+  "n": 116,
+  "point": -0.2750402373233242,
+  "ci": [
+   -0.3449865414847047,
+   -0.20260852754566436
+  ],
+  "point_rounded": -0.275,
+  "f6_claim": {
+   "recomputed": {
+    "mean": -0.2750402373233242,
+    "lo": -0.34498654148470465,
+    "hi": -0.20260852754566436,
+    "n": 116,
+    "replicates": 2000,
+    "ci": 0.95,
+    "seed": 2024
+   },
+   "delta_vs_pooled_all_mean_db": -0.17796861361541033
+  }
+ },
+ "per_dataset": {
+  "naip": {
+   "n": 62,
+   "delta": 0.236,
+   "ci": [
+    0.193,
+    0.28
+   ],
+   "beats_bicubic": true
+  },
+  "spain_crops": {
+   "n": 28,
+   "delta": -0.007,
+   "ci": [
+    -0.093,
+    0.08
+   ],
+   "beats_bicubic": false
+  },
+  "spain_urban": {
+   "n": 20,
+   "delta": 0.005,
+   "ci": [
+    -0.093,
+    0.102
+   ],
+   "beats_bicubic": true
+  },
+  "spot": {
+   "n": 9,
+   "delta": 0.13,
+   "ci": [
+    0.058,
+    0.198
+   ],
+   "beats_bicubic": true
+  },
+  "venus": {
+   "n": 59,
+   "delta": -0.559,
+   "ci": [
+    -0.638,
+    -0.482
+   ],
+   "beats_bicubic": false
+  }
+ },
+ "ha_metric": {
+  "naip": {
+   "sr": 0.0598,
+   "bicubic": 0.0375,
+   "sr_worse": true
+  },
+  "spain_crops": {
+   "sr": 0.0848,
+   "bicubic": 0.0642,
+   "sr_worse": true
+  },
+  "spain_urban": {
+   "sr": 0.0874,
+   "bicubic": 0.0645,
+   "sr_worse": true
+  },
+  "spot": {
+   "sr": 0.06,
+   "bicubic": 0.0341,
+   "sr_worse": true
+  },
+  "venus": {
+   "sr": 0.2049,
+   "bicubic": 0.1378,
+   "sr_worse": true
+  }
+ },
+ "ha_sr_worse_on_every_dataset": true
+}

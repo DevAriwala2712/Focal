@@ -1,0 +1,118 @@
+{
+ "n_attacks": 16,
+ "n_failed": 0,
+ "attacks": [
+  {
+   "attack": "guarded_load_date(post_date)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date(event_date)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-07-30 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date(datetime.date(2024,12,6))",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "build_sr_fold(held_out=post)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "build_sr_fold(post smuggled into pre_dates)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "build_10m_fold(held_out=post)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "build_10m_fold(post in pre_dates)",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "f2_gate_v2.build with post date in SR_POOL",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('2024-12-06')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-12-06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('2024-7-30')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024-7-30 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('20241206')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 20241206 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('2024/12/06')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2024/12/06 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('2025-01-01')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 2025-01-01 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date('9999-01-01')",
+   "outcome": "REFUSED_BY_GUARD",
+   "detail": "PostEventDateBlocked: 9999-01-01 is on or after the event date 2024-07-30; a placebo pair may never load it",
+   "expected_refusal": true,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date(2024-07-29) [stubbed loader]",
+   "outcome": "LOADED",
+   "detail": "no exception raised",
+   "expected_refusal": false,
+   "verdict": "PASS"
+  },
+  {
+   "attack": "guarded_load_date(2024-01-16) [stubbed loader]",
+   "outcome": "LOADED",
+   "detail": "no exception raised",
+   "expected_refusal": false,
+   "verdict": "PASS"
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "deviation_1_tau_verbatim_vs_recomputed": {
+  "tau_used_by_f2": 3.8891176504391876,
+  "tau_if_taken_verbatim_reported": null,
+  "f1_npz_present": true,
+  "f1_npz_sha256_f9_computed": "53a2fe8a3a7852d7648d6d8d17abaf982b1435d23ffb0afcd9fda8effd2679e4",
+  "f1_npz_sha256_f1_claimed": "53a2fe8a3a7852d7648d6d8d17abaf982b1435d23ffb0afcd9fda8effd2679e4",
+  "f1_npz_sha256_matches": true,
+  "f9_recomputed_verbatim_tau": 119.90589141845703,
+  "f9_n_calibration_scores": 981,
+  "f9_f1_score_range": [
+   -25.861984252929688,
+   255.60409545898438
+  ],
+  "f9_matches_f2_reported_verbatim": false,
+  "gate_v2_own_calibration_score_stats": {},
+  "interpretation": "The verbatim tau (~119.9) lives on F1's d/sigma_v1 scale; gate_v2's own window scores are ~1-10. Applying it would flag ~nothing, giving window FAR = 0, which PASSES the <=0.05 keep rule VACUOUSLY. Recomputing gave 0.0652, which FAILS. So the deviation is unambiguously HARDER, and it is the direction that costs F2 its keep rule -- the opposite of post-hoc rationalisation."
+ },
+ "deviation_2_e_b_ceiling_mixing_line": {
+  "sweep": [
+   {
+    "line_length_scale": 1.0,
+    "mean_f": 0.3950378904778521,
+    "mean_round16f": 6.30859375,
+    "n_blocks_with_round16f_gt0": 245,
+    "mean_sigma_f": 0.02042861586306339,
+    "mean_score_s": 20.35686742545623,
+    "max_score_s": 51.140362817428525
+   },
+   {
+    "line_length_scale": 0.75,
+    "mean_f": 0.5241917376224721,
+    "mean_round16f": 8.40234375,
+    "n_blocks_with_round16f_gt0": 247,
+    "mean_sigma_f": 0.027238154484084523,
+    "mean_score_s": 20.264014807051083,
+    "max_score_s": 47.600116873540955
+   },
+   {
+    "line_length_scale": 0.5,
+    "mean_f": 0.674038557830148,
+    "mean_round16f": 10.82421875,
+    "n_blocks_with_round16f_gt0": 251,
+    "mean_sigma_f": 0.04085723172612678,
+    "mean_score_s": 17.38889413613436,
+    "max_score_s": 31.797268453320918
+   },
+   {
+    "line_length_scale": 0.25,
+    "mean_f": 0.8209519368389024,
+    "mean_round16f": 13.19921875,
+    "n_blocks_with_round16f_gt0": 251,
+    "mean_sigma_f": 0.08171446345225356,
+    "mean_score_s": 10.58546718757015,
+    "max_score_s": 15.898634226660459
+   }
+  ],
+  "f_inflates_as_line_shortens": true,
+  "f_ratio_shortest_over_longest": 2.07815998573162,
+  "score_s_ratio_shortest_over_longest": 0.5199948973648588,
+  "detection_score_is_scale_invariant": false,
+  "detection_score_FALLS_as_line_shortens": true,
+  "n_allocating_blocks_rises": true,
+  "adr_claim_made_it_harder": "NOT ESTABLISHED (see finding)",
+  "does_this_indicate_post_hoc_gaming": "NO -- the keep rule still FAILED, so the deviation cannot have manufactured a pass, and the full 0.20-0.50 ceiling table was published",
+  "finding": "MEASURED, and the measurement CONTRADICTS the stated mechanism. As the mixing line shortens (e_b moved toward e_v, which is what the 0.20 -> 0.30 escalation did): f INFLATES (mean f 0.395 -> 0.821, 2.08x) and round(16f) with it, so each detected block allocates MORE sub-pixel area -- that part of F2/the ADR argument holds. But the DETECTION score s = f/sigma_f FALLS rather than rises (mean 20.36 -> 10.59, max 51.1 -> 15.9), because sigma_f carries its own 1/|e_v-e_b| factor which more than offsets the inflation of f. So the chain \"shorter line -> inflates f -> inflates the score -> raises FAR -> harder\" breaks at the third link: a shorter mixing line makes the conformal detector fire LESS readily, not more. And because tau is itself recomputed conformally from the SAME score on the calibration split, the calibration exceedance rate is pinned near alpha by construction whatever e_b is, so the net effect on the TEST-split window FAR is not fixed by any of these monotone arguments. VERDICT: the direction of the e_b deviation is NOT ESTABLISHED either way; F2 and the ADR over-claim when they state the escalation made the keep rule HARDER. This is not evidence of gaming -- F2 FAILED the keep rule, so no pass was manufactured, and the escalation was disclosed pre-hoc with the full ceiling table -- but the \"made it HARDER\" wording must be corrected to \"direction not established\" before F10 repeats it."
+ },
+ "deviation_3_n_pre_mismatch": {
+  "sigma_f_at_n_pre_2_calibration": 1.224744871391589,
+  "sigma_f_at_n_pre_3_production": 1.1547005383792515,
+  "production_sigma_is_smaller": true,
+  "score_inflation_factor_production_over_calibration": 1.0606601717798212,
+  "f9_required_tau_rescale_to_match_calibration_strictness": 1.0606601717798212,
+  "f7_reported_block": {
+   "calibration_n_pre": 2,
+   "production_n_pre": 3,
+   "why_it_matters": "sigma_f = sqrt(Var(a)(1/n_pre + 1)), so with 3 pre dates sigma_f is SMALLER than in the 2-pre-date placebo folds tau was calibrated on. The same physical change therefore scores HIGHER here than it would have in calibration: the production gate is slightly MORE sensitive than the threshold was calibrated for, which pushes the true false-alarm rate ABOVE the already-failing 0.0652.",
+   "median_sigma_f_ratio_2pre_over_3pre": 1.0606601717798212,
+   "flagged_px_at_tau": 256770,
+   "flagged_px_at_tau_rescaled_to_match_calibration_sensitivity": 246911,
+   "headline_uses": "tau as calibrated (no rescaling); the rescaled count is reported as a sensitivity, not substituted for the headline"
+  },
+  "f7_flagged_at_fitted_tau": 256770,
+  "verdict": "CONFIRMED. sigma_f shrinks with n_pre, so at n_pre=3 the same physical change scores 1.0607x HIGHER than it would have in the n_pre=2 calibration folds. The production gate is therefore MORE trigger-happy than tau was calibrated for, so the TRUE false-alarm rate is ABOVE the already-failing measured 0.0652. F7 states this and does NOT correct for it -- i.e. it reports the more favourable number as the headline while disclosing that the honest number is worse. That is a disclosure in the against-interest direction, but the headline FAR should be read as a LOWER BOUND on this gate's true FAR."
+ }
+}

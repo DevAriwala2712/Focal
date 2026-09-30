@@ -1,0 +1,262 @@
+{
+ "F1": {
+  "rule_10m": {
+   "pixel_far": 0.00026546675692536403,
+   "pixel_n": 7232544.0,
+   "pixel_point_in_ci": true,
+   "window_far": 0.0056065239551478085,
+   "window_n": 1962.0,
+   "window_point_in_ci": true,
+   "f9_pixel_num_over_den": 0.00026546675692536403,
+   "pixel_far_equals_num_over_den": true,
+   "f9_reduction_vs_ungated_pixel": -0.4030245815586628
+  },
+  "ungated_S_v1_sigma": {
+   "pixel_far": 0.4032900483155881,
+   "pixel_n": 3617880.0,
+   "pixel_point_in_ci": true,
+   "window_far": 0.8532110091743119,
+   "window_n": 981.0,
+   "window_point_in_ci": true,
+   "f9_pixel_num_over_den": 0.4032900483155881,
+   "pixel_far_equals_num_over_den": true,
+   "f9_reduction_vs_ungated_pixel": 0.0
+  },
+  "gate_v1": {
+   "pixel_far": 0.0004953176998684312,
+   "pixel_n": 3617880.0,
+   "pixel_point_in_ci": true,
+   "window_far": 0.007135575942915392,
+   "window_n": 981.0,
+   "window_point_in_ci": true,
+   "f9_pixel_num_over_den": 0.0004953176998684312,
+   "pixel_far_equals_num_over_den": true,
+   "f9_reduction_vs_ungated_pixel": -0.4027947306157197
+  },
+  "gate_v1_with_a5_sigma": {
+   "pixel_far": 0.0004953176998684312,
+   "pixel_n": 3617880.0,
+   "pixel_point_in_ci": true,
+   "window_far": 0.007135575942915392,
+   "window_n": 981.0,
+   "window_point_in_ci": true,
+   "f9_pixel_num_over_den": 0.0004953176998684312,
+   "pixel_far_equals_num_over_den": true,
+   "f9_reduction_vs_ungated_pixel": -0.4027947306157197
+  },
+  "gate_v2": {
+   "scored": false,
+   "status": "BLOCKED"
+  },
+  "_v1_vs_a5_identical_on_real_crop": {
+   "pixel_far_identical": true,
+   "window_far_identical": true,
+   "pixel_numerators": [
+    1792.0,
+    1792.0
+   ],
+   "numerators_identical": true
+  }
+ },
+ "F2": {
+  "_keep_rule_arithmetic": {
+   "reported": {
+    "block_sum_max_deviation_is_0": true,
+    "window_far_test_le_alpha": false,
+    "window_far_test": {
+     "estimate": 0.0652395514780836,
+     "lo": 0.04780674254466574,
+     "hi": 0.08498175581546036,
+     "numerator": 64.0,
+     "denominator": 981.0,
+     "blocks": 273,
+     "replicates": 2000,
+     "ci": 0.95,
+     "seed": 2024
+    },
+    "pixel_far_test": {
+     "estimate": 0.003639424193173903,
+     "lo": 0.0022063132957957574,
+     "hi": 0.005432409880921929,
+     "numerator": 13167.0,
+     "denominator": 3617880.0,
+     "blocks": 273,
+     "replicates": 2000,
+     "ci": 0.95,
+     "seed": 2024
+    },
+    "alpha": 0.05,
+    "verdict": "Block-sum test PASSES (max deviation 0). The scoring keep rule does NOT hold: the test-split window FAR point estimate is 0.0652, above alpha = 0.05. Its 95 % CI is [0.0478, 0.0850], which does contain alpha, but the pre-registered rule is stated on the point estimate and is therefore NOT met. F2's overall status is FAIL. Per configs/fix.yaml f2_gate_v2.block_sum_test.keep_rule, the condition that stops Wave 3 (F7) is a block-sum failure, and that did not happen; the FAR shortfall is a keep-rule failure for gate_v2's claim, not a Wave-3 stop.",
+    "exchangeability_caveat": "pixels and neighbouring windows are spatially correlated; exchangeability assumed across windows, not proven",
+    "wave_3_status": "not blocked by F2"
+   },
+   "alpha": 0.05,
+   "f9_estimate_exceeds_alpha": null
+  }
+ },
+ "F3": {
+  "estimator_normalised": {
+   "covered_px": 6663111.0,
+   "n_px": 7074856.0,
+   "reported_coverage": 0.9418016423231794,
+   "f9_covered_over_n": 0.9418016423231794,
+   "agrees": true,
+   "reported_gap_pp": -1.2698357676820593,
+   "f9_gap_pp": -1.2698357676820593,
+   "gap_agrees": true,
+   "within_2pp_of_nominal": true,
+   "f9_pooled_from_per_fold_folds": 0.9418016423231794,
+   "pooled_equals_fold_weighted_mean": true,
+   "f9_sum_of_fold_n_px": 7074856,
+   "fold_n_sums_to_pooled_n": true
+  },
+  "estimator_no_normalisation_same_sigma_method": {
+   "covered_px": 6069894.0,
+   "n_px": 7074856.0,
+   "reported_coverage": 0.8579530099269865,
+   "f9_covered_over_n": 0.8579530099269865,
+   "agrees": true,
+   "reported_gap_pp": -9.654699007301348,
+   "f9_gap_pp": -9.654699007301348,
+   "gap_agrees": true,
+   "within_2pp_of_nominal": false,
+   "f9_pooled_from_per_fold_folds": 0.8579530099269865,
+   "pooled_equals_fold_weighted_mean": true,
+   "f9_sum_of_fold_n_px": 7074856,
+   "fold_n_sums_to_pooled_n": true
+  }
+ },
+ "F5": {
+  "available_top_keys": [
+   "config_sha256",
+   "config_sha256_file",
+   "context_vs_non_allocating_methods",
+   "data",
+   "determinism",
+   "environment",
+   "evidence",
+   "experiment",
+   "finished_utc",
+   "headline",
+   "headline_other_classes",
+   "headline_primary_class",
+   "limitations",
+   "methods",
+   "oracle_vs_realistic_fraction",
+   "per_class",
+   "per_image",
+   "protocol",
+   "proxy_caveat",
+   "risk",
+   "runtime_seconds",
+   "started_utc",
+   "status",
+   "status_meaning",
+   "summary",
+   "verdict"
+  ],
+  "f9_all_datasets": {
+   "n": 118,
+   "delta": 0.008078493472185864,
+   "ci": [
+    0.0034706203836162358,
+    0.01409933875221179
+   ],
+   "n_sr_wins": 87
+  },
+  "f9_excluding_naip": {
+   "n": 56,
+   "delta": 0.0015916150720524122,
+   "ci": [
+    -0.0026134646747061814,
+    0.005321338265101551
+   ],
+   "n_sr_wins": 30,
+   "ci_spans_zero": true
+  },
+  "report_claims": {
+   "all": 0.0081,
+   "all_ci": [
+    0.0035,
+    0.0141
+   ],
+   "n_all": 118,
+   "no_naip": 0.0016,
+   "no_naip_ci": [
+    -0.0026,
+    0.0053
+   ],
+   "n_no_naip": 56
+  },
+  "f9_matches_report_all_4dp": true,
+  "f9_matches_report_no_naip_4dp": true
+ },
+ "F7": {
+  "per_class_area_arithmetic": {
+   "NO_CHANGE": {
+    "pixels": 4733514,
+    "reported_m2": 29584462.5,
+    "f9_px_times_6p25": 29584462.5,
+    "m2_agrees": true,
+    "km2_agrees": true
+   },
+   "CORE": {
+    "pixels": 17648,
+    "reported_m2": 110300.0,
+    "f9_px_times_6p25": 110300.0,
+    "m2_agrees": true,
+    "km2_agrees": true
+   },
+   "ALLOCATED": {
+    "pixels": 239122,
+    "reported_m2": 1494512.5,
+    "f9_px_times_6p25": 1494512.5,
+    "m2_agrees": true,
+    "km2_agrees": true
+   },
+   "UNSUPPORTED": {
+    "pixels": 46640,
+    "reported_m2": 291500.0,
+    "f9_px_times_6p25": 291500.0,
+    "m2_agrees": true,
+    "km2_agrees": true
+   },
+   "NO_DATA": {
+    "pixels": 205956,
+    "reported_m2": 1287225.0,
+    "f9_px_times_6p25": 1287225.0,
+    "m2_agrees": true,
+    "km2_agrees": true
+   }
+  },
+  "class_totals": {
+   "f9_sum_of_class_pixels": 5242880,
+   "reported_total": 5242880,
+   "agrees": true,
+   "f9_grid_product_2560x2048": 5242880,
+   "total_equals_grid": true
+  },
+  "mapped_change": {
+   "f9_core_plus_allocated_px": 256770,
+   "reported_v2_px": 256770,
+   "agrees": true,
+   "f9_km2": 1.6048125,
+   "reported_km2": 1.6048125,
+   "km2_agrees": true,
+   "f9_v2_minus_v1_px": 139186,
+   "reported_diff_px": 139186,
+   "f9_iou_from_intersection": 0.24481761048116252,
+   "reported_iou": 0.24481761048116252,
+   "iou_agrees": true,
+   "f9_in_v1_not_v2": 43960,
+   "f9_in_v2_not_v1": 183146
+  },
+  "tau_mutation": {
+   "tau_times_0p5": 287477,
+   "tau_fitted": 256770,
+   "tau_times_2": 123803
+  },
+  "tau_mutation_strictly_changes_output": true,
+  "tau_fitted_flagged_equals_mapped_change": true
+ }
+}
