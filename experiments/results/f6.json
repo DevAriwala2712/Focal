@@ -1,7 +1,8 @@
 {
   "status": "PASS",
   "evidence": "real",
-  "config_sha256": "7ee83389827340ed4e40b03917a7278d6bad11e2a6dac68460e8596c0111e7e6",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "config_sha256_note": "amended post-hoc: F1 found configs/fix.yaml as committed in F0 was not valid YAML (f9_checks block); the hash above is of the syntax-corrected file (no semantic change, no threshold touched). f6's own computation used the pre-fix file content, which was semantically identical to the post-fix file for every field f6 reads (f6_a2_report block untouched by the fix).",
   "source": "experiments/results/x2.json",
   "source_x2_config_sha256": "1f2b9d7d174dc0e606a8795427ec0d68e60761350c4e83866c0b3d92e8c67453",
   "finding": "B14 (selective reporting): RESULTS_EXCEPTIONAL.md reported only NAIP and SPOT (the 2/5 datasets where SR beat bicubic on PSNR) and omitted the pooled result and the Venus result. This file reports all 5 datasets, the pooled result, a NAIP-excluded sensitivity, and the hallucination-metric column.",
