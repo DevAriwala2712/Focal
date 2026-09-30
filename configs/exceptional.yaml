@@ -62,6 +62,27 @@ a5:
   also_report: old-sigma coverage, effective k that would give nominal coverage, simulation bias of old vs new sigma
   stable_pixel_definition: outside 1500 m disk around the published slide coordinates and outside the footprint; valid on all dates
   network: none (cached data only). If more dates are needed, say BLOCKED and name the dates
+  # ---- details added by agent A5 BEFORE its run (decision rule and failure modes: docs/adr-x5-noise-model.md) ----
+  noise:
+    sigma_floor: 0.005            # NDVI SD floor (variance = its square) so flat pixels do not get sigma = 0; fraction floored is reported
+    n_strata: 20                  # equal-count strata of the pre-mean NDVI for the stratified empirical-Bayes prior
+    window_m: 90                  # local window in metres; converted to an odd pixel count per grid (9 px at 10 m, 37 px at 2.5 m)
+    nu0_max: 10000.0              # cap on the prior degrees of freedom (= full shrinkage to the prior mean)
+    floor_rel_median: 1.0e-5      # s2 clip (relative to the median) before taking logs in the nu0 moment estimator
+    estimators: [raw, window, eb_stratified, eb_window]
+  selection:                      # picks the estimator; uses NO Wayanad data (E6 12-date cache, other AOI, 10 m, B04/B08 only)
+    replicates: 100
+    n_pool_dates: 3               # 3 pool dates + 1 held-out date per replicate, drawn without replacement from the 12 clear pre dates
+    seed: 2024
+    criterion: mean held-out Gaussian negative log-likelihood of d under N(0, sigma^2), sigma floored at noise.sigma_floor
+    tie_rule: winner = lowest mean NLL; if the paired per-replicate NLL difference vs the runner-up has a 95 % CI containing 0, take the simpler of the two (order raw < window < eb_stratified < eb_window)
+    stable: valid on the 4 used dates and outside the configured E6 suspected disk (no std truncation, which would bias variance estimates)
+  evaluation:
+    headline: leave-one-date-out over the 3 Wayanad pre dates (n_pre = 2 for the formula, 1 dof), pooled over the 3 folds, estimator chosen by `selection`, k = 2
+    secondary: [pre_mean_vs_december (n_pre = 3; confounded by season), stable_empirical_comparator (spatial cross-fit), k_eff (spatial cross-fit)]
+    tile_px_2p5m: 128             # checkerboard tiles for cross-fitting and the block bootstrap unit (= statistics.bootstrap.block_px_10m at 2.5 m)
+    stable_disk_points: [crown, mundakkai, chooralmala_bridge]   # keys of configs/wayanad_evidence.yaml aoi.plausibility_points; radius plausibility_radius_m
+    old_v1_reference: {sigma_pre_median: 0.0326, sigma_post_median: 0.0022}   # from diagnosis_verified, re-measured by the script
 
 # ---------------------------------------------------------------- A6 season and latency
 a6:
