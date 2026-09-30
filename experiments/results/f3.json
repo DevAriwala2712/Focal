@@ -451,7 +451,8 @@
   "risk": "f3",
   "started_utc": "2026-09-30T15:12:46.501329+00:00",
   "finished_utc": "2026-09-30T15:13:50.775041+00:00",
-  "config_sha256": "192345cd156583c61789d171b673ecbd00347eaf8f485811f6abfb9ad5a905b3",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "config_sha256_note": "amended post-hoc: F3 independently fixed the same fix.yaml YAML bug F1 found (f9_checks block), but without F1's explanatory comment; the merged fix-v2 branch kept F1's commented version. Hash above is of that final merged file. No field F3 reads (f3_noise_v2 block) differs between the two fixes.",
   "environment": {
     "platform": "macOS-27.0.1-arm64-arm-64bit",
     "machine": "arm64",
