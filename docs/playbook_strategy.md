@@ -18,7 +18,7 @@ The playbook's page 4 asks teams to lead with the problem owner's numbers. Its m
 | --- | --- | --- |
 | Sentinel-2 10 m input; requested output <4 m | Supplied NTRO statement | State the design target: ×4 gives a nominal 2.5 m output grid, with **inferred** detail. |
 | 10 to 30 m medium-resolution range | Supplied NTRO background | Context only; TrustSR's implemented input scope is the four 10 m bands. |
-| 2024-07-30 Wayanad event; AOI centre ~11.782°N, 76.233°E | Project brief | Identify the showcase, not a surveyed damage footprint. |
+| 2024-07-30 Wayanad event; AOI centre 11.490°N, 76.160°E | Project brief, **corrected** (the brief's 11.782°N, 76.233°E is ~34 km north of the slide; see `configs/fix.yaml` `aoi_center` and B16) | Identify the showcase, not a surveyed damage footprint. |
 | 147 STAC items, 73 acquisitions, 12 accepted pre-event dates; first accepted post-event 2024-12-06 | [R2 audit](../RISK_REPORT.md#r2-clear-date-audit) under its stated SCL policy | Show the date and the 129-day gap beside the imagery. |
 | 0.1208 s median for one 128-pixel inference tile; 100.48 MiB peak PyTorch allocation | [R1 benchmark](../RISK_REPORT.md#r1-what-was-actually-measured) on a 6 GB RTX 4050 | Describe only that run. It does not establish a physical 4 GB deployment or whole-AOI latency. |
 | WorldStrat: 3,928 AOIs; 71 in India, 125 in the defined South Asia set | [R3 audit](../RISK_REPORT.md#r3-actual-region-counts-and-storage) | Dataset availability, not usable training-pair count or model accuracy. |
