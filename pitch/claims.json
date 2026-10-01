@@ -1,0 +1,226 @@
+{
+  "claims": [
+    {
+      "id": "F1.ungated.pixel_far",
+      "plain_text": "ungated SR change detection flags",
+      "technical_text": "Pixel false alarm rate for ungated SR change detection on a no-event pair",
+      "unit": "pixel",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f1.json",
+      "json_pointer": "/gates/ungated_S_v1_sigma/test_split/pooled_pixel_far/estimate",
+      "source_sha256": "d1553ae37b2545d7c2ca93fa816421a0f689711b219c0966bdc2ff5721311a5d",
+      "ci_95": {
+        "pointer_lo": "/gates/ungated_S_v1_sigma/test_split/pooled_pixel_far/lo",
+        "pointer_hi": "/gates/ungated_S_v1_sigma/test_split/pooled_pixel_far/hi",
+        "lo": 0.3547891780491731,
+        "hi": 0.4592942442443348
+      },
+      "baseline": null,
+      "denominator": "/gates/ungated_S_v1_sigma/test_split/pooled_pixel_far/denominator",
+      "value": 0.4032900483155881,
+      "denominator_value": 3617880.0
+    },
+    {
+      "id": "F1.gate_v1.pixel_far",
+      "plain_text": "the gated product flags",
+      "technical_text": "Pixel false alarm rate for gate v1 on a no-event pair",
+      "unit": "pixel",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f1.json",
+      "json_pointer": "/gates/gate_v1/test_split/pooled_pixel_far/estimate",
+      "source_sha256": "d1553ae37b2545d7c2ca93fa816421a0f689711b219c0966bdc2ff5721311a5d",
+      "ci_95": {
+        "pointer_lo": "/gates/gate_v1/test_split/pooled_pixel_far/lo",
+        "pointer_hi": "/gates/gate_v1/test_split/pooled_pixel_far/hi",
+        "lo": 8.538559519841478e-05,
+        "hi": 0.0010969538995693085
+      },
+      "baseline": null,
+      "denominator": "/gates/gate_v1/test_split/pooled_pixel_far/denominator",
+      "value": 0.0004953176998684312,
+      "denominator_value": 3617880.0
+    },
+    {
+      "id": "F2.window_far",
+      "plain_text": "Gate v2 test-split window FAR",
+      "technical_text": "Test-split window FAR for Gate v2 against a required \u2264 0.05",
+      "unit": "window",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "FAIL",
+      "source_file": "experiments/results/f2.json",
+      "json_pointer": "/scoring_in_f1_harness/normalised_f3/pooled_window_far_test/estimate",
+      "source_sha256": "714a00310d242ca57948b4c89275d0c2d267b0370f25a0bc97f04cc78ee298eb",
+      "ci_95": {
+        "pointer_lo": "/scoring_in_f1_harness/normalised_f3/pooled_window_far_test/lo",
+        "pointer_hi": "/scoring_in_f1_harness/normalised_f3/pooled_window_far_test/hi",
+        "lo": 0.04780674254466574,
+        "hi": 0.08498175581546036
+      },
+      "baseline": 0.05,
+      "denominator": "/scoring_in_f1_harness/normalised_f3/pooled_window_far_test/denominator",
+      "value": 0.0652395514780836,
+      "denominator_value": 981.0
+    },
+    {
+      "id": "F3.coverage.normalised",
+      "plain_text": "Noise model v2 coverage",
+      "technical_text": "Coverage of the noise model v2 keep rule",
+      "unit": "percentage",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f3.json",
+      "json_pointer": "/measurements/wayanad/keep_rule/coverage",
+      "source_sha256": "62cea54f1bfba79ad7d55d4c981c1da0c43685d0e765597c91d6b46f872de28c",
+      "ci_95": {
+        "pointer_lo": "/measurements/wayanad/keep_rule/ci95/0",
+        "pointer_hi": "/measurements/wayanad/keep_rule/ci95/1",
+        "lo": 0.9327335140073472,
+        "hi": 0.9498293133738103
+      },
+      "baseline": 0.9545,
+      "denominator": "/measurements/wayanad/keep_rule/n_px",
+      "value": 0.9418016423231794
+    },
+    {
+      "id": "F5.iou.with_naip",
+      "plain_text": "SR-informed ranking IoU with NAIP",
+      "technical_text": "Headline +0.0081 IoU for SR-informed ranking with NAIP included",
+      "unit": "IoU",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f5.json",
+      "json_pointer": "/headline/oracle/all_datasets/mean",
+      "source_sha256": "3499006ecb235038b920f8c8438227a84520897a03cc44367edfbb8dfa3a8b8a",
+      "ci_95": {
+        "pointer_lo": "/headline/oracle/all_datasets/lo",
+        "pointer_hi": "/headline/oracle/all_datasets/hi",
+        "lo": 0.003470620383616239,
+        "hi": 0.01409933875221179
+      },
+      "baseline": 0.0,
+      "denominator": "/headline/oracle/all_datasets/n",
+      "value": 0.008078493472185864,
+      "denominator_value": 118
+    },
+    {
+      "id": "F5.iou.without_naip",
+      "plain_text": "SR-informed ranking IoU excluding NAIP",
+      "technical_text": "Headline IoU for SR-informed ranking with NAIP excluded",
+      "unit": "IoU",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f5.json",
+      "json_pointer": "/headline/oracle/excluding_naip/mean",
+      "source_sha256": "3499006ecb235038b920f8c8438227a84520897a03cc44367edfbb8dfa3a8b8a",
+      "ci_95": {
+        "pointer_lo": "/headline/oracle/excluding_naip/lo",
+        "pointer_hi": "/headline/oracle/excluding_naip/hi",
+        "lo": -0.002613464674706179,
+        "hi": 0.005321338265101551
+      },
+      "baseline": 0.0,
+      "denominator": "/headline/oracle/excluding_naip/n",
+      "value": 0.0015916150720524122,
+      "denominator_value": 56
+    },
+    {
+      "id": "F6.psnr.pooled",
+      "plain_text": "SR does not beat bicubic on PSNR pooled",
+      "technical_text": "Pooled SR vs bicubic PSNR across all datasets",
+      "unit": "dB",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f6.json",
+      "json_pointer": "/pooled_all_datasets/recomputed/mean",
+      "source_sha256": "119d6839e0bb3f334238e561cc33a721730741d151981b914dd420d66abb415b",
+      "ci_95": {
+        "pointer_lo": "/pooled_all_datasets/recomputed/lo",
+        "pointer_hi": "/pooled_all_datasets/recomputed/hi",
+        "lo": -0.1574637956167713,
+        "hi": -0.03696577159967953
+      },
+      "baseline": 0.0,
+      "denominator": "/pooled_all_datasets/recomputed/n",
+      "value": -0.09707162370791389,
+      "denominator_value": 178
+    },
+    {
+      "id": "F6.psnr.without_naip",
+      "plain_text": "SR vs bicubic PSNR excluding NAIP",
+      "technical_text": "Pooled SR vs bicubic PSNR excluding NAIP dataset",
+      "unit": "dB",
+      "evidence_label": "real",
+      "f9_verdict": "keep",
+      "status": "PASS",
+      "source_file": "experiments/results/f6.json",
+      "json_pointer": "/naip_excluded_sensitivity/recomputed/mean",
+      "source_sha256": "119d6839e0bb3f334238e561cc33a721730741d151981b914dd420d66abb415b",
+      "ci_95": {
+        "pointer_lo": "/naip_excluded_sensitivity/recomputed/lo",
+        "pointer_hi": "/naip_excluded_sensitivity/recomputed/hi",
+        "lo": -0.34498654148470465,
+        "hi": -0.20260852754566436
+      },
+      "baseline": 0.0,
+      "denominator": "/naip_excluded_sensitivity/recomputed/n",
+      "value": -0.2750402373233242,
+      "denominator_value": 116
+    }
+  ],
+  "forbidden": [
+    {
+      "pattern": "1.60 km\u00b2",
+      "reason": "F7 mapped area presented as a detection"
+    },
+    {
+      "pattern": "1.60 km2",
+      "reason": "F7 mapped area presented as a detection"
+    },
+    {
+      "pattern": "89.4 % of boundary blocks differ",
+      "reason": "presented as SR adding information"
+    },
+    {
+      "pattern": "89.4%",
+      "reason": "presented as SR adding information"
+    },
+    {
+      "pattern": "block-sum PASS",
+      "reason": "as a quality result"
+    },
+    {
+      "pattern": "made the rule harder",
+      "reason": "e_b escalation"
+    },
+    {
+      "pattern": "11.8 % placebo FAR",
+      "reason": "x3/x4/x9 number"
+    },
+    {
+      "pattern": "11.8%",
+      "reason": "x3/x4/x9 number"
+    },
+    {
+      "pattern": "fine-tuning",
+      "reason": "physical-4 GB or fine-tuning claim"
+    }
+  ],
+  "pairs": [
+    [
+      "F5.iou.with_naip",
+      "F5.iou.without_naip"
+    ],
+    [
+      "F2.window_far"
+    ]
+  ]
+}
