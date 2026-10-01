@@ -1084,9 +1084,13 @@ F11_JSON = ROOT / 'experiments/results/f11.json'
 F7_JSON = ROOT / 'experiments/results/f7.json'
 ```
 
-Immediately after the existing `COMPARABLE_PAIRS = {...}` and `INCOMPARABLE_PAIRS = {...}` dict
-definitions (leave those two untouched — they are now dead code in this copy but their presence
-costs nothing and keeps the diff minimal and auditable), add:
+F7's `INCOMPARABLE_PAIRS` dict is still read later in this clone (the preserved `unsupported_report`
+block looks up `INCOMPARABLE_PAIRS[('v1:UNSUPPORTED', 'v2:UNSUPPORTED')]` for its `'reason'` field,
+per Step 3d) — leave `INCOMPARABLE_PAIRS` exactly as-is. But `COMPARABLE_PAIRS`, the
+`assert_well_defined_comparison` function, and the `compare_sets` function become genuinely unused
+once Step 3d replaces their only call site — **delete all three** (the `COMPARABLE_PAIRS = {...}`
+dict, the `assert_well_defined_comparison` function, and the `compare_sets` function) rather than
+leaving dead code. Immediately after the now-solo `INCOMPARABLE_PAIRS = {...}` dict, add:
 
 ```python
 COMPARABLE_PAIRS_V3 = {
