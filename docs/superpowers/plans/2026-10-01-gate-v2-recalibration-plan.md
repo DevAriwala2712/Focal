@@ -101,9 +101,12 @@ def test_endmember_sensitivity_keep_rule_requires_all_three_conditions():
 
 
 def test_tau_recomputation_is_not_verbatim_from_f1_or_f2():
+    """The method must explain that tau is RECOMPUTED, not taken verbatim -- explaining the
+    rejection necessarily uses the word 'verbatim' in a negated sentence ('never ... verbatim'),
+    so this checks for the correct instruction phrase rather than absence of the word itself."""
     cfg = yaml.safe_load(CONFIG.read_text(encoding='utf-8'))
     method = cfg['tau_recomputation']['method']
-    assert 'verbatim' not in method.lower()
+    assert 'never' in method.lower() and 'verbatim' in method.lower()
     assert 'recomputed' in method.lower() or 'own score' in method.lower()
 
 
