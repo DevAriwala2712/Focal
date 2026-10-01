@@ -568,9 +568,13 @@ JSON and treat F11 as BLOCKED per its stop rule.
 
 - [ ] **Step 7: Commit**
 
+`data/` is gitignored (the whole repo's imagery/model cache lives outside version control, shared
+across worktrees via a symlink to the main checkout) — the new `.npy` cache files are NOT committed,
+same as every prior task in this program (F1's own newly-fetched 10 m bands weren't committed
+either). Only the code, test, and result JSON are tracked:
+
 ```bash
 git add experiments/f11_extend_pool.py tests/test_f11_extend_pool.py experiments/results/f11_pool_extension.json
-git add data/experiments-cache/wayanad_evidence/per_date_ndvi/*.npy
 git commit -m "F11: extend SR-dependent placebo pool via real SR inference on new dates"
 ```
 
