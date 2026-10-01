@@ -37,6 +37,74 @@ def test_run_sr_for_dates_returns_one_array_per_date(monkeypatch):
         assert arr.dtype == np.float32
 
 
+def test_main_cache_detection_skips_already_cached_candidate(tmp_path, monkeypatch):
+    """Regression test for the exact logic that broke: main()'s existing/candidates/need
+    computation. Pre-creates .npy stand-ins for the 3 original EXISTING_SR_POOL dates plus one
+    candidate date ('2024-02-05'), then proves that candidate is recognized as already-done --
+    excluded from `candidates` and never passed to run_sr_for_dates -- while the other, uncached
+    candidates are still processed."""
+    import yaml
+
+    from experiments import f11_extend_pool as mod
+
+    cache_dir = tmp_path / 'per_date_ndvi'
+    cache_dir.mkdir(parents=True)
+
+    candidate_dates = ['2024-02-05', '2024-02-10', '2024-02-15']
+    already_cached_candidate = '2024-02-05'
+
+    # Pre-create cache files for the 3 original pool dates + 1 candidate already "cached".
+    for d in mod.EXISTING_SR_POOL + [already_cached_candidate]:
+        np.save(cache_dir / f'{d}_dihedral_means.npy', np.zeros((8, 2, 2), dtype=np.float32))
+
+    f11_config = {
+        'pool_extension': {
+            'minimum_n': 4,
+            'target_n': 6,
+            'candidate_dates': candidate_dates,
+            'crop': [0, 10, 0, 10],
+        }
+    }
+    config_path = tmp_path / 'f11_f12.yaml'
+    config_path.write_text(yaml.safe_dump(f11_config), encoding='utf-8')
+
+    monkeypatch.setattr(mod, 'CACHE_DIR', cache_dir)
+    monkeypatch.setattr(mod, 'FIX11_CONFIG', config_path)
+    monkeypatch.setattr(mod, 'digest', lambda path: 'deadbeef')
+    monkeypatch.setattr(mod.C, 'load', lambda: ({}, tmp_path, 'hash'))
+    monkeypatch.setattr(mod.C, 'cache', lambda cfg, root: tmp_path)
+    monkeypatch.setattr(mod, 'write_json', lambda path, value: None)
+
+    sr_calls = []
+
+    def fake_run_sr_for_dates(cfg, root, cache, dates, crop):
+        sr_calls.append(list(dates))
+        out = {}
+        for d in dates:
+            arr = np.zeros((8, 2, 2), dtype=np.float32)
+            mod.write_dihedral_cache(cache_dir, d, arr)
+            out[d] = arr
+        return out
+
+    monkeypatch.setattr(mod, 'run_sr_for_dates', fake_run_sr_for_dates)
+
+    result = mod.main(verbose=False)
+
+    # The already-cached candidate must be recognized as existing, not re-processed.
+    assert already_cached_candidate in result['existing_pool']
+    processed_dates = [p['date'] for p in result['newly_processed']]
+    assert already_cached_candidate not in processed_dates
+    assert all(already_cached_candidate not in call for call in sr_calls)
+
+    # The 3 original dates + the 1 cached candidate = 4 existing pool dates.
+    assert sorted(result['existing_pool']) == sorted(mod.EXISTING_SR_POOL + [already_cached_candidate])
+
+    # Only the genuinely uncached candidates should ever be passed to run_sr_for_dates.
+    for call in sr_calls:
+        for d in call:
+            assert d in {'2024-02-10', '2024-02-15'}
+
+
 def test_cache_write_matches_existing_dihedral_format(tmp_path):
     """The written .npy file must load back as (8, H, W) float32 -- the exact format
     trustsr.placebo_v2._load_dihedral already expects, so no downstream code needs a format branch."""

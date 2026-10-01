@@ -91,7 +91,7 @@ def main(verbose=True):
     cfg_ev, ev_root, ev_hash = C.load()
     cache = C.cache(cfg_ev, ev_root)
 
-    existing = [d for d in EXISTING_SR_POOL + pe['candidate_dates']
+    existing = [d for d in dict.fromkeys(EXISTING_SR_POOL + pe['candidate_dates'])
                 if (CACHE_DIR / f'{d}_dihedral_means.npy').is_file()]
     need = pe['target_n'] - len(existing)
     candidates = [d for d in pe['candidate_dates'] if d not in existing]
