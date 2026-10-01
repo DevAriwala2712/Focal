@@ -1,0 +1,1257 @@
+{
+  "status": "FAIL",
+  "evidence": "real",
+  "experiment": "f2_gate_v2",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "wayanad_evidence_config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08",
+  "aoi_center": {
+    "lat": 11.49,
+    "lon": 76.16
+  },
+  "crop_10m_rows_cols": [
+    256,
+    896,
+    128,
+    640
+  ],
+  "sr_pool_dates": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26"
+  ],
+  "event_date": "2024-07-30",
+  "bands_unmixed": [
+    "B04",
+    "B08"
+  ],
+  "band_order": [
+    "B04",
+    "B03",
+    "B02",
+    "B08"
+  ],
+  "grid": {
+    "blocks_10m": [
+      640,
+      512
+    ],
+    "px_2p5m": [
+      2560,
+      2048
+    ],
+    "window_10m_px": 16,
+    "tile_px_2p5m": 128,
+    "window_px_2p5m": 64,
+    "n_windows_total": 1280,
+    "n_windows_calibration": 640,
+    "n_windows_test": 640
+  },
+  "endmembers": {
+    "headline_all_3_pre_dates": {
+      "e_v": [
+        0.024033333485325176,
+        0.040966667234897614,
+        0.028066667417685192,
+        0.25659999748071033
+      ],
+      "e_b": [
+        0.11133333419760069,
+        0.09586666772762933,
+        0.07623333359758058,
+        0.1819000020623207
+      ],
+      "e_v_robust_sd": [
+        0.005189100390300151,
+        0.008450817611068483,
+        0.006671701553836468,
+        0.048728127434849736
+      ],
+      "e_b_robust_sd": [
+        0.04487335925474764,
+        0.0364472502209246,
+        0.024289930621534582,
+        0.07086827928125856
+      ],
+      "e_v_count": 178141,
+      "e_b_count": 332,
+      "n_valid_outside_exclusion": 801632,
+      "n_pre_dates": 3,
+      "rules": {
+        "e_v": "valid on all 3 pre dates, outside exclusion, mean pre NDVI >= 0.8, per-pixel NDVI std across pre dates <= 0.05",
+        "e_b": "valid on all 3 pre dates, outside exclusion, NDVI <= 0.3 on EVERY pre date",
+        "statistic": "per-band median of the temporal-mean reflectance over the selected pixels; robust SD = 1.4826 * MAD",
+        "never_from_labels": "no label, class map or post-event array is an argument of estimate_endmembers"
+      }
+    },
+    "per_fold_used_for_scoring": {
+      "2024-01-16": {
+        "e_v": [
+          0.022300000302493572,
+          0.03879999928176403,
+          0.025200000032782555,
+          0.25
+        ],
+        "e_b": [
+          0.09629999846220016,
+          0.0816000010818243,
+          0.06479999795556068,
+          0.164900004863739
+        ],
+        "e_v_robust_sd": [
+          0.00459606047719717,
+          0.007264741466939449,
+          0.0051891008505597705,
+          0.04581234226226807
+        ],
+        "e_b_robust_sd": [
+          0.04351430650055408,
+          0.027724622611328957,
+          0.018829018391668794,
+          0.07042350463941693
+        ],
+        "e_v_count": 399294,
+        "e_b_count": 747,
+        "n_valid_outside_exclusion": 811766,
+        "n_pre_dates": 2,
+        "rules": {
+          "e_v": "valid on all 2 pre dates, outside exclusion, mean pre NDVI >= 0.8, per-pixel NDVI std across pre dates <= 0.05",
+          "e_b": "valid on all 2 pre dates, outside exclusion, NDVI <= 0.3 on EVERY pre date",
+          "statistic": "per-band median of the temporal-mean reflectance over the selected pixels; robust SD = 1.4826 * MAD",
+          "never_from_labels": "no label, class map or post-event array is an argument of estimate_endmembers"
+        }
+      },
+      "2024-01-21": {
+        "e_v": [
+          0.02290000021457672,
+          0.03944999910891056,
+          0.027049999684095383,
+          0.25449999421834946
+        ],
+        "e_b": [
+          0.10649999976158142,
+          0.09360000118613243,
+          0.07610000297427177,
+          0.17320000380277634
+        ],
+        "e_v_robust_sd": [
+          0.005633881475776433,
+          0.009192118192836642,
+          0.007412999834306538,
+          0.05307707268297672
+        ],
+        "e_b_robust_sd": [
+          0.045515817242860794,
+          0.03558239478617906,
+          0.024092254639416933,
+          0.0781330170661211
+        ],
+        "e_v_count": 109657,
+        "e_b_count": 411,
+        "n_valid_outside_exclusion": 814334,
+        "n_pre_dates": 2,
+        "rules": {
+          "e_v": "valid on all 2 pre dates, outside exclusion, mean pre NDVI >= 0.8, per-pixel NDVI std across pre dates <= 0.05",
+          "e_b": "valid on all 2 pre dates, outside exclusion, NDVI <= 0.3 on EVERY pre date",
+          "statistic": "per-band median of the temporal-mean reflectance over the selected pixels; robust SD = 1.4826 * MAD",
+          "never_from_labels": "no label, class map or post-event array is an argument of estimate_endmembers"
+        }
+      },
+      "2024-01-26": {
+        "e_v": [
+          0.02474999986588955,
+          0.04169999994337559,
+          0.028750000521540642,
+          0.2564999982714653
+        ],
+        "e_b": [
+          0.10889999940991402,
+          0.09589999914169312,
+          0.07694999873638153,
+          0.18200000375509262
+        ],
+        "e_v_robust_sd": [
+          0.0054856189660727975,
+          0.009043861206248402,
+          0.007487131089158355,
+          0.05055666524916887
+        ],
+        "e_b_robust_sd": [
+          0.04262475353479385,
+          0.03543414332270622,
+          0.02379572962000966,
+          0.06879263360202312
+        ],
+        "e_v_count": 122464,
+        "e_b_count": 337,
+        "n_valid_outside_exclusion": 822529,
+        "n_pre_dates": 2,
+        "rules": {
+          "e_v": "valid on all 2 pre dates, outside exclusion, mean pre NDVI >= 0.8, per-pixel NDVI std across pre dates <= 0.05",
+          "e_b": "valid on all 2 pre dates, outside exclusion, NDVI <= 0.3 on EVERY pre date",
+          "statistic": "per-band median of the temporal-mean reflectance over the selected pixels; robust SD = 1.4826 * MAD",
+          "never_from_labels": "no label, class map or post-event array is an argument of estimate_endmembers"
+        }
+      }
+    },
+    "exclusion_geometry": "1500 m disks around configs/wayanad_evidence.yaml plausibility_points union experiments/wayanad_evidence/outputs/footprint.tif, via trustsr.placebo_v2.exclusion_mask_10m (reused, not redefined)",
+    "n_excluded_10m_px_crop": 173171,
+    "n_excluded_10m_px_full_aoi": 186987,
+    "estimated_on": "the whole 1024x1024 10 m AOI (not only F1's 640x512 crop), pre-event dates only",
+    "sensitivity_plus_minus_1_robust_sd": {
+      "baseline": 3471.0,
+      "perturbations": {
+        "e_v_plus_1sd": {
+          "value": 14496.0,
+          "delta": 11025.0,
+          "relative_delta": 3.1763180639585133
+        },
+        "e_v_minus_1sd": {
+          "value": 698.0,
+          "delta": -2773.0,
+          "relative_delta": -0.7989052146355518
+        },
+        "e_b_plus_1sd": {
+          "value": 27769.0,
+          "delta": 24298.0,
+          "relative_delta": 7.000288101411697
+        },
+        "e_b_minus_1sd": {
+          "value": 3602.0,
+          "delta": 131.0,
+          "relative_delta": 0.03774128493229617
+        }
+      },
+      "max_abs_delta": 24298.0,
+      "max_relative_delta": 7.000288101411697,
+      "bands_indices": [
+        0,
+        3
+      ],
+      "note": "flagged (CORE|ALLOCATED) 2.5 m pixel count on the 2024-01-16 placebo fold with tau and lam held fixed, recomputed with each endmember shifted by +/- 1 robust SD (1.4826*MAD) in every band"
+    },
+    "never_from_labels": {
+      "apply_gate_v2_params": [
+        "y_pre",
+        "y_post",
+        "d_sr",
+        "e_v",
+        "e_b",
+        "sigma_bands",
+        "nodata",
+        "tau",
+        "lam",
+        "window_size",
+        "k_unsupported",
+        "sigma_sr",
+        "bands_indices",
+        "scale",
+        "check_sr"
+      ],
+      "tau_is_required_positional": true,
+      "estimate_endmembers_params": [
+        "refl_pre",
+        "valid_pre",
+        "ndvi_pre",
+        "exclude",
+        "ndvi_high",
+        "ndvi_low",
+        "stable_std_max",
+        "min_count"
+      ],
+      "estimate_endmembers_has_no_label_argument": true
+    },
+    "ndvi_low_used": 0.3,
+    "ndvi_low_ceiling_table": [
+      {
+        "ndvi_low": 0.2,
+        "e_b_count": 8,
+        "e_b": null,
+        "meets_min_count": false
+      },
+      {
+        "ndvi_low": 0.25,
+        "e_b_count": 80,
+        "e_b": null,
+        "meets_min_count": false
+      },
+      {
+        "ndvi_low": 0.3,
+        "e_b_count": 332,
+        "e_b": [
+          0.11133333419760069,
+          0.09586666772762933,
+          0.07623333359758058,
+          0.1819000020623207
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.35,
+        "e_b_count": 1182,
+        "e_b": [
+          0.08853333195050557,
+          0.07649999981125197,
+          0.06363333202898502,
+          0.16290000081062317
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.4,
+        "e_b_count": 2554,
+        "e_b": [
+          0.08290000011523566,
+          0.07419999937216441,
+          0.06066666605571906,
+          0.1652000000079473
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.45,
+        "e_b_count": 5094,
+        "e_b": [
+          0.07813333347439766,
+          0.07125000034769377,
+          0.058200000474850334,
+          0.17226666708787283
+        ],
+        "meets_min_count": true
+      },
+      {
+        "ndvi_low": 0.5,
+        "e_b_count": 9455,
+        "e_b": [
+          0.07316666593154271,
+          0.06846666584412257,
+          0.055266667157411575,
+          0.17933333416779837
+        ],
+        "meets_min_count": true
+      }
+    ]
+  },
+  "preregistration_deviations": [
+    {
+      "item": "configs/fix.yaml f2_gate_v2.endmembers.e_b: 'pre-event pixels with NDVI <= 0.2, valid on all pre dates, outside disks+footprint'",
+      "problem": "On this AOI in January the rule selects almost nothing. Over the whole 1024x1024 AOI, outside the disks + footprint and valid on all three pre dates, only 8 pixels have NDVI <= 0.2 on every date (0 pixels inside F1's 640x512 crop). The Western Ghats AOI is evergreen; the only large bare surface is the landslide scar itself, which the exclusion geometry removes by construction -- and which must be removed, because using it would make e_b a label (B12).",
+      "resolution": "The NDVI ceiling was escalated deterministically in 0.05 steps from the pre-registered 0.20 until at least 100 qualifying pixels existed. The first ceiling that qualified is 0.3. The full count/endmember table at every ceiling is in endmembers.ndvi_low_ceiling_table.",
+      "when": "decided and executed BEFORE any tau, block-sum or FAR number was computed in this run; no threshold was moved after seeing a result",
+      "consequence_stated_plainly": "e_b at NDVI <= 0.3 is the darkest, least-vegetated land in the AOI, NOT true bare ground. It sits closer to e_v than a real soil/rock endmember would, which SHORTENS the mixing line and therefore INFLATES f for a given spectral change. The fraction f reported by this gate is an upper-leaning estimate of vegetation-loss fraction on this AOI and must not be read as a calibrated area."
+    }
+  ],
+  "sigma_f": {
+    "method": "first-order error propagation through the unmixing; Var(f) = Var(a)*(1/n_pre+1), Var(a) = (sR^2 dR^2 + sN^2 dN^2)/|d|^4",
+    "sigma_band_source": "per-pixel temporal std (ddof=1) of the pre-date reflectance, floored at the scene median of that statistic",
+    "sigma_floor_per_band_normalised": {
+      "2024-01-16": [
+        0.0016263467852701873,
+        0.006363973927614572
+      ],
+      "2024-01-21": [
+        0.0029698487043617965,
+        0.006929647854903537
+      ],
+      "2024-01-26": [
+        0.0024041629232716888,
+        0.007636756069082934
+      ]
+    },
+    "bootstrap_alternative": "not used; see docs/adr-f2-gate-v2.md"
+  },
+  "tau": {
+    "value": 3.8891176504391876,
+    "alpha": 0.05,
+    "n_calibration": 981,
+    "k": 933,
+    "tau": 3.8891176504391876,
+    "exceedance_upper_bound": 0.04989816700610998,
+    "formula": "tau = T_(k), k = ceil((n+1)(1-alpha)) (split conformal, one-sided)",
+    "provenance": "ceil((n+1)(1-alpha))-th order statistic of the per-160 m-window max of gate_v2's OWN score s = f/sigma_f, over F1's three leave-one-date-out PLACEBO folds, restricted to the CALIBRATION (even-tile) half of the checkerboard split. Null-event data only: no post-event date is loadable in this code path (B1 guard).",
+    "value_no_normalisation_track": 3.5282762257764513,
+    "f1_export_consumed": {
+      "path": "data/experiments-cache/f1_calibration_scores.npz",
+      "sha256": "53a2fe8a3a7852d7648d6d8d17abaf982b1435d23ffb0afcd9fda8effd2679e4",
+      "sha256_matches_f1_json": true,
+      "n_scores": 981,
+      "tau_if_taken_verbatim_from_this_file": 119.90589141845703,
+      "why_not_used_verbatim": "F1 exported max(d/sigma_v1) per window -- an SR-NDVI z-score, whose units and scale (range -25.86 to 255.60) are not those of gate_v2's unmixing score f/sigma_f. F1's own docstring says so (\"gate_v2's own score (unmixing f/sigma_f) does not exist yet\"). Split conformal is only valid when calibration and test scores come from the SAME score function, so tau is recomputed with gate_v2's score on EXACTLY F1's folds, splits and window grid. The verbatim number is reported above for transparency; applying it would make the gate flag nothing and produce a vacuous FAR of 0."
+    }
+  },
+  "lambda": {
+    "value": 0.0,
+    "grid": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "curve": [
+      {
+        "lam": 0.0,
+        "split_half_jaccard_per_fold": [
+          0.7394969226652395,
+          0.7682917807205741,
+          0.729000039015255
+        ],
+        "mean_jaccard": 0.7455962474670229
+      },
+      {
+        "lam": 0.1,
+        "split_half_jaccard_per_fold": [
+          0.7394969226652395,
+          0.7680955727336612,
+          0.7291349642982559
+        ],
+        "mean_jaccard": 0.7455758198990523
+      },
+      {
+        "lam": 0.2,
+        "split_half_jaccard_per_fold": [
+          0.7398461023753764,
+          0.7677032873571719,
+          0.7278540237055521
+        ],
+        "mean_jaccard": 0.7451344711460335
+      },
+      {
+        "lam": 0.3,
+        "split_half_jaccard_per_fold": [
+          0.7398461023753764,
+          0.7656792494644308,
+          0.7278540237055521
+        ],
+        "mean_jaccard": 0.744459791848453
+      },
+      {
+        "lam": 0.4,
+        "split_half_jaccard_per_fold": [
+          0.617240950366961,
+          0.676215856095936,
+          0.6143086113944339
+        ],
+        "mean_jaccard": 0.6359218059524436
+      },
+      {
+        "lam": 0.5,
+        "split_half_jaccard_per_fold": [
+          0.6179453674320204,
+          0.6752759768705099,
+          0.6119012112174008
+        ],
+        "mean_jaccard": 0.6350408518399772
+      }
+    ],
+    "fit_split": "F1 calibration (even tiles) ONLY; the test split was never used to choose lam",
+    "objective": "split-half dihedral reproducibility: allocate with the SR change field built from dihedral runs 0-3 and again from runs 4-7, and maximise the Jaccard index of the two allocated sets over calibration pixels",
+    "cap_rationale": "lam <= 0.5 is a pre-committed cap so the within-block SR rank always carries at least as much weight as the neighbour-agreement term",
+    "neighbour_agreement_definition": "fraction of a 2.5 m pixel's 8 neighbours (8-connectivity, zero-padded at the array edge) allocated in the provisional pass-1 (pure-SR) allocation; the pixel itself is excluded",
+    "far_is_lambda_invariant": "lam changes WHICH sub-pixels inside a detected block are allocated, never HOW MANY (round(16*f)) nor which blocks are detected, so it cannot move pixel or window FAR; it is therefore not tunable against the keep rule even in principle"
+  },
+  "sr_ranking": {
+    "source": "data/experiments-cache/wayanad_evidence/per_date_ndvi/<date>_dihedral_means.npy -- the real 2.5 m SEN2SR-lite SR NDVI, 8 dihedral runs per date, produced by the E1 overlap tiler (experiments/wayanad_evidence/tiler.py + step3_sr.py, 128 px native tiles, stride 96, 16 px crop margin) through the pinned model on the corrected AOI crop",
+    "shape_2p5m": [
+      8,
+      2560,
+      2048
+    ],
+    "score": "per-pixel SR NDVI difference d = mean(pre dates, 8-run dihedral mean) - held-out date",
+    "blocks_with_within_block_variation_fraction": {
+      "2024-01-16": 1.0,
+      "2024-01-21": 1.0,
+      "2024-01-26": 1.0
+    },
+    "b9_guard": "trustsr.gate_v2.assert_sr_score_is_not_replicated raises if the ranking field is constant inside every 4x4 block, i.e. if np.repeat(np.repeat(d_10m,4),4) is passed (x9's bug)",
+    "not_rerun_note": "SR inference was NOT re-run in F2: the cached product is already the real tiled dihedral SR stack for exactly these dates and exactly this crop (rows 256:896, cols 128:640 = 640x512 at 10 m -> 2560x2048 at 2.5 m, 8 runs/date). Re-running it on CPU would reproduce the same bytes at a cost of hours."
+  },
+  "no_data": {
+    "source": "experiments.wayanad_evidence.data.scl_valid (v1 logic, reused verbatim) on EVERY date, AND-ed, propagated nearest-neighbour to 2.5 m, union the exclusion geometry and the pixels where the SR product is non-finite",
+    "n_nodata_px_2p5m_per_fold": {
+      "2024-01-16": 2836569,
+      "2024-01-21": 2836569,
+      "2024-01-26": 2836569
+    },
+    "n_valid_px_2p5m_per_fold": {
+      "2024-01-16": 2406311,
+      "2024-01-21": 2406311,
+      "2024-01-26": 2406311
+    }
+  },
+  "block_sum_test": {
+    "max_abs_deviation": 0,
+    "max_abs_deviation_detected_blocks": 0,
+    "pass": true,
+    "per_fold_normalised": {
+      "2024-01-16": {
+        "max_abs_deviation_all_blocks": 0,
+        "max_abs_deviation_detected_blocks": 0,
+        "mean_abs_deviation_all_blocks": 0.0,
+        "n_blocks": 327680,
+        "n_detected_blocks": 1984,
+        "n_blocks_touching_nodata": 177290,
+        "n_blocks_with_nonzero_deviation": 0,
+        "worst_block_rc": [
+          0,
+          0
+        ],
+        "worst_block_observed": 0,
+        "worst_block_expected": 0,
+        "pass": true,
+        "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+      },
+      "2024-01-21": {
+        "max_abs_deviation_all_blocks": 0,
+        "max_abs_deviation_detected_blocks": 0,
+        "mean_abs_deviation_all_blocks": 0.0,
+        "n_blocks": 327680,
+        "n_detected_blocks": 4875,
+        "n_blocks_touching_nodata": 177290,
+        "n_blocks_with_nonzero_deviation": 0,
+        "worst_block_rc": [
+          0,
+          0
+        ],
+        "worst_block_observed": 1,
+        "worst_block_expected": 1,
+        "pass": true,
+        "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+      },
+      "2024-01-26": {
+        "max_abs_deviation_all_blocks": 0,
+        "max_abs_deviation_detected_blocks": 0,
+        "mean_abs_deviation_all_blocks": 0.0,
+        "n_blocks": 327680,
+        "n_detected_blocks": 1779,
+        "n_blocks_touching_nodata": 177290,
+        "n_blocks_with_nonzero_deviation": 0,
+        "worst_block_rc": [
+          0,
+          0
+        ],
+        "worst_block_observed": 0,
+        "worst_block_expected": 0,
+        "pass": true,
+        "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+      }
+    },
+    "definition": "observed = count of CORE|ALLOCATED 2.5 m px in each block's 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Independent paths (B7)."
+  },
+  "tau_mutation_test": {
+    "changes_output_map": true,
+    "runs": {
+      "tau_fitted": {
+        "tau": 3.8891176504391876,
+        "n_flagged_px": 3471
+      },
+      "tau_times_0p5": {
+        "tau": 1.9445588252195938,
+        "n_flagged_px": 22399
+      },
+      "tau_times_2": {
+        "tau": 7.778235300878375,
+        "n_flagged_px": 1055
+      }
+    },
+    "unit_test": "tests/test_gate_v2.py::TestTauMutation"
+  },
+  "scoring_in_f1_harness": {
+    "harness": "trustsr/placebo_v2.py (F1), GATES['gate_v2'], unchanged FAR code paths",
+    "flagged_definition": "CORE union ALLOCATED (configs/fix.yaml units.flagged_definition.v2); UNSUPPORTED is reported separately and never counted as flagged",
+    "normalised_f3": {
+      "per_fold": [
+        {
+          "held_out": "2024-01-16",
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.0018458323659159507,
+            "lo": 0.0005930928381707339,
+            "hi": 0.0039598135437957415,
+            "numerator": 2226.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.039755351681957186,
+            "lo": 0.018574418071322096,
+            "hi": 0.06647029204431014,
+            "numerator": 13.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.0010371966199886533,
+            "lo": 0.0004362958674460028,
+            "hi": 0.0018240955731852625,
+            "numerator": 1245.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.04281345565749235,
+            "lo": 0.021536809815950922,
+            "hi": 0.06725213262514082,
+            "numerator": 14.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 3471,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 27,
+          "class_counts": {
+            "NO_CHANGE": 145773,
+            "CORE": 0,
+            "ALLOCATED": 3471,
+            "UNSUPPORTED": 2257067,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 1984,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 0,
+            "worst_block_expected": 0,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        },
+        {
+          "held_out": "2024-01-21",
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.007197585326213141,
+            "lo": 0.0035670211218713247,
+            "hi": 0.011777762136794245,
+            "numerator": 8680.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.1162079510703364,
+            "lo": 0.07430340557275542,
+            "hi": 0.1619047619047619,
+            "numerator": 38.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.005729990644403179,
+            "lo": 0.0021123924476660846,
+            "hi": 0.010470372792889749,
+            "numerator": 6878.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.08256880733944955,
+            "lo": 0.0467269284215689,
+            "hi": 0.12346560846560842,
+            "numerator": 27.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 15558,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 65,
+          "class_counts": {
+            "NO_CHANGE": 1854683,
+            "CORE": 0,
+            "ALLOCATED": 15558,
+            "UNSUPPORTED": 536070,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 4875,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 1,
+            "worst_block_expected": 1,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        },
+        {
+          "held_out": "2024-01-26",
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.0018748548873926167,
+            "lo": 0.0005250362231597704,
+            "hi": 0.0036644111496586815,
+            "numerator": 2261.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.039755351681957186,
+            "lo": 0.01834862385321101,
+            "hi": 0.06452861280335556,
+            "numerator": 13.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.0011804880405814633,
+            "lo": 0.00010128411160729033,
+            "hi": 0.002597646464041084,
+            "numerator": 1417.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.021406727828746176,
+            "lo": 0.003125,
+            "hi": 0.043863786825554425,
+            "numerator": 7.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 3678,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 20,
+          "class_counts": {
+            "NO_CHANGE": 2358541,
+            "CORE": 0,
+            "ALLOCATED": 3678,
+            "UNSUPPORTED": 44092,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 1779,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 0,
+            "worst_block_expected": 0,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        }
+      ],
+      "pooled_pixel_far_test": {
+        "estimate": 0.003639424193173903,
+        "lo": 0.0022063132957957574,
+        "hi": 0.005432409880921929,
+        "numerator": 13167.0,
+        "denominator": 3617880.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_window_far_test": {
+        "estimate": 0.0652395514780836,
+        "lo": 0.04780674254466574,
+        "hi": 0.08498175581546036,
+        "numerator": 64.0,
+        "denominator": 981.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_pixel_far_calibration": {
+        "estimate": 0.002649225101657765,
+        "lo": 0.0013582521838267688,
+        "hi": 0.004264901105506185,
+        "numerator": 9540.0,
+        "denominator": 3601053.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_window_far_calibration": {
+        "estimate": 0.04892966360856269,
+        "lo": 0.03346596314287399,
+        "hi": 0.06708119578845022,
+        "numerator": 48.0,
+        "denominator": 981.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "block_sum_max_deviation": 0,
+      "block_sum_max_deviation_detected": 0
+    },
+    "no_normalisation_comparator": {
+      "per_fold": [
+        {
+          "held_out": "2024-01-16",
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.003945404491027895,
+            "lo": 0.0018824805557441616,
+            "hi": 0.006705392733826206,
+            "numerator": 4758.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.07033639143730887,
+            "lo": 0.03821051358542289,
+            "hi": 0.10778443113772455,
+            "numerator": 23.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.003159909059933303,
+            "lo": 0.0016216384844642663,
+            "hi": 0.004935224682029196,
+            "numerator": 3793.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.0764525993883792,
+            "lo": 0.04517733094540324,
+            "hi": 0.1114710905321606,
+            "numerator": 25.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 8551,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 48,
+          "class_counts": {
+            "NO_CHANGE": 190268,
+            "CORE": 0,
+            "ALLOCATED": 8551,
+            "UNSUPPORTED": 2207492,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 5125,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 0,
+            "worst_block_expected": 0,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        },
+        {
+          "held_out": "2024-01-21",
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.0071163222660784765,
+            "lo": 0.0032207434724361786,
+            "hi": 0.012004170832673364,
+            "numerator": 8582.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.0764525993883792,
+            "lo": 0.03927344351637936,
+            "hi": 0.11563406152037613,
+            "numerator": 25.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.006003244051115048,
+            "lo": 0.001798215761728439,
+            "hi": 0.011480860158606082,
+            "numerator": 7206.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.06116207951070336,
+            "lo": 0.02702702702702703,
+            "hi": 0.10334863581590256,
+            "numerator": 20.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 15788,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 45,
+          "class_counts": {
+            "NO_CHANGE": 1851440,
+            "CORE": 0,
+            "ALLOCATED": 15788,
+            "UNSUPPORTED": 539083,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 4523,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 2,
+            "worst_block_expected": 2,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        },
+        {
+          "held_out": "2024-01-26",
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "pixel_far_test": {
+            "estimate": 0.0007670237818833129,
+            "lo": 3.080598899047787e-05,
+            "hi": 0.001823099956291192,
+            "numerator": 925.0,
+            "denominator": 1205960.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_test": {
+            "estimate": 0.01529051987767584,
+            "lo": 0.0029583616972997506,
+            "hi": 0.03226330121491409,
+            "numerator": 5.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "pixel_far_calibration": {
+            "estimate": 0.00033073659287991594,
+            "lo": 0.0,
+            "hi": 0.0008891776940967248,
+            "numerator": 397.0,
+            "denominator": 1200351.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m^2)"
+          },
+          "window_far_calibration": {
+            "estimate": 0.009174311926605505,
+            "lo": 0.0,
+            "hi": 0.02416918429003021,
+            "numerator": 3.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16x16 10 m px windows (160 m) with >=1 flagged px, this gate's own flag map",
+            "window_px_2p5m": 64
+          },
+          "n_flagged_px": 1322,
+          "n_valid_px": 2406311,
+          "n_windows_valid": 654,
+          "n_windows_detected": 8,
+          "class_counts": {
+            "NO_CHANGE": 2356291,
+            "CORE": 0,
+            "ALLOCATED": 1322,
+            "UNSUPPORTED": 48698,
+            "NO_DATA": 2836569
+          },
+          "block_sum": {
+            "max_abs_deviation_all_blocks": 0,
+            "max_abs_deviation_detected_blocks": 0,
+            "mean_abs_deviation_all_blocks": 0.0,
+            "n_blocks": 327680,
+            "n_detected_blocks": 531,
+            "n_blocks_touching_nodata": 177290,
+            "n_blocks_with_nonzero_deviation": 0,
+            "worst_block_rc": [
+              0,
+              0
+            ],
+            "worst_block_observed": 0,
+            "worst_block_expected": 0,
+            "pass": true,
+            "definition": "observed = count of CORE|ALLOCATED px in the block 4x4 footprint of the OUTPUT class map; expected = round(16*f) recomputed from the unmixing fraction. Two independent paths; the allocator's n_per_block is not used (B7)."
+          },
+          "sr_score_blocks_varying_fraction": 1.0
+        }
+      ],
+      "pooled_pixel_far_test": {
+        "estimate": 0.0039429168463298945,
+        "lo": 0.0024463465827488776,
+        "hi": 0.005946401215208525,
+        "numerator": 14265.0,
+        "denominator": 3617880.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_window_far_test": {
+        "estimate": 0.05402650356778797,
+        "lo": 0.03688336015287137,
+        "hi": 0.07347237080315996,
+        "numerator": 53.0,
+        "denominator": 981.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_pixel_far_calibration": {
+        "estimate": 0.0031646299013094225,
+        "lo": 0.0016662156179956637,
+        "hi": 0.004987559347831128,
+        "numerator": 11396.0,
+        "denominator": 3601053.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "pooled_window_far_calibration": {
+        "estimate": 0.04892966360856269,
+        "lo": 0.03242065884843041,
+        "hi": 0.06839419939325068,
+        "numerator": 48.0,
+        "denominator": 981.0,
+        "blocks": 273,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "block_sum_max_deviation": 0,
+      "block_sum_max_deviation_detected": 0
+    }
+  },
+  "keep_rule": {
+    "block_sum_max_deviation_is_0": true,
+    "window_far_test_le_alpha": false,
+    "window_far_test": {
+      "estimate": 0.0652395514780836,
+      "lo": 0.04780674254466574,
+      "hi": 0.08498175581546036,
+      "numerator": 64.0,
+      "denominator": 981.0,
+      "blocks": 273,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    },
+    "pixel_far_test": {
+      "estimate": 0.003639424193173903,
+      "lo": 0.0022063132957957574,
+      "hi": 0.005432409880921929,
+      "numerator": 13167.0,
+      "denominator": 3617880.0,
+      "blocks": 273,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    },
+    "alpha": 0.05,
+    "verdict": "Block-sum test PASSES (max deviation 0). The scoring keep rule does NOT hold: the test-split window FAR point estimate is 0.0652, above alpha = 0.05. Its 95 % CI is [0.0478, 0.0850], which does contain alpha, but the pre-registered rule is stated on the point estimate and is therefore NOT met. F2's overall status is FAIL. Per configs/fix.yaml f2_gate_v2.block_sum_test.keep_rule, the condition that stops Wave 3 (F7) is a block-sum failure, and that did not happen; the FAR shortfall is a keep-rule failure for gate_v2's claim, not a Wave-3 stop.",
+    "exchangeability_caveat": "pixels and neighbouring windows are spatially correlated; exchangeability assumed across windows, not proven",
+    "wave_3_status": "not blocked by F2"
+  },
+  "b_ids_fixed": {
+    "B6": "tau comes from PLACEBO (null-event) calibration-split window scores only; x4 calibrated on pre_mean - post_mean of the real event pair with valid = ones",
+    "B7": "block_sum_deviation compares the OUTPUT class map's per-block CORE|ALLOCATED count with round(16*f) recomputed from the fraction -- two independent paths, never a quantity with itself",
+    "B8": "config_sha256 = sha256(configs/fix.yaml) = 18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970; no \"pending-a3-output\" anywhere",
+    "B9": "allocation is ranked by the real 2.5 m SR NDVI difference from the cached E1/E8 dihedral SR stack, guarded by assert_sr_score_is_not_replicated; x9 ranked by np.repeat(np.repeat(d_10m,4),4)",
+    "B10": "tau is a required positional argument of apply_gate_v2 and raises if non-finite; the mutation test above and tests/test_gate_v2.py::TestTauMutation show the map changes with tau",
+    "B11": "NO_DATA from the SCL validity mask on every date, nearest-neighbour to 2.5 m; x9 used NaN only",
+    "B12": "endmembers estimated by estimate_endmembers from stable/high-NDVI and NDVI<=0.2 pre-event pixels outside disks+footprint; x9 hard-coded e_v/e_b constants"
+  },
+  "limitations": [
+    "Three pool dates only (2024-01-16/21/26): the cached real 2.5 m dihedral SR product exists for no other pre-event date, so every fold's reference is the mean of just 2 dates and the three folds share one crop. Serial and spatial correlation across folds is not modelled, as in F1.",
+    "tau is recomputed with gate_v2's own score rather than read verbatim from f1_calibration_scores.npz, because F1 exported a different score function (d/sigma_v1). The folds, the checkerboard split, the window grid and the alpha are exactly F1's. The verbatim number is reported in tau.f1_export_consumed.",
+    "sigma_f propagates measurement noise only. Endmember uncertainty is reported separately as the +/- 1 robust SD sensitivity, not folded into the score.",
+    "sigma_band carries a floor at the scene median of the per-pixel temporal std. Without it a handful of pixels with near-identical pre dates dominate the score (F1's exported d/sigma_v1 reaches 255 for this reason). The floor is fixed at the median and was not varied.",
+    "SR inference was not re-run; the cached real tiled dihedral stack for these dates and this crop was used as-is (see sr_ranking.not_rerun_note).",
+    "The pre-registered e_b rule (NDVI <= 0.2) is not satisfiable on this evergreen AOI in January (8 qualifying px over the whole AOI). The ceiling was escalated to 0.3 before any result was computed; see preregistration_deviations. e_b is therefore the darkest land cover present, not true bare ground, and f is correspondingly upper-leaning.",
+    "The gate is HIGHLY sensitive to the endmembers: shifting e_b by +1 robust SD multiplies the flagged pixel count by about 8.0 on the fold tested. The robust SD of e_b is large relative to |e_v - e_b| because only a few hundred dark-land pixels exist to estimate it from. The fraction f is not a calibrated area and must not be reported as one.",
+    "lam was fitted to 0.0 on the calibration split, i.e. the neighbour-agreement term carries zero weight in the headline run. That is a fitted value, not a disabled parameter: split-half dihedral reproducibility was HIGHEST at lam = 0 and fell monotonically across the grid (see lambda.curve), and tests/test_gate_v2.py::test_lambda_changes_which_sub_pixels_are_chosen_but_never_how_many shows the term does change the map when lam > 0.",
+    "UNSUPPORTED is very large on these folds (millions of 2.5 m px) because it is defined against the v1 dihedral sigma, which is tiny, so almost any SR NDVI difference exceeds k*sigma. UNSUPPORTED is reported separately and is NEVER counted as flagged (configs/fix.yaml units.flagged_definition.v2), so it does not enter any FAR above; it is a known v1-sigma artefact, not a gate-v2 result.",
+    "F3's per-date normalisation changes the test-split window FAR from 0.0540 (without) to 0.0652 (with). Both columns are reported; the headline follows configs/fix.yaml f3_noise_v2.interaction_test, which instructs F2 to apply the normalisation.",
+    "pixels and neighbouring windows are spatially correlated; exchangeability assumed across windows, not proven"
+  ],
+  "started_utc": "2026-09-30T15:49:58.814214+00:00",
+  "finished_utc": "2026-09-30T15:50:19.262306+00:00"
+}

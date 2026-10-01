@@ -1,0 +1,478 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "evidence_labels": {
+    "selection": "real (E6, other AOI, no Wayanad pixel)",
+    "wayanad.lodo": "real",
+    "change_preservation": "synthetic (injected change on a real stable-pixel field)"
+  },
+  "motivated_by": "A5 diagnostics: offset share 77%/70% across two folds; post-hoc centred coverage 96.1% (window), 99.3% (eb_stratified)",
+  "status_note": "pre-registered before its own run; does not edit x5",
+  "selected_estimator": "eb_stratified",
+  "measurements": {
+    "selection": {
+      "evidence": "real",
+      "dataset": "E6 12-date cache: other AOI (34 km from the Wayanad slide), 10 m B04/B08",
+      "no_wayanad_pixel": true,
+      "replicates": 100,
+      "seed": 2024,
+      "n_pool_dates": 3,
+      "window_px_10m": 9,
+      "n_strata": 20,
+      "dates": [
+        "2024-01-11",
+        "2024-01-21",
+        "2024-01-31",
+        "2024-02-05",
+        "2024-02-10",
+        "2024-02-15",
+        "2024-03-01",
+        "2024-03-06",
+        "2024-03-31",
+        "2024-04-05",
+        "2024-04-30",
+        "2024-05-05"
+      ],
+      "first_three_draws": [
+        [
+          "2024-02-15",
+          "2024-03-06",
+          "2024-04-30",
+          "2024-01-31"
+        ],
+        [
+          "2024-05-05",
+          "2024-02-05",
+          "2024-04-30",
+          "2024-01-21"
+        ],
+        [
+          "2024-03-06",
+          "2024-02-05",
+          "2024-01-31",
+          "2024-02-15"
+        ]
+      ],
+      "summary": {
+        "normalised": {
+          "raw": {
+            "mean_nll": 1.845179433124382,
+            "mean_coverage_k2": 0.8314665894005114,
+            "gap_pp_vs_nominal": -12.303341059948858,
+            "mean_k_eff": 4.275739163629441,
+            "mean_valid_px": 883427.47
+          },
+          "window": {
+            "mean_nll": -0.70101136854192,
+            "mean_coverage_k2": 0.8956996315265334,
+            "gap_pp_vs_nominal": -5.880036847346659,
+            "mean_k_eff": 2.417154184974426,
+            "mean_valid_px": 883427.47
+          },
+          "eb_stratified": {
+            "mean_nll": -0.8608348903311581,
+            "mean_coverage_k2": 0.9163408672034572,
+            "gap_pp_vs_nominal": -3.8159132796542816,
+            "mean_k_eff": 2.096092372442399,
+            "mean_valid_px": 883427.47
+          },
+          "eb_window": {
+            "mean_nll": -0.6997181438845552,
+            "mean_coverage_k2": 0.8956961200371971,
+            "gap_pp_vs_nominal": -5.880387996280289,
+            "mean_k_eff": 2.4174832773387767,
+            "mean_valid_px": 883427.47
+          }
+        },
+        "no_normalisation": {
+          "raw": {
+            "mean_nll": 1.6541173427317775,
+            "mean_coverage_k2": 0.8216529644432192,
+            "gap_pp_vs_nominal": -13.284703555678078,
+            "mean_k_eff": 3.8910492506871694,
+            "mean_valid_px": 883427.47
+          },
+          "window": {
+            "mean_nll": -0.361857549355286,
+            "mean_coverage_k2": 0.8698641064462607,
+            "gap_pp_vs_nominal": -8.463589355373935,
+            "mean_k_eff": 2.504138570696205,
+            "mean_valid_px": 883427.47
+          },
+          "eb_stratified": {
+            "mean_nll": -0.5991874611574776,
+            "mean_coverage_k2": 0.8982061422452234,
+            "gap_pp_vs_nominal": -5.629385775477658,
+            "mean_k_eff": 2.0759306258616776,
+            "mean_valid_px": 883427.47
+          },
+          "eb_window": {
+            "mean_nll": -0.36186193672479466,
+            "mean_coverage_k2": 0.8698662192718111,
+            "gap_pp_vs_nominal": -8.463378072818895,
+            "mean_k_eff": 2.5041156811286402,
+            "mean_valid_px": 883427.47
+          }
+        }
+      },
+      "ranking_by_mean_nll_normalised": [
+        "eb_stratified",
+        "window",
+        "eb_window",
+        "raw"
+      ],
+      "best": "eb_stratified",
+      "runner_up": "window",
+      "mean_abs_fitted_offset": 0.043530199658125636,
+      "exploratory_scene_median_offset_share_of_mean_d2_after_normalisation": {
+        "mean": 0.014398986298737246,
+        "min": 1.2311337652960382e-07,
+        "max": 0.1914631684879442,
+        "note": "share of the RESIDUAL d^2 that is still a scene-wide median offset, after normalisation; should be far below A5's unnormalised 70-97 % if the estimator removed the effect it targets"
+      },
+      "paired_nll_diff_best_minus_runner_up": {
+        "mean": -0.15982352178923825,
+        "lo": -0.25061584204077436,
+        "hi": -0.08337756110389233,
+        "n": 100,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "tie_rule_triggered": false,
+      "tie_within_ci": false,
+      "winner": "eb_stratified",
+      "note": "replicates share the same 12 dates and pixels: not independent; procedure and hyperparameters (n_strata, window, floors, nu0_max) are exactly configs/exceptional.yaml a5.noise/a5.selection, reused verbatim"
+    },
+    "wayanad": {
+      "stable_pixels": {
+        "crop_px_10m": 327680,
+        "valid_all_dates_10m": 314869,
+        "parent_10m": 7349,
+        "footprint_10m": 39019,
+        "disk_10m": 171557,
+        "stable_10m": 147393,
+        "disk_radius_m": 1500,
+        "disk_points": [
+          "crown",
+          "mundakkai",
+          "chooralmala_bridge"
+        ],
+        "valid_2p5m_all_pre_dates": 5242770,
+        "stable_and_valid_2p5m": 2358286,
+        "window_px_2p5m": 37,
+        "tile_px_2p5m": 128
+      },
+      "lodo": {
+        "evidence": "real",
+        "n_pre_for_formula": 2,
+        "dof_per_pixel": 1,
+        "definition": "d = held-out pre date minus mean of the other two pre dates, both normalised by the per-date median-offset estimator fit on stable pixels outside disks+footprint; sigma from the same two dates + held-out dihedral variance (trustsr.noise, unchanged); matches configs/exceptional.yaml a5.coverage_metric verbatim",
+        "folds": {
+          "2024-01-16": {
+            "held_out": "2024-01-16",
+            "remaining": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d_after_normalisation": 0.0,
+            "exploratory_offset_share_of_mean_d2_after_normalisation": 0.0,
+            "median_d_without_normalisation": -0.05664893798530102,
+            "median_sigma": 0.021174730253547727,
+            "nu0": 7.504446614591604
+          },
+          "2024-01-21": {
+            "held_out": "2024-01-21",
+            "remaining": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d_after_normalisation": 0.0,
+            "exploratory_offset_share_of_mean_d2_after_normalisation": 0.0,
+            "median_d_without_normalisation": 0.008406151086091995,
+            "median_sigma": null,
+            "nu0": 10000.0
+          },
+          "2024-01-26": {
+            "held_out": "2024-01-26",
+            "remaining": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d_after_normalisation": 0.0,
+            "exploratory_offset_share_of_mean_d2_after_normalisation": 0.0,
+            "median_d_without_normalisation": 0.04843013547360897,
+            "median_sigma": 0.02324636604955222,
+            "nu0": 28.991086734669036
+          }
+        },
+        "offsets_by_fold": {
+          "2024-01-16": {
+            "offset_pool": {
+              "2024-01-21": -0.013121357187628746,
+              "2024-01-26": 0.013121357187628746
+            },
+            "offset_held": -0.05664893798530102
+          },
+          "2024-01-21": {
+            "offset_pool": {
+              "2024-01-16": -0.035119062289595604,
+              "2024-01-26": 0.035119062289595604
+            },
+            "offset_held": 0.008406151086091995
+          },
+          "2024-01-26": {
+            "offset_pool": {
+              "2024-01-16": -0.021758833900094032,
+              "2024-01-21": 0.021758833900094032
+            },
+            "offset_held": 0.04843013547360897
+          }
+        },
+        "estimator_normalised": {
+          "label": "LODO eb_stratified (normalised)",
+          "folds": {
+            "2024-01-16": {
+              "coverage_k2": 0.8850622867625046,
+              "ci95": [
+                0.8658472504318356,
+                0.9026847840252041
+              ],
+              "n_px": 2358286,
+              "blocks": 182,
+              "median_abs_z": 0.8147752311824157,
+              "robust_scale_of_z_madn": 1.2079692085728921,
+              "frac_abs_z_gt_3": 0.026660040385262856,
+              "frac_abs_z_gt_4": 0.005289858821194715
+            },
+            "2024-01-21": {
+              "coverage_k2": 0.9765715240403615,
+              "ci95": [
+                0.9690124171660814,
+                0.9833309588211928
+              ],
+              "n_px": 2358284,
+              "blocks": 182,
+              "median_abs_z": 0.48251580425973983,
+              "robust_scale_of_z_madn": 0.7153681308520976,
+              "frac_abs_z_gt_3": 0.006621339923435854,
+              "frac_abs_z_gt_4": 0.0037264383763787566
+            },
+            "2024-01-26": {
+              "coverage_k2": 0.9637711456540895,
+              "ci95": [
+                0.9508373508731759,
+                0.974880443052469
+              ],
+              "n_px": 2358286,
+              "blocks": 182,
+              "median_abs_z": 0.6344186612411188,
+              "robust_scale_of_z_madn": 0.9405762212618515,
+              "frac_abs_z_gt_3": 0.004164041172275118,
+              "frac_abs_z_gt_4": 0.0017241335444471112
+            }
+          },
+          "pooled": {
+            "coverage_k2": 0.9418016423231794,
+            "ci95": [
+              0.9327335140073472,
+              0.9498293133738103
+            ],
+            "covered_px": 6663111.0,
+            "n_px": 7074856.0,
+            "blocks": 182,
+            "gap_pp_vs_nominal": -1.2698357676820593,
+            "ci_contains_nominal": false
+          },
+          "k_eff": {
+            "value_all_stable": 2.154725111957937,
+            "ci95_block_bootstrap": [
+              2.06,
+              2.26
+            ],
+            "value_parity0": 2.176169090670007,
+            "value_parity1": 2.133487025580716,
+            "crossfit_coverage_at_k_eff": {
+              "coverage": 0.954476105238043,
+              "ci95": [
+                0.9466508045839535,
+                0.9612377380633869
+              ],
+              "n_px": 7074856.0,
+              "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+            }
+          },
+          "robust_scale_of_z_madn": 0.9268426042975559,
+          "frac_abs_z_gt_3": 0.012481808817027512,
+          "frac_abs_z_gt_4": 0.0035801435393172667
+        },
+        "estimator_no_normalisation_same_sigma_method": {
+          "label": "LODO eb_stratified (no normalisation, same estimator)",
+          "folds": {
+            "2024-01-16": {
+              "coverage_k2": 0.6129409240439879,
+              "ci95": [
+                0.5772560533837111,
+                0.646523401447954
+              ],
+              "n_px": 2358286,
+              "blocks": 182,
+              "median_abs_z": 1.7488965352536943,
+              "robust_scale_of_z_madn": 2.592878480731941,
+              "frac_abs_z_gt_3": 0.07976852680294078,
+              "frac_abs_z_gt_4": 0.00803040852551387
+            },
+            "2024-01-21": {
+              "coverage_k2": 0.9958707263416959,
+              "ci95": [
+                0.9929047268409841,
+                0.9981851825473708
+              ],
+              "n_px": 2358284,
+              "blocks": 182,
+              "median_abs_z": 0.22585519172739288,
+              "robust_scale_of_z_madn": 0.33484831983305097,
+              "frac_abs_z_gt_3": 0.002011632186793448,
+              "frac_abs_z_gt_4": 0.0011292109008075363
+            },
+            "2024-01-26": {
+              "coverage_k2": 0.9650474963596443,
+              "ci95": [
+                0.9519949873337304,
+                0.9755718588390413
+              ],
+              "n_px": 2358286,
+              "blocks": 182,
+              "median_abs_z": 1.104583168114178,
+              "robust_scale_of_z_madn": 1.6376325694798786,
+              "frac_abs_z_gt_3": 0.004223830358149944,
+              "frac_abs_z_gt_4": 0.001068572683720295
+            }
+          },
+          "pooled": {
+            "coverage_k2": 0.8579530099269865,
+            "ci95": [
+              0.8445403829882342,
+              0.8699985151744998
+            ],
+            "covered_px": 6069894.0,
+            "n_px": 7074856.0,
+            "blocks": 182,
+            "gap_pp_vs_nominal": -9.654699007301348,
+            "ci_contains_nominal": false
+          },
+          "k_eff": {
+            "value_all_stable": 2.7510697235038815,
+            "ci95_block_bootstrap": [
+              2.68,
+              2.84
+            ],
+            "value_parity0": 2.7462449994612963,
+            "value_parity1": 2.7558106308390053,
+            "crossfit_coverage_at_k_eff": {
+              "coverage": 0.9544903811469803,
+              "ci95": [
+                0.9473743956582983,
+                0.9607718364511827
+              ],
+              "n_px": 7074856.0,
+              "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+            }
+          },
+          "robust_scale_of_z_madn": 1.3559788955624714,
+          "frac_abs_z_gt_3": 0.028668003984816087,
+          "frac_abs_z_gt_4": 0.0034093980146027002
+        },
+        "median_ndvi_on_stable_px_by_date": {
+          "2024-01-16": 0.7512603476643562,
+          "2024-01-21": 0.8017150945961475,
+          "2024-01-26": 0.8313800357282162
+        },
+        "independent_dates_note": "three folds share three dates: at most 3 date effects, not independent"
+      },
+      "keep_rule": {
+        "rule": "pooled LODO coverage of |d| <= 2 sigma for the selected estimator within +/- 2 pp of 95.45 %, same threshold A5 used (configs/fix.yaml f3_noise_v2.keep_rule)",
+        "estimator": "eb_stratified",
+        "coverage": 0.9418016423231794,
+        "ci95": [
+          0.9327335140073472,
+          0.9498293133738103
+        ],
+        "gap_pp": -1.2698357676820593,
+        "kept": true,
+        "coverage_without_normalisation_same_sigma_method": 0.8579530099269865,
+        "ci95_without_normalisation": [
+          0.8445403829882342,
+          0.8699985151744998
+        ],
+        "cause_note": null
+      }
+    },
+    "change_preservation": {
+      "evidence": "synthetic (injected change on a real Wayanad stable-pixel field)",
+      "held_out_date": "2024-01-26",
+      "pool_dates": [
+        "2024-01-16",
+        "2024-01-21"
+      ],
+      "injected_patch_px": 1600,
+      "stable_px_used_to_fit_offset": 2358286,
+      "injected_drop": 0.3,
+      "fitted_offset_held_before_injection": 0.04843013547360897,
+      "fitted_offset_held_after_injection": 0.04839375056326389,
+      "offset_shift_from_injection": -3.6384910345077515e-05,
+      "offset_shift_as_fraction_of_injected_drop": -0.00012128303448359172,
+      "measured_drop_after_normalisation": 0.29996361508965497,
+      "recovery_ratio": 0.9998787169655166,
+      "interpretation": "the injected patch is a small fraction of the stable-pixel set the offset is fit on, so a robust (median) offset should barely move, and the drop should survive normalisation almost intact (recovery_ratio near 1.0); a ratio far from 1 would mean the estimator is absorbing real local change into its scene-wide correction"
+    }
+  },
+  "x5_reference": {
+    "file": "experiments/x5_noise_model.py (not edited)",
+    "result": "experiments/results/x5.json (not edited)",
+    "report": "experiments/x5_REPORT.md (not edited)"
+  },
+  "limitations": [
+    "median(d) is exactly 0 for each LODO fold by construction: offset_held is DEFINED as the median residual against the pool reference, so removing it zeroes the median identically. This is a definitional consequence of the estimator, not itself evidence; the non-trivial, non-tautological result is the COVERAGE (|d| <= 2 sigma), since sigma is estimated from the pool dates\u2019 across-date and dihedral variance, never from d",
+    "three Wayanad pre dates only: leave-one-date-out has n_pre = 2 (1 dof) and 3 non-independent folds",
+    "block-bootstrap CIs resample space, not dates: they understate date-level uncertainty",
+    "the median offset is a SINGLE scalar per date: it cannot correct within-date spatial structure (e.g. a cloud-edge gradient), only a scene-wide shift",
+    "change-preservation test is synthetic (injected on real pixels): it is not evidence about a real event, only about this estimator's sensitivity to a minority-pixel change",
+    "stable pixels lie inside the SR crop around the slide, outside the footprint and 1500 m disks",
+    "coverage on stable pixels says nothing about power on real change"
+  ],
+  "experiment": "f3",
+  "risk": "f3",
+  "started_utc": "2026-09-30T15:12:46.501329+00:00",
+  "finished_utc": "2026-09-30T15:13:50.775041+00:00",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "config_sha256_note": "amended post-hoc: F3 independently fixed the same fix.yaml YAML bug F1 found (f9_checks block), but without F1's explanatory comment; the merged fix-v2 branch kept F1's commented version. Hash above is of that final merged file. No field F3 reads (f3_noise_v2 block) differs between the two fixes.",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  },
+  "config": {
+    "file": "configs/fix.yaml",
+    "f3_noise_v2": {
+      "motivated_by": "A5 diagnostics: offset share 77%/70% across two folds; post-hoc centred coverage 96.1% (window), 99.3% (eb_stratified)",
+      "status": "pre-registered before its own run; does not edit x5",
+      "estimator": "per-date robust relative normalisation (median offset, optional Theil-Sen gain) fitted on stable pixels outside disks+footprint, then existing sigma estimators from trustsr/noise.py",
+      "model_selection_on": "data/experiments-cache/e6 (12-date cache, other AOI)",
+      "evaluation_on": "wayanad, leave-one-date-out",
+      "keep_rule": "coverage within +/-2pp of 95.45% (same as A5)",
+      "interaction_test": "if kept, apply the same normalisation in F2 and F7; on F1's placebo, report FAR with and without normalisation to show it does not absorb real change"
+    }
+  }
+}

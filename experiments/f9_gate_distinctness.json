@@ -1,0 +1,80 @@
+{
+ "a_code_identity": {
+  "gate_names": [
+   "rule_10m",
+   "ungated_S_v1_sigma",
+   "gate_v1",
+   "gate_v1_with_a5_sigma",
+   "gate_v2"
+  ],
+  "n_distinct_code_objects": 5,
+  "pairs_sharing_a_code_object": [],
+  "qualnames": {
+   "rule_10m": "gate_rule_10m",
+   "ungated_S_v1_sigma": "gate_ungated_s_v1_sigma",
+   "gate_v1": "gate_v1",
+   "gate_v1_with_a5_sigma": "gate_v1_with_a5_sigma",
+   "gate_v2": "gate_v2"
+  },
+  "source_first_line": {
+   "rule_10m": 189,
+   "ungated_S_v1_sigma": 194,
+   "gate_v1": 201,
+   "gate_v1_with_a5_sigma": 207,
+   "gate_v2": 213
+  },
+  "B2_regression": false
+ },
+ "b_v1_vs_a5_divergence_fixture": {
+  "fixture": "parent=True, d=5.0, k=2.0, 64x64; only sigma_a5 NaN on cols 32:",
+  "gate_v1_flagged_px": 4096,
+  "gate_v1_with_a5_sigma_flagged_px": 2048,
+  "maps_differ": true,
+  "n_px_where_they_disagree": 2048,
+  "reverse_fixture_only_sigma_v1_nan": {
+   "gate_v1_flagged_px": 2048,
+   "gate_v1_with_a5_sigma_flagged_px": 4096,
+   "maps_differ": true,
+   "each_gate_reads_its_own_sigma": true
+  }
+ },
+ "b2_identity_explained_on_finite_data": {
+  "sigmas_differ_by_3x_but_all_finite": true,
+  "gate_v1_flagged_px": 2055,
+  "a5_flagged_px": 2055,
+  "maps_identical": true,
+  "both_equal_parent_mask": true,
+  "interpretation": "identity on finite data is a property of flagged = OBSERVED|INFERRED = parent, reproduced here with two deliberately very different sigmas; it is NOT evidence of code aliasing"
+ },
+ "c_f5": {
+  "f5_json_top_keys": [
+   "config_sha256",
+   "config_sha256_file",
+   "context_vs_non_allocating_methods",
+   "data",
+   "determinism",
+   "environment",
+   "evidence",
+   "experiment",
+   "finished_utc",
+   "headline",
+   "headline_other_classes",
+   "headline_primary_class",
+   "limitations",
+   "methods",
+   "oracle_vs_realistic_fraction",
+   "per_class",
+   "per_image",
+   "protocol",
+   "proxy_caveat",
+   "risk",
+   "runtime_seconds",
+   "started_utc",
+   "status",
+   "status_meaning",
+   "summary"
+  ],
+  "ranking_field_block_present": false,
+  "sr_sha_block": "{}"
+ }
+}

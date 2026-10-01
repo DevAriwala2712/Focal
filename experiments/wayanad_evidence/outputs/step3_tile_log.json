@@ -4,8 +4,8 @@
     "tile": 0,
     "r0": 0,
     "c0": 0,
-    "seconds_8_runs": 0.35626183298882097,
-    "peak_rss_mib": 1821.71875,
+    "seconds_8_runs": 0.456665375000739,
+    "peak_rss_mib": 1769.5625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -13,8 +13,8 @@
     "tile": 1,
     "r0": 0,
     "c0": 96,
-    "seconds_8_runs": 0.308038207993377,
-    "peak_rss_mib": 1821.96875,
+    "seconds_8_runs": 0.3415351669991651,
+    "peak_rss_mib": 1769.5625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -22,8 +22,8 @@
     "tile": 2,
     "r0": 0,
     "c0": 192,
-    "seconds_8_runs": 0.307612375007011,
-    "peak_rss_mib": 1821.96875,
+    "seconds_8_runs": 0.3418219169998338,
+    "peak_rss_mib": 1769.5625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -31,8 +31,8 @@
     "tile": 3,
     "r0": 0,
     "c0": 288,
-    "seconds_8_runs": 0.3097028750053141,
-    "peak_rss_mib": 1821.96875,
+    "seconds_8_runs": 0.3382051249991491,
+    "peak_rss_mib": 1769.5625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -40,8 +40,8 @@
     "tile": 4,
     "r0": 0,
     "c0": 384,
-    "seconds_8_runs": 0.3092557920026593,
-    "peak_rss_mib": 1821.96875,
+    "seconds_8_runs": 0.32404500000120606,
+    "peak_rss_mib": 1769.5625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -49,8 +49,8 @@
     "tile": 5,
     "r0": 96,
     "c0": 0,
-    "seconds_8_runs": 0.3104395830014255,
-    "peak_rss_mib": 1851.96875,
+    "seconds_8_runs": 0.3289189169991005,
+    "peak_rss_mib": 1799.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -58,8 +58,8 @@
     "tile": 6,
     "r0": 96,
     "c0": 96,
-    "seconds_8_runs": 0.3089951669971924,
-    "peak_rss_mib": 1851.96875,
+    "seconds_8_runs": 0.3341106250009034,
+    "peak_rss_mib": 1799.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -67,8 +67,8 @@
     "tile": 7,
     "r0": 96,
     "c0": 192,
-    "seconds_8_runs": 0.309303624992026,
-    "peak_rss_mib": 1851.96875,
+    "seconds_8_runs": 0.3395056659992406,
+    "peak_rss_mib": 1799.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -76,8 +76,8 @@
     "tile": 8,
     "r0": 96,
     "c0": 288,
-    "seconds_8_runs": 0.31166683399351314,
-    "peak_rss_mib": 1851.96875,
+    "seconds_8_runs": 0.3389330840000184,
+    "peak_rss_mib": 1799.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -85,8 +85,8 @@
     "tile": 9,
     "r0": 96,
     "c0": 384,
-    "seconds_8_runs": 0.3125641660008114,
-    "peak_rss_mib": 1851.96875,
+    "seconds_8_runs": 0.337724959001207,
+    "peak_rss_mib": 1799.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -94,8 +94,8 @@
     "tile": 10,
     "r0": 192,
     "c0": 0,
-    "seconds_8_runs": 0.3090754170261789,
-    "peak_rss_mib": 1881.96875,
+    "seconds_8_runs": 0.33674079199954576,
+    "peak_rss_mib": 1846.765625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -103,8 +103,8 @@
     "tile": 11,
     "r0": 192,
     "c0": 96,
-    "seconds_8_runs": 0.31034158301190473,
-    "peak_rss_mib": 1881.96875,
+    "seconds_8_runs": 0.33570508299999346,
+    "peak_rss_mib": 1846.765625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -112,8 +112,8 @@
     "tile": 12,
     "r0": 192,
     "c0": 192,
-    "seconds_8_runs": 0.3098165830015205,
-    "peak_rss_mib": 1881.96875,
+    "seconds_8_runs": 0.35737779199916986,
+    "peak_rss_mib": 1846.8125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -121,8 +121,8 @@
     "tile": 13,
     "r0": 192,
     "c0": 288,
-    "seconds_8_runs": 0.3091192910214886,
-    "peak_rss_mib": 1881.96875,
+    "seconds_8_runs": 0.32814054200025566,
+    "peak_rss_mib": 1846.8125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -130,8 +130,8 @@
     "tile": 14,
     "r0": 192,
     "c0": 384,
-    "seconds_8_runs": 0.30857479202677496,
-    "peak_rss_mib": 1881.96875,
+    "seconds_8_runs": 0.3297416669993254,
+    "peak_rss_mib": 1846.8125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -139,8 +139,8 @@
     "tile": 15,
     "r0": 288,
     "c0": 0,
-    "seconds_8_runs": 0.31161341699771583,
-    "peak_rss_mib": 1911.96875,
+    "seconds_8_runs": 0.3397502909992909,
+    "peak_rss_mib": 1897.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -148,8 +148,8 @@
     "tile": 16,
     "r0": 288,
     "c0": 96,
-    "seconds_8_runs": 0.30975024998770095,
-    "peak_rss_mib": 1911.96875,
+    "seconds_8_runs": 0.3381466659993748,
+    "peak_rss_mib": 1897.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -157,8 +157,8 @@
     "tile": 17,
     "r0": 288,
     "c0": 192,
-    "seconds_8_runs": 0.30940100000589155,
-    "peak_rss_mib": 1911.96875,
+    "seconds_8_runs": 0.3383160829998815,
+    "peak_rss_mib": 1897.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -166,8 +166,8 @@
     "tile": 18,
     "r0": 288,
     "c0": 288,
-    "seconds_8_runs": 0.3092365000047721,
-    "peak_rss_mib": 1911.96875,
+    "seconds_8_runs": 0.33831083299992315,
+    "peak_rss_mib": 1897.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -175,8 +175,8 @@
     "tile": 19,
     "r0": 288,
     "c0": 384,
-    "seconds_8_runs": 0.3094923749740701,
-    "peak_rss_mib": 1911.96875,
+    "seconds_8_runs": 0.3499599169990688,
+    "peak_rss_mib": 1897.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -184,8 +184,8 @@
     "tile": 20,
     "r0": 384,
     "c0": 0,
-    "seconds_8_runs": 0.3117252080119215,
-    "peak_rss_mib": 1941.96875,
+    "seconds_8_runs": 0.3397395409992896,
+    "peak_rss_mib": 1950.03125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -193,8 +193,8 @@
     "tile": 21,
     "r0": 384,
     "c0": 96,
-    "seconds_8_runs": 0.3123207079770509,
-    "peak_rss_mib": 1941.96875,
+    "seconds_8_runs": 0.3275158750002447,
+    "peak_rss_mib": 1950.03125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -202,8 +202,8 @@
     "tile": 22,
     "r0": 384,
     "c0": 192,
-    "seconds_8_runs": 0.31053266700473614,
-    "peak_rss_mib": 1941.96875,
+    "seconds_8_runs": 0.32790120800018485,
+    "peak_rss_mib": 1950.046875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -211,8 +211,8 @@
     "tile": 23,
     "r0": 384,
     "c0": 288,
-    "seconds_8_runs": 0.3082032500242349,
-    "peak_rss_mib": 1941.96875,
+    "seconds_8_runs": 0.337794875000327,
+    "peak_rss_mib": 1950.046875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -220,8 +220,8 @@
     "tile": 24,
     "r0": 384,
     "c0": 384,
-    "seconds_8_runs": 0.31204991598497145,
-    "peak_rss_mib": 1941.96875,
+    "seconds_8_runs": 0.33704000000034284,
+    "peak_rss_mib": 1950.046875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -229,8 +229,8 @@
     "tile": 25,
     "r0": 480,
     "c0": 0,
-    "seconds_8_runs": 0.3116722089762334,
-    "peak_rss_mib": 1971.96875,
+    "seconds_8_runs": 0.32935750000069675,
+    "peak_rss_mib": 2004.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -238,8 +238,8 @@
     "tile": 26,
     "r0": 480,
     "c0": 96,
-    "seconds_8_runs": 0.3099502080003731,
-    "peak_rss_mib": 1971.96875,
+    "seconds_8_runs": 0.3351382500004547,
+    "peak_rss_mib": 2004.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -247,8 +247,8 @@
     "tile": 27,
     "r0": 480,
     "c0": 192,
-    "seconds_8_runs": 0.31051370900240727,
-    "peak_rss_mib": 1971.96875,
+    "seconds_8_runs": 0.33545337499890593,
+    "peak_rss_mib": 2004.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -256,8 +256,8 @@
     "tile": 28,
     "r0": 480,
     "c0": 288,
-    "seconds_8_runs": 0.30978220800170675,
-    "peak_rss_mib": 1971.984375,
+    "seconds_8_runs": 0.3368004580006527,
+    "peak_rss_mib": 2004.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -265,8 +265,8 @@
     "tile": 29,
     "r0": 480,
     "c0": 384,
-    "seconds_8_runs": 0.308600208023563,
-    "peak_rss_mib": 1971.984375,
+    "seconds_8_runs": 0.3304003749999538,
+    "peak_rss_mib": 2004.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -274,8 +274,8 @@
     "tile": 30,
     "r0": 512,
     "c0": 0,
-    "seconds_8_runs": 0.3092483749787789,
-    "peak_rss_mib": 1986.984375,
+    "seconds_8_runs": 0.3306632500007254,
+    "peak_rss_mib": 2031.09375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -283,8 +283,8 @@
     "tile": 31,
     "r0": 512,
     "c0": 96,
-    "seconds_8_runs": 0.3107343750016298,
-    "peak_rss_mib": 1986.984375,
+    "seconds_8_runs": 0.3313854160005576,
+    "peak_rss_mib": 2031.09375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -292,8 +292,8 @@
     "tile": 32,
     "r0": 512,
     "c0": 192,
-    "seconds_8_runs": 0.3114294169936329,
-    "peak_rss_mib": 1986.984375,
+    "seconds_8_runs": 0.35621749999882013,
+    "peak_rss_mib": 2031.09375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -301,8 +301,8 @@
     "tile": 33,
     "r0": 512,
     "c0": 288,
-    "seconds_8_runs": 0.3112043330038432,
-    "peak_rss_mib": 1986.984375,
+    "seconds_8_runs": 0.34047383300094225,
+    "peak_rss_mib": 2031.09375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -310,8 +310,8 @@
     "tile": 34,
     "r0": 512,
     "c0": 384,
-    "seconds_8_runs": 0.3111659999995027,
-    "peak_rss_mib": 1986.984375,
+    "seconds_8_runs": 0.3376439580006263,
+    "peak_rss_mib": 2031.109375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -319,8 +319,8 @@
     "tile": 0,
     "r0": 0,
     "c0": 0,
-    "seconds_8_runs": 0.3205792500230018,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34476412500043807,
+    "peak_rss_mib": 2064.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -328,8 +328,8 @@
     "tile": 1,
     "r0": 0,
     "c0": 96,
-    "seconds_8_runs": 0.3117047499981709,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3344536250006058,
+    "peak_rss_mib": 2064.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -337,8 +337,8 @@
     "tile": 2,
     "r0": 0,
     "c0": 192,
-    "seconds_8_runs": 0.3111113339837175,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.329652750000605,
+    "peak_rss_mib": 2064.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -346,8 +346,8 @@
     "tile": 3,
     "r0": 0,
     "c0": 288,
-    "seconds_8_runs": 0.3105478750076145,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3281818340001337,
+    "peak_rss_mib": 2064.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -355,8 +355,8 @@
     "tile": 4,
     "r0": 0,
     "c0": 384,
-    "seconds_8_runs": 0.3120121249812655,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.35397625000041444,
+    "peak_rss_mib": 2064.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -364,8 +364,8 @@
     "tile": 5,
     "r0": 96,
     "c0": 0,
-    "seconds_8_runs": 0.3108861669898033,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3732078749999346,
+    "peak_rss_mib": 2088.359375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -373,8 +373,8 @@
     "tile": 6,
     "r0": 96,
     "c0": 96,
-    "seconds_8_runs": 0.3112642079940997,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3402178329997696,
+    "peak_rss_mib": 2088.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -382,8 +382,8 @@
     "tile": 7,
     "r0": 96,
     "c0": 192,
-    "seconds_8_runs": 0.3108347909874283,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3409533330013801,
+    "peak_rss_mib": 2088.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -391,8 +391,8 @@
     "tile": 8,
     "r0": 96,
     "c0": 288,
-    "seconds_8_runs": 0.3115607079816982,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34033583299969905,
+    "peak_rss_mib": 2088.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -400,8 +400,8 @@
     "tile": 9,
     "r0": 96,
     "c0": 384,
-    "seconds_8_runs": 0.3110369170026388,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3392859169998701,
+    "peak_rss_mib": 2088.375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -409,8 +409,8 @@
     "tile": 10,
     "r0": 192,
     "c0": 0,
-    "seconds_8_runs": 0.31171462501515634,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.330809875000341,
+    "peak_rss_mib": 2102.390625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -418,8 +418,8 @@
     "tile": 11,
     "r0": 192,
     "c0": 96,
-    "seconds_8_runs": 0.3107596669869963,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.33067720900180575,
+    "peak_rss_mib": 2102.390625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -427,8 +427,8 @@
     "tile": 12,
     "r0": 192,
     "c0": 192,
-    "seconds_8_runs": 0.31184487498831004,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.32577504199980467,
+    "peak_rss_mib": 2102.390625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -436,8 +436,8 @@
     "tile": 13,
     "r0": 192,
     "c0": 288,
-    "seconds_8_runs": 0.3126258330012206,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3386073749989009,
+    "peak_rss_mib": 2102.390625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -445,8 +445,8 @@
     "tile": 14,
     "r0": 192,
     "c0": 384,
-    "seconds_8_runs": 0.31164979201275855,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34393241700126964,
+    "peak_rss_mib": 2102.421875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -454,8 +454,8 @@
     "tile": 15,
     "r0": 288,
     "c0": 0,
-    "seconds_8_runs": 0.31312475001323037,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34122233299967775,
+    "peak_rss_mib": 2126.421875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -463,8 +463,8 @@
     "tile": 16,
     "r0": 288,
     "c0": 96,
-    "seconds_8_runs": 0.312358957977267,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3382193340003141,
+    "peak_rss_mib": 2126.421875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -472,8 +472,8 @@
     "tile": 17,
     "r0": 288,
     "c0": 192,
-    "seconds_8_runs": 0.31260420801118016,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.33486366599936446,
+    "peak_rss_mib": 2126.421875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -481,8 +481,8 @@
     "tile": 18,
     "r0": 288,
     "c0": 288,
-    "seconds_8_runs": 0.3114568750024773,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3368727500001114,
+    "peak_rss_mib": 2126.421875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -490,8 +490,8 @@
     "tile": 19,
     "r0": 288,
     "c0": 384,
-    "seconds_8_runs": 0.31572020798921585,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.36446320899995044,
+    "peak_rss_mib": 2126.4375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -499,8 +499,8 @@
     "tile": 20,
     "r0": 384,
     "c0": 0,
-    "seconds_8_runs": 0.3119224999973085,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3311444169994502,
+    "peak_rss_mib": 2146.578125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -508,8 +508,8 @@
     "tile": 21,
     "r0": 384,
     "c0": 96,
-    "seconds_8_runs": 0.31217408398515545,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3407841659991391,
+    "peak_rss_mib": 2146.578125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -517,8 +517,8 @@
     "tile": 22,
     "r0": 384,
     "c0": 192,
-    "seconds_8_runs": 0.3118023330171127,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34349179200034996,
+    "peak_rss_mib": 2146.578125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -526,8 +526,8 @@
     "tile": 23,
     "r0": 384,
     "c0": 288,
-    "seconds_8_runs": 0.3110942920029629,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.33900433400049224,
+    "peak_rss_mib": 2146.578125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -535,8 +535,8 @@
     "tile": 24,
     "r0": 384,
     "c0": 384,
-    "seconds_8_runs": 0.3123446670069825,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.3436963330004801,
+    "peak_rss_mib": 2146.578125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -544,8 +544,8 @@
     "tile": 25,
     "r0": 480,
     "c0": 0,
-    "seconds_8_runs": 0.312584125000285,
-    "peak_rss_mib": 2095.0,
+    "seconds_8_runs": 0.34095650000017486,
+    "peak_rss_mib": 2168.25,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -553,8 +553,8 @@
     "tile": 26,
     "r0": 480,
     "c0": 96,
-    "seconds_8_runs": 0.31198887500795536,
-    "peak_rss_mib": 2095.015625,
+    "seconds_8_runs": 0.3399694579984498,
+    "peak_rss_mib": 2168.25,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -562,8 +562,8 @@
     "tile": 27,
     "r0": 480,
     "c0": 192,
-    "seconds_8_runs": 0.3118569159996696,
-    "peak_rss_mib": 2095.03125,
+    "seconds_8_runs": 0.35140320800019254,
+    "peak_rss_mib": 2168.25,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -571,8 +571,8 @@
     "tile": 28,
     "r0": 480,
     "c0": 288,
-    "seconds_8_runs": 0.31229379199794494,
-    "peak_rss_mib": 2095.046875,
+    "seconds_8_runs": 0.3304108339998493,
+    "peak_rss_mib": 2168.25,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -580,8 +580,8 @@
     "tile": 29,
     "r0": 480,
     "c0": 384,
-    "seconds_8_runs": 0.31220799998845905,
-    "peak_rss_mib": 2095.078125,
+    "seconds_8_runs": 0.3503308339986688,
+    "peak_rss_mib": 2168.25,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -589,8 +589,8 @@
     "tile": 30,
     "r0": 512,
     "c0": 0,
-    "seconds_8_runs": 0.31217966598342173,
-    "peak_rss_mib": 2095.078125,
+    "seconds_8_runs": 0.35476458400080446,
+    "peak_rss_mib": 2175.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -598,8 +598,8 @@
     "tile": 31,
     "r0": 512,
     "c0": 96,
-    "seconds_8_runs": 0.31317416598903947,
-    "peak_rss_mib": 2095.078125,
+    "seconds_8_runs": 0.3458217089992104,
+    "peak_rss_mib": 2175.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -607,8 +607,8 @@
     "tile": 32,
     "r0": 512,
     "c0": 192,
-    "seconds_8_runs": 0.31254891701973975,
-    "peak_rss_mib": 2095.078125,
+    "seconds_8_runs": 0.34432120800011035,
+    "peak_rss_mib": 2175.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -616,8 +616,8 @@
     "tile": 33,
     "r0": 512,
     "c0": 288,
-    "seconds_8_runs": 0.3131915830017533,
-    "peak_rss_mib": 2095.109375,
+    "seconds_8_runs": 0.33830112500072573,
+    "peak_rss_mib": 2175.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -625,8 +625,8 @@
     "tile": 34,
     "r0": 512,
     "c0": 384,
-    "seconds_8_runs": 0.31351045798510313,
-    "peak_rss_mib": 2095.109375,
+    "seconds_8_runs": 0.3321239159995457,
+    "peak_rss_mib": 2175.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -634,8 +634,8 @@
     "tile": 0,
     "r0": 0,
     "c0": 0,
-    "seconds_8_runs": 0.3114465420076158,
-    "peak_rss_mib": 2095.109375,
+    "seconds_8_runs": 0.3346999160003179,
+    "peak_rss_mib": 2181.046875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -643,8 +643,8 @@
     "tile": 1,
     "r0": 0,
     "c0": 96,
-    "seconds_8_runs": 0.31118562500341795,
-    "peak_rss_mib": 2095.109375,
+    "seconds_8_runs": 0.32691808300114644,
+    "peak_rss_mib": 2181.046875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -652,8 +652,8 @@
     "tile": 2,
     "r0": 0,
     "c0": 192,
-    "seconds_8_runs": 0.31241287500597537,
-    "peak_rss_mib": 2095.109375,
+    "seconds_8_runs": 0.3242685839995829,
+    "peak_rss_mib": 2181.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -661,8 +661,8 @@
     "tile": 3,
     "r0": 0,
     "c0": 288,
-    "seconds_8_runs": 0.31211591698229313,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3320626660006383,
+    "peak_rss_mib": 2181.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -670,8 +670,8 @@
     "tile": 4,
     "r0": 0,
     "c0": 384,
-    "seconds_8_runs": 0.3119132919819094,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.33006974999989325,
+    "peak_rss_mib": 2181.0625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -679,8 +679,8 @@
     "tile": 5,
     "r0": 96,
     "c0": 0,
-    "seconds_8_runs": 0.31214179200469516,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3338545000005979,
+    "peak_rss_mib": 2181.828125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -688,8 +688,8 @@
     "tile": 6,
     "r0": 96,
     "c0": 96,
-    "seconds_8_runs": 0.3127119590062648,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3266004590004741,
+    "peak_rss_mib": 2181.828125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -697,8 +697,8 @@
     "tile": 7,
     "r0": 96,
     "c0": 192,
-    "seconds_8_runs": 0.3126146249996964,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32863650000035705,
+    "peak_rss_mib": 2181.828125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -706,8 +706,8 @@
     "tile": 8,
     "r0": 96,
     "c0": 288,
-    "seconds_8_runs": 0.3122637920023408,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32534108300023945,
+    "peak_rss_mib": 2181.828125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -715,8 +715,8 @@
     "tile": 9,
     "r0": 96,
     "c0": 384,
-    "seconds_8_runs": 0.3111911670130212,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.33032758400077,
+    "peak_rss_mib": 2181.859375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -724,8 +724,8 @@
     "tile": 10,
     "r0": 192,
     "c0": 0,
-    "seconds_8_runs": 0.3128708750009537,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3379602500008332,
+    "peak_rss_mib": 2181.859375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -733,8 +733,8 @@
     "tile": 11,
     "r0": 192,
     "c0": 96,
-    "seconds_8_runs": 0.31526412500534207,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3426348750017496,
+    "peak_rss_mib": 2181.859375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -742,8 +742,8 @@
     "tile": 12,
     "r0": 192,
     "c0": 192,
-    "seconds_8_runs": 0.3120565419958439,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3612167920000502,
+    "peak_rss_mib": 2181.875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -751,8 +751,8 @@
     "tile": 13,
     "r0": 192,
     "c0": 288,
-    "seconds_8_runs": 0.3128112090053037,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.33859045799908927,
+    "peak_rss_mib": 2181.890625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -760,8 +760,8 @@
     "tile": 14,
     "r0": 192,
     "c0": 384,
-    "seconds_8_runs": 0.31476012500934303,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3303749999995489,
+    "peak_rss_mib": 2181.890625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -769,8 +769,8 @@
     "tile": 15,
     "r0": 288,
     "c0": 0,
-    "seconds_8_runs": 0.3123476250038948,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.31954470799973933,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -778,8 +778,8 @@
     "tile": 16,
     "r0": 288,
     "c0": 96,
-    "seconds_8_runs": 0.31280829198658466,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32506562500020664,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -787,8 +787,8 @@
     "tile": 17,
     "r0": 288,
     "c0": 192,
-    "seconds_8_runs": 0.31221937501686625,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3247209999990446,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -796,8 +796,8 @@
     "tile": 18,
     "r0": 288,
     "c0": 288,
-    "seconds_8_runs": 0.311404667008901,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32006770900079573,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -805,8 +805,8 @@
     "tile": 19,
     "r0": 288,
     "c0": 384,
-    "seconds_8_runs": 0.31235241700778715,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32989495800029545,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -814,8 +814,8 @@
     "tile": 20,
     "r0": 384,
     "c0": 0,
-    "seconds_8_runs": 0.31222266601980664,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3268520419987908,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -823,8 +823,8 @@
     "tile": 21,
     "r0": 384,
     "c0": 96,
-    "seconds_8_runs": 0.31274562497856095,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3304237499996816,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -832,8 +832,8 @@
     "tile": 22,
     "r0": 384,
     "c0": 192,
-    "seconds_8_runs": 0.3123943750106264,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32178583399945637,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -841,8 +841,8 @@
     "tile": 23,
     "r0": 384,
     "c0": 288,
-    "seconds_8_runs": 0.3123053750023246,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3303224589999445,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -850,8 +850,8 @@
     "tile": 24,
     "r0": 384,
     "c0": 384,
-    "seconds_8_runs": 0.31271320799714886,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32573983300062537,
+    "peak_rss_mib": 2181.90625,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -859,8 +859,8 @@
     "tile": 25,
     "r0": 480,
     "c0": 0,
-    "seconds_8_runs": 0.3128179170016665,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3235369169997284,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -868,8 +868,8 @@
     "tile": 26,
     "r0": 480,
     "c0": 96,
-    "seconds_8_runs": 0.31363987500662915,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3242778330004512,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -877,8 +877,8 @@
     "tile": 27,
     "r0": 480,
     "c0": 192,
-    "seconds_8_runs": 0.3130034999921918,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32923745900006907,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -886,8 +886,8 @@
     "tile": 28,
     "r0": 480,
     "c0": 288,
-    "seconds_8_runs": 0.3135465410014149,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3302294589993835,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -895,8 +895,8 @@
     "tile": 29,
     "r0": 480,
     "c0": 384,
-    "seconds_8_runs": 0.3126508329878561,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.329265165999459,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -904,8 +904,8 @@
     "tile": 30,
     "r0": 512,
     "c0": 0,
-    "seconds_8_runs": 0.31312825001077726,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3283503340007883,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -913,8 +913,8 @@
     "tile": 31,
     "r0": 512,
     "c0": 96,
-    "seconds_8_runs": 0.3131677080236841,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3295722500006377,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -922,8 +922,8 @@
     "tile": 32,
     "r0": 512,
     "c0": 192,
-    "seconds_8_runs": 0.3127068330068141,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32939695800087065,
+    "peak_rss_mib": 2181.921875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -931,8 +931,8 @@
     "tile": 33,
     "r0": 512,
     "c0": 288,
-    "seconds_8_runs": 0.3125554579892196,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.3172769579996384,
+    "peak_rss_mib": 2181.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -940,8 +940,8 @@
     "tile": 34,
     "r0": 512,
     "c0": 384,
-    "seconds_8_runs": 0.3133571250073146,
-    "peak_rss_mib": 2095.125,
+    "seconds_8_runs": 0.32435925000027055,
+    "peak_rss_mib": 2181.9375,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -949,8 +949,8 @@
     "tile": 0,
     "r0": 0,
     "c0": 0,
-    "seconds_8_runs": 0.31365820902283303,
-    "peak_rss_mib": 2116.125,
+    "seconds_8_runs": 0.31701595800041105,
+    "peak_rss_mib": 2207.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -958,8 +958,8 @@
     "tile": 1,
     "r0": 0,
     "c0": 96,
-    "seconds_8_runs": 0.3134648749837652,
-    "peak_rss_mib": 2116.125,
+    "seconds_8_runs": 0.3265461660012079,
+    "peak_rss_mib": 2207.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -967,8 +967,8 @@
     "tile": 2,
     "r0": 0,
     "c0": 192,
-    "seconds_8_runs": 0.314120750001166,
-    "peak_rss_mib": 2116.125,
+    "seconds_8_runs": 0.3297255839988793,
+    "peak_rss_mib": 2207.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -976,8 +976,8 @@
     "tile": 3,
     "r0": 0,
     "c0": 288,
-    "seconds_8_runs": 0.3127492500061635,
-    "peak_rss_mib": 2116.125,
+    "seconds_8_runs": 0.32888762500078883,
+    "peak_rss_mib": 2207.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -985,8 +985,8 @@
     "tile": 4,
     "r0": 0,
     "c0": 384,
-    "seconds_8_runs": 0.3138013330171816,
-    "peak_rss_mib": 2116.125,
+    "seconds_8_runs": 0.32910474999880535,
+    "peak_rss_mib": 2207.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -994,8 +994,8 @@
     "tile": 5,
     "r0": 96,
     "c0": 0,
-    "seconds_8_runs": 0.3143285829864908,
-    "peak_rss_mib": 2134.125,
+    "seconds_8_runs": 0.33021437500065076,
+    "peak_rss_mib": 2225.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1003,8 +1003,8 @@
     "tile": 6,
     "r0": 96,
     "c0": 96,
-    "seconds_8_runs": 0.3153762499860022,
-    "peak_rss_mib": 2134.125,
+    "seconds_8_runs": 0.328869584000131,
+    "peak_rss_mib": 2225.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1012,8 +1012,8 @@
     "tile": 7,
     "r0": 96,
     "c0": 192,
-    "seconds_8_runs": 0.31398170901229605,
-    "peak_rss_mib": 2134.125,
+    "seconds_8_runs": 0.32470624999950815,
+    "peak_rss_mib": 2225.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1021,8 +1021,8 @@
     "tile": 8,
     "r0": 96,
     "c0": 288,
-    "seconds_8_runs": 0.3143139170133509,
-    "peak_rss_mib": 2134.125,
+    "seconds_8_runs": 0.3253193340005964,
+    "peak_rss_mib": 2225.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1030,8 +1030,8 @@
     "tile": 9,
     "r0": 96,
     "c0": 384,
-    "seconds_8_runs": 0.31396604198380373,
-    "peak_rss_mib": 2134.125,
+    "seconds_8_runs": 0.3301678330008144,
+    "peak_rss_mib": 2225.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1039,8 +1039,8 @@
     "tile": 10,
     "r0": 192,
     "c0": 0,
-    "seconds_8_runs": 0.31301225000061095,
-    "peak_rss_mib": 2152.125,
+    "seconds_8_runs": 0.32654495799943106,
+    "peak_rss_mib": 2243.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1048,8 +1048,8 @@
     "tile": 11,
     "r0": 192,
     "c0": 96,
-    "seconds_8_runs": 0.31438616701052524,
-    "peak_rss_mib": 2152.125,
+    "seconds_8_runs": 0.329465374999927,
+    "peak_rss_mib": 2243.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1057,8 +1057,8 @@
     "tile": 12,
     "r0": 192,
     "c0": 192,
-    "seconds_8_runs": 0.31438429199624807,
-    "peak_rss_mib": 2152.125,
+    "seconds_8_runs": 0.3248031250004715,
+    "peak_rss_mib": 2243.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1066,8 +1066,8 @@
     "tile": 13,
     "r0": 192,
     "c0": 288,
-    "seconds_8_runs": 0.3139957080129534,
-    "peak_rss_mib": 2152.125,
+    "seconds_8_runs": 0.3295529169990914,
+    "peak_rss_mib": 2243.203125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1075,8 +1075,8 @@
     "tile": 14,
     "r0": 192,
     "c0": 384,
-    "seconds_8_runs": 0.31373870800598525,
-    "peak_rss_mib": 2152.125,
+    "seconds_8_runs": 0.32667025000046124,
+    "peak_rss_mib": 2243.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1084,8 +1084,8 @@
     "tile": 15,
     "r0": 288,
     "c0": 0,
-    "seconds_8_runs": 0.31412962498143315,
-    "peak_rss_mib": 2170.125,
+    "seconds_8_runs": 0.33172916599869495,
+    "peak_rss_mib": 2261.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1093,8 +1093,8 @@
     "tile": 16,
     "r0": 288,
     "c0": 96,
-    "seconds_8_runs": 0.3138912089925725,
-    "peak_rss_mib": 2170.125,
+    "seconds_8_runs": 0.33578374999888183,
+    "peak_rss_mib": 2261.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1102,8 +1102,8 @@
     "tile": 17,
     "r0": 288,
     "c0": 192,
-    "seconds_8_runs": 0.31358341698069125,
-    "peak_rss_mib": 2170.125,
+    "seconds_8_runs": 0.3314362919991254,
+    "peak_rss_mib": 2261.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1111,8 +1111,8 @@
     "tile": 18,
     "r0": 288,
     "c0": 288,
-    "seconds_8_runs": 0.3137772500049323,
-    "peak_rss_mib": 2170.125,
+    "seconds_8_runs": 0.33675304100142966,
+    "peak_rss_mib": 2261.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1120,8 +1120,8 @@
     "tile": 19,
     "r0": 288,
     "c0": 384,
-    "seconds_8_runs": 0.31449237497872673,
-    "peak_rss_mib": 2170.125,
+    "seconds_8_runs": 0.3416235000004235,
+    "peak_rss_mib": 2261.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1129,8 +1129,8 @@
     "tile": 20,
     "r0": 384,
     "c0": 0,
-    "seconds_8_runs": 0.314139249996515,
-    "peak_rss_mib": 2188.125,
+    "seconds_8_runs": 0.3630962499992165,
+    "peak_rss_mib": 2279.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1138,8 +1138,8 @@
     "tile": 21,
     "r0": 384,
     "c0": 96,
-    "seconds_8_runs": 0.3149203749781009,
-    "peak_rss_mib": 2188.125,
+    "seconds_8_runs": 0.38219008300075075,
+    "peak_rss_mib": 2279.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1147,8 +1147,8 @@
     "tile": 22,
     "r0": 384,
     "c0": 192,
-    "seconds_8_runs": 0.31426887499401346,
-    "peak_rss_mib": 2188.125,
+    "seconds_8_runs": 0.36420729200108326,
+    "peak_rss_mib": 2279.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1156,8 +1156,8 @@
     "tile": 23,
     "r0": 384,
     "c0": 288,
-    "seconds_8_runs": 0.3134005840111058,
-    "peak_rss_mib": 2188.125,
+    "seconds_8_runs": 0.35132816700024705,
+    "peak_rss_mib": 2279.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1165,8 +1165,8 @@
     "tile": 24,
     "r0": 384,
     "c0": 384,
-    "seconds_8_runs": 0.3141460419865325,
-    "peak_rss_mib": 2188.125,
+    "seconds_8_runs": 0.35059616699982143,
+    "peak_rss_mib": 2279.21875,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1174,8 +1174,8 @@
     "tile": 25,
     "r0": 480,
     "c0": 0,
-    "seconds_8_runs": 0.31404350002412684,
-    "peak_rss_mib": 2206.125,
+    "seconds_8_runs": 0.3605271670003276,
+    "peak_rss_mib": 2297.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1183,8 +1183,8 @@
     "tile": 26,
     "r0": 480,
     "c0": 96,
-    "seconds_8_runs": 0.31439625000348315,
-    "peak_rss_mib": 2206.125,
+    "seconds_8_runs": 0.3621049169996695,
+    "peak_rss_mib": 2297.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1192,8 +1192,8 @@
     "tile": 27,
     "r0": 480,
     "c0": 192,
-    "seconds_8_runs": 0.31448425000417046,
-    "peak_rss_mib": 2206.125,
+    "seconds_8_runs": 0.35473950000050536,
+    "peak_rss_mib": 2297.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1201,8 +1201,8 @@
     "tile": 28,
     "r0": 480,
     "c0": 288,
-    "seconds_8_runs": 0.31416699997498654,
-    "peak_rss_mib": 2206.125,
+    "seconds_8_runs": 0.35640929199871607,
+    "peak_rss_mib": 2297.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1210,8 +1210,8 @@
     "tile": 29,
     "r0": 480,
     "c0": 384,
-    "seconds_8_runs": 0.313929416006431,
-    "peak_rss_mib": 2206.125,
+    "seconds_8_runs": 0.3531343750000815,
+    "peak_rss_mib": 2297.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1219,8 +1219,8 @@
     "tile": 30,
     "r0": 512,
     "c0": 0,
-    "seconds_8_runs": 0.3134680840012152,
-    "peak_rss_mib": 2215.125,
+    "seconds_8_runs": 0.3526077909991727,
+    "peak_rss_mib": 2306.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1228,8 +1228,8 @@
     "tile": 31,
     "r0": 512,
     "c0": 96,
-    "seconds_8_runs": 0.3131333749915939,
-    "peak_rss_mib": 2215.125,
+    "seconds_8_runs": 0.3797522080003546,
+    "peak_rss_mib": 2306.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1237,8 +1237,8 @@
     "tile": 32,
     "r0": 512,
     "c0": 192,
-    "seconds_8_runs": 0.3134375000081491,
-    "peak_rss_mib": 2215.125,
+    "seconds_8_runs": 0.3240193330002512,
+    "peak_rss_mib": 2306.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1246,8 +1246,8 @@
     "tile": 33,
     "r0": 512,
     "c0": 288,
-    "seconds_8_runs": 0.3152553339896258,
-    "peak_rss_mib": 2215.125,
+    "seconds_8_runs": 0.32691212500139954,
+    "peak_rss_mib": 2306.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   },
   {
@@ -1255,8 +1255,8 @@
     "tile": 34,
     "r0": 512,
     "c0": 384,
-    "seconds_8_runs": 0.31838291700114496,
-    "peak_rss_mib": 2215.125,
+    "seconds_8_runs": 0.33425683400128037,
+    "peak_rss_mib": 2306.125,
     "gpu_memory": "not measured: no CUDA device on this machine"
   }
 ]

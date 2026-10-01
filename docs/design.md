@@ -6,7 +6,7 @@ The statement is copied byte-for-byte from the root file; an official SIH statem
 
 ## Purpose and success criteria
 
-Build a reproducible Sentinel-2 L2A 10 m â†’ 2.5 m (Ã—4) pipeline for landslide damage assessment. Demonstrate the 30 July 2024 Wayanad event using a roughly 10 Ã— 10 km AOI centred on 11.782Â°N, 76.233Â°E. This is an offline research demonstration for the SIH finale, not an operational emergency service.
+Build a reproducible Sentinel-2 L2A 10 m → 2.5 m (×4) pipeline for landslide damage assessment. Demonstrate the 30 July 2024 Wayanad event using a roughly 10 × 10 km AOI centred on 11.490°N, 76.160°E. This is an offline research demonstration for the SIH finale, not an operational emergency service.
 
 Trustworthiness takes priority over sharpness. The 2.5 m output is a model reconstruction, not a new sensor observation. Report where change has independent support in the original 10 m signal, where spatial detail is inferred, and where SR-only change is unsupported. Every displayed date, metric, and checkpoint must have provenance.
 

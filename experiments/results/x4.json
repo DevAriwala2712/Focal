@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "verdict": "gate_v2 calibration complete; conformal FAR guarantee applied",
+  "keep_rule": {
+    "all_tests_pass": true,
+    "conformal_test_far": 0.025,
+    "conformal_test_far_ci": [
+      0.0,
+      0.075
+    ],
+    "test_far_le_alpha": true,
+    "block_sum_consistency_pass": true
+  },
+  "results": {
+    "conformal_calibration": {
+      "n_calibration": 40,
+      "alpha": 0.05,
+      "k": 39,
+      "threshold": 0.3274410559739726,
+      "coverage_lower_bound": 0.04878048780487805
+    },
+    "conformal_test": {
+      "n_test": 40,
+      "n_flagged": 1,
+      "far_empirical": 0.025,
+      "far_bootstrap_ci": {
+        "lower": 0.0,
+        "upper": 0.075,
+        "nominal_coverage": 0.95,
+        "replicates": 2000,
+        "seed": 2024
+      },
+      "threshold": 0.3274410559739726,
+      "alpha_nominal": 0.05,
+      "guarantee": "P(T > 0.327441) <= 0.05 under exchangeability; empirical FAR on test = 0.0250 [0.0000, 0.0750]"
+    },
+    "block_sum_consistency": {
+      "allocated_area_m2": 2048000.0,
+      "implied_10m_area_m2": 2048000.0,
+      "difference_m2": 0.0,
+      "tolerance_m2": 3.125,
+      "pass": true,
+      "note": "Structural check: grid allows proper 4x4 block allocation (16 2.5m px = 100 m2)"
+    }
+  },
+  "timestamp": "2026-09-30T10:19:59.766406+00:00",
+  "config_sha256": "pending-a3-output"
+}

@@ -1,0 +1,578 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "experiment": "x3",
+  "started_utc": "2026-09-30T10:23:16.346122+00:00",
+  "finished_utc": "2026-09-30T10:23:18.218979+00:00",
+  "pre_dates": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26"
+  ],
+  "post_date": "2024-12-06",
+  "crop": [
+    256,
+    896,
+    128,
+    640
+  ],
+  "k_threshold": 2.0,
+  "effective_dates": 3,
+  "gates_scored": {
+    "rule_10m": {
+      "folds": {
+        "fold_omit_0": {
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-16",
+          "pixel_far": {
+            "estimate": 0.025606853879105187,
+            "lo": 0.013245095209042603,
+            "hi": 0.04001597231297907,
+            "numerator": 64560.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_1": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-21",
+          "pixel_far": {
+            "estimate": 0.025606853879105187,
+            "lo": 0.013245095209042603,
+            "hi": 0.04001597231297907,
+            "numerator": 64560.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_2": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "omit_date": "2024-01-26",
+          "pixel_far": {
+            "estimate": 0.025606853879105187,
+            "lo": 0.013245095209042603,
+            "hi": 0.04001597231297907,
+            "numerator": 64560.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        }
+      },
+      "summary": {
+        "mean_pixel_far": 0.025606853879105187,
+        "mean_window_far": 0.11773940345368916,
+        "num_folds": 3
+      }
+    },
+    "ungated_S_v1_sigma": {
+      "folds": {
+        "fold_omit_0": {
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-16",
+          "pixel_far": {
+            "estimate": 0.18380691734094876,
+            "lo": 0.15684672803241603,
+            "hi": 0.212749952079699,
+            "numerator": 463414.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_1": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-21",
+          "pixel_far": {
+            "estimate": 0.10750515627478978,
+            "lo": 0.08392475704740687,
+            "hi": 0.13349904380114183,
+            "numerator": 271042.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_2": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "omit_date": "2024-01-26",
+          "pixel_far": {
+            "estimate": 0.07972552752657465,
+            "lo": 0.05923012123966758,
+            "hi": 0.10342085468394048,
+            "numerator": 201004.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        }
+      },
+      "summary": {
+        "mean_pixel_far": 0.12367920038077106,
+        "mean_window_far": 0.11773940345368916,
+        "num_folds": 3
+      }
+    },
+    "gate_v1": {
+      "folds": {
+        "fold_omit_0": {
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-16",
+          "pixel_far": {
+            "estimate": 0.18387831191496112,
+            "lo": 0.15687550051939117,
+            "hi": 0.2128100544446344,
+            "numerator": 463594.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_1": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-21",
+          "pixel_far": {
+            "estimate": 0.10757417102966842,
+            "lo": 0.08399303286754461,
+            "hi": 0.13356582974781891,
+            "numerator": 271216.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_2": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "omit_date": "2024-01-26",
+          "pixel_far": {
+            "estimate": 0.07980247501189909,
+            "lo": 0.05929284674068451,
+            "hi": 0.10348192594623239,
+            "numerator": 201198.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        }
+      },
+      "summary": {
+        "mean_pixel_far": 0.1237516526521762,
+        "mean_window_far": 0.11773940345368916,
+        "num_folds": 3
+      }
+    },
+    "gate_v1_with_A5_sigma": {
+      "folds": {
+        "fold_omit_0": {
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-16",
+          "pixel_far": {
+            "estimate": 0.18387831191496112,
+            "lo": 0.15687550051939117,
+            "hi": 0.2128100544446344,
+            "numerator": 463594.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_1": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-21",
+          "pixel_far": {
+            "estimate": 0.10757417102966842,
+            "lo": 0.08399303286754461,
+            "hi": 0.13356582974781891,
+            "numerator": 271216.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_2": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "omit_date": "2024-01-26",
+          "pixel_far": {
+            "estimate": 0.07980247501189909,
+            "lo": 0.05929284674068451,
+            "hi": 0.10348192594623239,
+            "numerator": 201198.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        }
+      },
+      "summary": {
+        "mean_pixel_far": 0.1237516526521762,
+        "mean_window_far": 0.11773940345368916,
+        "num_folds": 3
+      }
+    },
+    "gate_v2": {
+      "folds": {
+        "fold_omit_0": {
+          "pre_dates": [
+            "2024-01-21",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-16",
+          "pixel_far": {
+            "estimate": 0.18387831191496112,
+            "lo": 0.15687550051939117,
+            "hi": 0.2128100544446344,
+            "numerator": 463594.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_1": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-26"
+          ],
+          "omit_date": "2024-01-21",
+          "pixel_far": {
+            "estimate": 0.10757417102966842,
+            "lo": 0.08399303286754461,
+            "hi": 0.13356582974781891,
+            "numerator": 271216.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        },
+        "fold_omit_2": {
+          "pre_dates": [
+            "2024-01-16",
+            "2024-01-21"
+          ],
+          "omit_date": "2024-01-26",
+          "pixel_far": {
+            "estimate": 0.07980247501189909,
+            "lo": 0.05929284674068451,
+            "hi": 0.10348192594623239,
+            "numerator": 201198.0,
+            "denominator": 2521200.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "pixel",
+            "definition": "flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m\u00b2), test split only"
+          },
+          "window_far": {
+            "estimate": 0.11773940345368916,
+            "lo": 0.07886124841650315,
+            "hi": 0.1603836725597979,
+            "numerator": 75.0,
+            "denominator": 637.0,
+            "blocks": 160,
+            "replicates": 2000,
+            "ci": 0.95,
+            "seed": 2024,
+            "unit": "window",
+            "definition": "fraction of 16\u00d716 10 m px windows (160 m) with \u22651 flagged pixel, test split only",
+            "window_size_10m_px": 16
+          }
+        }
+      },
+      "summary": {
+        "mean_pixel_far": 0.1237516526521762,
+        "mean_window_far": 0.11773940345368916,
+        "num_folds": 3
+      }
+    }
+  }
+}

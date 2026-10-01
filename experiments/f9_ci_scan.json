@@ -1,0 +1,51 @@
+{
+ "F1": {
+  "n_ci_pairs_found": 76,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 0,
+  "without_denominator_sample": []
+ },
+ "F2": {
+  "n_ci_pairs_found": 34,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 0,
+  "without_denominator_sample": []
+ },
+ "F3": {
+  "n_ci_pairs_found": 15,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 4,
+  "without_denominator_sample": [
+   "/measurements/wayanad/lodo/estimator_normalised/k_eff",
+   "/measurements/wayanad/lodo/estimator_no_normalisation_same_sigma_method/k_eff",
+   "/measurements/wayanad/keep_rule",
+   "/measurements/wayanad/keep_rule"
+  ]
+ },
+ "F5": {
+  "n_ci_pairs_found": 40,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 0,
+  "without_denominator_sample": []
+ },
+ "F6": {
+  "n_ci_pairs_found": 9,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 0,
+  "without_denominator_sample": []
+ },
+ "F7": {
+  "n_ci_pairs_found": 1,
+  "n_outside_own_ci": 0,
+  "outside": [],
+  "n_without_denominator_sibling": 1,
+  "without_denominator_sample": [
+   "/gate_v2_keep_rule_failure"
+  ]
+ }
+}

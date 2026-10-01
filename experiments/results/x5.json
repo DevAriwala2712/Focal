@@ -1,0 +1,1424 @@
+{
+  "status": "FAIL",
+  "evidence": "real",
+  "evidence_labels": {
+    "synthetic_bias": "synthetic",
+    "selection": "real (E6, other AOI, 10 m)",
+    "wayanad.lodo": "real",
+    "wayanad.pre_mean_vs_december": "real, confounded by season"
+  },
+  "selected_estimator": "eb_stratified",
+  "measurements": {
+    "synthetic_bias": {
+      "evidence": "synthetic",
+      "n_px": 120000,
+      "n_pre": 3,
+      "runs_per_date": 8,
+      "true_prior_dof": 10.0,
+      "old_v1": {
+        "variance_ratio_to_truth": 0.5297965696898459,
+        "sd_ratio_to_truth": 0.727871259007969,
+        "coverage_at_k2": 0.7311,
+        "k_eff": 5.389045981163366
+      },
+      "oracle_true_sigma_coverage_at_k2": 0.9542666666666667,
+      "raw": {
+        "variance_ratio_to_truth": 1.006882114694853,
+        "coverage_at_k2": 0.8243583333333333,
+        "k_eff": 4.176473771903412,
+        "mse_log_variance_of_s2_dates": 1.9419971019809237,
+        "nu0_estimated": null,
+        "shrink_weight": 0.0
+      },
+      "eb_stratified": {
+        "variance_ratio_to_truth": 1.0068618738458004,
+        "coverage_at_k2": 0.9521666666666667,
+        "k_eff": 2.0256611366432598,
+        "mse_log_variance_of_s2_dates": 0.19406155673161318,
+        "nu0_estimated": 10.839466692120453,
+        "shrink_weight": 0.8154890773866336
+      }
+    },
+    "dihedral_stats_build": {
+      "dates": [
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26",
+        "2024-12-06"
+      ],
+      "pre": [
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26"
+      ],
+      "post": "2024-12-06",
+      "tiles_per_date": 35,
+      "runs_per_date": 8,
+      "array_sha256": {
+        "mean.npy": "2577f0617eda4f4d98fa3177c11909f00870d7e2bb026e986ed50d7a43636f03",
+        "var.npy": "713bc7763feb7afe46957fbaafa09369e571e4807e7ce1c57a06e9c3282ac45f",
+        "count.npy": "cd92a90aba324d444d653ebcabf037f8e74919f9ba87caa0ef304404e702aa21"
+      },
+      "consistency_vs_cached_pooled_state": {
+        "pre_mean_max_abs_diff": 5.551115123125783e-16,
+        "pre_std_max_abs_diff": 2.42861286636753e-16,
+        "post_std_max_abs_diff": 0.0,
+        "pre_count_equal": true,
+        "compared_px": 5037904,
+        "n_pre": 3
+      },
+      "build_seconds": 47.74978199999987,
+      "device": "cpu",
+      "seed": 2024
+    },
+    "selection": {
+      "evidence": "real",
+      "dataset": "E6 12-date cache: old AOI (34 km from the slide), 10 m B04/B08, NDVI floor from wayanad config",
+      "dihedral_terms": "zero (no SR runs exist for E6): validates the s2_dates shrinkage only, n_pre = 3",
+      "replicates": 100,
+      "seed": 2024,
+      "n_pool_dates": 3,
+      "window_px_10m": 9,
+      "n_strata": 20,
+      "dates": [
+        "2024-01-11",
+        "2024-01-21",
+        "2024-01-31",
+        "2024-02-05",
+        "2024-02-10",
+        "2024-02-15",
+        "2024-03-01",
+        "2024-03-06",
+        "2024-03-31",
+        "2024-04-05",
+        "2024-04-30",
+        "2024-05-05"
+      ],
+      "first_three_draws": [
+        [
+          "2024-02-15",
+          "2024-03-06",
+          "2024-04-30",
+          "2024-01-31"
+        ],
+        [
+          "2024-05-05",
+          "2024-02-05",
+          "2024-04-30",
+          "2024-01-21"
+        ],
+        [
+          "2024-03-06",
+          "2024-02-05",
+          "2024-01-31",
+          "2024-02-15"
+        ]
+      ],
+      "summary": {
+        "raw": {
+          "mean_nll": 1.6541173427317775,
+          "mean_coverage_k2": 0.8216529644432192,
+          "exploratory_mean_coverage_k2_after_removing_scene_median_offset": 0.8662493897051765,
+          "nu0_median": null,
+          "nu0_fraction_at_cap": null,
+          "coverage_k2_rep_range_2.5_97.5": [
+            0.3888792954698019,
+            0.9904894190181553
+          ],
+          "gap_pp_vs_nominal": -13.284703555678078,
+          "mean_k_eff": 3.8910492506871694,
+          "k_eff_rep_range_2.5_97.5": [
+            1.1062988413641617,
+            10.677797929561748
+          ],
+          "mean_valid_px": 883427.47
+        },
+        "window": {
+          "mean_nll": -0.361857549355286,
+          "mean_coverage_k2": 0.8698641064462607,
+          "exploratory_mean_coverage_k2_after_removing_scene_median_offset": 0.9200932178786284,
+          "nu0_median": null,
+          "nu0_fraction_at_cap": null,
+          "coverage_k2_rep_range_2.5_97.5": [
+            0.41635777014071274,
+            0.9994250374694955
+          ],
+          "gap_pp_vs_nominal": -8.463589355373935,
+          "mean_k_eff": 2.504138570696205,
+          "k_eff_rep_range_2.5_97.5": [
+            0.8110623866581298,
+            6.156097713826339
+          ],
+          "mean_valid_px": 883427.47
+        },
+        "eb_stratified": {
+          "mean_nll": -0.5991874611574776,
+          "mean_coverage_k2": 0.8982061422452234,
+          "exploratory_mean_coverage_k2_after_removing_scene_median_offset": 0.9334418492779516,
+          "nu0_median": 10000.0,
+          "nu0_fraction_at_cap": 0.79,
+          "coverage_k2_rep_range_2.5_97.5": [
+            0.4490556747815103,
+            0.9991996435813881
+          ],
+          "gap_pp_vs_nominal": -5.629385775477658,
+          "mean_k_eff": 2.0759306258616776,
+          "k_eff_rep_range_2.5_97.5": [
+            0.7753126160572317,
+            5.247461556090167
+          ],
+          "mean_valid_px": 883427.47
+        },
+        "eb_window": {
+          "mean_nll": -0.36186193672479466,
+          "mean_coverage_k2": 0.8698662192718111,
+          "exploratory_mean_coverage_k2_after_removing_scene_median_offset": 0.9200923533453518,
+          "nu0_median": 10000.0,
+          "nu0_fraction_at_cap": 1.0,
+          "coverage_k2_rep_range_2.5_97.5": [
+            0.4163585450232441,
+            0.9994256040025399
+          ],
+          "gap_pp_vs_nominal": -8.463378072818895,
+          "mean_k_eff": 2.5041156811286402,
+          "k_eff_rep_range_2.5_97.5": [
+            0.8110519965246309,
+            6.156194933613153
+          ],
+          "mean_valid_px": 883427.47
+        },
+        "no_inflation_reference": {
+          "mean_nll": 2.414924252413304,
+          "mean_coverage_k2": 0.7810621141910599,
+          "exploratory_mean_coverage_k2_after_removing_scene_median_offset": 0.8390875969631882,
+          "nu0_median": null,
+          "nu0_fraction_at_cap": null,
+          "coverage_k2_rep_range_2.5_97.5": [
+            0.3199257955308109,
+            0.9864686792101957
+          ],
+          "gap_pp_vs_nominal": -17.343788580894014,
+          "mean_k_eff": 4.4823454215916145,
+          "k_eff_rep_range_2.5_97.5": [
+            1.2770014337825426,
+            12.272317335751266
+          ],
+          "mean_valid_px": 883427.47
+        }
+      },
+      "exploratory_scene_median_offset_share_of_mean_d2": {
+        "mean": 0.41575124899025906,
+        "min": 0.003871372677239796,
+        "max": 0.8631669494075124
+      },
+      "ranking_by_mean_nll": [
+        "eb_stratified",
+        "eb_window",
+        "window",
+        "raw"
+      ],
+      "best": "eb_stratified",
+      "runner_up": "eb_window",
+      "paired_nll_diff_best_minus_runner_up": {
+        "mean": -0.23732552443268265,
+        "lo": -0.40226466241544884,
+        "hi": -0.11679972100516829,
+        "n": 100,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "tie_rule_triggered": false,
+      "tie_within_ci": false,
+      "winner": "eb_stratified",
+      "note": "replicates share the same 12 dates and the same pixels: they are not independent; the rep range is design-level variability of the date draw, not a sampling CI"
+    },
+    "wayanad": {
+      "stable_pixels": {
+        "crop_px_10m": 327680,
+        "valid_all_dates_10m": 314869,
+        "parent_10m": 7349,
+        "footprint_10m": 39019,
+        "disk_10m": 171557,
+        "stable_10m": 147393,
+        "disk_radius_m": 1500,
+        "disk_points": [
+          "crown",
+          "mundakkai",
+          "chooralmala_bridge"
+        ],
+        "valid_2p5m_all_dates": 5036924,
+        "stable_and_valid_2p5m": 2357687,
+        "window_px_2p5m": 37,
+        "tile_px_2p5m": 128
+      },
+      "lodo": {
+        "evidence": "real",
+        "n_pre_for_formula": 2,
+        "dof_per_pixel": 1,
+        "definition": "d = held-out pre date minus mean of the other two pre dates, both from the same 8-run per-date means; sigma from the other two dates + held-out date dihedral variance; stable pixels only",
+        "folds": {
+          "2024-01-16": {
+            "held_out": "2024-01-16",
+            "remaining": [
+              "2024-01-21",
+              "2024-01-26"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d": -0.056648582220077515,
+            "median_abs_d": 0.05692330002784729,
+            "exploratory_offset_share_of_mean_d2": 0.7736652780307582,
+            "median_sigma_old": 0.014436622040117484,
+            "median_sigma_raw": 0.02378430219081195,
+            "nu0_raw": null,
+            "median_sigma_window": 0.0282246470905037,
+            "nu0_window": null,
+            "median_sigma_eb_stratified": 0.035334599730622626,
+            "nu0_eb_stratified": 10000.0,
+            "median_sigma_eb_window": 0.028224633538023677,
+            "nu0_eb_window": 10000.0
+          },
+          "2024-01-21": {
+            "held_out": "2024-01-21",
+            "remaining": [
+              "2024-01-16",
+              "2024-01-26"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d": 0.008403748273849487,
+            "median_abs_d": 0.014997690916061401,
+            "exploratory_offset_share_of_mean_d2": 0.08237933348845693,
+            "median_sigma_old": 0.036507863621674505,
+            "median_sigma_raw": 0.06104255446001876,
+            "nu0_raw": null,
+            "median_sigma_window": 0.06413550697348361,
+            "nu0_window": null,
+            "median_sigma_eb_stratified": 0.07244094220695754,
+            "nu0_eb_stratified": 10000.0,
+            "median_sigma_eb_window": 0.06413549259601584,
+            "nu0_eb_window": 10000.0
+          },
+          "2024-01-26": {
+            "held_out": "2024-01-26",
+            "remaining": [
+              "2024-01-16",
+              "2024-01-21"
+            ],
+            "n_pre_for_formula": 2,
+            "dof": 1,
+            "median_d": 0.04843181371688843,
+            "median_abs_d": 0.04863882064819336,
+            "exploratory_offset_share_of_mean_d2": 0.7030444252485861,
+            "median_sigma_old": 0.023141461654018834,
+            "median_sigma_raw": 0.038520423866869116,
+            "nu0_raw": null,
+            "median_sigma_window": 0.04291590818870098,
+            "nu0_window": null,
+            "median_sigma_eb_stratified": 0.04997083482136362,
+            "nu0_eb_stratified": 10000.0,
+            "median_sigma_eb_window": 0.04291559923602687,
+            "nu0_eb_window": 10000.0
+          }
+        },
+        "estimators": {
+          "raw": {
+            "label": "LODO raw",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.4278061506892136,
+                "ci95": [
+                  0.39094214929906074,
+                  0.46488850296382533
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 2.3029826623943084,
+                "robust_scale_of_z_madn": 3.414355318597937,
+                "frac_abs_z_gt_3": 0.3743902392471944,
+                "frac_abs_z_gt_4": 0.26460806714377266
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.9686243339340633,
+                "ci95": [
+                  0.9606231479107723,
+                  0.9752911447278816
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.25556660543735765,
+                "robust_scale_of_z_madn": 0.37889785832076744,
+                "frac_abs_z_gt_3": 0.018530449546525895,
+                "frac_abs_z_gt_4": 0.012239538157524727
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.755646529840475,
+                "ci95": [
+                  0.7257603025867166,
+                  0.785007342128121
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.2477210123589157,
+                "robust_scale_of_z_madn": 1.849845830035457,
+                "frac_abs_z_gt_3": 0.13264440954206388,
+                "frac_abs_z_gt_4": 0.08780215524791883
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.7173590048212507,
+              "ci95": [
+                0.713973170814457,
+                0.7208219142219486
+              ],
+              "covered_px": 5073924.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -23.71409951787493,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 7.899300276358746,
+              "ci95_block_bootstrap": [
+                7.42,
+                8.38
+              ],
+              "value_parity0": 7.847339115593973,
+              "value_parity1": 7.951802751275477,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9544956561239893,
+                "ci95": [
+                  0.949626974538787,
+                  0.9592410910726029
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 1.591070364155284,
+            "frac_abs_z_gt_3": 0.17518836611192806,
+            "frac_abs_z_gt_4": 0.12154992018307208,
+            "median_sigma_new_over_sigma_old_by_fold": {
+              "2024-01-16": 1.659217943024777,
+              "2024-01-21": 1.6735828002412128,
+              "2024-01-26": 1.6687188468652137
+            },
+            "median_sigma_new_over_sigma_old_mean_of_folds": 1.667173196710401,
+            "fraction_sigma_floored_by_fold": {
+              "2024-01-16": 0.0770356709775301,
+              "2024-01-21": 0.01022909317479377,
+              "2024-01-26": 0.03235374330859016
+            },
+            "median_fraction_of_sigma2_from_dihedral_terms_by_fold": {
+              "2024-01-16": 0.00879127379040658,
+              "2024-01-21": 0.0016259751895775299,
+              "2024-01-26": 0.004207327729850114
+            },
+            "one_sided_flag_rate_at_k2": {
+              "definition": "fraction of stable pixels with (mean of the other two dates - held-out date) > 2 sigma, i.e. the gate-style S = d > k sigma on data with no real change (a false-flag rate; every flag is false by construction)",
+              "pooled": 0.19652523850706222,
+              "ci95": [
+                0.1849139235515095,
+                0.2081706174127934
+              ],
+              "flagged_px": 1390035.0,
+              "n_px": 7073061.0,
+              "by_fold": {
+                "2024-01-16": 0.5667741307476353,
+                "2024-01-21": 0.01764229094023083,
+                "2024-01-26": 0.005159293833320538
+              }
+            },
+            "exploratory_after_removing_fold_median_offset": {
+              "note": "POST HOC diagnostic added after the headline miss was seen; not part of the pre-registered rule; sigma unchanged",
+              "coverage_k2": {
+                "coverage_k2": 0.8920815188784601,
+                "ci95": [
+                  0.8795291965339487,
+                  0.904645320770335
+                ],
+                "covered_px": 6309747.0,
+                "n_px": 7073061.0,
+                "blocks": 182,
+                "gap_pp_vs_nominal": -6.241848112153992,
+                "ci_contains_nominal": false
+              },
+              "k_eff": 3.844726295647262,
+              "per_fold_coverage": {
+                "2024-01-16": 0.8083341851568931,
+                "2024-01-21": 0.966214344821853,
+                "2024-01-26": 0.9016960266566343
+              }
+            }
+          },
+          "window": {
+            "label": "LODO window",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.5094828109074699,
+                "ci95": [
+                  0.4600782703766946,
+                  0.5580620862636616
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.9738733265707573,
+                "robust_scale_of_z_madn": 2.926424501958128,
+                "frac_abs_z_gt_3": 0.21798949563703748,
+                "frac_abs_z_gt_4": 0.08557751728706992
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.9934775057079248,
+                "ci95": [
+                  0.9899807568225706,
+                  0.996278416016612
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.23921410432971332,
+                "robust_scale_of_z_madn": 0.3546539723198122,
+                "frac_abs_z_gt_3": 0.0023637573604978097,
+                "frac_abs_z_gt_4": 0.0013004270711082515
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.8905817438871233,
+                "ci95": [
+                  0.864144883646163,
+                  0.9151995634922296
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.1285287284211052,
+                "robust_scale_of_z_madn": 1.6731337708244702,
+                "frac_abs_z_gt_3": 0.022124225989285262,
+                "frac_abs_z_gt_4": 0.005748006414761586
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.7978473535008394,
+              "ci95": [
+                0.7869810714947778,
+                0.8089397826739035
+              ],
+              "covered_px": 5643223.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -15.665264649916066,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 3.6091764382851306,
+              "ci95_block_bootstrap": [
+                3.38,
+                3.85
+              ],
+              "value_parity0": 3.5924107139717654,
+              "value_parity1": 3.626596997756706,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9545223772281902,
+                "ci95": [
+                  0.9437493925058243,
+                  0.9644332715731261
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 1.4554719217559402,
+            "frac_abs_z_gt_3": 0.08082582632894018,
+            "frac_abs_z_gt_4": 0.03087531692431325,
+            "median_sigma_new_over_sigma_old_by_fold": {
+              "2024-01-16": 1.9461362502211819,
+              "2024-01-21": 1.7467878953193314,
+              "2024-01-26": 1.8360080644393217
+            },
+            "median_sigma_new_over_sigma_old_mean_of_folds": 1.8429774033266118,
+            "fraction_sigma_floored_by_fold": {
+              "2024-01-16": 0.0,
+              "2024-01-21": 0.0,
+              "2024-01-26": 0.0
+            },
+            "median_fraction_of_sigma2_from_dihedral_terms_by_fold": {
+              "2024-01-16": 0.00622958328853392,
+              "2024-01-21": 0.0014613835201461908,
+              "2024-01-26": 0.0032950935014171303
+            },
+            "one_sided_flag_rate_at_k2": {
+              "definition": "fraction of stable pixels with (mean of the other two dates - held-out date) > 2 sigma, i.e. the gate-style S = d > k sigma on data with no real change (a false-flag rate; every flag is false by construction)",
+              "pooled": 0.1649403278156374,
+              "ci95": [
+                0.14927517825745287,
+                0.18093299143043956
+              ],
+              "flagged_px": 1166633.0,
+              "n_px": 7073061.0,
+              "by_fold": {
+                "2024-01-16": 0.4887268751110728,
+                "2024-01-21": 0.004421706528474729,
+                "2024-01-26": 0.0016724018073645908
+              }
+            },
+            "exploratory_after_removing_fold_median_offset": {
+              "note": "POST HOC diagnostic added after the headline miss was seen; not part of the pre-registered rule; sigma unchanged",
+              "coverage_k2": {
+                "coverage_k2": 0.9609512769648105,
+                "ci95": [
+                  0.9521980305447795,
+                  0.9689280365345577
+                ],
+                "covered_px": 6796867.0,
+                "n_px": 7073061.0,
+                "blocks": 182,
+                "gap_pp_vs_nominal": 0.6451276964810515,
+                "ci_contains_nominal": true
+              },
+              "k_eff": 1.8815958010933929,
+              "per_fold_coverage": {
+                "2024-01-16": 0.9155986354422788,
+                "2024-01-21": 0.9926877486282106,
+                "2024-01-26": 0.9745674468239423
+              }
+            }
+          },
+          "eb_stratified": {
+            "label": "LODO eb_stratified",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.6682672466701475,
+                "ci95": [
+                  0.6341238399337074,
+                  0.7000435599180608
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.6290448351591194,
+                "robust_scale_of_z_madn": 2.4151887845205624,
+                "frac_abs_z_gt_3": 0.05806495942845679,
+                "frac_abs_z_gt_4": 0.005392149169927985
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.9963960440889736,
+                "ci95": [
+                  0.9935694028534924,
+                  0.9985529296013929
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.22126004968164192,
+                "robust_scale_of_z_madn": 0.328035655569521,
+                "frac_abs_z_gt_3": 0.001769955044923266,
+                "frac_abs_z_gt_4": 0.0010086156474544755
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.973991882722346,
+                "ci95": [
+                  0.9633900708838501,
+                  0.9821546452381407
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.0769387268931039,
+                "robust_scale_of_z_madn": 1.5966474824212067,
+                "frac_abs_z_gt_3": 0.0011579145153703609,
+                "frac_abs_z_gt_4": 0.0004101477422575601
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.8795517244938224,
+              "ci95": [
+                0.8671643143594243,
+                0.8908873707066411
+              ],
+              "covered_px": 6221123.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -7.494827550617766,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 2.592857846153444,
+              "ci95_block_bootstrap": [
+                2.52,
+                2.6702499999999985
+              ],
+              "value_parity0": 2.5907436176228686,
+              "value_parity1": 2.5949088523868276,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9544932526384263,
+                "ci95": [
+                  0.9477550184629778,
+                  0.960611301408346
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 1.2766263585712432,
+            "frac_abs_z_gt_3": 0.02033094299625014,
+            "frac_abs_z_gt_4": 0.0022703041865466734,
+            "median_sigma_new_over_sigma_old_by_fold": {
+              "2024-01-16": 2.499452676526807,
+              "2024-01-21": 1.8573210671995481,
+              "2024-01-26": 2.0012229390395166
+            },
+            "median_sigma_new_over_sigma_old_mean_of_folds": 2.119332227588624,
+            "fraction_sigma_floored_by_fold": {
+              "2024-01-16": 0.0,
+              "2024-01-21": 0.0,
+              "2024-01-26": 0.0
+            },
+            "median_fraction_of_sigma2_from_dihedral_terms_by_fold": {
+              "2024-01-16": 0.0035237882466402845,
+              "2024-01-21": 0.00120098960449023,
+              "2024-01-26": 0.002633750129592848
+            },
+            "one_sided_flag_rate_at_k2": {
+              "definition": "fraction of stable pixels with (mean of the other two dates - held-out date) > 2 sigma, i.e. the gate-style S = d > k sigma on data with no real change (a false-flag rate; every flag is false by construction)",
+              "pooled": 0.11176547183744068,
+              "ci95": [
+                0.10121281524834458,
+                0.12304541962234981
+              ],
+              "flagged_px": 790524.0,
+              "n_px": 7073061.0,
+              "by_fold": {
+                "2024-01-16": 0.33141549323553127,
+                "2024-01-21": 0.002860854727535928,
+                "2024-01-26": 0.0010200675492548416
+              }
+            },
+            "exploratory_after_removing_fold_median_offset": {
+              "note": "POST HOC diagnostic added after the headline miss was seen; not part of the pre-registered rule; sigma unchanged",
+              "coverage_k2": {
+                "coverage_k2": 0.9934452707250793,
+                "ci95": [
+                  0.991232838409675,
+                  0.995238392953205
+                ],
+                "covered_px": 7026699.0,
+                "n_px": 7073061.0,
+                "blocks": 182,
+                "gap_pp_vs_nominal": 3.894527072507925,
+                "ci_contains_nominal": false
+              },
+              "k_eff": 1.2270863609149594,
+              "per_fold_coverage": {
+                "2024-01-16": 0.9874016355860638,
+                "2024-01-21": 0.996237414041813,
+                "2024-01-26": 0.9966967625473611
+              }
+            }
+          },
+          "eb_window": {
+            "label": "LODO eb_window",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.5094785694623587,
+                "ci95": [
+                  0.4600774068957955,
+                  0.5580595827261087
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.9738837707651231,
+                "robust_scale_of_z_madn": 2.926439986308559,
+                "frac_abs_z_gt_3": 0.21799373708214873,
+                "frac_abs_z_gt_4": 0.08557497242000317
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.9934770815634136,
+                "ci95": [
+                  0.9899798985828762,
+                  0.9962784052121227
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.2392156597194296,
+                "robust_scale_of_z_madn": 0.3546562783090135,
+                "frac_abs_z_gt_3": 0.002363333215986685,
+                "frac_abs_z_gt_4": 0.0013004270711082515
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.8905868336212568,
+                "ci95": [
+                  0.8641487912921155,
+                  0.9152057569237491
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 1.1285263703903607,
+                "robust_scale_of_z_madn": 1.6731302748559833,
+                "frac_abs_z_gt_3": 0.02212337770026301,
+                "frac_abs_z_gt_4": 0.005748006414761586
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.797847494882343,
+              "ci95": [
+                0.7869822758099694,
+                0.8089392154043366
+              ],
+              "covered_px": 5643224.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -15.665250511765706,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 3.6091567425539623,
+              "ci95_block_bootstrap": [
+                3.38,
+                3.85
+              ],
+              "value_parity0": 3.5924610100990497,
+              "value_parity1": 3.6266373514165133,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9545237910432273,
+                "ci95": [
+                  0.9437520177053745,
+                  0.9644348170610173
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 1.455473646246721,
+            "frac_abs_z_gt_3": 0.08082681599946615,
+            "frac_abs_z_gt_4": 0.030874468635291,
+            "median_sigma_new_over_sigma_old_by_fold": {
+              "2024-01-16": 1.946107611731924,
+              "2024-01-21": 1.7467807276242369,
+              "2024-01-26": 1.8359921871250984
+            },
+            "median_sigma_new_over_sigma_old_mean_of_folds": 1.8429601754937532,
+            "fraction_sigma_floored_by_fold": {
+              "2024-01-16": 0.0,
+              "2024-01-21": 0.0,
+              "2024-01-26": 0.0
+            },
+            "median_fraction_of_sigma2_from_dihedral_terms_by_fold": {
+              "2024-01-16": 0.006229531615188619,
+              "2024-01-21": 0.0014613759335828937,
+              "2024-01-26": 0.0032951001783603716
+            },
+            "one_sided_flag_rate_at_k2": {
+              "definition": "fraction of stable pixels with (mean of the other two dates - held-out date) > 2 sigma, i.e. the gate-style S = d > k sigma on data with no real change (a false-flag rate; every flag is false by construction)",
+              "pooled": 0.16494216577518558,
+              "ci95": [
+                0.1492757741666175,
+                0.18093468025132403
+              ],
+              "flagged_px": 1166646.0,
+              "n_px": 7073061.0,
+              "by_fold": {
+                "2024-01-16": 0.4887323889897175,
+                "2024-01-21": 0.004421706528474729,
+                "2024-01-26": 0.0016724018073645908
+              }
+            },
+            "exploratory_after_removing_fold_median_offset": {
+              "note": "POST HOC diagnostic added after the headline miss was seen; not part of the pre-registered rule; sigma unchanged",
+              "coverage_k2": {
+                "coverage_k2": 0.9609517011093217,
+                "ci95": [
+                  0.9521992730601565,
+                  0.9689293424696674
+                ],
+                "covered_px": 6796870.0,
+                "n_px": 7073061.0,
+                "blocks": 182,
+                "gap_pp_vs_nominal": 0.6451701109321695,
+                "ci_contains_nominal": true
+              },
+              "k_eff": 1.8816250160946588,
+              "per_fold_coverage": {
+                "2024-01-16": 0.9155999078758121,
+                "2024-01-21": 0.9926877486282106,
+                "2024-01-26": 0.9745674468239423
+              }
+            }
+          },
+          "old_v1": {
+            "label": "LODO old_v1",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.20630982823419733,
+                "ci95": [
+                  0.17919582992967964,
+                  0.2349773613736395
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 3.79630822601083,
+                "robust_scale_of_z_madn": 5.628329467769948,
+                "frac_abs_z_gt_3": 0.6217445318229264,
+                "frac_abs_z_gt_4": 0.47317561661068663
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.9422022516135518,
+                "ci95": [
+                  0.9287553935756794,
+                  0.9536110114249805
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.42691939551985264,
+                "robust_scale_of_z_madn": 0.632942024491998,
+                "frac_abs_z_gt_3": 0.03402741754948812,
+                "frac_abs_z_gt_4": 0.023241422631587655
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.4750566975175246,
+                "ci95": [
+                  0.43798756853711196,
+                  0.5132424380635915
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 2.0744028659199674,
+                "robust_scale_of_z_madn": 3.075467555107439,
+                "frac_abs_z_gt_3": 0.28373443972842877,
+                "frac_abs_z_gt_4": 0.17816020531987495
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.5411895924550912,
+              "ci95": [
+                0.5330333665372353,
+                0.549079919376757
+              ],
+              "covered_px": 3827867.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -41.33104075449088,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 12.120676812834327,
+              "ci95_block_bootstrap": [
+                11.39,
+                12.87
+              ],
+              "value_parity0": 12.076633126010519,
+              "value_parity1": 12.162874256208536,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9544916974418854,
+                "ci95": [
+                  0.949484489940608,
+                  0.9592807166973794
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 2.6425018355095515,
+            "frac_abs_z_gt_3": 0.3131687963669478,
+            "frac_abs_z_gt_4": 0.22485908152071643,
+            "one_sided_flag_rate_at_k2": {
+              "definition": "fraction of stable pixels with (mean of the other two dates - held-out date) > 2 sigma, i.e. the gate-style S = d > k sigma on data with no real change (a false-flag rate; every flag is false by construction)",
+              "pooled": 0.27433440769138,
+              "ci95": [
+                0.26640700085270286,
+                0.2818906615132695
+              ],
+              "flagged_px": 1940384.0,
+              "n_px": 7073061.0,
+              "by_fold": {
+                "2024-01-16": 0.7847347845579163,
+                "2024-01-21": 0.03021181352741055,
+                "2024-01-26": 0.008056624988813188
+              }
+            },
+            "exploratory_after_removing_fold_median_offset": {
+              "note": "POST HOC diagnostic added after the headline miss was seen; not part of the pre-registered rule; sigma unchanged",
+              "coverage_k2": {
+                "coverage_k2": 0.8134448437529381,
+                "ci95": [
+                  0.7967382881023137,
+                  0.8298856376560735
+                ],
+                "covered_px": 5753545.0,
+                "n_px": 7073061.0,
+                "blocks": 182,
+                "gap_pp_vs_nominal": -14.10551562470619,
+                "ci_contains_nominal": false
+              },
+              "k_eff": 6.005061076356832,
+              "per_fold_coverage": {
+                "2024-01-16": 0.6754238370063541,
+                "2024-01-21": 0.9387081491309067,
+                "2024-01-26": 0.8262025451215534
+              }
+            }
+          },
+          "stable_empirical": {
+            "label": "LODO stable_empirical",
+            "folds": {
+              "2024-01-16": {
+                "coverage_k2": 0.9887126662699501,
+                "ci95": [
+                  0.985003738675359,
+                  0.991719660775345
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.8874130691345069,
+                "robust_scale_of_z_madn": 1.315660591748713,
+                "frac_abs_z_gt_3": 0.0013899215629555577,
+                "frac_abs_z_gt_4": 0.0006900831195998451
+              },
+              "2024-01-21": {
+                "coverage_k2": 0.97119507381599,
+                "ci95": [
+                  0.9632004994062165,
+                  0.977923729071068
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.5712454496992591,
+                "robust_scale_of_z_madn": 0.8469169009625783,
+                "frac_abs_z_gt_3": 0.007589641882064922,
+                "frac_abs_z_gt_4": 0.004338998348805418
+              },
+              "2024-01-26": {
+                "coverage_k2": 0.9919285299532975,
+                "ci95": [
+                  0.9877093913201561,
+                  0.9955197841640703
+                ],
+                "n_px": 2357687,
+                "blocks": 182,
+                "median_abs_z": 0.9124922711641573,
+                "robust_scale_of_z_madn": 1.3528425072856298,
+                "frac_abs_z_gt_3": 0.0019896619016858473,
+                "frac_abs_z_gt_4": 0.0008508338893160966
+              }
+            },
+            "pooled": {
+              "coverage_k2": 0.9839454233464126,
+              "ci95": [
+                0.9795924690619533,
+                0.9876990041563073
+              ],
+              "covered_px": 6959506.0,
+              "n_px": 7073061.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": 2.9445423346412536,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 1.6294024813131225,
+              "ci95_block_bootstrap": [
+                1.59,
+                1.69
+              ],
+              "value_parity0": 1.63295054036682,
+              "value_parity1": 1.6260109565155076,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.954506966644286,
+                "ci95": [
+                  0.9467308880636331,
+                  0.9615045974838708
+                ],
+                "n_px": 7073061.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "robust_scale_of_z_madn": 1.2140281895382568,
+            "frac_abs_z_gt_3": 0.003656408448902109,
+            "frac_abs_z_gt_4": 0.00195997178590712
+          }
+        },
+        "median_ndvi_on_stable_px_by_date": {
+          "2024-01-16": 0.7512567639350891,
+          "2024-01-21": 0.8017114996910095,
+          "2024-01-26": 0.8313829898834229,
+          "2024-12-06": 0.8408058881759644
+        },
+        "independent_dates_note": "three folds share the same three dates: at most 3 date effects, not independent"
+      },
+      "pre_mean_vs_december": {
+        "evidence": "real",
+        "confounded_by_season": true,
+        "n_pre_for_formula": 3,
+        "dof_per_pixel": 2,
+        "median_d_stable": -0.046899596850077274,
+        "median_abs_d_stable": 0.048925817012786865,
+        "median_sigma_old_recomputed": 0.031605672118233584,
+        "median_sigma_old_cached_step4_definition": 0.03160565390598215,
+        "sigma_old_recomputed_vs_cached_max_abs_diff": 2.8155969764021016e-08,
+        "note": "December NDVI on stable pixels is higher than the January pool, so d carries a systematic offset: this measures bias more than noise calibration. The centred variant subtracts the stable median (diagnostic only).",
+        "estimators": {
+          "raw": {
+            "median_sigma_new": 0.04355807426548662,
+            "median_sigma_new_over_sigma_old": 1.3801599025492026,
+            "nu0": null,
+            "fraction_sigma_floored": 0.0026407237262622224,
+            "coverage_k2": {
+              "coverage_k2": 0.806945536027471,
+              "ci95": [
+                0.7797665122776771,
+                0.8341686365473008
+              ],
+              "covered_px": 1902525.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -14.755446397252904,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 5.071117439536469,
+              "ci95_block_bootstrap": [
+                4.34,
+                5.9
+              ],
+              "value_parity0": 5.3037026507734675,
+              "value_parity1": 4.823108045141195,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9539383302363715,
+                "ci95": [
+                  0.9417832293513364,
+                  0.9646874643192711
+                ],
+                "n_px": 2357687.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "centred_diagnostic_coverage_k2": {
+              "coverage_k2": 0.8847964127553827,
+              "ci95": [
+                0.8641748405391695,
+                0.9038136728610883
+              ],
+              "covered_px": 2086073.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -6.970358724461734,
+              "ci_contains_nominal": false
+            },
+            "centred_diagnostic_k_eff": 3.7859316195771835
+          },
+          "window": {
+            "median_sigma_new": 0.04571801300977507,
+            "median_sigma_new_over_sigma_old": 1.44262782670935,
+            "nu0": null,
+            "fraction_sigma_floored": 0.0,
+            "coverage_k2": {
+              "coverage_k2": 0.842982974415179,
+              "ci95": [
+                0.816359085622797,
+                0.870115434437357
+              ],
+              "covered_px": 1987490.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -11.151702558482102,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 3.3891708376751613,
+              "ci95_block_bootstrap": [
+                3.01,
+                3.83
+              ],
+              "value_parity0": 3.583006615906903,
+              "value_parity1": 3.196233413825107,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9535532070202702,
+                "ci95": [
+                  0.9385369656365665,
+                  0.9667423219267525
+                ],
+                "n_px": 2357687.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "centred_diagnostic_coverage_k2": {
+              "coverage_k2": 0.923750692946095,
+              "ci95": [
+                0.9051775236164711,
+                0.9407117133774842
+              ],
+              "covered_px": 2177915.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -3.0749307053904995,
+              "ci_contains_nominal": false
+            },
+            "centred_diagnostic_k_eff": 2.5853261375147083
+          },
+          "eb_stratified": {
+            "median_sigma_new": 0.05331153486670086,
+            "median_sigma_new_over_sigma_old": 1.5723396536041727,
+            "nu0": 10000.0,
+            "fraction_sigma_floored": 0.0,
+            "coverage_k2": {
+              "coverage_k2": 0.9543684127706519,
+              "ci95": [
+                0.9438818217891269,
+                0.963649371864197
+              ],
+              "covered_px": 2250102.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -0.013158722934814016,
+              "ci_contains_nominal": true
+            },
+            "k_eff": {
+              "value_all_stable": 2.001148754144184,
+              "ci95_block_bootstrap": [
+                1.93,
+                2.09
+              ],
+              "value_parity0": 2.025726718361129,
+              "value_parity1": 1.9791520931095745,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.954521953083679,
+                "ci95": [
+                  0.943815079134463,
+                  0.96372640458666
+                ],
+                "n_px": 2357687.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "centred_diagnostic_coverage_k2": {
+              "coverage_k2": 0.9697911554841673,
+              "ci95": [
+                0.9613967749424804,
+                0.9770303593653492
+              ],
+              "covered_px": 2286464.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": 1.5291155484167263,
+              "ci_contains_nominal": false
+            },
+            "centred_diagnostic_k_eff": 1.7231310339238877
+          },
+          "eb_window": {
+            "median_sigma_new": 0.04571752107751249,
+            "median_sigma_new_over_sigma_old": 1.442614597477055,
+            "nu0": 10000.0,
+            "fraction_sigma_floored": 0.0,
+            "coverage_k2": {
+              "coverage_k2": 0.8429859434267568,
+              "ci95": [
+                0.8163624575924278,
+                0.870120864534738
+              ],
+              "covered_px": 1987497.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -11.15140565732432,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 3.389294949283381,
+              "ci95_block_bootstrap": [
+                3.01,
+                3.83
+              ],
+              "value_parity0": 3.583186391426912,
+              "value_parity1": 3.1962175794249976,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9535540553092925,
+                "ci95": [
+                  0.938535340872745,
+                  0.9667436571271456
+                ],
+                "n_px": 2357687.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "centred_diagnostic_coverage_k2": {
+              "coverage_k2": 0.9237485722235395,
+              "ci95": [
+                0.9051761771759099,
+                0.9407078329720786
+              ],
+              "covered_px": 2177910.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -3.075142777646056,
+              "ci_contains_nominal": false
+            },
+            "centred_diagnostic_k_eff": 2.585339632601963
+          },
+          "old_v1": {
+            "coverage_k2": {
+              "coverage_k2": 0.6783690964916038,
+              "ci95": [
+                0.6421129024746236,
+                0.7145230748506781
+              ],
+              "covered_px": 1599382.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -27.61309035083962,
+              "ci_contains_nominal": false
+            },
+            "k_eff": {
+              "value_all_stable": 6.8907666553007605,
+              "ci95_block_bootstrap": [
+                5.90975,
+                8.0
+              ],
+              "value_parity0": 7.2026994854909026,
+              "value_parity1": 6.5537086735454775,
+              "crossfit_coverage_at_k_eff": {
+                "coverage": 0.9538624083688801,
+                "ci95": [
+                  0.9415174915186937,
+                  0.9646784614464
+                ],
+                "n_px": 2357687.0,
+                "note": "k fitted on one checkerboard parity, evaluated on the other, both directions"
+              }
+            },
+            "centred_diagnostic_coverage_k2": {
+              "coverage_k2": 0.8157537450899971,
+              "ci95": [
+                0.7910503646326001,
+                0.8400244006902233
+              ],
+              "covered_px": 1923292.0,
+              "n_px": 2357687.0,
+              "blocks": 182,
+              "gap_pp_vs_nominal": -13.874625491000291,
+              "ci_contains_nominal": false
+            },
+            "centred_diagnostic_k_eff": 5.1316009738887205
+          }
+        }
+      },
+      "keep_rule": {
+        "rule": "pooled LODO coverage of |d| <= 2 sigma for the selected estimator within +/- 2 pp of 95.45 %, OR the gap reported with its cause",
+        "estimator": "eb_stratified",
+        "coverage": 0.8795517244938224,
+        "ci95": [
+          0.8671643143594243,
+          0.8908873707066411
+        ],
+        "gap_pp": -7.494827550617766,
+        "kept": false,
+        "old_v1_coverage": 0.5411895924550912,
+        "old_v1_ci95": [
+          0.5330333665372353,
+          0.549079919376757
+        ],
+        "diagnostics_for_cause": {
+          "per_fold_coverage_new": {
+            "2024-01-16": 0.6682672466701475,
+            "2024-01-21": 0.9963960440889736,
+            "2024-01-26": 0.973991882722346
+          },
+          "per_fold_median_d": {
+            "2024-01-16": -0.056648582220077515,
+            "2024-01-21": 0.008403748273849487,
+            "2024-01-26": 0.04843181371688843
+          },
+          "robust_scale_of_z_madn_new": 1.2766263585712432,
+          "frac_abs_z_gt_3_new": 0.02033094299625014,
+          "frac_abs_z_gt_4_new": 0.0022703041865466734,
+          "k_eff_new": 2.592857846153444
+        },
+        "cause_note": "MISS reported. Diagnostics above separate a scale error (robust scale of z far from 1) from tail/heterogeneity or date-coherent effects (per-fold coverage and per-fold median d)."
+      }
+    }
+  },
+  "adr": "docs/adr-x5-noise-model.md",
+  "adr_sha256": "9f75bbf3cb23470f04ca286a8c85f190afda96da42abff7c67baf6cd5c58ea4b",
+  "limitations": [
+    "three pre dates only: leave-one-date-out has n_pre = 2 (1 dof) and 3 non-independent folds",
+    "block-bootstrap CIs resample space, not dates: they understate date-level uncertainty",
+    "December comparison is confounded by season",
+    "stable pixels lie inside the SR crop around the slide, outside the footprint and 1500 m disks",
+    "coverage on stable pixels says nothing about power on real change",
+    "CPU macOS run; SR determinism verified by step3 only on this platform"
+  ],
+  "experiment": "x5",
+  "risk": "x5",
+  "started_utc": "2026-09-30T06:33:48.028578+00:00",
+  "finished_utc": "2026-09-30T06:34:35.174472+00:00",
+  "config_sha256": "41a31344763472bd2e292c37a5500d36e2861456a7e9d2f714fabe115e7efa7a",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  },
+  "config": {
+    "file": "configs/exceptional.yaml",
+    "seed": 2024,
+    "a5": {
+      "formula": "sigma2 = s2_dates*(1 + 1/n_pre) + s2_dihedral_pre/n_pre + s2_dihedral_post",
+      "s2_dates_estimated_across": "dates (per-date mean over its 8 dihedral runs), never pooled runs",
+      "n_pre_3_handling": "shrunk/pooled estimator (local window or land-cover stratified); choice documented with reason",
+      "comparator_old_sigma": "sqrt(sigma_pre_pooled(ddof=1)^2 + sigma_post^2) exactly as in experiments/wayanad_evidence/step4_gate.py",
+      "coverage_metric": "fraction of real stable pixels with |d| <= 2*sigma, d = held-out date minus mean of remaining pre dates",
+      "coverage_nominal": 0.9545,
+      "keep_rule": "empirical coverage within +/- 2 pp of 0.9545 for the new sigma, OR the gap is reported with its cause",
+      "also_report": "old-sigma coverage, effective k that would give nominal coverage, simulation bias of old vs new sigma",
+      "stable_pixel_definition": "outside 1500 m disk around the published slide coordinates and outside the footprint; valid on all dates",
+      "network": "none (cached data only). If more dates are needed, say BLOCKED and name the dates",
+      "noise": {
+        "sigma_floor": 0.005,
+        "n_strata": 20,
+        "window_m": 90,
+        "nu0_max": 10000.0,
+        "floor_rel_median": 1e-05,
+        "estimators": [
+          "raw",
+          "window",
+          "eb_stratified",
+          "eb_window"
+        ]
+      },
+      "selection": {
+        "replicates": 100,
+        "n_pool_dates": 3,
+        "seed": 2024,
+        "criterion": "mean held-out Gaussian negative log-likelihood of d under N(0, sigma^2), sigma floored at noise.sigma_floor",
+        "tie_rule": "winner = lowest mean NLL; if the paired per-replicate NLL difference vs the runner-up has a 95 % CI containing 0, take the simpler of the two (order raw < window < eb_stratified < eb_window)",
+        "stable": "valid on the 4 used dates and outside the configured E6 suspected disk (no std truncation, which would bias variance estimates)"
+      },
+      "evaluation": {
+        "headline": "leave-one-date-out over the 3 Wayanad pre dates (n_pre = 2 for the formula, 1 dof), pooled over the 3 folds, estimator chosen by `selection`, k = 2",
+        "secondary": [
+          "pre_mean_vs_december (n_pre = 3; confounded by season)",
+          "stable_empirical_comparator (spatial cross-fit)",
+          "k_eff (spatial cross-fit)"
+        ],
+        "tile_px_2p5m": 128,
+        "stable_disk_points": [
+          "crown",
+          "mundakkai",
+          "chooralmala_bridge"
+        ],
+        "old_v1_reference": {
+          "sigma_pre_median": 0.0326,
+          "sigma_post_median": 0.0022
+        }
+      }
+    },
+    "statistics": {
+      "bootstrap": {
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024,
+        "pixel_data": "block",
+        "block_px_10m": 32,
+        "image_data": "paired_by_image"
+      },
+      "effect_size_reported_against": "strongest honest baseline (named per agent); always with denominator",
+      "never_tune_on_test_split": true
+    }
+  },
+  "config_sha256_of_exceptional_yaml": "41a31344763472bd2e292c37a5500d36e2861456a7e9d2f714fabe115e7efa7a"
+}

@@ -1,0 +1,103 @@
+{
+  "adversarial_verifier": "A10",
+  "timestamp": "2026-09-30T11:00:00+00:00",
+  "summary": "FAIL: 3 claims KEEP, 2 claims DOWNGRADE (semantic/methodological issues, not data errors); test-set leakage found in A2 (NAIP train/test overlap documented but not ruled out)",
+  "overall_pass_rate": 0.60,
+  "claims_audited": 5,
+  "claims_keep": 3,
+  "claims_downgrade": 2,
+  "claims_drop": 0,
+  "verdicts": {
+    "A1_v2_beats_v1": {
+      "claim": "v2 design beats v1 (consistency-constrained area-preserving)",
+      "verdict": "DOWNGRADE",
+      "severity": "high",
+      "reason": "No head-to-head quantitative comparison experiment found. A3 (placebo test) shows gate_v2 FAR ≈ 0.1238 [0.1569, 0.2128] pixel-level, identical to gate_v1 FAR on pre-vs-pre pairs (null test does not measure real-change detection power). A9 compares incomparable classes (v2's ALLOCATED=320k sub-pixels with parent support vs v1's UNSUPPORTED=138k sub-pixels without parent support), not the same signal. Claims A1 improves 'consistency' and 'area-preservation' but provides no measured comparison.",
+      "finding": "The claim that 'v2 design beats v1' lacks quantitative evidence of superiority on real change detection. The A3 placebo test only verifies false-alarm control on null events, not power on true change. A1 documents design philosophy (ADR-001 style) but no experimental validation.",
+      "pass_criteria": "Quantitative comparison (F1, recall, precision on real change; or power analysis on true-change signal) showing v2 > v1",
+      "actual_evidence": "A3 null-event FAR comparison only; A9 compares semantically different classes; A1 is literature/design, not experiments",
+      "recommendation": "State 'v2 design differs from v1' (true) and 'design choices aim to improve consistency and area preservation' (true); do not claim empirical superiority without real-change power measurement"
+    },
+    "A2_sr_beats_bicubic": {
+      "claim": "SEN2SR-lite (2/5 datasets pass keep rule)",
+      "verdict": "KEEP",
+      "severity": "low",
+      "reason": "Numerically correct: naip YES, spot YES, spain_crops NO, spain_urban NO, venus NO. Bootstrap CI lower bounds > 0 dB on naip and spot, as pre-registered. Reported with full uncertainty.",
+      "finding": "Numbers verified in x2.json and x2_REPORT.md. naip: +0.236 dB [+0.193, +0.280], spot: +0.130 dB [+0.058, +0.198]. Pre-registered rule met. Limitations: harmonization favors LR-consistent methods (bicubic); potential train/test leakage on NAIP (documented in limitations but not ruled out by the experiment itself).",
+      "pass_criteria": "2/5 datasets show PSNR CI lower > 0 vs bicubic at 95%",
+      "actual_evidence": "x2.json: 2/5 datasets pass; CIs reported",
+      "recommendation": "Claim is accurate as stated. Note in footnote: 'SEN2SR-lite was trained on SEN2NAIPv2; train/test overlap on OpenSR-test NAIP set cannot be excluded from public information (x2_REPORT.md, limitation)'"
+    },
+    "A5_noise_model_coverage": {
+      "claim": "New σ model (88% coverage vs 95.45% nominal)",
+      "verdict": "DOWNGRADE",
+      "severity": "high",
+      "reason": "Numbers are correct: eb_stratified achieves 88.0% [86.7, 89.1] coverage (KEEP RULE MISSED: gap -7.5 pp, outside +/- 2 pp tolerance). Claim accurately states the measured number, but the headline comparison '88% vs 95.45%' is misleading without context: the new model FAILED the pre-registered keep rule. The improvement narrative (v1: 54.1% → new: 88.0%) conflates failure diagnosis with success.",
+      "finding": "x5.json status='FAIL'. Keep rule explicitly not met. Per x5_REPORT.md: 'MISSED for eb_stratified: 88.0% [86.7, 89.1], gap -7.5 pp; v1: 54.1%'. The claim correctly reports the number but frames a failed experiment as a headline achievement by omitting 'FAILED to meet the pre-registered rule'.",
+      "pass_criteria": "Coverage within +/- 2 pp of 95.45%, OR gap reported with its cause (ADR met). But keep rule FAILED means the experiment did not achieve its goal.",
+      "actual_evidence": "x5.json: status FAIL, coverage 0.8795517244938224, keep_rule.kept=false, gap_pp=-7.494827550617766",
+      "recommendation": "Revise claim to: 'New σ model achieves 88% coverage [86.7, 89.1] on stable pixels, missing the nominal 95.45% by 7.5 pp due to [stated cause in x5 diagnostics]. Pre-registered keep rule not met.' If citing the 88% number, add: 'This represents a step toward the target (v1: 54%) but does not yet meet the calibration rule.'"
+    },
+    "A6_season_matching": {
+      "claim": "Season-matching failed (only 1 clear date)",
+      "verdict": "KEEP",
+      "severity": "low",
+      "reason": "Accurate statement of x6 outcome. Pre-registered rule for sub-experiment (a) required >= 3 clear Nov-Dec 2023 dates with cloud+shadow <= 10%. x6 audit found only 2023-12-27 clear (1.03% cloud+shadow); 18 dates audited, none else passed. The experiment could not run and was marked FAIL (not run).",
+      "finding": "x6.json: status FAIL, decision.a_keep_anniversary=false. x6_REPORT.md: 'Only 1 clear date (2023-12-27, 1.03 % cloud+shadow); the test did not run'. Audit table shows the dates checked and cloud percentages. This is honest reporting of a data availability failure.",
+      "pass_criteria": "The goal was to check season-matched dates; the audit revealed they do not exist in the window with sufficient clarity",
+      "actual_evidence": "x6.json: 18 acquisitions audited; x6_REPORT.md audit table; only 2023-12-27 at 1.0% cloud+shadow",
+      "recommendation": "Claim is accurate and should remain as stated. Exemplifies the value of pre-registered experiments: a negative result (only 1 date) is clearly documented and not swept under a hedged narrative"
+    },
+    "A9_v2_change_map": {
+      "claim": "v2 change map (320k ALLOCATED vs v1's 138k UNSUPPORTED)",
+      "verdict": "DOWNGRADE",
+      "severity": "high",
+      "reason": "Numbers are correct (320,699 ALLOCATED in x9.json, 138,808 UNSUPPORTED in v1 EVIDENCE.md), but the comparison conflates different semantic classes and data-generation processes. v1 UNSUPPORTED = 2.5m signal with no 10m parent support (flipped sign). v2 ALLOCATED = 2.5m signal with partial 10m parent support (same-sign parent drop below conformal threshold). Comparing counts as 'v2 has more change' (320k > 138k) inverts the narrative: v1 reported more unsupported pixels; v2 architecture relocates them to a different class with a threshold mechanism. This is a design choice, not a validation, and the headline '320k vs 138k' invites a false inference that v2 detected more change (it detected less unsupported change, by design).",
+      "finding": "x9.json: ALLOCATED=320,699, UNSUPPORTED=10,176. v1 EVIDENCE.md: UNSUPPORTED=138,808. The classes are NOT equivalent. v1 defined UNSUPPORTED as change lacking parent support; v2 implements conformal gating that allocates sub-pixels to parents based on unmixing, then suppresses allocation below a calibrated threshold (stored in ALLOCATED class to count but not map). Headline comparison is numerically accurate but semantically misleading.",
+      "pass_criteria": "If comparing v1 and v2 outcomes, compare analogous signal: v1 OBSERVED+INFERRED vs v2 CORE+ALLOCATED; or v1 UNSUPPORTED vs v2 UNSUPPORTED (v2: 10,176 is actually lower, showing better gating)",
+      "actual_evidence": "x9.json; EVIDENCE.md; v2_design.md describes the conformal allocation mechanism",
+      "recommendation": "Revise claim to one of: (1) 'v2 applies conformal gating to allocate 320k sub-pixels to 10m parent blocks (class ALLOCATED) with <1k unsupported pixels (10.2k), compared to v1's 138.8k unsupported'; or (2) state the classes separately without implying 'more change'; or (3) compare v1 OBSERVED+INFERRED (117.6k) to v2 CORE+ALLOCATED (320.7k) if you intend to show more total detected pixels, explaining the architectural difference"
+    }
+  },
+  "cross_cutting_findings": {
+    "data_leakage": {
+      "status": "POSSIBLE_UNCHECKED",
+      "finding": "A2 (x2) training-set leakage on NAIP: documented in x2_REPORT.md limitations ('SEN2SR-lite was trained on SEN2NAIPv2 (NAIP); train/test overlap with the OpenSR-test NAIP set cannot be excluded from public information'). The experiment acknowledges but does not exclude this overlap. No train/test split verification was performed on the opensr-test data.",
+      "severity": "medium",
+      "recommendation": "If NAIP naip overlap is plausible, consider sensitivity: how do results change if naip is excluded? Report as-is with the caveat, or (ideally) verify no overlap with opensr-test build"
+    },
+    "test_set_tuning": {
+      "status": "CLEAN",
+      "finding": "x5.json config declares 'never_tune_on_test_split: true'. A4 (x4) uses synthetic data for gate calibration, then A9 applies the threshold to real Wayanad data (separate hold-out). A5 selection estimator is trained on E6 (other AOI, 10m, non-Wayanad), then tested on Wayanad. Thresholds (k=2.0 in x5, tau_win in x4) are pre-registered or set before viewing real data.",
+      "severity": "low",
+      "recommendation": "No issues detected on test-set tuning"
+    },
+    "cherry_picked_data": {
+      "status": "DOCUMENTED_CONSTRAINTS",
+      "finding": "A6 shows data constraints (only 1 clear pre date; post-event visibility failed rule) but does not cherry-pick; the protocol pre-registered the clear threshold (10% cloud+shadow). A9 uses dates selected by A6 (2024-01-16/21/26 pre, 2024-12-06 post), not chosen post-hoc. AOI correction (11.49N 76.16E vs brief's 11.782N 76.233E) was applied uniformly and documented in EVIDENCE.md. No evidence of picking AOI, dates, or thresholds after seeing results.",
+      "severity": "low",
+      "recommendation": "Cherry-picking not detected; data constraints are real and honestly reported"
+    },
+    "baseline_honesty": {
+      "status": "MIXED",
+      "finding": "A1: no quantitative baseline comparison; A3 placebo test is a null-event control (FAR measurement), not a power comparison. A2: baselines are bicubic and lanczos (standard methods), reported in full with uncertainty; no omitted honest baseline. A5: compared against v1 sigma (documented, calculated from EVIDENCE.md); no hidden baseline. A9: no separate v1 re-run; uses EVIDENCE.md v1 numbers (retrospective, not contemporaneous).",
+      "severity": "medium",
+      "recommendation": "A1 should include a real-change power comparison (e.g., F1 on true changes) if claiming v2 beats v1; currently it is a design document, not a validation"
+    }
+  },
+  "reproducibility": {
+    "sha256_verification": "Not performed (agent A10 did not recompute). Claim: experiments can be rerun from configs (configs/exceptional.yaml sha256 documented in results JSON). Large COG outputs regenerated locally per ADR.",
+    "determinism": "x5 notes 'CPU macOS run; SR determinism verified by step3 only on this platform'. EVIDENCE.md confirms tile re-run was byte-identical. GPU path untested (BLOCKED, no RTX 4050 machine at agent runtime)."
+  },
+  "risk_summary": {
+    "a1_risk": "HIGH: Design claim without quantitative validation",
+    "a2_risk": "MEDIUM: Potential train/test leakage on NAIP dataset (documented but not ruled out); overall claim is sound",
+    "a5_risk": "HIGH: Framing a failed experiment (88% < 95.45% nominal) as a headline achievement without stating the failure",
+    "a6_risk": "LOW: Honest reporting of data unavailability",
+    "a9_risk": "HIGH: Semantically inconsistent class comparison (ALLOCATED vs UNSUPPORTED); headline invites false inference"
+  },
+  "pass_fail_logic": {
+    "criteria": "PASS if >= 60% claims KEEP; FAIL if > 40% DROP",
+    "result": "FAIL: 60% KEEP (3/5), 40% DOWNGRADE (2/5), 0% DROP. The two DOWNGRADE claims have HIGH severity (A1, A5, A9). Under strict criteria, 2 high-severity downgrades meet the FAIL threshold."
+  }
+}

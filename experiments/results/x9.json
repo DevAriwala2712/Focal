@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "timestamp": "2026-09-30T10:54:06.097597+00:00",
+  "config_sha256": "41a31344763472bd2e292c37a5500d36e2861456a7e9d2f714fabe115e7efa7a",
+  "a4_conformal_threshold": 0.3274410559739726,
+  "a5_noise_estimator": "eb_stratified",
+  "a6_dates": {
+    "pre": [
+      "2024-01-16",
+      "2024-01-21",
+      "2024-01-26"
+    ],
+    "post": "2024-12-06"
+  },
+  "computation": {
+    "elapsed_seconds": 2.8154139518737793,
+    "device": "cpu",
+    "seed": 2024
+  },
+  "class_distribution": {
+    "NO_CHANGE": 4911477,
+    "CORE": 16,
+    "ALLOCATED": 320699,
+    "UNSUPPORTED": 10176,
+    "NO_DATA": 512
+  },
+  "diagnostic": {
+    "sigma_info": {
+      "method": "eb_stratified",
+      "nu0": 10000.0,
+      "shrink_weight": 0.9998000039668888,
+      "n_pre": 3
+    }
+  }
+}

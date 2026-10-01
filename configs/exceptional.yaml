@@ -1,0 +1,152 @@
+# PRE-REGISTRATION for the "exceptional" experiments (branch experiments/exceptional).
+# Committed BEFORE any run it governs. A failed keep rule is a result, not a reason to edit a threshold here.
+# Agents may ADD details (block sizes, sample counts, file paths) inside their OWN section in a separate commit
+# made before their run; they may not edit another agent's section or loosen a keep rule after seeing results.
+# Every result JSON must carry the sha256 of this file (config_sha256) and say `evidence: real` or `evidence: synthetic`.
+schema_version: 1
+phase0_config: configs/phase0.yaml
+seed: 2024
+results_dir: experiments/results
+
+# Verified diagnosis this programme acts on (lead engineer, 2026-09-30, from data/experiments-cache/wayanad_evidence):
+#   P = 7,349 10 m px = 117,584 2.5 m px; INFERRED = 515 hr px (0.438 % of P); sigma_pre median 0.0326, sigma_post median 0.0022
+#   (no temporal term); boundary fraction of the main 10 m component = 40.7 %; UNSUPPORTED = 138,808 hr px, 98.5 % with 10 m drop > 0.
+diagnosis_verified:
+  inferred_px: 515
+  parent_hr_px: 117584
+  observed_px: 117069
+  unsupported_px: 138808
+  sigma_pre_median: 0.0326
+  sigma_post_median: 0.0022
+  main_component_boundary_fraction: 0.407
+  unsupported_with_positive_10m_drop: 0.985
+
+statistics:
+  bootstrap:
+    replicates: 2000
+    ci: 0.95
+    seed: 2024
+    pixel_data: block            # spatial block bootstrap; blocks resampled with replacement
+    block_px_10m: 32             # 320 m; 2.5 m rasters use 128 px blocks (same ground size)
+    image_data: paired_by_image  # benchmark sets: resample images/AOIs, paired across methods
+  effect_size_reported_against: strongest honest baseline (named per agent); always with denominator
+  never_tune_on_test_split: true
+
+units:
+  far_pixel: flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m2), placebo pairs only
+  far_window: fraction of 16x16 10 m px windows (160 m) with >= 1 flagged px. The conformal guarantee applies at this unit
+  window_caveat: pixels and neighbouring windows are spatially correlated; exchangeability is assumed across windows, not proven
+
+# ---------------------------------------------------------------- A2 HR validation benchmark
+a2:
+  model: pinned SEN2SR-lite RGBN x4 (revision in configs/phase0.yaml); bands B04,B03,B02,B08
+  datasets: every RGBN set available in opensr-test (e.g. NAIP, SPOT, Venus), plus SEN2NAIPv2 cross-sensor if accessible
+  baselines: [nearest, bicubic, lanczos]
+  primary_metric: masked PSNR on reflectance in [0,1] (data range 1.0), paired by image, SR minus bicubic
+  secondary_metrics: [masked SSIM, per-band 10 m downsample error, opensr-test consistency/synthesis/correctness groups]
+  keep_rule: >-
+    Report per-dataset delta vs bicubic (PSNR and SSIM) with paired bootstrap 95 % CI. KEEP 'SR beats bicubic on dataset D'
+    iff the PSNR CI lower bound > 0 on D. Datasets where it fails are reported, never dropped.
+  published_numbers_check: quote the SEN2SR paper table and version next to ours as a sanity check; state the comparability gap
+  blocked_if: opensr-test or its data cannot be installed/fetched (name exactly what failed)
+
+# ---------------------------------------------------------------- A5 noise model
+a5:
+  formula: sigma2 = s2_dates*(1 + 1/n_pre) + s2_dihedral_pre/n_pre + s2_dihedral_post
+  s2_dates_estimated_across: dates (per-date mean over its 8 dihedral runs), never pooled runs
+  n_pre_3_handling: shrunk/pooled estimator (local window or land-cover stratified); choice documented with reason
+  comparator_old_sigma: sqrt(sigma_pre_pooled(ddof=1)^2 + sigma_post^2) exactly as in experiments/wayanad_evidence/step4_gate.py
+  coverage_metric: fraction of real stable pixels with |d| <= 2*sigma, d = held-out date minus mean of remaining pre dates
+  coverage_nominal: 0.9545
+  keep_rule: empirical coverage within +/- 2 pp of 0.9545 for the new sigma, OR the gap is reported with its cause
+  also_report: old-sigma coverage, effective k that would give nominal coverage, simulation bias of old vs new sigma
+  stable_pixel_definition: outside 1500 m disk around the published slide coordinates and outside the footprint; valid on all dates
+  network: none (cached data only). If more dates are needed, say BLOCKED and name the dates
+  # ---- details added by agent A5 BEFORE its run (decision rule and failure modes: docs/adr-x5-noise-model.md) ----
+  noise:
+    sigma_floor: 0.005            # NDVI SD floor (variance = its square) so flat pixels do not get sigma = 0; fraction floored is reported
+    n_strata: 20                  # equal-count strata of the pre-mean NDVI for the stratified empirical-Bayes prior
+    window_m: 90                  # local window in metres; converted to an odd pixel count per grid (9 px at 10 m, 37 px at 2.5 m)
+    nu0_max: 10000.0              # cap on the prior degrees of freedom (= full shrinkage to the prior mean)
+    floor_rel_median: 1.0e-5      # s2 clip (relative to the median) before taking logs in the nu0 moment estimator
+    estimators: [raw, window, eb_stratified, eb_window]
+  selection:                      # picks the estimator; uses NO Wayanad data (E6 12-date cache, other AOI, 10 m, B04/B08 only)
+    replicates: 100
+    n_pool_dates: 3               # 3 pool dates + 1 held-out date per replicate, drawn without replacement from the 12 clear pre dates
+    seed: 2024
+    criterion: mean held-out Gaussian negative log-likelihood of d under N(0, sigma^2), sigma floored at noise.sigma_floor
+    tie_rule: winner = lowest mean NLL; if the paired per-replicate NLL difference vs the runner-up has a 95 % CI containing 0, take the simpler of the two (order raw < window < eb_stratified < eb_window)
+    stable: valid on the 4 used dates and outside the configured E6 suspected disk (no std truncation, which would bias variance estimates)
+  evaluation:
+    headline: leave-one-date-out over the 3 Wayanad pre dates (n_pre = 2 for the formula, 1 dof), pooled over the 3 folds, estimator chosen by `selection`, k = 2
+    secondary: [pre_mean_vs_december (n_pre = 3; confounded by season), stable_empirical_comparator (spatial cross-fit), k_eff (spatial cross-fit)]
+    tile_px_2p5m: 128             # checkerboard tiles for cross-fitting and the block bootstrap unit (= statistics.bootstrap.block_px_10m at 2.5 m)
+    stable_disk_points: [crown, mundakkai, chooralmala_bridge]   # keys of configs/wayanad_evidence.yaml aoi.plausibility_points; radius plausibility_radius_m
+    old_v1_reference: {sigma_pre_median: 0.0326, sigma_post_median: 0.0022}   # from diagnosis_verified, re-measured by the script
+
+# ---------------------------------------------------------------- A6 season and latency
+a6:
+  aoi: corrected AOI in configs/wayanad_evidence.yaml (11.49N, 76.16E)
+  exp_a:
+    question: anniversary Nov-Dec 2023 clear pre dates vs the current Jan 2024 pool
+    metric: E6 stable-pixel false-drop fraction, exact definition from experiments/e6_season_matched.py and configs/experiments.yaml
+    keep_rule: anniversary false-drop fraction lower than January's with the block-bootstrap 95 % CI of the difference excluding 0
+  exp_b:
+    composite_dates: ['2024-10-27', '2024-11-01', '2024-11-06']
+    rule: per-pixel first valid observation in date order (SCL valid mask only)
+    keep_rule: footprint validity >= 0.90 AND event-to-latest-contributing-image gap <= 99 days (was 129)
+  byte_cap: from configs/wayanad_evidence.yaml fetch.max_fetch_bytes; per-process byte log like step1
+  blocked_if: no network
+
+# ---------------------------------------------------------------- A7 fine-tune
+a7:
+  data: real WorldStrat and/or SEN2NAIPv2 pairs per docs/r5_data_contract.md
+  split: by AOI before any cropping; held-out AOIs never seen in training or in model selection
+  frozen: Fourier hard-constraint module (unchanged)
+  init: pinned pretrained SEN2SR-lite
+  keep_rule: >-
+    SHIP fine-tuned iff (1) paired PSNR gain on held-out AOIs has 95 % CI excluding 0 on the positive side AND
+    (2) on A2's benchmark no dataset has its PSNR-delta CI entirely below 0 AND the pooled mean delta > 0.
+    Otherwise ship pretrained and report the regression.
+  log: environment, per-step losses, safetensors sha256, reload agreement
+  compute: CPU or Colab GPU; environment recorded honestly. BLOCKED only if neither can run
+
+# ---------------------------------------------------------------- A3 placebo harness (wave 2)
+a3:
+  pairs: leave-one-out among clear Jan-May 2024 dates (and Nov-Dec 2023 if A6 fetched them); every flag is a false alarm by construction
+  exclude_region: published-slide 1500 m disk and footprint
+  split: spatial, by 128 px tile of the AOI, checkerboard parity (even = calibration, odd = test); tile is the exchangeable unit
+  gates_scored: [rule_10m, ungated_S_v1_sigma, gate_v1, gate_v1_with_A5_sigma, gate_v2]
+  headline: FAR reduction (gate vs ungated SR) on the test split, pixel-level and window-level, with block-bootstrap CI and denominators
+  honesty: date pairs share dates, so pairs are not independent; report the effective number of independent dates
+
+# ---------------------------------------------------------------- A4 gate v2 (wave 2)
+a4:
+  fraction_estimator: two-endmember linear unmixing in reflectance (B04, B08), not NDVI
+  allocation: exactly round(16 f) sub-pixels per 10 m block, ranked by SR change score plus a spatial-dependence term
+  classes: [CORE, ALLOCATED, UNSUPPORTED, NO_DATA]     # UNSUPPORTED = SR change mass in blocks with f = 0 (reported, not mapped)
+  conformal: split-conformal on A3 calibration windows; alpha = 0.05 at far_window
+  tests_required: block-sum consistency (allocated area == 10 m implied area up to rounding) - a failure stops wave 3
+  keep_rule: all tests pass AND conformal window-level FAR on the A3 TEST split <= alpha (0.05)
+
+# ---------------------------------------------------------------- A8 HR-referenced evaluation (wave 3)
+a8:
+  hr_truth_rule: HR NDVI < 0.35 => non-vegetation (binary 2.5 m truth); sensitivity at 0.25 and 0.45 reported; NDWI>0 water as second target
+  methods: [blocky_10m, hard_threshold_v1_style, alloc_bilinear, alloc_pretrained_sr, alloc_finetuned_sr, optional_heavy_sr_colab]
+  fractions: [oracle_from_hr, realistic_from_s2]
+  metrics: [IoU, boundary_F1_1px, boundary_F1_2px, area_error]
+  strata_by_feature_width_m: [0-20, 20-50, 50-150, 150+]
+  keep_rule: >-
+    'SR adds information' test = paired IoU(alloc_pretrained_sr) - IoU(alloc_bilinear), image-paired block bootstrap 95 % CI,
+    reported whatever its sign; the same for fine-tuned if kept
+
+# ---------------------------------------------------------------- A1 / A9 / A10 / A11
+a1:
+  keep_rule: every "X is better" claim cites a primary source and a comparable metric, else it is marked unverified
+a9:
+  external_reference: only a clearly licensed published Wayanad polygon; never digitized from copyrighted imagery; otherwise BLOCKED
+a10:
+  verdicts: [keep, downgrade, drop]
+  required: clean-clone rerun and hash comparison
+a11:
+  rows: only A10-surviving claims

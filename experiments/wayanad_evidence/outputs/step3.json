@@ -521,15 +521,15 @@
       "tiles_per_date": 35,
       "forward_passes_total": 1120,
       "seconds_per_tile_8_runs": {
-        "median": 0.31235002100584097,
-        "p95": 0.3149371229286771,
-        "max": 0.35626183298882097,
-        "total": 43.76623954498791
+        "median": 0.33457677050046186,
+        "p95": 0.36215448364964686,
+        "max": 0.456665375000739,
+        "total": 47.268456254008925
       },
       "device": "cpu",
       "cuda_available": false,
       "memory": {
-        "peak_rss_mib": 2320.09375,
+        "peak_rss_mib": 2452.84375,
         "gpu_memory": "not measured: no CUDA device on this machine"
       },
       "gpu_memory_peak": null,
@@ -616,6 +616,12 @@
       "stats_files": [
         "cache/step3_state.npz"
       ],
+      "per_date_ndvi_files": {
+        "2024-01-16": "cache/per_date_ndvi/2024-01-16_dihedral_means.npy",
+        "2024-01-21": "cache/per_date_ndvi/2024-01-21_dihedral_means.npy",
+        "2024-01-26": "cache/per_date_ndvi/2024-01-26_dihedral_means.npy",
+        "2024-12-06": "cache/per_date_ndvi/2024-12-06_dihedral_means.npy"
+      },
       "sr_cog": "sr_post_2p5m.tif",
       "pre_pool": {
         "dates": [
@@ -640,7 +646,7 @@
   ],
   "experiment": "step3",
   "risk": "step3",
-  "started_utc": "2026-09-29T17:35:10.697374+00:00",
-  "finished_utc": "2026-09-29T17:36:07.434411+00:00",
+  "started_utc": "2026-09-30T10:13:39.968744+00:00",
+  "finished_utc": "2026-09-30T10:14:44.116491+00:00",
   "config_sha256": "929bacb36d2cb1a935707b7622675bd042b830aacf124d201f0f1a6a3e7d2d08"
 }

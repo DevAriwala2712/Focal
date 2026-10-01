@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "config_sha256": "18cce7b1ea88855bc054b42e6cbe3219eef73b2909eb091d07d5ada3df170970",
+  "config_sha256_note": "amended post-hoc: F1 found configs/fix.yaml as committed in F0 was not valid YAML (f9_checks block); the hash above is of the syntax-corrected file (no semantic change, no threshold touched). f6's own computation used the pre-fix file content, which was semantically identical to the post-fix file for every field f6 reads (f6_a2_report block untouched by the fix).",
+  "source": "experiments/results/x2.json",
+  "source_x2_config_sha256": "1f2b9d7d174dc0e606a8795427ec0d68e60761350c4e83866c0b3d92e8c67453",
+  "finding": "B14 (selective reporting): RESULTS_EXCEPTIONAL.md reported only NAIP and SPOT (the 2/5 datasets where SR beat bicubic on PSNR) and omitted the pooled result and the Venus result. This file reports all 5 datasets, the pooled result, a NAIP-excluded sensitivity, and the hallucination-metric column.",
+  "per_dataset": {
+    "naip": {
+      "n_images": 62,
+      "mean_psnr_sr": 36.85253869575145,
+      "mean_psnr_bicubic": 36.61663678430796,
+      "delta_vs_bicubic_psnr_db": 0.23590191144349892,
+      "ci95_lo": 0.1926967428643918,
+      "ci95_hi": 0.27975815975476676,
+      "beats_bicubic": true
+    },
+    "spot": {
+      "n_images": 9,
+      "mean_psnr_sr": 33.40575284962935,
+      "mean_psnr_bicubic": 33.275861156022685,
+      "delta_vs_bicubic_psnr_db": 0.12989169360665542,
+      "ci95_lo": 0.05774383990056957,
+      "ci95_hi": 0.19838916690285957,
+      "beats_bicubic": true
+    },
+    "spain_crops": {
+      "n_images": 28,
+      "mean_psnr_sr": 32.88863547062631,
+      "mean_psnr_bicubic": 32.89549573548025,
+      "delta_vs_bicubic_psnr_db": -0.006860264853939313,
+      "ci95_lo": -0.09309818591420042,
+      "ci95_hi": 0.07998680895060899,
+      "beats_bicubic": false
+    },
+    "spain_urban": {
+      "n_images": 20,
+      "mean_psnr_sr": 29.251935726195445,
+      "mean_psnr_bicubic": 29.247315761091745,
+      "delta_vs_bicubic_psnr_db": 0.004619965103699819,
+      "ci95_lo": -0.09317609437264775,
+      "ci95_hi": 0.10155842525984723,
+      "beats_bicubic": false
+    },
+    "venus": {
+      "n_images": 59,
+      "mean_psnr_sr": 36.037815770717735,
+      "mean_psnr_bicubic": 36.59669720560129,
+      "delta_vs_bicubic_psnr_db": -0.5588814348835458,
+      "ci95_lo": -0.6379178455759738,
+      "ci95_hi": -0.4821562609519091,
+      "beats_bicubic": false
+    }
+  },
+  "pooled_all_datasets": {
+    "recomputed": {
+      "mean": -0.09707162370791389,
+      "lo": -0.1574637956167713,
+      "hi": -0.03696577159967953,
+      "n": 178,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    },
+    "matches_x2_json_pooled_block": true,
+    "x2_json_pooled_block": {
+      "mean": -0.09707162370791389,
+      "lo": -0.1574637956167713,
+      "hi": -0.03696577159967953,
+      "n": 178,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    },
+    "matches_audit_quoted_claim_3dp": true,
+    "audit_quoted_claim": {
+      "mean": -0.097,
+      "lo": -0.157,
+      "hi": -0.037,
+      "n": 178
+    }
+  },
+  "naip_excluded_sensitivity": {
+    "recomputed": {
+      "mean": -0.2750402373233242,
+      "lo": -0.34498654148470465,
+      "hi": -0.20260852754566436,
+      "n": 116,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    },
+    "delta_vs_pooled_all_mean_db": -0.17796861361541033
+  },
+  "opensr_hallucination_column": {
+    "naip": {
+      "sr_ha_metric": 0.059813561518826795,
+      "bicubic_ha_metric": 0.037466434731839166,
+      "sr_higher_than_bicubic": true
+    },
+    "spot": {
+      "sr_ha_metric": 0.060030373434225716,
+      "bicubic_ha_metric": 0.03412220999598503,
+      "sr_higher_than_bicubic": true
+    },
+    "spain_crops": {
+      "sr_ha_metric": 0.08478389134896654,
+      "bicubic_ha_metric": 0.0642496549657413,
+      "sr_higher_than_bicubic": true
+    },
+    "spain_urban": {
+      "sr_ha_metric": 0.08741310108453035,
+      "bicubic_ha_metric": 0.06451084166765213,
+      "sr_higher_than_bicubic": true
+    },
+    "venus": {
+      "sr_ha_metric": 0.2049363729054645,
+      "bicubic_ha_metric": 0.1378415250614033,
+      "sr_higher_than_bicubic": true
+    }
+  },
+  "bootstrap_params": {
+    "replicates": 2000,
+    "ci": 0.95,
+    "seed": 2024
+  }
+}

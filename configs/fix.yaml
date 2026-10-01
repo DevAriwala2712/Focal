@@ -1,0 +1,154 @@
+# PRE-REGISTRATION for the fix wave (branch experiments/fix-v2).
+# Committed BEFORE any run it governs (Wave 0, before Wave 1). Every f*.json result file must carry
+# this file's sha256 as `config_sha256` — never "pending". A failed keep rule is a result, not a
+# reason to edit a threshold here after seeing results.
+schema_version: 1
+supersedes: configs/exceptional.yaml   # exceptional.yaml's diagnosis_verified block and units are inherited unchanged
+results_dir: experiments/results
+seed: 2024
+aoi_center: {lat: 11.490, lon: 76.160}   # corrected AOI (B16); wrong value 11.782N 76.233E must not reappear
+
+statistics:
+  bootstrap:
+    replicates: 2000
+    ci: 0.95
+    seed: 2024
+    pixel_data: block            # spatial block bootstrap over 128 px (2.5 m grid) tiles
+    block_px_10m: 32
+    image_data: paired_by_image
+  never_tune_on_test_split: true
+  split: checkerboard_128px_tile   # even tile index (row+col) = calibration, odd = test; fixed before any score is seen
+
+units:
+  far_pixel: flagged valid 2.5 m px / valid 2.5 m px, area weighted (px = 6.25 m2), placebo pairs only
+  far_window: fraction of 16x16 10 m px windows (160 m) with >= 1 flagged px, using each gate's OWN flag map
+  window_caveat: pixels and neighbouring windows are spatially correlated; exchangeability assumed across windows, not proven
+  flagged_definition:
+    v1: OBSERVED union INFERRED
+    v2: CORE union ALLOCATED
+    unsupported_reported_separately: true   # UNSUPPORTED is never counted as flagged
+
+# ---------------------------------------------------------------- F1 real placebo (replaces x3)
+f1_placebo:
+  hard_rule: "the loader raises if asked to load any date >= 2024-07-30 (the event); unit-tested"
+  pool_candidates: [2024-01-16, 2024-01-21, 2024-01-26, 2023-12-27]   # plus any Jan-Jun 2024 clear date found by STAC audit, logged with cloud % and SCL clear-fraction
+  scl_clear_rule: "same rule as A6/x6: SCL clear-fraction over AOI minus disks/footprint >= threshold used in x6_season_latency.py (cite, do not redefine)"
+  exclusions: [1500m_disks, footprint]
+  pairs: "for each held-out date h in pool, reference = mean of remaining pool dates; d = ref - h; every flag is a false alarm by construction"
+  proxy_pair: "2023-12-27 vs January-2024 pool reported separately as the seasonal-offset proxy for the real Jan-vs-Dec comparison; never pooled into the main FAR"
+  gates: [rule_10m, ungated_S_v1_sigma, gate_v1, gate_v1_with_a5_sigma, gate_v2]
+  gate_v2_status_until_f2_lands: BLOCKED   # never a copy of gate_v1
+  keep_rule: >-
+    Headline = FAR reduction of each gate vs ungated SR, on the TEST split (odd tiles), pixel and
+    window level, with block-bootstrap 95% CI and denominators (n valid px / n windows). Report
+    whatever sign results. KEEP requires: (a) point estimate inside its own CI, (b) different gates
+    give different FARs on a synthetic fixture, (c) window FAR changes when the flag map changes.
+  exports: "per-window calibration scores (even tiles) cached with sha256, consumed by F2's tau"
+
+# ---------------------------------------------------------------- F3 noise model v2 (new x5b)
+f3_noise_v2:
+  motivated_by: "A5 diagnostics: offset share 77%/70% across two folds; post-hoc centred coverage 96.1% (window), 99.3% (eb_stratified)"
+  status: "pre-registered before its own run; does not edit x5"
+  estimator: "per-date robust relative normalisation (median offset, optional Theil-Sen gain) fitted on stable pixels outside disks+footprint, then existing sigma estimators from trustsr/noise.py"
+  model_selection_on: data/experiments-cache/e6 (12-date cache, other AOI)
+  evaluation_on: wayanad, leave-one-date-out
+  keep_rule: "coverage within +/-2pp of 95.45% (same as A5)"
+  interaction_test: "if kept, apply the same normalisation in F2 and F7; on F1's placebo, report FAR with and without normalisation to show it does not absorb real change"
+
+# ---------------------------------------------------------------- F4 A7 fine-tune
+a7:
+  data_contract: docs/r5_data_contract.md
+  aoi_pool: "WorldStrat India/South Asia AOIs (71/125 available per R3)"
+  split: "AOI-level, before cropping; shuffled batches drawn from many AOIs (guards against B15's 3-batch cycling)"
+  hard_constraint: frozen (unchanged from AGENTS.md / hard_constraint.safetensor)
+  validation: per-epoch held-out-AOI PSNR
+  artifact: safetensors + sha256 + reload-agreement test
+  guard_test: "fails if the loss sequence is periodic in the number of distinct batches (catches B15)"
+  smoke_test: "20 CPU steps to prove mechanics only; evidence: synthetic if synthetic data, else real+labelled smoke"
+  status_until_colab_upload: BLOCKED
+  keep_rule: "evaluate finetuned checkpoint against a7 rule and the A2 benchmark (x2.json baselines); ship pretrained and say so if the rule fails"
+
+# ---------------------------------------------------------------- F6 A2 honest reporting (no new runs)
+f6_a2_report:
+  source: experiments/results/x2.json
+  rows_required: [per_dataset_including_failing, pooled_all_datasets, naip_excluded_leakage_sensitivity, opensr_hallucination_column]
+  pooled_number_to_carry_forward: "-0.097 dB [-0.157, -0.037], 178 images (B14)"
+
+# ---------------------------------------------------------------- F2 gate v2 rebuild
+f2_gate_v2:
+  endmembers:
+    e_v: "robust median of stable, high-NDVI pre-event pixels, outside disks+footprint"
+    e_b: "robust median of pre-event pixels with NDVI <= 0.2, valid on all pre dates, outside disks+footprint"
+    never_from_labels: true
+    record: [counts, sensitivity_at_plus_minus_1_robust_sd]
+  unmixing: "two-endmember, reflectance space (B04, B08), per 10 m block -> fraction f; block score s = f / sigma_f"
+  detection:
+    tau: "ceil((n+1)*(1-alpha))-th order statistic of F1 CALIBRATION (even-tile) placebo window scores"
+    alpha: 0.05
+    tau_is_explicit_arg_of: apply_gate_v2
+    mutation_test: "changing tau must change the output map"
+  allocation:
+    sub_pixels_per_block: round(16*f)
+    ranking: "true 2.5 m SR change score (per-pixel SR NDVI difference from the tiled SR stack) + lambda*neighbour_agreement"
+    lambda_fit_split: F1 calibration (even tiles) only
+    test: "synthetic fixture where SR and bilinear ranking differ must yield different maps"
+  no_data: "from SCL validity mask on every date, propagated nearest-neighbour; masked 10 m px -> 16 NO_DATA sub-px, tested"
+  block_sum_test:
+    rule: "for every detected block, count(allocated) == round(16*f) exactly (within rounding)"
+    keep_rule: "max deviation 0; failure stops Wave 3 (F7)"
+  scoring: "gate_v2 scored in F1's harness on TEST split (odd tiles); keep_rule: window FAR <= alpha on test split, with CI and the exchangeability caveat stated"
+
+# ---------------------------------------------------------------- F5 A8 HR-referenced sub-pixel mapping
+a8:
+  images: opensr-test HRharm (already cached by A2)
+  truth:
+    primary: "HR NDVI < 0.35 -> non-vegetation at 2.5 m; sensitivity thresholds 0.25 and 0.45"
+    secondary: "NDWI > 0 -> water"
+  methods: [blocky_10m, hard_threshold_v1_style, alloc_bilinear, alloc_pretrained_sr, alloc_finetuned_sr, heavy_sr_optional_colab_only]
+  alloc_finetuned_sr_status_until_f4: BLOCKED
+  fractions: [oracle_from_HR, realistic_from_S2_unmixing]
+  metrics: [IoU, boundary_F1_at_1px, boundary_F1_at_2px, area_error]
+  stratify_by_feature_width_m: ["0-20", "20-50", "50-150", "150+"]
+  headline: "paired IoU(alloc_pretrained_sr) - IoU(alloc_bilinear), image-paired block bootstrap 95% CI, reported whatever sign, with and without NAIP"
+  caveat_required_in_report: "static land-cover boundaries are a proxy for change boundaries, not a landslide label"
+  blocked_if_no_usable_hr_images: "no 'SR adds information' claim anywhere; state so in RESULTS_V2.md"
+
+# ---------------------------------------------------------------- F7 Wayanad v2 rerun (replaces x9)
+f7_wayanad_v2:
+  aoi: corrected (11.490N 76.160E)
+  dates:
+    pre: [2024-01-16, 2024-01-21, 2024-01-26]
+    pre_4th_conditional: "2023-12-27 only if pre-registered here before the run: YES, pre-registered as a 4th pre date"
+    post: 2024-12-06
+  sr: "real tiled SR via E1 tiler, 8 dihedral runs (E8)"
+  normalisation: "F3 output if F3 is kept"
+  gate: "F2, tau from F1"
+  report_per_class: [pixels, km2_at_6.25m2_per_px, block_sum_deviation]
+  compare_v1_vs_v2_only_on: [mapped_change_area, count_10m_boundary_px_whose_2.5m_allocation_differs_from_blocky_parent, unsupported_area]
+  no_cross_class_comparison: true
+  forward_passes_saved_by_e5_cascade: report
+
+# ---------------------------------------------------------------- F8 hardware (human-run, RTX 3050)
+f8_gpu:
+  checks: [nvidia_smi_vram, e4_memory_gate_full_aoi, e8_4_vs_8_dihedral_real_tiles, gpu_hash_drift, seconds_per_km2]
+  physical_4gb_test_condition: "only if total memory <= 4 GiB"
+  blocked_if_no_cuda: "exact instructions recorded in f8.json"
+
+# ---------------------------------------------------------------- F9 adversarial verifier checks (mandatory, all recorded pass/fail)
+f9_checks:
+  # NOTE (F1, 2026-09-30): this block was a YAML block-sequence directly followed by sibling mapping keys at
+  # the same indent, which is not valid YAML (yaml.safe_load raised a ParserError on this file). Nested the
+  # list under `checks:` so the file parses. No check name, value, or semantic was added, removed or changed.
+  checks:
+    - point_estimate_inside_its_ci
+    - no_placebo_code_path_reads_post_event_date
+    - every_loaded_threshold_is_used_mutation_test
+    - no_test_compares_quantity_with_itself
+    - every_result_carries_fix_yaml_hash
+    - gates_in_a_table_differ_in_code
+    - denominators_stated
+    - no_row_compares_classes_with_different_definitions
+    - negative_results_present_in_claim_table
+  verdict_per_claim: [keep, downgrade, drop]
+  arithmetic_checked_by: code, not prose
+  stop_rule: "a tautological test or an unused loaded parameter -> that claim is DROPPED, not downgraded"
