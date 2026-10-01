@@ -142,6 +142,30 @@ def build_sr_fold(cfg, cache_dir: Path, cache_root: Path, crop, held_out: str, p
                 d=d.astype('float64'), sigma_v1=sig_v1, sigma_a5=sig_a5, n_pre=len(pre_dates))
 
 
+def enumerate_fold_specs(pool_dates: list[str], n_pre: int) -> list[tuple[list[str], str]]:
+    """Every (reference_dates, held_out_date) pair where reference_dates is a size-n_pre subset of
+    pool_dates and held_out_date is a remaining pool date -- unlike leave-one-out over the whole
+    pool (which only matches n_pre = len(pool_dates) - 1), this matches an arbitrary n_pre exactly.
+
+    Used by F11 to build calibration folds whose reference-set size equals production's n_pre (3),
+    closing the n_pre mismatch F9 found between F1's leave-one-out calibration (n_pre=2) and F7's
+    production call (n_pre=3). Folds from overlapping reference sets share dates and are therefore
+    not independent -- callers must report an effective-independent-dates count, not just len(specs).
+    """
+    import itertools
+    pool_dates = list(pool_dates)
+    if len(pool_dates) <= n_pre:
+        raise ValueError(f'n_pre={n_pre} requires more than {n_pre} pool dates to leave one out; '
+                         f'got {len(pool_dates)}')
+    specs = []
+    for ref in itertools.combinations(pool_dates, n_pre):
+        ref_list = list(ref)
+        for held_out in pool_dates:
+            if held_out not in ref_list:
+                specs.append((ref_list, held_out))
+    return specs
+
+
 def build_10m_fold(cfg, cache_dir: Path, crop, held_out: str, pre_dates: list[str], threshold: float) -> Fold:
     """A fold usable ONLY by rule_10m (no SR product required): parent mask at 10 m, upsampled to 2.5 m."""
     all_dates = pre_dates + [held_out]
