@@ -1,0 +1,59 @@
+# PRE-REGISTRATION for F11 (gate v2 recalibration) and F12 (Wayanad v3 rerun).
+# Committed BEFORE either run. Addresses the three root causes F9 found for F2/F7's FAR failure:
+# n_pre mismatch, calibration/test exchangeability gap, endmember instability. Does NOT edit
+# configs/fix.yaml (F0-F10's hash references stay exactly as they are) and does NOT modify
+# trustsr/gate_v2.py's fraction_sigma or apply_gate_v2 (see docs/superpowers/specs/
+# 2026-10-01-gate-v2-recalibration-design.md, "Key finding that reshaped this design": endmember
+# uncertainty is a scene-wide systematic error, not independent per-pixel noise, so it is NOT
+# folded into sigma_f -- it is handled by the sensitivity-robust keep rule below instead.
+schema_version: 1
+aoi_center: {lat: 11.490, lon: 76.160}
+supersedes: none   # independent addendum to configs/fix.yaml; fix.yaml's own hash is untouched
+
+pool_extension:
+  minimum_n: 4   # hard floor: fold_construction needs at least n_pre+1 pool dates to hold one out
+  target_n: 6    # C(6,3) = 20 reference-set combinations, vs F1's original 3 trivial leave-one-out folds
+  candidate_dates: [2024-02-05, 2024-02-10, 2024-02-15, 2024-02-20, 2024-03-01, 2024-03-06, 2024-03-11, 2024-03-26]
+  source: "experiments/results/f1.json stac_audit.table (already-audited clear Jan-Jun 2024 dates, corrected AOI)"
+  crop: [256, 896, 128, 640]   # rows0, rows1, cols0, cols1 on the 1024x1024 10 m AOI grid -- identical to F1/F2/F7
+  stop_rule: >-
+    If real SR processing (E1 tiler + E8 dihedral) cannot reach minimum_n=4 within a 45-minute CPU
+    budget, F11 is BLOCKED, not forced with a mismatched n_pre. State exactly which dates were
+    processed and why any remaining target dates were not.
+
+fold_construction:
+  n_pre: 3   # matches f12_wayanad_v3.dates.pre exactly -- this is the direct fix for the n_pre mismatch
+  method: >-
+    Enumerate every size-n_pre reference subset of the extended SR pool; for each, every remaining
+    pool date is a held-out comparison. Folds from overlapping reference sets are not independent
+    (they share dates); report effective_independent_dates honestly, same spirit as F1.
+  checkerboard_seed: 2024   # same seed fix.yaml uses, for consistency with F1/F2's tile split
+
+endmember_sensitivity_keep_rule:
+  alpha: 0.05
+  conditions: [point_estimate, e_b_plus_1sd, e_b_minus_1sd]
+  method: >-
+    Hold tau and every other parameter fixed at their point-estimate-calibrated values. Recompute
+    e_b at +1 and -1 robust SD (reusing estimate_endmembers' own e_b_robust_sd output, not a new
+    estimate). Score gate_v2 on the TEST split under all three e_b values. KEEP requires window FAR
+    <= alpha in ALL THREE conditions, each reported with its own CI and denominator.
+
+tau_recomputation:
+  method: >-
+    Same formula as F2 (ceil((n+1)(1-alpha))-th order statistic of the gate's own f/sigma_f score,
+    via trustsr.gate_v2.split_conformal_quantile), recomputed over the CALIBRATION half of the
+    extended, n_pre-matched folds from fold_construction. Never the raw F1-npz score verbatim (that
+    score function differs from gate_v2's own, which invalidates split conformal -- same reasoning
+    F2 used in docs/adr-f2-gate-v2.md section 3).
+
+f12_wayanad_v3:
+  dates:
+    pre: [2024-01-16, 2024-01-21, 2024-01-26]
+    post: 2024-12-06
+  crop: [256, 896, 128, 640]
+  uses: "F11's recalibrated tau at the point-estimate endmembers; F3's normalisation (kept, per configs/fix.yaml f3_noise_v2.interaction_test)"
+  comparison_scope: "v1, v2 (F7), and v3 (this run) compared ONLY on quantities with identical definitions on all sides present, enforced in code -- no new definition is introduced for v3 beyond what F7 already defined for v1/v2"
+  stop_rule: >-
+    If F11 is BLOCKED or F11's keep rule fails in any of the three conditions, F12 still runs
+    (block-sum is independent of the keep-rule outcome) but must carry F11's result forward exactly
+    as F7 carried F2's forward -- no softening.
