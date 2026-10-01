@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "evidence": "real",
+  "config_sha256": "7ce581d5c194a689dafc732b26e9b1f133cd37bc05e6a99729527d918ac99835",
+  "started_utc": "2026-10-01T06:13:11.564855+00:00",
+  "finished_utc": "2026-10-01T06:13:11.572457+00:00",
+  "existing_pool": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26",
+    "2024-02-05",
+    "2024-02-10",
+    "2024-02-15"
+  ],
+  "newly_processed": [],
+  "skipped": [],
+  "final_pool": [
+    "2024-01-16",
+    "2024-01-21",
+    "2024-01-26",
+    "2024-02-05",
+    "2024-02-10",
+    "2024-02-15"
+  ],
+  "final_pool_size": 6,
+  "minimum_required": 4,
+  "target": 6,
+  "blocked_reason": null
+}
