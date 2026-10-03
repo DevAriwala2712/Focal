@@ -15,6 +15,7 @@ from experiments import f13_a0_exchangeability as A0
 from experiments import f13_a3_sr_swap as A3
 from experiments import f13_a4_degrade20m as A4
 from experiments import f13_a1_sr_vs_interpolation as A1
+from experiments import f13_a2_calibrated_fraction as A2
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -694,3 +695,89 @@ class TestA1VerdictRule:
         assert A1.pivot_met({'estimate': 0.01, 'lo': 0.002, 'hi': 0.02}) is True
         assert A1.pivot_met({'estimate': 0.0099, 'lo': 0.002, 'hi': 0.02}) is False
         assert A1.pivot_met({'estimate': 0.02, 'lo': -0.001, 'hi': 0.04}) is False
+
+
+# ================================================================ PASS 2 — A2: calibrated fraction ================================================================
+
+def _brute_isotonic_increasing(y, w):
+    """Reference: f_i = max_{j<=i} min_{k>=i} weighted mean(y[j..k]) (min-max formula for the L2 isotonic fit)."""
+    n = len(y)
+    out = np.empty(n)
+    for i in range(n):
+        best = -np.inf
+        for j in range(i + 1):
+            worst = np.inf
+            for k in range(i, n):
+                worst = min(worst, np.average(y[j:k + 1], weights=w[j:k + 1]))
+            best = max(best, worst)
+        out[i] = best
+    return out
+
+
+class TestPAV:
+    @pytest.mark.parametrize('seed', [0, 1, 2, 3])
+    def test_increasing_fit_matches_brute_force(self, seed):
+        rng = np.random.default_rng(seed)
+        y = rng.normal(size=12); w = rng.integers(1, 4, 12).astype(float)
+        assert np.allclose(A2.pav_increasing(y, w), _brute_isotonic_increasing(y, w))
+
+    def test_decreasing_fit_is_monotone_and_matches_brute_force(self):
+        rng = np.random.default_rng(5)
+        x = np.sort(rng.uniform(size=15)); y = -x + 0.3 * rng.normal(size=15)
+        model = A2.fit_isotonic_decreasing(x, y)
+        fitted = A2.predict_isotonic(model, x)
+        assert np.all(np.diff(fitted) <= 1e-12)
+        assert np.allclose(fitted, -_brute_isotonic_increasing(-y, np.ones(15)))
+
+    def test_tied_x_values_are_pooled_before_fitting(self):
+        x = np.array([0.1, 0.1, 0.5, 0.9]); y = np.array([1.0, 0.0, 0.2, 0.1])
+        model = A2.fit_isotonic_decreasing(x, y)
+        assert A2.predict_isotonic(model, np.array([0.1]))[0] == pytest.approx(0.5)
+
+    def test_prediction_interpolates_between_knots_and_clips_outside(self):
+        model = A2.fit_isotonic_decreasing(np.array([0.0, 1.0]), np.array([1.0, 0.0]))
+        assert A2.predict_isotonic(model, np.array([0.5]))[0] == pytest.approx(0.5)
+        assert A2.predict_isotonic(model, np.array([-3.0, 4.0])).tolist() == [1.0, 0.0]
+
+    def test_non_finite_input_predicts_zero(self):
+        model = A2.fit_isotonic_decreasing(np.array([0.0, 1.0]), np.array([1.0, 0.0]))
+        assert A2.predict_isotonic(model, np.array([np.nan]))[0] == 0.0
+
+
+class TestLODO:
+    def test_four_folds_each_holding_out_one_dataset_and_never_fitting_on_it(self):
+        folds = A2.lodo_folds(['naip', 'spot', 'spain_crops', 'spain_urban'])
+        assert [f['held_out'] for f in folds] == ['naip', 'spot', 'spain_crops', 'spain_urban']
+        for f in folds:
+            assert f['held_out'] not in f['train'] and len(f['train']) == 3
+
+    def test_fit_rows_exclude_the_held_out_dataset(self):
+        rows = [{'dataset': 'a', 'x': np.array([0.1]), 'y': np.array([0.9])},
+                {'dataset': 'b', 'x': np.array([0.8]), 'y': np.array([0.1])},
+                {'dataset': 'c', 'x': np.array([0.5]), 'y': np.array([0.5])}]
+        x, y = A2.training_arrays(rows, train=['a', 'b'])
+        assert sorted(x.tolist()) == [0.1, 0.8] and 0.5 not in x.tolist()
+
+
+class TestValidBlocks:
+    def test_block_is_valid_only_if_all_16_px_valid_and_ndvi_finite(self):
+        valid = np.ones((8, 8), bool); valid[0, 0] = False
+        ndvi10 = np.array([[0.5, 0.5], [np.nan, 0.5]])
+        assert A2.valid_blocks(valid, ndvi10).tolist() == [[False, True], [False, True]]
+
+
+class TestA2VerdictRule:
+    """yaml A2: TRUE = MAE <= 0.15 AND delta > 0 with CI excluding 0; FALSE = MAE > 0.20 OR delta <= 0; else INCONCLUSIVE."""
+
+    def test_true(self):
+        assert A2.a2_verdict(0.15, {'estimate': 0.01, 'lo': 0.001, 'hi': 0.02}) == 'TRUE'
+
+    def test_false_on_mae(self):
+        assert A2.a2_verdict(0.2001, {'estimate': 0.05, 'lo': 0.01, 'hi': 0.09}) == 'FALSE'
+
+    def test_false_on_non_positive_delta(self):
+        assert A2.a2_verdict(0.10, {'estimate': 0.0, 'lo': -0.01, 'hi': 0.01}) == 'FALSE'
+
+    def test_inconclusive_between(self):
+        assert A2.a2_verdict(0.18, {'estimate': 0.02, 'lo': 0.01, 'hi': 0.03}) == 'INCONCLUSIVE'
+        assert A2.a2_verdict(0.10, {'estimate': 0.01, 'lo': -0.001, 'hi': 0.02}) == 'INCONCLUSIVE'
