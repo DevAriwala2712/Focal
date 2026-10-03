@@ -14,6 +14,7 @@ import pytest
 from experiments import f13_a0_exchangeability as A0
 from experiments import f13_a3_sr_swap as A3
 from experiments import f13_a4_degrade20m as A4
+from experiments import f13_a1_sr_vs_interpolation as A1
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -557,3 +558,139 @@ class TestA4VerdictRule:
         assert A4.a4_verdict(0.90) == 'TRUE' and A4.a4_verdict(1.0) == 'TRUE'
         assert A4.a4_verdict(0.8999) == 'INCONCLUSIVE' and A4.a4_verdict(0.70) == 'INCONCLUSIVE'
         assert A4.a4_verdict(0.6999) == 'FALSE'
+
+
+# ================================================================ PASS 2 — A1: SR vs interpolation ================================================================
+
+class TestResampleAlignment:
+    """Every interpolation in Pass 2 goes through trustsr.hrbench.resample (pixel-centre aligned)."""
+
+    @pytest.mark.parametrize('method', ['bilinear', 'bicubic'])
+    def test_constant_field_stays_constant(self, method):
+        from trustsr.hrbench import resample
+        assert np.allclose(resample(np.full((1, 6, 7), 0.37), 4, method), 0.37)
+
+    def test_linear_ramp_is_the_ramp_at_subpixel_centres(self):
+        # bilinear only: hrbench's bicubic uses the Keys kernel with a = -0.75 (torch/OpenCV), which does not reproduce a
+        # ramp exactly (max error ~0.095 px); its centre alignment is tested by symmetry below instead
+        from trustsr.hrbench import resample
+        a = np.tile(np.arange(8, dtype=float), (8, 1))[None]          # value = column index of the 10 m pixel centre
+        up = resample(a, 4, 'bilinear')[0]
+        x = (np.arange(32) + 0.5) / 4 - 0.5                           # sub-pixel centres in source coordinates
+        inner = slice(4, 28)                                          # away from the clamped border
+        assert np.allclose(up[:, inner], np.broadcast_to(x[inner], (32, 24)))
+
+    @pytest.mark.parametrize('method', ['bilinear', 'bicubic'])
+    def test_interp_index_impulse_is_symmetric_about_the_block_centre(self, method):
+        a = np.zeros((6, 6)); a[2, 2] = 1.0
+        up = A1.interp_index(a, method)
+        assert up.shape == (24, 24)
+        # block (2,2) covers sub-pixels 8..11; centre alignment makes the response symmetric about 9.5
+        assert np.allclose(up[8:12, 8:12], up[8:12, 8:12][::-1, ::-1])
+        assert up[9, 9] == pytest.approx(up[10, 10]) and up[9, 9] == pytest.approx(up.max())
+
+    def test_interp_index_fills_nan_with_zero_like_f5(self):
+        a = np.full((4, 4), 0.8); a[1, 1] = np.nan
+        up = A1.interp_index(a, 'bilinear')
+        from trustsr.hrbench import resample
+        filled = a.copy(); filled[1, 1] = 0.0
+        assert np.isfinite(up).all() and np.allclose(up, resample(filled[None], 4, 'bilinear')[0])
+
+
+class TestHrAt5m:
+    def test_constant_reflectance_gives_constant_ndvi(self):
+        hr = np.zeros((4, 16, 16)); hr[0] = 0.05; hr[3] = 0.45
+        f = A1.hr_at_5m_field(hr)
+        assert f.shape == (16, 16) and np.allclose(f, 0.8)
+
+    def test_averages_reflectance_over_2x2_before_ndvi(self):
+        hr = np.zeros((4, 4, 4)); hr[3] = 0.4
+        hr[0] = np.array([[0.1, 0.02, 0.1, 0.02], [0.1, 0.02, 0.1, 0.02]] * 2)
+        f = A1.hr_at_5m_field(hr)
+        expect = (0.4 - 0.06) / (0.4 + 0.06)                         # NDVI of the 5 m mean reflectance
+        assert np.allclose(f, expect)
+
+
+class TestRandomRanking:
+    def test_reproducible_per_image_and_different_between_images(self):
+        a = A1.random_scores((8, 8), seed=2024, image_index=3)
+        b = A1.random_scores((8, 8), seed=2024, image_index=3)
+        c = A1.random_scores((8, 8), seed=2024, image_index=4)
+        assert np.array_equal(a, b) and not np.array_equal(a, c)
+
+
+class TestSumRatio:
+    def test_sum_ratio_is_not_the_mean_of_ratios(self):
+        inter, union = np.array([1, 90]), np.array([10, 100])
+        assert A1.sum_ratio(inter, union) == pytest.approx(91 / 110)
+        assert A1.sum_ratio(inter, union) != pytest.approx(np.mean(inter / union))
+
+    def test_zero_total_union_is_nan(self):
+        assert np.isnan(A1.sum_ratio(np.array([0, 0]), np.array([0, 0])))
+
+
+class TestPairedRatioDiffBootstrap:
+    def _data(self, n=60, shift=0.0, seed=0):
+        rng = np.random.default_rng(seed)
+        ub = rng.integers(50, 150, n).astype(float)
+        ib = np.floor(ub * rng.uniform(0.3, 0.7, n))
+        ia = np.minimum(ub, np.floor(ib + shift * ub))
+        return ia, ub.copy(), ib, ub
+
+    def test_point_estimate_is_the_difference_of_sum_ratios(self):
+        ia, ua, ib, ub = self._data(shift=0.05)
+        out = A1.paired_ratio_diff_ci(ia, ua, ib, ub, replicates=200, seed=1, ci=0.95)
+        assert out['estimate'] == pytest.approx(ia.sum() / ua.sum() - ib.sum() / ub.sum())
+        assert out['lo'] <= out['estimate'] <= out['hi']
+
+    def test_same_image_indices_for_both_arms(self):
+        # identical arms -> every replicate difference is exactly 0, which only holds if images are paired
+        ia, ua, _ib, _ub = self._data()
+        out = A1.paired_ratio_diff_ci(ia, ua, ia, ua, replicates=200, seed=1, ci=0.95)
+        assert out['lo'] == 0.0 and out['hi'] == 0.0
+
+    def test_deterministic_and_detects_a_shift(self):
+        ia, ua, ib, ub = self._data(shift=0.1)
+        a = A1.paired_ratio_diff_ci(ia, ua, ib, ub, replicates=300, seed=7, ci=0.95)
+        b = A1.paired_ratio_diff_ci(ia, ua, ib, ub, replicates=300, seed=7, ci=0.95)
+        assert a == b and a['lo'] > 0
+
+    def test_matches_a_brute_force_replicate(self):
+        ia, ua, ib, ub = self._data(n=20, shift=0.03)
+        out = A1.paired_ratio_diff_ci(ia, ua, ib, ub, replicates=50, seed=3, ci=0.95, return_draws=True)
+        idx = np.random.default_rng(3).integers(0, 20, size=(50, 20))[0]
+        brute = ia[idx].sum() / ua[idx].sum() - ib[idx].sum() / ub[idx].sum()
+        assert out['draws'][0] == pytest.approx(brute)
+
+
+class TestPooledStratum:
+    def test_pooled_0_50_is_the_union_of_the_two_narrow_bins(self):
+        from trustsr import alloc
+        m = np.zeros((40, 40), bool)
+        m[2:5, 2:30] = True                  # 3 px wide -> 7.5 m  -> 0-20
+        m[10:22, 2:30] = True                # 12 px wide -> 27.5 m -> 20-50
+        m[25:40, 0:40] = True                # 15 px wide -> 35 m? no: (2*8-1)*2.5 = 37.5 m -> 20-50
+        w, _, _ = alloc.component_width_m(m, 2.5)
+        bins = alloc.width_bin_masks(w, m)
+        pooled = A1.pooled_stratum(w, m)
+        assert np.array_equal(pooled, bins['0-20'] | bins['20-50'])
+        assert not (pooled & (w > 50)).any()
+
+
+class TestA1VerdictRule:
+    """yaml A1: TRUE if either primary contrast (without NAIP, pooled 0-50 m) has estimate > 0 with CI excluding 0;
+    FALSE if both CIs span 0 or are negative."""
+
+    def test_true_when_one_contrast_is_significantly_positive(self):
+        assert A1.a1_verdict([{'estimate': 0.02, 'lo': 0.001, 'hi': 0.04}, {'estimate': -0.01, 'lo': -0.03, 'hi': 0.01}]) == 'TRUE'
+
+    def test_false_when_both_span_zero_or_are_negative(self):
+        assert A1.a1_verdict([{'estimate': 0.01, 'lo': -0.001, 'hi': 0.02}, {'estimate': -0.02, 'lo': -0.04, 'hi': -0.01}]) == 'FALSE'
+
+    def test_lower_bound_exactly_zero_does_not_exclude_zero(self):
+        assert A1.a1_verdict([{'estimate': 0.01, 'lo': 0.0, 'hi': 0.02}, {'estimate': 0.0, 'lo': -0.01, 'hi': 0.01}]) == 'FALSE'
+
+    def test_pivot_threshold_needs_0p01_and_ci_excluding_zero(self):
+        assert A1.pivot_met({'estimate': 0.01, 'lo': 0.002, 'hi': 0.02}) is True
+        assert A1.pivot_met({'estimate': 0.0099, 'lo': 0.002, 'hi': 0.02}) is False
+        assert A1.pivot_met({'estimate': 0.02, 'lo': -0.001, 'hi': 0.04}) is False
