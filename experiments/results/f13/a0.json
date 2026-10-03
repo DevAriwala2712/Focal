@@ -1,0 +1,681 @@
+{
+  "evidence": "real",
+  "experiment_id": "A0",
+  "reproduction_gate": {
+    "tau": {
+      "regenerated": 3.8891176504391876,
+      "f2_json": 3.8891176504391876,
+      "abs_diff": 0.0,
+      "equal_to_6dp": true
+    },
+    "real_gate_per_fold": [
+      {
+        "held_out": "2024-01-16",
+        "test_num": 13.0,
+        "test_den": 327.0,
+        "cal_num": 14.0,
+        "cal_den": 327.0,
+        "f2_json": {
+          "test": [
+            13.0,
+            327.0
+          ],
+          "cal": [
+            14.0,
+            327.0
+          ]
+        },
+        "matches_f2": true
+      },
+      {
+        "held_out": "2024-01-21",
+        "test_num": 38.0,
+        "test_den": 327.0,
+        "cal_num": 27.0,
+        "cal_den": 327.0,
+        "f2_json": {
+          "test": [
+            38.0,
+            327.0
+          ],
+          "cal": [
+            27.0,
+            327.0
+          ]
+        },
+        "matches_f2": true
+      },
+      {
+        "held_out": "2024-01-26",
+        "test_num": 13.0,
+        "test_den": 327.0,
+        "cal_num": 7.0,
+        "cal_den": 327.0,
+        "f2_json": {
+          "test": [
+            13.0,
+            327.0
+          ],
+          "cal": [
+            7.0,
+            327.0
+          ]
+        },
+        "matches_f2": true
+      }
+    ],
+    "real_gate_pooled": {
+      "cal": [
+        48.0,
+        981.0
+      ],
+      "test": [
+        64.0,
+        981.0
+      ],
+      "f2_json": {
+        "cal": [
+          48.0,
+          981.0
+        ],
+        "test": [
+          64.0,
+          981.0
+        ]
+      }
+    },
+    "real_gate_matches_f2": true,
+    "fast_path_equals_real_gate_window_map_at_tau": true,
+    "fast_path_equals_real_gate_at_other_taus_fold0": {
+      "0.5": true,
+      "2.0": true
+    },
+    "records_checkerboard_point": {
+      "num_cal": 48.0,
+      "den_cal": 981.0,
+      "num_test": 64.0,
+      "den_test": 981.0,
+      "tau": 3.8891176504391876
+    },
+    "records_match_f2_json": true,
+    "raw_arm_records_match_f2_json": true
+  },
+  "status": "FAIL",
+  "verdict": "FALSE",
+  "rule_applied": {
+    "TRUE": "checkerboard delta 95% CI excludes 0 AND random-split delta 95% CI includes 0",
+    "FALSE": "delta 95% CI includes 0 under BOTH splits",
+    "MISCALIBRATED_SCORE": "random-split delta CI excludes 0 (O3: score is miscalibrated, not a split artefact); recorded as verdict INCONCLUSIVE with this label",
+    "INCONCLUSIVE": "any other combination",
+    "on_FALSE": "drop the \"does not generalise\" narrative; F2 FAIL still stands as pre-registered"
+  },
+  "preregistration": {
+    "sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+    "commit": "0978e8a924e9b104c50aac2a1db1c00a8d220718",
+    "experiment": "A0"
+  },
+  "checkerboard": {
+    "tau": 3.8891176504391876,
+    "k": 933,
+    "n_cal_pop": 981,
+    "num_cal": 48.0,
+    "den_cal": 981.0,
+    "far_cal": 0.04892966360856269,
+    "num_test": 64.0,
+    "den_test": 981.0,
+    "far_test": 0.0652395514780836,
+    "D": 0.016309887869520902,
+    "lo": -0.00873993608696646,
+    "hi": 0.04357367027123641,
+    "replicates": 2000,
+    "seed": 2024,
+    "ci": 0.95,
+    "n_tiles": 320,
+    "replicates_skipped": 0
+  },
+  "random_window_split": {
+    "tau": 4.065453401052046,
+    "k": 911,
+    "n_cal_pop": 957,
+    "num_cal": 46.0,
+    "den_cal": 957.0,
+    "far_cal": 0.04806687565308255,
+    "num_test": 47.0,
+    "den_test": 1005.0,
+    "far_test": 0.046766169154228855,
+    "D": -0.0013007064988536932,
+    "lo": -0.017540467178608236,
+    "hi": 0.02151677704056862,
+    "replicates": 2000,
+    "seed": 2024,
+    "ci": 0.95,
+    "n_tiles": 320,
+    "replicates_skipped": 0
+  },
+  "secondary_raw_arm": {
+    "raw_arm": {
+      "checkerboard": {
+        "tau": 3.5282762257764513,
+        "k": 933,
+        "n_cal_pop": 981,
+        "num_cal": 48.0,
+        "den_cal": 981.0,
+        "far_cal": 0.04892966360856269,
+        "num_test": 53.0,
+        "den_test": 981.0,
+        "far_test": 0.05402650356778797,
+        "D": 0.005096839959225281,
+        "lo": -0.015107558528286167,
+        "hi": 0.03686831321813627,
+        "replicates": 2000,
+        "seed": 2024,
+        "ci": 0.95,
+        "n_tiles": 320,
+        "replicates_skipped": 0
+      },
+      "random_window": {
+        "tau": 3.4768642793466813,
+        "k": 911,
+        "n_cal_pop": 957,
+        "num_cal": 46.0,
+        "den_cal": 957.0,
+        "far_cal": 0.04806687565308255,
+        "num_test": 59.0,
+        "den_test": 1005.0,
+        "far_test": 0.05870646766169154,
+        "D": 0.010639592008608992,
+        "lo": -0.01088294979237159,
+        "hi": 0.03561295557168196,
+        "replicates": 2000,
+        "seed": 2024,
+        "ci": 0.95,
+        "n_tiles": 320,
+        "replicates_skipped": 0
+      }
+    }
+  },
+  "tile_permutation_reference_primary_per_prompt": {
+    "D_obs": 0.016309887869520902,
+    "n_perm": 2000,
+    "seed": 2024,
+    "n_ge_obs": 219,
+    "p_one_sided": 0.10994502748625687,
+    "perm_mean": 0.0013450351447207368,
+    "perm_sd": 0.012025706164098615,
+    "perm_q025": -0.02039977383453089,
+    "perm_q975": 0.02635298263149934
+  },
+  "window_permutation_reference_secondary": {
+    "D_obs": 0.016309887869520902,
+    "n_perm": 2000,
+    "seed": 2024,
+    "n_ge_obs": 121,
+    "p_one_sided": 0.06096951524237881,
+    "perm_mean": 0.0005794645745819378,
+    "perm_sd": 0.00980075720653916,
+    "perm_q025": -0.01757073473861094,
+    "perm_q975": 0.02184276055366527
+  },
+  "analytic_iid_reference": {
+    "parameters": {
+      "k": 933,
+      "a": 49,
+      "b": 933
+    },
+    "n_cal": 981,
+    "n_test": 981,
+    "x_obs": 64,
+    "P_test_count_ge_x_obs": 0.07204505463251953,
+    "P_test_far_gt_alpha": 0.4587605569680451,
+    "memo_value_for_x_obs": 0.072,
+    "memo_value_for_far_gt_alpha": 0.46,
+    "assumption": "independent windows, perfectly exchangeable; the 3 folds share one set of windows so the true effective n is smaller (memo design effect 2-4)"
+  },
+  "power": {
+    "checkerboard": {
+      "0.15": {
+        "drop": 0.15,
+        "split": "checkerboard",
+        "tau": 3.8891176504391876,
+        "recall": {
+          "estimate": 0.9666666666666667,
+          "lo": 0.9366084806712616,
+          "hi": 0.9932443769272628,
+          "numerator": 145.0,
+          "denominator": 150.0,
+          "blocks": 112,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 145,
+        "patches_in_windows_already_flagged_by_placebo": 10,
+        "recall_excluding_those": 0.9642857142857143,
+        "denominator_excluding_those": 140,
+        "pixel_recall_mean": 0.176825,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 48,
+            "already_flagged_by_placebo": 3
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 48,
+            "already_flagged_by_placebo": 5
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 49,
+            "already_flagged_by_placebo": 2
+          }
+        }
+      },
+      "0.3": {
+        "drop": 0.3,
+        "split": "checkerboard",
+        "tau": 3.8891176504391876,
+        "recall": {
+          "estimate": 0.9933333333333333,
+          "lo": 0.9790209790209791,
+          "hi": 1.0,
+          "numerator": 149.0,
+          "denominator": 150.0,
+          "blocks": 117,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 149,
+        "patches_in_windows_already_flagged_by_placebo": 7,
+        "recall_excluding_those": 0.993006993006993,
+        "denominator_excluding_those": 143,
+        "pixel_recall_mean": 0.420275,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 1
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 4
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 49,
+            "already_flagged_by_placebo": 2
+          }
+        }
+      },
+      "0.5": {
+        "drop": 0.5,
+        "split": "checkerboard",
+        "tau": 3.8891176504391876,
+        "recall": {
+          "estimate": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "numerator": 150.0,
+          "denominator": 150.0,
+          "blocks": 115,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 150,
+        "patches_in_windows_already_flagged_by_placebo": 11,
+        "recall_excluding_those": 1.0,
+        "denominator_excluding_those": 139,
+        "pixel_recall_mean": 0.7403333333333333,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 3
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 5
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 3
+          }
+        }
+      }
+    },
+    "random_window": {
+      "0.15": {
+        "drop": 0.15,
+        "split": "random_window",
+        "tau": 4.065453401052046,
+        "recall": {
+          "estimate": 0.9466666666666667,
+          "lo": 0.9025814871403107,
+          "hi": 0.9801324503311258,
+          "numerator": 142.0,
+          "denominator": 150.0,
+          "blocks": 133,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 142,
+        "patches_in_windows_already_flagged_by_placebo": 5,
+        "recall_excluding_those": 0.9448275862068966,
+        "denominator_excluding_those": 145,
+        "pixel_recall_mean": 0.17189166666666666,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 47,
+            "already_flagged_by_placebo": 2
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 47,
+            "already_flagged_by_placebo": 3
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 48,
+            "already_flagged_by_placebo": 0
+          }
+        }
+      },
+      "0.3": {
+        "drop": 0.3,
+        "split": "random_window",
+        "tau": 4.065453401052046,
+        "recall": {
+          "estimate": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "numerator": 150.0,
+          "denominator": 150.0,
+          "blocks": 135,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 150,
+        "patches_in_windows_already_flagged_by_placebo": 3,
+        "recall_excluding_those": 1.0,
+        "denominator_excluding_those": 147,
+        "pixel_recall_mean": 0.4018208333333333,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 0
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 3
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 0
+          }
+        }
+      },
+      "0.5": {
+        "drop": 0.5,
+        "split": "random_window",
+        "tau": 4.065453401052046,
+        "recall": {
+          "estimate": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "numerator": 150.0,
+          "denominator": 150.0,
+          "blocks": 133,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "patches": 150,
+        "flagged": 150,
+        "patches_in_windows_already_flagged_by_placebo": 5,
+        "recall_excluding_those": 1.0,
+        "denominator_excluding_those": 145,
+        "pixel_recall_mean": 0.7315125,
+        "per_fold": {
+          "2024-01-16": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 1
+          },
+          "2024-01-21": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 4
+          },
+          "2024-01-26": {
+            "patches": 50,
+            "flagged": 50,
+            "already_flagged_by_placebo": 0
+          }
+        }
+      }
+    }
+  },
+  "power_vacuous_flag": {
+    "checkerboard": false,
+    "random_window": false
+  },
+  "measurements": [
+    {
+      "name": "D_checkerboard",
+      "estimate": 0.016309887869520902,
+      "numerator": null,
+      "denominator": null,
+      "lo": -0.00873993608696646,
+      "hi": 0.04357367027123641,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "window FAR difference (test - calibration)",
+      "far_test": 0.0652395514780836,
+      "far_cal": 0.04892966360856269,
+      "num_test": 64.0,
+      "den_test": 981.0,
+      "num_cal": 48.0,
+      "den_cal": 981.0,
+      "tau": 3.8891176504391876,
+      "k": 933,
+      "n_cal_pop": 981,
+      "n_tiles": 320,
+      "replicates_skipped": 0
+    },
+    {
+      "name": "D_random_window_split",
+      "estimate": -0.0013007064988536932,
+      "numerator": null,
+      "denominator": null,
+      "lo": -0.017540467178608236,
+      "hi": 0.02151677704056862,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "window FAR difference (test - calibration)",
+      "far_test": 0.046766169154228855,
+      "far_cal": 0.04806687565308255,
+      "num_test": 47.0,
+      "den_test": 1005.0,
+      "num_cal": 46.0,
+      "den_cal": 957.0,
+      "tau": 4.065453401052046,
+      "k": 911,
+      "n_cal_pop": 957,
+      "n_tiles": 320,
+      "replicates_skipped": 0
+    },
+    {
+      "name": "D_checkerboard_raw_arm_secondary",
+      "estimate": 0.005096839959225281,
+      "numerator": null,
+      "denominator": null,
+      "lo": -0.015107558528286167,
+      "hi": 0.03686831321813627,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "window FAR difference (test - calibration)",
+      "far_test": 0.05402650356778797,
+      "far_cal": 0.04892966360856269,
+      "num_test": 53.0,
+      "den_test": 981.0,
+      "num_cal": 48.0,
+      "den_cal": 981.0,
+      "tau": 3.5282762257764513,
+      "k": 933,
+      "n_cal_pop": 981,
+      "n_tiles": 320,
+      "replicates_skipped": 0
+    },
+    {
+      "name": "D_random_window_raw_arm_secondary",
+      "estimate": 0.010639592008608992,
+      "numerator": null,
+      "denominator": null,
+      "lo": -0.01088294979237159,
+      "hi": 0.03561295557168196,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "window FAR difference (test - calibration)",
+      "far_test": 0.05870646766169154,
+      "far_cal": 0.04806687565308255,
+      "num_test": 59.0,
+      "den_test": 1005.0,
+      "num_cal": 46.0,
+      "den_cal": 957.0,
+      "tau": 3.4768642793466813,
+      "k": 911,
+      "n_cal_pop": 957,
+      "n_tiles": 320,
+      "replicates_skipped": 0
+    },
+    {
+      "name": "recall_checkerboard_drop_0.15",
+      "estimate": 0.9666666666666667,
+      "numerator": 145.0,
+      "denominator": 150.0,
+      "lo": 0.9366084806712616,
+      "hi": 0.9932443769272628,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 3.8891176504391876,
+      "recall_excluding_prior_false_alarm_windows": 0.9642857142857143,
+      "denominator_excluding": 140,
+      "patches_in_already_flagged_windows": 10
+    },
+    {
+      "name": "recall_checkerboard_drop_0.3",
+      "estimate": 0.9933333333333333,
+      "numerator": 149.0,
+      "denominator": 150.0,
+      "lo": 0.9790209790209791,
+      "hi": 1.0,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 3.8891176504391876,
+      "recall_excluding_prior_false_alarm_windows": 0.993006993006993,
+      "denominator_excluding": 143,
+      "patches_in_already_flagged_windows": 7
+    },
+    {
+      "name": "recall_checkerboard_drop_0.5",
+      "estimate": 1.0,
+      "numerator": 150.0,
+      "denominator": 150.0,
+      "lo": 1.0,
+      "hi": 1.0,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 3.8891176504391876,
+      "recall_excluding_prior_false_alarm_windows": 1.0,
+      "denominator_excluding": 139,
+      "patches_in_already_flagged_windows": 11
+    },
+    {
+      "name": "recall_random_window_drop_0.15",
+      "estimate": 0.9466666666666667,
+      "numerator": 142.0,
+      "denominator": 150.0,
+      "lo": 0.9025814871403107,
+      "hi": 0.9801324503311258,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 4.065453401052046,
+      "recall_excluding_prior_false_alarm_windows": 0.9448275862068966,
+      "denominator_excluding": 145,
+      "patches_in_already_flagged_windows": 5
+    },
+    {
+      "name": "recall_random_window_drop_0.3",
+      "estimate": 1.0,
+      "numerator": 150.0,
+      "denominator": 150.0,
+      "lo": 1.0,
+      "hi": 1.0,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 4.065453401052046,
+      "recall_excluding_prior_false_alarm_windows": 1.0,
+      "denominator_excluding": 147,
+      "patches_in_already_flagged_windows": 3
+    },
+    {
+      "name": "recall_random_window_drop_0.5",
+      "estimate": 1.0,
+      "numerator": 150.0,
+      "denominator": 150.0,
+      "lo": 1.0,
+      "hi": 1.0,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "injected-patch recall at the split tau",
+      "tau": 4.065453401052046,
+      "recall_excluding_prior_false_alarm_windows": 1.0,
+      "denominator_excluding": 145,
+      "patches_in_already_flagged_windows": 5
+    }
+  ],
+  "limitations": [
+    "The three leave-one-date-out folds share ONE crop and the same valid windows (nodata is the union over all 3 dates), so folds are not independent; the bootstrap resamples whole 128 px tiles with all three folds together, which is wider than F2's per-fold-tile bootstrap (273 blocks).",
+    "F2 FAIL (window FAR 0.0652 > 0.05) is not revisited by this result in either direction.",
+    "tau is recomputed on gate_v2 own score on the same crop, so exchangeability here is spatial exchangeability within one crop only; it says nothing about a different crop, AOI or season (B1).",
+    "The prompt asks for N random tile splits with N from the yaml; the yaml has no N for A0, so the only replicate count in it (statistics.bootstrap.replicates = 2000) is used. This reference is additional; the verdict uses only the yaml A0 rule (bootstrap CI under the checkerboard and under the single window-level random split, seed 2024).",
+    "Power injects NDVI drops into raw held-out reflectance (10 x 10 px patches, B08+B04 preserved) and re-runs F3 normalisation, unmixing and scoring; allocation inside a flagged block is exactly round(16 f) px regardless of the SR ranking, so the SR product is not needed for recall. The prompt mentions mixing toward e_b; the yaml specifies the NDVI-drop rule, which is used.",
+    "Patch recall counts a patch as hit if its 160 m window is detected, including windows the placebo already false-alarmed on; recall excluding those windows is reported beside it."
+  ],
+  "experiment": "f13_a0",
+  "started_utc": "2026-10-03T06:25:06.006737+00:00",
+  "finished_utc": "2026-10-03T06:25:14.458792+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}
