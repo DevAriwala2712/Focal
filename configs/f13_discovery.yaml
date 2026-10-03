@@ -1,0 +1,495 @@
+# PRE-REGISTRATION for F13 (discovery wave): experiments A0, A3, A4, A1, A2, B2, B1, B3, C1, C2.
+# Written in Pass 0, BEFORE any F13 experiment runs. Every experiments/results/f13/<id>.json must carry this
+# file's sha256 as `config_sha256`. A missed keep rule is a result: no threshold, metric, dataset, seed or date
+# in this file may change after any F13 number has been seen.
+#
+# Transcription source: "TrustSR — Adversarial Research Memo (2026-10-03).md" (repo root, untracked when this file
+# was written; the path docs/research/ADVERSARIAL_MEMO_2026-10-03.md named in the pass brief does not exist).
+# Sections 7, 8, 11, 12. Text under a `memo:` key is quoted from the memo. Values under a `proposed_not_in_memo:`
+# key are NOT in the memo: they were filled from repository precedent (cited) for the human to review
+# before this file was committed. The human made three decisions on 2026-10-03, recorded under `human_decisions`.
+schema_version: 1
+wave: F13
+supersedes: none        # independent addendum; configs/fix.yaml (18cce7b1...f170970) and configs/f11_f12.yaml are untouched
+memo:
+  file: "TrustSR — Adversarial Research Memo (2026-10-03).md"
+  sha256: 329fbb1221c8995041363a679e56c7b7176ea13e67dc028616408929429c6afc
+  sections_transcribed: [7, 8, 11, 12]
+results_dir: experiments/results/f13
+code_pattern: experiments/f13_<id>_<name>.py
+tests: tests/test_f13.py
+branch: experiments/f13-discovery
+aoi_center: {lat: 11.490, lon: 76.160}   # corrected AOI (fix.yaml B16); 11.782N 76.233E must not reappear
+event_date: '2024-07-30'
+seed: 2024                                # fix.yaml seed; used for every bootstrap, split and injection below
+
+human_decisions:   # 2026-10-03, answered before this file was written
+  b1_threshold_reading: >-
+    Per gate, 2x that gate's OWN within-season test-split window FAR (gate_v2 from f2.json, rule_10m from
+    f1.json). FALSE if inside that gate's within-season CI. The memo's parenthetical "(>= 0.10)" is kept as a
+    quoted note only and is not a decision threshold.
+  b1_non_event_pair: "Jan 2023 clear dates -> 2023-12-27"
+  memo_gaps: "fill from repository precedent, each value tagged under proposed_not_in_memo"
+
+# ============================================================================================ global rules
+statistics:
+  ci: 0.95
+  bootstrap:
+    method: block bootstrap over tiles
+    replicates: 2000
+    seed: 2024
+    resampling_unit:   # proposed_not_in_memo: the unit that "tile" means for each data type, from fix.yaml
+      raster_maps: "128 x 128 px tiles on the 2.5 m grid (= 32 x 32 px at 10 m, 320 m); fix.yaml statistics.bootstrap.pixel_data"
+      raster_maps_20m: "the same 320 m tiles (16 x 16 px at 20 m)"
+      hr_image_benchmarks: "one OpenSR-test image = one tile, image-paired; fix.yaml statistics.bootstrap.image_data: paired_by_image"
+    ratio_metrics: "FAR, IoU and recall are recomputed as sum(numerator)/sum(denominator) over the resampled tiles, never as a mean of per-tile ratios"
+    ci_type: percentile
+  split_checkerboard: "fix.yaml statistics.split: even (row+col) 128 px tile index = calibration, odd = test"
+  never_tune_on_test_split: true
+  point_estimate_rule: >-
+    proposed_not_in_memo (F2 precedent, f2.json keep_rule.verdict): a threshold stated on a metric is applied to
+    the POINT ESTIMATE unless the memo text says "CI"; the CI is always reported beside it.
+
+power_requirement:   # memo s8: "Power must ride with every FAR."
+  memo: >-
+    Any gate experiment above also reports recall on F3-style injected drops (0.15, 0.30, 0.50 NDVI) at its alpha.
+    A gate that wins FAR by flagging nothing is a failure, not a pass.
+  injected_ndvi_drops: [0.15, 0.30, 0.50]
+  applies_to: [A0, B1, B3]   # every experiment that reports a FAR
+  rule: "every FAR row carries recall at the SAME threshold for all three drops; a FAR without its three recalls is invalid"
+  zero_power_rule: "if recall at the 0.50 drop is 0 for a gate, that gate's FAR row is reported as VACUOUS and cannot support any verdict"
+  proposed_not_in_memo:
+    patch: "square 10 x 10 px at 10 m (100 m), the same footprint as F3's 40 x 40 px 2.5 m patch (f3.json change_preservation.injected_patch_px = 1600)"
+    injection_rule: >-
+      applied to the held-out / post date's 10 m B04 and B08 reflectance inside the patch, preserving S = B08 + B04:
+      B08 -= drop*S/2, B04 += drop*S/2, so NDVI falls by exactly `drop` and both NDVI-based and unmixing-based gates see it
+    placement: "uniform random with seed 2024, patch wholly inside valid 10 m px, outside disks + footprint, on TEST-split tiles; no two patches share a 160 m window"
+    n_patches_per_fold_per_drop: 50
+    recall_unit: "patch recall = fraction of injected patches with >= 1 flagged px inside the patch (pixel recall reported secondarily)"
+    ci: "block bootstrap over tiles, as statistics.bootstrap"
+
+result_schema:
+  required_fields: [experiment, status, verdict, evidence, started_utc, finished_utc, config_sha256, measurements, limitations, environment]
+  status_values: [PASS, FAIL, BLOCKED]
+  status_meaning: >-
+    proposed_not_in_memo: PASS = the experiment ran on the named real data and its pre-registered TRUE criterion
+    is met; FAIL = it ran and the TRUE criterion is not met (verdict FALSE or INCONCLUSIVE); BLOCKED = a named
+    input is missing. BLOCKED is never PASS.
+  verdict_values: ["TRUE", "FALSE", "INCONCLUSIVE", "NOT_RUN"]
+  evidence_values: [real, synthetic]
+  measurement_fields: [estimate, numerator, denominator, lo, hi, replicates, seed, unit]
+  exit_codes: {PASS: 0, FAIL: 2, BLOCKED: 2}
+  timestamps: UTC ISO-8601
+  naip_rule: "every SR-vs-interpolation comparison on OpenSR-test is reported with_naip and without_naip side by side; verdicts use without_naip"
+  blocked_rule: "missing cache, data, GPU or network -> BLOCKED naming what is missing and every path checked; never substitute synthetic data, another date or a guessed path"
+
+# ============================================================================================ PASS 1 (cached data, no network)
+experiments:
+  A0:
+    pass: 1
+    name: gate_exchangeability
+    memo_refs: ["s8 rank 1", "s7 O3", "s11 Experiment 1"]
+    memo:
+      hypothesis: "The gate fails because test windows are not exchangeable with calibration windows"
+      mechanism: "Spatial structure across a checkerboard on one crop"
+      if_true_if_false: "True: test - cal FAR CI excludes 0 under checkerboard and closes under a random split. False: CI includes 0 in both"
+      experiment: "O3 on F1/F2 window scores · cached npz"
+      o3_give: "Perfect exchangeability: random (not checkerboard) window split of the same placebo scores"
+      o3_if_fails: "Gap persists under random split -> score is miscalibrated, not a split artefact"
+      metric: "FAR difference, block bootstrap (tile blocks), 2,000 reps"
+      abandon_when: "CI includes 0 -> drop the \"does not generalise\" narrative; FAIL still stands as pre-registered"
+    data:
+      folds: "F1/F2 SR placebo folds: pool 2024-01-16, 2024-01-21, 2024-01-26, leave-one-date-out (f2.json sr_pool_dates)"
+      crop_10m_rows_cols: [256, 896, 128, 640]
+      windows: "16 x 16 px at 10 m (160 m); 1,280 per fold (f2.json grid)"
+      gate: "gate_v2, F3-normalised arm (F2's headline arm); un-normalised arm reported secondarily"
+      score: "gate_v2's OWN per-window max of s = f/sigma_f (the score F2's tau used), for BOTH halves"
+      caches: [data/experiments-cache/f1_calibration_scores.npz, data/experiments-cache/wayanad_evidence/]
+      cache_note: >-
+        f1_calibration_scores.npz holds only the 981 CALIBRATION-half scores and in F1's max(d/sigma_v1) units, not
+        gate_v2's. Both halves' gate_v2 scores must be recomputed from the cached real 10 m stack through F2's code
+        path (trustsr.gate_v2, trustsr.placebo_v2). No network. If that cannot be done from cache, A0 is BLOCKED.
+    method:
+      splits: [checkerboard, random]
+      tau_per_split: "trustsr.gate_v2.split_conformal_quantile(calibration-half scores, alpha=0.05)"
+      metric: "delta = window FAR(test half) - window FAR(calibration half), each half at that split's tau"
+      proposed_not_in_memo:
+        random_split: "each window assigned to calibration or test uniformly at random, equal halves, seed 2024, one split"
+        tau_in_bootstrap: "tau recomputed inside every bootstrap replicate from that replicate's calibration windows (captures conformal-quantile variability, the memo's finding 1)"
+        bootstrap_block: "128 px (2.5 m) tile; a tile contributes its windows to whichever half each window belongs to"
+    keep_rule:
+      "TRUE": "checkerboard delta 95% CI excludes 0 AND random-split delta 95% CI includes 0"
+      "FALSE": "delta 95% CI includes 0 under BOTH splits"
+      "MISCALIBRATED_SCORE": "random-split delta CI excludes 0 (O3: score is miscalibrated, not a split artefact); recorded as verdict INCONCLUSIVE with this label"
+      "INCONCLUSIVE": "any other combination"
+      on_FALSE: "drop the \"does not generalise\" narrative; F2 FAIL still stands as pre-registered"
+    power: "patch recall at each split's tau for drops 0.15/0.30/0.50 (power_requirement)"
+    naip: not_applicable   # no OpenSR-test data
+
+  A3:
+    pass: 1
+    name: wayanad_bilinear_ranking
+    memo_refs: ["s8 rank 2", "s7 X1", "s11 Experiment 2"]
+    memo:
+      hypothesis: "SR changes the Wayanad map"
+      mechanism: "SR ranking moves sub-pixels"
+      if_true_if_false: "True: IoU(SR map, bilinear map) < 0.9. False: >= 0.95"
+      experiment: "X1: F7 pipeline, bilinear ranking field, all else fixed · F7 cache"
+      metric: "Map IoU, area difference (km2)"
+      abandon_when: "IoU >= 0.95 -> SR is decorative in production"
+    data:
+      f7_state: data/experiments-cache/f7_production_state.npz   # class_map, f_effective, nodata
+      sr_ndvi: data/experiments-cache/wayanad_evidence/per_date_ndvi/   # dihedral means, pre 2024-01-16/21/26, post 2024-12-06
+      ten_m: data/experiments-cache/wayanad_evidence/
+      dates: {pre: ['2024-01-16', '2024-01-21', '2024-01-26'], post: '2024-12-06'}
+      crop_10m_rows_cols: [256, 896, 128, 640]
+    method:
+      identical_to_f7: "f_effective, tau = f2.json tau.value, lambda = 0.0, endmembers, F3 normalisation, nodata: all taken from F7, unchanged"
+      only_change: "ranking field d_sr in trustsr.gate_v2.allocate_pixels"
+      proposed_not_in_memo:
+        bilinear_field: "bilinear upsample (x4) of the 10 m NDVI drop (pre mean - post), the same construction as F5's alloc_bilinear ranking (experiments/f5_a8_mapping.py: hb.resample(..., BLOCK, 'bilinear'))"
+        map_definition: "mapped change = CORE union ALLOCATED (fix.yaml flagged_definition.v2), on valid 2.5 m px"
+        reproduction_check: "the SR arm must reproduce f7_production_state.npz class_map exactly before the bilinear arm is scored; otherwise BLOCKED"
+    metrics:
+      primary: "IoU(SR-ranked map, bilinear-ranked map) over valid 2.5 m px"
+      secondary: "area difference km2 at 6.25 m2/px"
+      tautology_note: >-
+        proposed_not_in_memo: both arms allocate round(16 f) per block with the same f, so the area difference is 0 by
+        construction (block-sum). It is reported as a plumbing check, never as evidence.
+    keep_rule:
+      "TRUE": "IoU < 0.90 (point estimate)"
+      "FALSE": "IoU >= 0.95 (point estimate)"
+      "INCONCLUSIVE": "0.90 <= IoU < 0.95"
+      on_FALSE: "SR is decorative in production"
+    caveat_required: "both maps come from gate_v2, which FAILED its FAR keep rule (f2.json); A3 measures map agreement, not accuracy"
+    naip: not_applicable
+
+  A4:
+    pass: 1
+    name: wayanad_20m_degrade
+    memo_refs: ["s8 rank 4", "s7 X3", "s11 Experiment 3"]
+    memo:
+      hypothesis: "Resolution does not bind at Wayanad"
+      mechanism: "Scar width >> 10 m"
+      if_true_if_false: "True: 20 m rule recovers the same scar (recall >= 0.9 of 10 m component area). False: < 0.7"
+      experiment: "X3 · R2 imagery"
+      metric: "Area recall vs 10 m component; crown distance"
+      abandon_when: "— (informs framing only)"
+    data:
+      ten_m: data/experiments-cache/wayanad_evidence/   # same dates as F7
+      dates: {pre: ['2024-01-16', '2024-01-21', '2024-01-26'], post: '2024-12-06'}
+      rule: "configs/wayanad_evidence.yaml change.parent_drop_threshold = 0.30, parent_connectivity = 8"
+      crown: {lon: 76.134982, lat: 11.465104}   # configs/wayanad_evidence.yaml plausibility_points.crown; never a label
+    method:
+      proposed_not_in_memo:
+        degrade: "2 x 2 block mean of 10 m B04 and B08 reflectance per date, then NDVI at 20 m; a 20 m px is valid only if all four 10 m children are valid on every date"
+        rule_20m: "same rule and same 0.30 threshold on the 20 m pre-mean - post NDVI drop"
+        scar_component: "largest 8-connected 10 m parent-positive component within plausibility_radius_m = 1500 of the crown (configs/wayanad_evidence.yaml), as in the 2026-09-29 evidence run"
+        area_recall: "area of (20 m positive px, nearest-upsampled to 10 m) inside the 10 m scar component / area of the 10 m scar component"
+        crown_distance: "minimum distance in metres from the crown point to the centre of any px of the 20 m component(s) overlapping the scar; the 10 m distance is reported beside it"
+    keep_rule:
+      "TRUE": "area recall >= 0.90"
+      "FALSE": "area recall < 0.70"
+      "INCONCLUSIVE": "0.70 <= area recall < 0.90"
+      decision_use: "informs framing only; feeds pivot rule 'Reframe the whole project'"
+    naip: not_applicable
+
+# ============================================================================================ PASS 2 (F5 cache, no network)
+  A1:
+    pass: 2
+    name: sr_vs_interpolation_threshold
+    memo_refs: ["s8 rank 3", "s7 O1", "s7 O4", "s11 Experiment 4"]
+    memo:
+      hypothesis: "SR adds analytical information over interpolation"
+      mechanism: "Prior places boundaries better than neighbour gradients"
+      if_true_if_false: "True: SR-threshold - bilinear-threshold > 0, CI excludes 0, no NAIP, in 0–50 m bins. False: CI spans 0 or negative"
+      experiment: "O4 + O1 (random, bicubic arms) · F5 cache"
+      metric: "Paired IoU and boundary F1 (1 px) by width bin"
+      abandon_when: "No positive bin without NAIP -> SR leaves the evidence path"
+      o1: "Perfect fraction; ranking in {random, bilinear, bicubic, SR, HR-at-5 m}. If SR ~ bilinear and HR-at-5 m >> both, the prior is the problem, not resolution"
+      o4: "Same detector, field swapped: SR vs bicubic vs bilinear, threshold at 2.5 m. SR <= bilinear -> SR leaves the evidence path"
+    data:
+      cache: .claude/worktrees/agent-aee3717766a1e05f9/data_a2/opensr_test/   # f5.json data.cache_dir
+      hub: {repo: isp-uv-es/opensr-test, revision: e4600b9c74a621adeec047e5f6cc7a2d70a58134}
+      datasets: [naip, spot, spain_crops, spain_urban]   # venus excluded: 5 m HR cannot carry a 2.5 m truth (f5.json)
+      n_images: 119
+      truth: "HR NDVI < 0.35 -> non-vegetation at 2.5 m (fix.yaml a8.truth.primary)"
+      sr: "pretrained SEN2SR-lite outputs via F5's code path (CPU); NOT fine-tuned"
+    method:
+      threshold_arms: [sr_threshold, bicubic_threshold, bilinear_threshold]   # O4
+      ranking_arms_oracle_fraction: [random, bilinear, bicubic, sr, hr_at_5m]   # O1
+      proposed_not_in_memo:
+        detector: "identical for every threshold arm: predicted non-vegetation = upsampled 2.5 m NDVI < 0.35 (the truth threshold)"
+        allocation: "trustsr.alloc.allocate_by_rank with the oracle fraction (block mean of HR truth), as F5"
+        random_ranking: "uniform random scores, seed 2024"
+        hr_at_5m: "HR reflectance block-averaged to 5 m, NDVI, bilinear-upsampled to 2.5 m, used as the ranking field"
+        width_bins_m: ["0-20", "20-50", "50-150", "150+"]   # fix.yaml a8.stratify_by_feature_width_m; width = trustsr.alloc.component_width_m
+        stratum_metric: "trustsr.alloc.stratum_iou (stratum dilated by 4 px), as F5"
+        primary_stratum: "pooled 0–50 m stratum (union of the 0-20 and 20-50 bins); per-bin values are reported but are not the verdict"
+        boundary_f1: "trustsr.alloc.boundary_f1 at tolerance 1 px (2.5 m); 2 px reported secondarily"
+    contrasts:
+      primary: ["sr_threshold - bilinear_threshold", "sr_ranked - bilinear_ranked (oracle fraction)"]
+      secondary: ["sr - bicubic (both families)", "hr_at_5m - bilinear", "bilinear - random"]
+    ci: "image-paired block bootstrap (image = tile), 2000 reps, seed 2024"
+    keep_rule:
+      "TRUE": "for either primary contrast, without_naip, pooled 0–50 m stratum: paired IoU delta > 0 with 95% CI excluding 0"
+      "FALSE": "for both primary contrasts, without_naip, pooled 0–50 m stratum: CI spans 0 or the estimate is negative"
+      pivot_threshold_s12: "the 'Keep TrustSR with SR in the evidence path' rule additionally needs delta >= 0.01 IoU (see pivot_rules)"
+      on_FALSE: "SR leaves the evidence path"
+    naip: "with_naip and without_naip side by side; verdict on without_naip"
+
+  A2:
+    pass: 2
+    name: calibrated_fraction_allocation
+    memo_refs: ["s8 rank 6", "s7 O2", "s11 Experiment 5"]
+    memo:
+      hypothesis: "A calibrated fraction makes allocation beat blocky"
+      mechanism: "Monotone index-to-fraction map fixes non-linearity and endmember bias"
+      if_true_if_false: "True: fraction MAE <= 0.15 and allocation - blocky > 0, CI excludes 0. False: MAE > 0.2 or allocation <= blocky"
+      experiment: "Isotonic regression of block HR fraction on 10 m NDVI, leave-one-dataset-out · F5 cache"
+      metric: "Fraction MAE; IoU vs blocky 0.760"
+      abandon_when: "False -> stop hard sub-pixel maps; switch to probability (H5)"
+      o2: "Perfect ranking field (HR downsampled to 2.5 m); realistic fraction. If still below blocky, fraction dominates and no SR can rescue allocation"
+    data: "same as A1 (F5 cache, 4 datasets, 119 images, truth HR NDVI < 0.35)"
+    method:
+      calibration: "isotonic regression (decreasing) of the oracle block fraction on the 10 m NDVI of that block, fitted leave-one-dataset-out over [naip, spot, spain_crops, spain_urban]"
+      allocation_arms: [bilinear_ranked_calibrated, sr_ranked_calibrated, hr_ranked_realistic, hr_ranked_calibrated]
+      baseline: "blocky_10m exactly as F5 (f5.json; 0.7596 IoU pooled)"
+      proposed_not_in_memo:
+        primary_arm: "bilinear_ranked_calibrated (H4 / AS-2); SR ranking is an ablation arm only (memo s10 D2)"
+        fraction_mae: "mean |f_hat - f_oracle| over valid 10 m blocks of the held-out dataset, pooled over the 4 LODO folds"
+        realistic_fraction: "trustsr.alloc.block_fraction_realistic, as F5 (for the O2 arm)"
+    ci: "image-paired block bootstrap (image = tile), 2000 reps, seed 2024"
+    keep_rule:
+      "TRUE": "fraction MAE <= 0.15 AND IoU(primary arm) - IoU(blocky_10m) > 0 with 95% CI excluding 0"
+      "FALSE": "fraction MAE > 0.20 OR IoU(primary arm) - IoU(blocky_10m) <= 0"
+      "INCONCLUSIVE": "any other outcome"
+      verdict_dataset_set: "all 4 datasets (LODO needs all four); the without_naip result is reported beside it"
+      on_FALSE: "stop hard sub-pixel maps; switch to probability (H5)"
+    naip: "with_naip and without_naip side by side for every IoU row"
+
+# ============================================================================================ PASS 3 (network: named STAC fetches only)
+  B2:
+    pass: 3
+    name: inventory_width_share
+    memo_refs: ["s8 rank 5", "s7 O5", "s11 Experiment 6"]
+    memo:
+      hypothesis: "Most landslide area lies in features narrower than 20 m"
+      mechanism: "Runout channels are narrow"
+      if_true_if_false: "True: >= 30 % of inventory area in < 20 m wide parts; IoU(10 m truth, 2.5 m truth) < 0.8. False: < 10 %; IoU >= 0.85"
+      experiment: "O5 · Colombia inventory (cached, R4) · labels only, no imagery"
+      metric: "Area share by width; rasterisation IoU"
+      abandon_when: "False -> resolution cannot be the main lever for landslides; pick narrow-feature applications or drop sub-pixel claims"
+    data:
+      inventory: "R4 Colombia GeoPackage, table colombia_landslides, 838 polygons, EPSG:4326, event 2019-12-24"
+      sha256: c55da5d5d5c72dd6eed2ad1173ce261a3b1eb4080b17b04ba7a49e1a2e04d29f   # risk/results/r4.json
+      availability_note: >-
+        Not present on this machine when this file was written (no *.gpkg under the repo or its parent to depth 4;
+        R4 recorded it under the ignored data/risk-cache/labels/). The pass-3 network rule allows STAC only, so
+        B2 is BLOCKED unless the human places the file and its sha256 matches.
+    method:
+      resolutions_m: [2.5, 10, 20]
+      proposed_not_in_memo:
+        crs: "EPSG:32618 (UTM 18N), grids nested so each 10 m px = 4 x 4 2.5 m px and each 20 m px = 8 x 8"
+        rasterise: "rasterio.features.rasterize, pixel-centre rule (all_touched=False), at each resolution directly"
+        width: "per-pixel local thickness on the 2.5 m raster (diameter of the largest inscribed disk covering the px); F5's per-component width (trustsr.alloc.component_width_m) reported secondarily, not used for the verdict"
+        rasterisation_iou: "IoU(10 m raster nearest-upsampled to 2.5 m, 2.5 m raster); same for 20 m"
+    keep_rule:
+      "TRUE": "area share in < 20 m parts >= 0.30 AND IoU(10 m, 2.5 m) < 0.80"
+      "FALSE": "area share in < 20 m parts < 0.10 AND IoU(10 m, 2.5 m) >= 0.85"
+      "INCONCLUSIVE": "any other outcome"
+      o5_note: "If 10 m truth already gets IoU >= 0.85, resolution cannot be the main bottleneck for landslides"
+    ci: "block bootstrap over 128 px (2.5 m) tiles of the inventory extent, 2000 reps, seed 2024"
+    naip: not_applicable
+
+  B1:
+    pass: 3
+    name: cross_season_placebo
+    memo_refs: ["s8 rank 7", "s7 X4", "s11 Experiment 7"]
+    memo:
+      hypothesis: "Within-season calibration understates deployment FAR"
+      mechanism: "December greener than January"
+      if_true_if_false: "True: cross-season placebo window FAR at F2's tau >= 2x within-season (>= 0.10). False: within CI of 0.065"
+      x4: "Replace the null: cross-season placebo (Jan pre vs Dec of a non-event year; Jan 2024 pool vs 2023-12-27)"
+      metric: "Window FAR, rule_10m and gate v2"
+      abandon_when: "True -> every current threshold is invalid for Wayanad; seasonal modelling (H6) becomes priority"
+    data:
+      resolution: "10 m only; no SR"
+      comparisons:
+        primary_non_event:
+          pre_window: ['2023-01-01', '2023-01-31']   # every date in this window passing the clear rule, corrected AOI
+          post: '2023-12-27'
+        secondary_proxy:
+          pre: ['2024-01-16', '2024-01-21', '2024-01-26']   # cached; F7's pre dates
+          post: '2023-12-27'
+      clear_rule: "experiments.x6_season_latency.clear_dates_in_window, cloud_shadow_pct_aoi <= 10 AND coverage_pct >= 99 (f1.json stac_audit.thresholds); cite, do not redefine"
+      network: "STAC fetch through the existing fetch code path ONLY for the dates named in this block; nothing else"
+      crop_10m_rows_cols: [256, 896, 128, 640]
+      exclusions: [1500m_disks, footprint]   # same as F1
+      min_pre_dates: 2   # proposed_not_in_memo: sigma needs >= 2 dates (ddof=1); fewer clear Jan 2023 dates -> primary comparison BLOCKED, no substitute date
+    method:
+      gates:
+        rule_10m: "trustsr.placebo_v2 gate_rule_10m, parent_drop_threshold 0.30"
+        gate_v2: "trustsr.gate_v2.apply_gate_v2 at F2's tau = 3.8891176504391876 (f2.json tau.value), F3 normalisation, lambda 0"
+      proposed_not_in_memo:
+        split: "window FAR on the TEST split (odd tiles) as the verdict number, for comparability with F1/F2; all-window FAR reported secondarily"
+        n_pre_mismatch: "record n_pre and the sigma_f ratio vs tau's calibration n_pre = 2, as F7 did; not corrected"
+        overall_verdict: "B1's verdict = gate_v2's verdict on the primary comparison (the memo's 'at F2's tau'); rule_10m's verdict and both secondary-proxy verdicts are reported separately"
+    within_season_reference:   # committed numbers, not recomputed
+      gate_v2: {window_far: 0.0652395514780836, lo: 0.04780674254466574, hi: 0.08498175581546036, numerator: 64, denominator: 981, source: "f2.json keep_rule.window_far_test"}
+      rule_10m: {window_far: 0.0056065239551478085, lo: 0.002006999422753962, hi: 0.010736333610531435, numerator: 11, denominator: 1962, source: "f1.json gates.rule_10m.test_split.pooled_window_far"}
+    keep_rule:   # human decision b1_threshold_reading
+      gate_v2:
+        "TRUE": "window FAR >= 0.1304791029561672 (2 x 0.0652395514780836)"
+        "FALSE": "window FAR inside [0.04780674254466574, 0.08498175581546036]"
+        "INCONCLUSIVE": "any other value"
+      rule_10m:
+        "TRUE": "window FAR >= 0.011213047910295617 (2 x 0.0056065239551478085)"
+        "FALSE": "window FAR inside [0.002006999422753962, 0.010736333610531435]"
+        "INCONCLUSIVE": "any other value"
+      memo_parenthetical_note: "the memo's '(>= 0.10)' is quoted for provenance only and is not applied"
+    power: "patch recall for drops 0.15/0.30/0.50 injected into the post date, at each gate's threshold (power_requirement)"
+    naip: not_applicable
+
+  B3:
+    pass: 3
+    name: harmonic_seasonal_model
+    memo_refs: ["s8 rank 9", "s4 H6", "s5 AS-1", "s11 Experiment 8"]
+    memo:
+      hypothesis: "A harmonic seasonal model beats the pre-pool mean on null FAR"
+      mechanism: "Season is modelled"
+      if_true_if_false: "True: placebo FAR at matched power drops >= 30 %. False: < 10 %"
+      experiment: "H6 on 10 m archive"
+      metric: "Window FAR at fixed injected-change recall"
+      abandon_when: "False -> keep pre-pool with season-matched dates"
+      as1: "Per-pixel harmonic model of NDVI ... fitted on all valid observations from 2019–2024, including partially cloudy scenes per pixel"
+    data:
+      archive_window: ['2019-01-01', '2023-12-26']   # every L2A acquisition, pre-target only; per-pixel SCL validity
+      target: '2023-12-27'   # B1's primary non-event post date
+      baseline_pool: "B1 primary_non_event pre dates (clear Jan 2023)"
+      network: "STAC fetch through the existing fetch code path ONLY for acquisitions in archive_window and the target date"
+      crop_10m_rows_cols: [256, 896, 128, 640]
+    method:
+      proposed_not_in_memo:
+        model: "per 10 m px OLS: NDVI(t) = a0 + a1*t + sum_{k=1..2}[b_k cos(2 pi k t/365.25) + c_k sin(2 pi k t/365.25)]"
+        valid_obs: "per-pixel SCL validity (phase0 SCL classes); px with < 12 valid observations -> NO_DATA"
+        score_harmonic: "(prediction - observed NDVI at target) / residual std of the fit"
+        score_pool: "(pre-pool mean - observed) / per-pixel pre-pool std (ddof=1)"
+        window_flag: "window flagged if any px score exceeds the method's threshold"
+        matched_power: "for each method, the threshold is set so that patch recall at the 0.30 drop = 0.80 on injected patches (power_requirement patch rule); FAR is then read at that threshold"
+        fetch_budget_bytes: 2000000000
+    metric: "relative FAR reduction = (FAR_pool - FAR_harmonic) / FAR_pool at matched recall; test split windows"
+    keep_rule:
+      "TRUE": "relative FAR reduction >= 0.30"
+      "FALSE": "relative FAR reduction < 0.10"
+      "INCONCLUSIVE": "0.10 <= reduction < 0.30"
+    power: "recall at 0.15 and 0.50 also reported at each method's matched threshold"
+    naip: not_applicable
+
+# ============================================================================================ PASS 4
+  C1:
+    pass: 4
+    name: reconstruction_confidence
+    memo_refs: ["s8 rank 8", "s4 H10", "s11 Experiment 9"]
+    memo:
+      hypothesis: "A reconstruction-confidence map predicts where SR is wrong"
+      mechanism: "Low-frequency share is observed; prior-only detail is error-prone"
+      if_true_if_false: "True: AUROC for |SR - HR| > t beats the trivial predictor (local 10 m gradient magnitude) by >= 0.05. False: <= 0.02"
+      experiment: "H10 on A2 cache"
+      metric: "AUROC, reliability curve"
+      abandon_when: "False -> the uncertainty deliverable reverts to dihedral spread with a stated caveat"
+    data: "A2/F5 OpenSR-test cache (A1 data block), datasets with 2.5 m HR: naip, spot, spain_crops, spain_urban"
+    method:
+      proposed_not_in_memo:
+        error_label: "|SR NDVI - HR NDVI| > t at each valid 2.5 m px, t = 0.10 NDVI (2x the 0.05 date-to-date stable-pixel std in configs/wayanad_evidence.yaml change)"
+        confidence_score: "prior-only share h = |SR NDVI - bilinear_x4(block_mean_4x4(SR NDVI))|, 3 x 3 px mean; larger h = less observed"
+        trivial_predictor: "Sobel gradient magnitude of 10 m NDVI, bilinear-upsampled to 2.5 m"
+        reliability: "score mapped to P(error) by isotonic regression fitted leave-one-dataset-out; 10 equal-count bins; ECE reported (no threshold)"
+    metric: "AUROC gain = AUROC(h) - AUROC(trivial)"
+    ci: "image-paired block bootstrap (image = tile), 2000 reps, seed 2024"
+    keep_rule:
+      "TRUE": "AUROC gain >= 0.05"
+      "FALSE": "AUROC gain <= 0.02"
+      "INCONCLUSIVE": "0.02 < gain < 0.05"
+      verdict_dataset_set: "without_naip"
+    naip: "with_naip and without_naip side by side; verdict on without_naip"
+
+  C2:
+    pass: 4
+    name: sentinel1_metadata_audit
+    memo_refs: ["s8 rank 10", "s4 H8", "s11 Experiment 10"]
+    memo:
+      hypothesis: "SAR shortens latency with usable agreement"
+      mechanism: "Cloud-independent post-event data"
+      if_true_if_false: "True: S1 acquisition <= 12 days post; IoU with 10 m Dec parent >= 0.4. False: no scene or IoU < 0.2"
+      experiment: "H8 · Planetary Computer S1 RTC; only after the constraint decision"
+      s11: "Sentinel-1 availability audit only (dates within 12 days of 2024-07-30)"
+    scope: "metadata audit ONLY: list Sentinel-1 acquisitions; process no SAR pixels"
+    data:
+      aoi: corrected (11.490N 76.160E, configs/wayanad_evidence.yaml extent)
+      list_window: ['2024-07-30', '2024-08-30']   # pass brief; superset of the memo's 12-day window
+      evaluation_window_end: '2024-08-11'          # event + 12 days (memo)
+      collections: ["sentinel-1-rtc", "sentinel-1-grd"]   # Planetary Computer STAC
+    keep_rule:
+      TRUE_latency_part: ">= 1 S1 acquisition intersecting the AOI dated 2024-07-30 .. 2024-08-11"
+      FALSE_latency_part: "no such acquisition"
+      agreement_part: "NOT_RUN: the memo's IoU criterion needs SAR processing, which waits for the human constraint decision (AGENTS.md bands line)"
+    naip: not_applicable
+
+# ============================================================================================ PASS 5 (verification) — no new thresholds
+verification:
+  pass: 5
+  style: "F9 (experiments/results/f9.json)"
+  checks: [rerun_every_pass_1_to_4_script_from_clean_checkout, recompute_every_headline_in_code, denominators_stated,
+           naip_leakage, spatial_adjacency_leakage, calibration_test_contamination, threshold_applied_equals_this_file,
+           power_reported_beside_every_far, point_estimate_inside_its_ci, config_sha256_matches_this_file]
+  verdict_per_claim: [KEEP, DOWNGRADE, DROP]
+  synthesis: experiments/results/f13/SYNTHESIS.md
+  synthesis_rule: "apply pivot_rules below literally, mapping each trigger to the experiment verdicts in this file"
+
+# ============================================================================================ PIVOT RULES (memo s12, verbatim)
+pivot_rules:
+  memo_preamble: "These thresholds belong in the Day 0 pre-registration, written before any of the experiments run."
+  rules:
+    keep_sr_in_evidence_path:
+      decision: "Keep TrustSR with SR in the evidence path"
+      trigger: "A1: SR-threshold or SR-ranked beats the bilinear equivalent by >= 0.01 IoU in the 0–50 m bins, NAIP excluded, CI excluding 0; and A3: IoU(SR map, bilinear map) < 0.9 on Wayanad; and A2 or the oracle shows allocation beats blocky"
+    sr_as_labelled_visual_layer:
+      decision: "Remove SR from the decision; keep it as a labelled visual layer"
+      trigger: "A1 CI spans 0 or is negative without NAIP, or A3 IoU >= 0.95. SR then appears only as \"model reconstruction\", with the C1 map if C1 passes"
+    remove_sr_entirely:
+      decision: "Remove SR entirely"
+      trigger: "A1 negative and C1 fails (AUROC gain <= 0.02 over the trivial predictor). Ship bilinear sub-pixel mapping and say why, with F6's PSNR table as the evidence"
+    add_sentinel1:
+      decision: "Add another sensor (Sentinel-1)"
+      trigger: "B1 cross-season FAR >= 2x within-season or no clear optical post scene within 60 days for the target event; and the C2 audit finds an S1 acquisition within 12 days"
+    probabilistic_output:
+      decision: "Switch the output from a hard map to a probabilistic map"
+      trigger: "A2 fraction MAE > 0.15 after calibration, or calibrated allocation <= blocky. Report P(change) per 10 m pixel and expected area with CI; score with Brier and reliability, not IoU"
+    reframe_project:
+      decision: "Reframe the whole project"
+      trigger: "B2 shows < 10 % of landslide area in parts narrower than 20 m and A4 finds the Wayanad scar at 20 m. Then sub-10 m landslide mapping is not where value lies: reframe to (a) an honest SR product with a validated observed-vs-invented map for NTRO's stated applications, and (b) narrow-feature applications (roads, stream banks, field boundaries) where F5's only surviving gain sits"
+    abandon_conformal_gate:
+      decision: "Abandon the conformal gate"
+      trigger: "A0 shows a real gap and B1 shows a large cross-season gap and B3 does not close it. The gate's exchangeability assumption cannot be met with this archive"
+  constraint_note_verbatim: >-
+    Constraint decisions this would need (human, not this memo). Adding Sentinel-1 conflicts with the AGENTS.md line
+    "Bands: only the four 10 m bands (B02, B03, B04, B08). No 20 m or 60 m bands." as currently interpreted for all
+    inputs. A terrain prior conflicts with the project-context rule "no DEM as input" if that is read beyond the SR
+    model. Neither line is changed here. The cheap audits (C2, B2) produce the evidence a human needs to decide.
+  literal_application:   # proposed_not_in_memo: how pass 5 maps memo wording to this file's verdicts; no new thresholds
+    "A1 ... beats ... by >= 0.01 IoU ... CI excluding 0": "A1 primary contrast without_naip, pooled 0–50 m stratum: estimate >= 0.01 AND CI excludes 0"
+    "A1 CI spans 0 or is negative without NAIP": "A1 verdict FALSE"
+    "A1 negative": "both A1 primary contrasts without_naip have estimate < 0"
+    "A3 IoU < 0.9 / >= 0.95": "A3 point estimate"
+    "A2 or the oracle shows allocation beats blocky": "A2 TRUE, or an A1/A2 oracle-fraction arm (F5 precedent) beats blocky_10m with CI excluding 0"
+    "C1 passes / fails": "C1 verdict TRUE / FALSE"
+    "B1 cross-season FAR >= 2x within-season": "B1 overall verdict TRUE (gate_v2, primary comparison)"
+    "no clear optical post scene within 60 days": "evaluated from the committed R2 / wayanad_evidence audit (first clear post 2024-12-06, 129 days); not re-fetched"
+    "C2 audit finds an S1 acquisition within 12 days": "C2 TRUE_latency_part"
+    "A2 fraction MAE > 0.15 after calibration, or calibrated allocation <= blocky": "A2 measured MAE > 0.15 OR primary-arm IoU delta <= 0"
+    "B2 shows < 10 %": "B2 area share < 0.10 (point estimate)"
+    "A4 finds the Wayanad scar at 20 m": "A4 verdict TRUE"
+    "A0 shows a real gap": "A0 verdict TRUE or MISCALIBRATED_SCORE"
+    "B1 shows a large cross-season gap": "B1 overall verdict TRUE"
+    "B3 does not close it": "B3 verdict FALSE or INCONCLUSIVE"
