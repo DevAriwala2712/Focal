@@ -250,7 +250,11 @@ def main():
                 'The bilinear field is the 10 m NDVI drop of the raw (un-normalised) bands, which is what the SR field is built from; invalid '
                 'pixels are filled with 0 (F5 precedent), which only touches blocks adjacent to NO_DATA.',
                 'The mapped-area difference is zero by construction (block-sum); it is not evidence.',
-                'SR is the cached real tiled SEN2SR-lite dihedral stack (F7 verified it against a fresh run); no SR inference was run here.'])
+                'SR is the cached real tiled SEN2SR-lite dihedral stack (F7 verified it against a fresh run); no SR inference was run here.',
+                'd_sr and sigma_sr are read from the cached v1 moments (data/experiments-cache/wayanad_evidence/step3_state.npz), which F7 verified '
+                'equal its fresh moments (max diff 0.0). A first attempt rebuilt them from the float32 per-date dihedral means; that failed this '
+                "script's own reproduction gate by exactly one pixel (UNSUPPORTED vs NO_CHANGE; CORE and ALLOCATED identical), was discarded before "
+                'any IoU was computed, and changed no threshold, metric or seed.'])
         return _finish(result, started)
     except C.Blocked as exc:
         result.update(status='BLOCKED', verdict='NOT_RUN', reason=str(exc))
