@@ -13,6 +13,7 @@ import pytest
 
 from experiments import f13_a0_exchangeability as A0
 from experiments import f13_a3_sr_swap as A3
+from experiments import f13_a4_degrade20m as A4
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -479,3 +480,80 @@ class TestA3VerdictRule:
         assert A3.a3_verdict(0.9499) == 'INCONCLUSIVE'
         assert A3.a3_verdict(0.95) == 'FALSE'
         assert A3.a3_verdict(1.0) == 'FALSE'
+
+
+# ================================================================ A4: does Wayanad need 10 m? ================================================================
+
+class TestAggregate2x2:
+    def test_reflectance_is_averaged_not_ndvi(self):
+        refl = np.zeros((4, 2, 2)); refl[0] = [[0.10, 0.02], [0.10, 0.02]]; refl[3] = [[0.40, 0.40], [0.40, 0.40]]   # B04 .. B08
+        valid = np.ones((2, 2), bool)
+        r20, v20 = A4.aggregate_reflectance_2x2(refl, valid)
+        assert r20.shape == (4, 1, 1) and v20.shape == (1, 1)
+        assert r20[0, 0, 0] == pytest.approx(0.06) and r20[3, 0, 0] == pytest.approx(0.40)
+        ndvi = lambda r, n: (n - r) / (n + r)
+        mean_of_ndvi = np.mean([ndvi(0.10, 0.40), ndvi(0.02, 0.40)])
+        ndvi_of_mean = ndvi(0.06, 0.40)
+        assert not np.isclose(mean_of_ndvi, ndvi_of_mean)                      # the two differ, so the choice matters
+        assert A4.ndvi_from_reflectance(r20, 0.05)[0, 0] == pytest.approx(ndvi_of_mean)
+
+    def test_cell_is_invalid_if_any_of_its_four_children_is_invalid(self):
+        valid = np.ones((4, 4), bool); valid[0, 1] = False; valid[3, 3] = False
+        _, v20 = A4.aggregate_reflectance_2x2(np.ones((4, 4, 4)), valid)
+        assert v20.tolist() == [[False, True], [True, False]]
+
+    def test_odd_dimensions_raise_instead_of_cropping(self):
+        with pytest.raises(ValueError):
+            A4.aggregate_reflectance_2x2(np.ones((4, 5, 4)), np.ones((5, 4), bool))
+
+
+class TestScarComponent:
+    def _mask(self):
+        m = np.zeros((40, 40), bool)
+        m[2:12, 2:12] = True            # 100 px, far from the crown
+        m[20:24, 20:23] = True          # 12 px, touches the disk
+        m[26:28, 21:24] = True          # 6 px, touches the disk (row 26 is 4 px from the crown row 22)
+        return m
+
+    def test_picks_the_largest_component_that_touches_the_disk_not_the_largest_overall(self):
+        comp, info = A4.scar_component(self._mask(), crown_rc=(22, 21), radius_px=5)
+        assert int(comp.sum()) == 12 and info['n_components_touching_disk'] == 2
+        assert comp[21, 21]
+
+    def test_8_connectivity_joins_diagonal_pixels(self):
+        m = np.zeros((10, 10), bool); m[2, 2] = m[3, 3] = m[4, 4] = True
+        comp, _ = A4.scar_component(m, crown_rc=(3, 3), radius_px=3)
+        assert int(comp.sum()) == 3
+
+    def test_no_component_in_the_disk_raises(self):
+        with pytest.raises(ValueError):
+            A4.scar_component(np.zeros((10, 10), bool), crown_rc=(5, 5), radius_px=3)
+
+
+class TestDistanceAndAgreement:
+    def test_min_distance_from_a_point_to_pixel_centres_in_metres(self):
+        from affine import Affine
+        tr = Affine(10, 0, 500000, 0, -10, 1000000)             # 10 m px, origin (500000, 1000000)
+        comp = np.zeros((10, 10), bool); comp[3, 4] = True      # centre x = 500000 + 4.5*10, y = 1000000 - 3.5*10
+        d = A4.min_distance_m(comp, tr, (500045.0 + 30.0, 999965.0))
+        assert d == pytest.approx(30.0)
+
+    def test_area_recall_and_upsampled_iou(self):
+        scar10 = np.zeros((8, 8), bool); scar10[2:6, 2:6] = True                 # 16 px at 10 m
+        mask20 = np.zeros((4, 4), bool); mask20[1:2, 1:3] = True                 # 2 cells = 8 px at 10 m, inside the scar
+        up = A4.upsample_nn(mask20, 2)
+        assert up.shape == (8, 8) and int(up.sum()) == 8
+        assert A4.area_recall(up, scar10) == pytest.approx(0.5)
+        assert A3.iou(up, scar10, np.ones((8, 8), bool))['iou'] == pytest.approx(0.5)
+
+    def test_recall_of_an_empty_scar_is_nan(self):
+        assert np.isnan(A4.area_recall(np.ones((4, 4), bool), np.zeros((4, 4), bool)))
+
+
+class TestA4VerdictRule:
+    """yaml experiments.A4.keep_rule: TRUE recall >= 0.90; FALSE recall < 0.70; INCONCLUSIVE in between."""
+
+    def test_regions(self):
+        assert A4.a4_verdict(0.90) == 'TRUE' and A4.a4_verdict(1.0) == 'TRUE'
+        assert A4.a4_verdict(0.8999) == 'INCONCLUSIVE' and A4.a4_verdict(0.70) == 'INCONCLUSIVE'
+        assert A4.a4_verdict(0.6999) == 'FALSE'

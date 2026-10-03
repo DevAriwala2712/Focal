@@ -1,0 +1,193 @@
+{
+  "evidence": "real",
+  "experiment_id": "A4",
+  "reproduction_gate": {
+    "scar_px_10m": 5539,
+    "step1_largest_component_px": 5539,
+    "scar_is_the_largest_component_overall": true,
+    "positive_px_aoi": 18075,
+    "step1_positive_px_aoi": 18075,
+    "distances_m": {
+      "crown": 5.743262484100802,
+      "mundakkai": 112.30160892709858,
+      "chooralmala_bridge": 7.60798203157454
+    },
+    "step1_distances_m": {
+      "crown": 5.743262484100802,
+      "mundakkai": 112.30160892709858,
+      "chooralmala_bridge": 7.60798203157454
+    },
+    "matches_step1": true
+  },
+  "status": "PASS",
+  "verdict": "TRUE",
+  "rule_applied": {
+    "TRUE": "area recall >= 0.90",
+    "FALSE": "area recall < 0.70",
+    "INCONCLUSIVE": "0.70 <= area recall < 0.90",
+    "decision_use": "informs framing only; feeds pivot rule 'Reframe the whole project'"
+  },
+  "preregistration": {
+    "sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+    "commit": "0978e8a924e9b104c50aac2a1db1c00a8d220718",
+    "experiment": "A4"
+  },
+  "verdict_basis": "area recall = 10 m scar-component px that are also positive under the 20 m rule / 10 m scar-component px, point estimate (yaml method.proposed_not_in_memo.area_recall)",
+  "scar": {
+    "definition": "largest 8-connected 10 m parent-positive component within plausibility_radius_m = 1500 of the crown (configs/wayanad_evidence.yaml), as in the 2026-09-29 evidence run",
+    "area_10m": {
+      "px": 5539,
+      "m2": 553900.0,
+      "connected_components_touching_disk": 13
+    },
+    "area_20m": {
+      "cells": 1398,
+      "m2": 559200.0,
+      "info": {
+        "n_components_total": 110,
+        "n_components_touching_disk": 7,
+        "area_px": 1398
+      }
+    },
+    "area_ratio_20m_over_10m": 1.0095685141722333
+  },
+  "area_recall": {
+    "estimate": 0.9429499909730998,
+    "numerator": 5223,
+    "denominator": 5539,
+    "ci": {
+      "estimate": 0.9429499909730998,
+      "lo": 0.9232013933207365,
+      "hi": 0.9576798024840634,
+      "numerator": 5223.0,
+      "denominator": 5539.0,
+      "blocks": 32,
+      "replicates": 2000,
+      "ci": 0.95,
+      "seed": 2024
+    }
+  },
+  "area_recall_component_only": 0.9429499909730998,
+  "iou": {
+    "scar_component_20m_vs_10m": {
+      "iou": 0.8840555179417738,
+      "intersection": 5223,
+      "union": 5908,
+      "n_a": 5592,
+      "n_b": 5539
+    },
+    "parent_mask_20m_vs_scar_10m": {
+      "iou": 0.2868519332161687,
+      "intersection": 5223,
+      "union": 18208,
+      "n_a": 17892,
+      "n_b": 5539
+    },
+    "whole_aoi_parent_masks": {
+      "iou": 0.8773880363294707,
+      "intersection": 16809,
+      "union": 19158,
+      "n_a": 17892,
+      "n_b": 18075
+    }
+  },
+  "validity_effect": {
+    "scar_px_10m_in_invalid_20m_cells": 0,
+    "share_of_scar_px": 0.0,
+    "recall_on_scar_px_with_valid_20m_cell": 0.9429499909730998,
+    "denominator_valid_only": 5539,
+    "note": "sensitivity only: scar px whose 2 x 2 cell has an invalid child cannot be positive at 20 m"
+  },
+  "distance_to_published_points_m": {
+    "ten_m_component": {
+      "crown": 5.743262484100802,
+      "mundakkai": 112.30160892709858,
+      "chooralmala_bridge": 7.60798203157454
+    },
+    "twenty_m_component": {
+      "crown": 21.19319370415231,
+      "mundakkai": 112.83102770735964,
+      "chooralmala_bridge": 6.720215217963235
+    },
+    "points": {
+      "crown": {
+        "lon": 76.134982,
+        "lat": 11.465104
+      },
+      "mundakkai": {
+        "lon": 76.1559113,
+        "lat": 11.4859333
+      },
+      "chooralmala_bridge": {
+        "lon": 76.1601,
+        "lat": 11.4992
+      }
+    },
+    "definition": "minimum distance from the point to the centre of any pixel of the component; published coordinates are a plausibility check, never a label"
+  },
+  "positive_counts": {
+    "parent_10m_px": 18075,
+    "parent_20m_cells": 4473,
+    "parent_20m_cells_as_10m_px": 17892
+  },
+  "measurements": [
+    {
+      "name": "area_recall_20m_rule_vs_10m_scar",
+      "estimate": 0.9429499909730998,
+      "numerator": 5223,
+      "denominator": 5539,
+      "lo": 0.9232013933207365,
+      "hi": 0.9576798024840634,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of the 10 m scar component area also positive under the 20 m rule",
+      "bootstrap_unit": "32 x 32 px (10 m) = 320 m tiles; the scar covers few tiles, so the CI is coarse",
+      "blocks": 32
+    },
+    {
+      "name": "IoU_20m_scar_component_vs_10m_scar_component",
+      "estimate": 0.8840555179417738,
+      "numerator": 5223,
+      "denominator": 5908,
+      "lo": null,
+      "hi": null,
+      "replicates": null,
+      "seed": null,
+      "unit": "IoU after nearest-neighbour upsampling 20 m -> 10 m"
+    },
+    {
+      "name": "IoU_20m_parent_mask_vs_10m_scar_component",
+      "estimate": 0.2868519332161687,
+      "numerator": 5223,
+      "denominator": 18208,
+      "lo": null,
+      "hi": null,
+      "replicates": null,
+      "seed": null,
+      "unit": "IoU of ALL 20 m positive cells (upsampled) vs the 10 m scar component; extra positives count against it"
+    }
+  ],
+  "limitations": [
+    "One scene, one event, one scar: this informs framing only (yaml: abandon_when \"\u2014\"); it is not a generalisation about landslides.",
+    "The 10 m scar component is a threshold-0.30 NDVI-drop component (provisional, set before viewing data), not a surveyed polygon; recall is agreement with the 10 m rule, not accuracy against truth. No 2.5 m or 10 m change truth exists for Wayanad.",
+    "A 20 m cell is invalid if any child is invalid on any date, so cloud/shadow edges inside the scar cannot be positive at 20 m; validity_effect reports how many scar px that touches and the recall restricted to the rest.",
+    "Both rules use the single post date 2024-12-06 (129 days after the event); season and regrowth are confounded with the landslide at both resolutions.",
+    "The recall CI resamples 320 m tiles of one component and is coarse; the verdict uses the point estimate as pre-registered.",
+    "The prompt says \"the component intersecting the published crown location\"; the committed yaml says the largest component within 1500 m of the crown, which is what is used. The 10 m component lies 5.7 m from the crown point, so it does not strictly intersect it."
+  ],
+  "experiment": "f13_a4",
+  "started_utc": "2026-10-03T06:31:42.346772+00:00",
+  "finished_utc": "2026-10-03T06:31:42.619087+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}
