@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TrustSR · Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/app.css"/><script src="assets/shell.js"></script><script src="assets/viewer.js"></script></head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="demo">
+<main id="app" class="h-screen flex flex-col">
+  <div class="shrink-0 bg-surface-container-high border-b border-outline-variant flex flex-wrap items-center justify-between px-space-md py-space-xs gap-space-sm">
+    <div><span class="font-headline-sm text-headline-sm font-bold text-primary">TrustSR</span><span class="font-label-sm text-label-sm text-on-surface-variant"> · JURY PRESENTATION · WAYANAD DEBRIS ZONE · RETROSPECTIVE</span></div>
+    <div class="flex items-center gap-space-md">
+      <span class="seg" id="res"><button data-v="10m">10 m observation</button><button data-v="2p5m" class="on">2.5 m trust-gated</button></span>
+      <label class="flex items-center gap-1 font-label-sm text-label-sm"><input id="ov" type="checkbox" checked class="accent-primary"/> change overlay</label>
+      <button id="live" class="btn ghost" disabled title="Needs the RTX 4050 machine and a fetched stack; not wired in this build"><span class="material-symbols-outlined text-[14px]">bolt</span>Run live (GPU)</button>
+    </div>
+  </div>
+  <div class="flex-1 min-h-0 relative">
+    <div id="viewer" class="absolute inset-0"></div>
+    <div class="absolute top-3 left-1/2 -translate-x-1/2 z-10 banner px-space-md py-1 font-label-sm text-label-sm text-center max-w-[80%]" id="strip"></div>
+    <!-- metrics -->
+    <div class="absolute right-3 top-14 z-10 w-[300px] bg-surface border border-outline shadow-none">
+      <div class="px-space-sm py-1 bg-surface-container border-b border-outline-variant flex justify-between font-label-md text-label-md font-bold text-primary uppercase tracking-wider"><span>Change census</span><button id="tog" class="material-symbols-outlined text-[16px]">expand_less</button></div>
+      <div id="mbody" class="p-space-sm space-y-space-sm">
+        <div class="font-label-sm text-label-sm text-on-surface-variant">k = <span id="k"></span> (uncalibrated) · parent threshold 0.30 (provisional)</div>
+        <table class="tbl" id="cen"></table>
+        <div class="font-body-sm text-body-sm text-on-surface-variant" id="expl"></div>
+      </div>
+    </div>
+    <div class="absolute left-3 bottom-3 z-10 bg-surface border border-outline-variant px-space-sm py-1 font-label-sm text-label-sm flex flex-col gap-1" id="legend"></div>
+    <div class="absolute left-3 top-14 z-10 flex flex-col gap-1"><button id="zin" class="btn ghost bg-surface">+</button><button id="zout" class="btn ghost bg-surface">−</button><button id="zfit" class="btn ghost bg-surface"><span class="material-symbols-outlined text-[14px]">fit_screen</span></button></div>
+  </div>
+</main>
+<script>
+document.addEventListener('tsr-ready', (ev) => {
+  const { esc, int, fix, chip } = TSR, s = ev.detail, q = (id) => document.getElementById(id), c = s.step4.class_counts_px, a = s.step4.class_areas_m2;
+  const v = new TSRViewer.Viewer(q('viewer'), s, { visible: [1, 2, 255] });
+  q('res').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => { q('res').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b)); v.setAfter(b.dataset.v); }));
+  q('ov').addEventListener('change', (e) => v.setOpacity(e.target.checked ? 1 : 0));
+  q('zin').onclick = () => v.zoomBy(1.5); q('zout').onclick = () => v.zoomBy(1 / 1.5); q('zfit').onclick = () => v.reset();
+  q('k').textContent = s.k.toFixed(1);
+  q('strip').textContent = `Pre: ${s.pre_dates.join(' · ')} → Post: ${s.post_date} (${s.gap_days} days after the ${s.event_date} event) · pretrained SEN2SR-lite, not fine-tuned · no accuracy claim`;
+  const rows = [['OBSERVED', '#b83c1e', c.OBSERVED, a.OBSERVED], ['INFERRED', '#e8a020', c.INFERRED, a.INFERRED], ['UNSUPPORTED', '#5b6e7d', c.UNSUPPORTED, a.UNSUPPORTED], ['NO_DATA', '#6e6e6e', c.NO_DATA, a.NO_DATA]];
+  q('cen').innerHTML = '<thead><tr><th>Class</th><th class="r">Pixels</th><th class="r">Area m²</th></tr></thead><tbody>' + rows.map(([n, col, p, m]) => `<tr><td><i class="sw" style="background:${col}"></i> ${n}</td><td class="r">${int(p)}</td><td class="r">${int(m)}</td></tr>`).join('') + '</tbody>';
+  q('expl').innerHTML = '<b>Observed</b>: the 2.5 m change clears k·σ and the 10 m data agree. <b>Inferred</b>: the 10 m data show change but the model’s exact shape is a guess. <b>Unsupported</b>: model-only change, not counted. Observed area is NDVI-drop pixels, not surveyed scar area.';
+  q('legend').innerHTML = rows.filter((r) => r[0] !== 'UNSUPPORTED').map(([n, col]) => `<span><i class="sw" style="background:${col}"></i> ${n}</span>`).join('') + '<span class="text-on-surface-variant">+ markers: published crown / Mundakkai / bridge (plausibility only)</span>';
+  let open = true; q('tog').onclick = () => { open = !open; q('mbody').style.display = open ? '' : 'none'; q('tog').textContent = open ? 'expand_less' : 'expand_more'; };
+});
+</script>
+</body></html>

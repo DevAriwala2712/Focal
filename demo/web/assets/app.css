@@ -1,0 +1,42 @@
+/* Cartographic Precision – shared styles (see DESIGN.md: planar, hairline, zero radius, tabular mono numerals) */
+html, body { margin: 0; padding: 0; }
+body { overscroll-behavior: none; font-variant-numeric: tabular-nums lining-nums; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+.num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums lining-nums; }
+.hair { border: 1px solid #d4cebf; }
+.reg { position: relative; }
+.reg::before, .reg::after { content: '+'; position: absolute; font: 400 10px 'JetBrains Mono', monospace; color: #747871; line-height: 1; }
+.reg::before { top: 2px; left: 4px; }
+.reg::after { bottom: 2px; right: 4px; }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.tbl th { background: #ece7dc; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid #d4cebf; position: sticky; top: 0; z-index: 1; }
+.tbl td { padding: 6px 8px; border-bottom: 1px solid #d4cebf; vertical-align: top; }
+.tbl tbody tr:nth-child(even) { background: #f1ece3; }
+.tbl tbody tr.sel { outline: 1.5px solid #1c201a; outline-offset: -1.5px; background: #fff; }
+.tbl .r { text-align: right; }
+.tbl tbody tr.click { cursor: pointer; }
+.tbl tbody tr.click:hover { background: #ebe8e1; }
+.chip { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 6px; border: 1px solid #c3c8bf; font: 500 10px 'JetBrains Mono', monospace; white-space: nowrap; }
+.chip.ok { border-color: #3a4d39; color: #243624; }
+.chip.warn { border-color: #994623; color: #994623; }
+.chip.ref { border-color: #5b6e7d; color: #364957; }
+.btn { font: 500 11px 'JetBrains Mono', monospace; letter-spacing: .04em; text-transform: uppercase; padding: 7px 12px; border: 1px solid #3a4d39; background: #3a4d39; color: #f4f1ea; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.btn:hover { background: #2a382a; }
+.btn.ghost { background: transparent; color: #3a4d39; }
+.btn.ghost:hover { background: #ece7dc; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn.on { background: #3a4d39; color: #f4f1ea; }
+.seg { display: inline-flex; border: 1px solid #3a4d39; }
+.seg button { font: 500 11px 'JetBrains Mono', monospace; padding: 5px 10px; background: transparent; color: #3a4d39; border: 0; border-right: 1px solid #3a4d39; cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button.on { background: #3a4d39; color: #f4f1ea; }
+input[type=range].tsr { -webkit-appearance: none; appearance: none; height: 2px; background: #3a4d39; width: 100%; }
+input[type=range].tsr::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 18px; background: #fcf9f2; border: 1.5px solid #1c201a; cursor: pointer; }
+input[type=range].tsr::-moz-range-thumb { width: 12px; height: 18px; background: #fcf9f2; border: 1.5px solid #1c201a; border-radius: 0; cursor: pointer; }
+.pix { image-rendering: pixelated; }
+.banner { border: 1px solid #994623; background: #fff; color: #7b2f0d; }
+.sw { display: inline-block; width: 10px; height: 10px; border: 1px solid #1c201a; }
+pre.code { background: #ece7dc; border: 1px solid #d4cebf; padding: 10px; font: 11px/1.5 'JetBrains Mono', monospace; overflow-x: auto; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #c3c8bf; }
+::-webkit-scrollbar-track { background: #ece7dc; }

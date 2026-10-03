@@ -28,9 +28,27 @@ R2 reads the full year's SCL windows. R3 downloads metadata and country polygons
 
 ## How to reproduce the Wayanad demo
 
-The demo is **not yet implemented**. The executed audit found 12 clear pre-event dates and the first post-event date meeting the configured cloud/shadow threshold on 6 December 2024. That is 129 days after the landslide.
+The front end is a static site in `demo/web/` (the "Cartographic Precision" design: eight screens sharing one shell) plus a tiny Python server. Every number and image on it is read from the Wayanad evidence run; nothing is hand-typed. Anything the run did not measure is shown as NOT RUN / BLOCKED.
 
-Before building the demo, resolve the risk report's fixed-mask tiling limitation, held-out calibration preparation and real-data Colab training. The intended later route remains: pinned inputs/weights -> aligned 10m COGs -> tiled x4 SR -> trust/change COGs -> held-out evaluation -> offline Streamlit demo. A 6 GB GPU run is not proof of physical 4 GB compatibility.
+```bash
+# 1. (once, or after re-running the evidence steps) build the site data from the run outputs; it re-checks that
+#    classify() reproduces the stored class map and that rho matches rho_objects.csv, and refuses to build otherwise
+.venv/bin/python scripts/build_web_data.py
+
+# 2. serve it
+.venv/bin/python demo/server.py            # http://127.0.0.1:8765
+
+# 3. guards (pages present, numbers match step4.json, downloads whitelisted, no invented claims)
+.venv/bin/python -m pytest tests/test_web_demo.py
+```
+
+Needs the evidence outputs in `experiments/wayanad_evidence/outputs/` (the large `stack_*.tif` and `sr_post_2p5m.tif` are gitignored; regenerate them with the steps in `experiments/wayanad_evidence/EVIDENCE.md`). `demo/web/data/` is generated and gitignored. Pages load Tailwind and fonts from CDNs, so open them once online before an offline demo.
+
+Screens: How it works · Data & dates (73 real acquisitions, post-event visibility audit) · Map workspace (swipe, 10 m / 2.5 m, live k re-gate, pixel inspector) · Objects (2,217 change objects with ρ) · Evidence · Experiments · Demo (jury view) · Exports (real files, sizes, SHA-256).
+
+Not wired yet: the spec'd "Run live" GPU button (the control is present but disabled; it needs the RTX 4050 machine). The k slider is exploratory only, since k = 2.0 remains uncalibrated.
+
+Current evidence status: 12 clear pre-event dates existed on the old AOI, and the corrected AOI (11.490°N, 76.160°E) run used pre 2024-01-16/21/26 and post 2024-12-06 (129 days after the landslide). Phase 0 is not passed; no accuracy claim is established.
 
 ## Documents
 

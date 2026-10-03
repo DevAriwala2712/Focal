@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TrustSR · Objects</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/app.css"/><script src="assets/shell.js"></script></head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="objects">
+<main id="app" class="min-h-screen">
+  <div class="h-12 bg-surface-container-high border-b border-outline-variant flex items-center justify-between px-space-md">
+    <div><div class="font-headline-sm text-headline-sm font-bold text-primary">Change-object register</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant">Connected components of the ungated 2.5 m change mask S = d &gt; k·σ (8-connected, k = 2.0) · ρ = measurement-visible fraction of each object</div></div>
+    <div id="pills" class="flex gap-space-xs"></div>
+  </div>
+  <div class="flex flex-col xl:flex-row">
+    <section class="flex-1 min-w-0">
+      <div class="p-space-md bg-surface-container-low border-b border-outline-variant flex flex-wrap items-end gap-space-lg font-label-sm text-label-sm">
+        <label class="flex flex-col gap-1">MIN SIZE (2.5 m px)<input id="fpx" type="number" value="16" min="1" class="bg-surface-container border-b border-primary px-2 py-1 w-28 num"/></label>
+        <label class="flex flex-col gap-1">MIN ρ<input id="frho" type="number" value="0" min="0" max="1" step="0.05" class="bg-surface-container border-b border-primary px-2 py-1 w-24 num"/></label>
+        <label class="flex flex-col gap-1">SUPPORT<select id="fsup" class="bg-surface-container border-b border-primary px-2 py-1"><option value="all">all objects</option><option value="obs">majority OBSERVED (parent-supported)</option><option value="uns">majority UNSUPPORTED</option></select></label>
+        <label class="flex flex-col gap-1">SORT<select id="fsort" class="bg-surface-container border-b border-primary px-2 py-1"><option value="area">area ▼</option><option value="rho">ρ ▼</option><option value="unsup">UNSUPPORTED share ▼</option><option value="id">id ▲</option></select></label>
+        <div class="ml-auto flex items-center gap-space-md"><span id="count" class="num"></span><button id="csv" class="btn ghost"><span class="material-symbols-outlined text-[14px]">download</span>CSV (filtered)</button></div>
+      </div>
+      <div class="overflow-auto" style="max-height:calc(100vh - 12.5rem)"><table class="tbl" id="tbl"></table></div>
+      <div class="p-space-md font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant" id="foot"></div>
+    </section>
+    <aside class="xl:w-[380px] border-t xl:border-t-0 xl:border-l border-outline-variant bg-surface-container-low">
+      <div class="px-space-md py-space-sm bg-surface-container border-b border-outline-variant flex justify-between"><span class="font-label-md text-label-md font-bold text-primary uppercase tracking-wider">Object inspector</span><span id="oid" class="font-label-sm text-label-sm text-secondary"></span></div>
+      <div id="insp" class="p-space-md text-on-surface-variant font-body-sm text-body-sm">Select a row.</div>
+    </aside>
+  </div>
+</main>
+<script>
+document.addEventListener('tsr-ready', async (ev) => {
+  const { esc, int, fix, chip } = TSR, s = ev.detail, st = s.step4.rho;
+  const objs = await fetch('data/objects.json').then((r) => r.json());
+  const A = s.pixel_area_m2; let rows = [], sel = null;
+  document.getElementById('pills').innerHTML = chip('ok', '●', int(objs.length) + ' objects') + chip('ref', '■', 'ρ median (≥16 px) ' + fix(st.objects_ge_min_px_distribution.median, 3));
+  const q = (id) => document.getElementById(id);
+  const tag = (o) => o.unsupported_fraction > 0.5 ? chip('warn', '▲', 'UNSUPPORTED') : chip('ok', '●', 'OBSERVED');
+  function apply() {
+    const mp = +q('fpx').value || 1, mr = +q('frho').value || 0, sup = q('fsup').value, so = q('fsort').value;
+    rows = objs.filter((o) => o.px >= mp && (o.rho ?? 0) >= mr && (sup === 'all' || (sup === 'uns' ? o.unsupported_fraction > 0.5 : o.unsupported_fraction <= 0.5)));
+    const cmp = { area: (a, b) => b.px - a.px, rho: (a, b) => (b.rho ?? -1) - (a.rho ?? -1), unsup: (a, b) => b.unsupported_fraction - a.unsupported_fraction, id: (a, b) => a.id - b.id }[so];
+    rows.sort(cmp);
+    const shown = rows.slice(0, 400);
+    q('count').textContent = `${int(rows.length)} MATCH · showing ${int(shown.length)}`;
+    q('tbl').innerHTML = '<thead><tr><th>ID</th><th class="r">Size px</th><th class="r">Area m²</th><th class="r">ρ</th><th class="r">Unsupp. share</th><th>Majority</th><th class="r">Lat, Lon</th></tr></thead><tbody>' +
+      shown.map((o) => `<tr class="click ${sel && sel.id === o.id ? 'sel' : ''}" data-id="${o.id}"><td>OBJ-${String(o.id).padStart(4, '0')}</td><td class="r">${int(o.px)}</td><td class="r">${int(o.area_m2)}</td><td class="r">${o.rho == null ? '—' : fix(o.rho, 3)}</td><td class="r">${fix(o.unsupported_fraction * 100, 1)} %</td><td>${tag(o)}</td><td class="r">${o.lat.toFixed(5)}, ${o.lon.toFixed(5)}</td></tr>`).join('') + '</tbody>';
+    q('tbl').querySelectorAll('tr.click').forEach((tr) => tr.addEventListener('click', () => select(objs[+tr.dataset.id - 1])));
+    const tot = rows.reduce((a, o) => a + o.px, 0);
+    q('foot').innerHTML = `Filtered set: ${int(tot)} px = ${int(tot * A)} m² · ρ is a fraction of signal energy in [0, 1], <b>not a probability</b>. It is the share of an object’s change energy that survives 4×4 block-averaging, i.e. what a 10 m pixel could have measured. No object here has been checked against a field survey or a drone/HR image.`;
+  }
+  const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.src = src; });
+  const imgs = Promise.all([load('data/layers/post_sr_2p5m.png'), load('data/layers/post_10m.png'), load('data/layers/class_k2.png'), load('data/layers/pre_10m.png')]);
+  async function select(o) {
+    sel = o; q('oid').textContent = 'OBJ-' + String(o.id).padStart(4, '0');
+    q('tbl').querySelectorAll('tr').forEach((tr) => tr.classList.toggle('sel', +tr.dataset.id === o.id));
+    const [sr, p10, cl, pre] = await imgs;
+    const [x0, y0, x1, y1] = o.bbox, pad = Math.max(24, Math.round(Math.max(x1 - x0, y1 - y0) * 0.6)), sz = Math.max(x1 - x0, y1 - y0) + 2 * pad;
+    const cx = Math.round((x0 + x1) / 2), cy = Math.round((y0 + y1) / 2), sx = Math.max(0, Math.min(2048 - sz, cx - sz / 2)), sy = Math.max(0, Math.min(2560 - sz, cy - sz / 2));
+    const T = 104;
+    const panel = (src, w, label, over) => { const c = document.createElement('canvas'); c.width = c.height = T * 2; const g = c.getContext('2d'); g.imageSmoothingEnabled = false; const f = w / 2048;
+      g.drawImage(src, sx * f, sy * f, sz * f, sz * f, 0, 0, T * 2, T * 2); if (over) g.drawImage(cl, sx, sy, sz, sz, 0, 0, T * 2, T * 2);
+      const m = (T * 2) / sz; g.strokeStyle = '#1c201a'; g.lineWidth = 1.5; g.strokeRect((x0 - sx) * m, (y0 - sy) * m, (x1 - x0 + 1) * m, (y1 - y0 + 1) * m);
+      c.style.cssText = `width:${T}px;height:${T}px;image-rendering:pixelated`; const d = document.createElement('div'); d.append(c); d.insertAdjacentHTML('beforeend', `<div class="font-label-sm text-label-sm text-center text-on-surface-variant">${label}</div>`); return d; };
+    const wrap = document.createElement('div'); wrap.className = 'flex gap-space-xs justify-between mb-space-md';
+    wrap.append(panel(pre, 512, 'BEFORE 10 m'), panel(p10, 512, 'AFTER 10 m'), panel(sr, 2048, 'AFTER 2.5 m + gate', true));
+    const kv = (a, b) => `<div class="flex justify-between gap-2 py-0.5 border-b border-outline-variant"><span class="text-on-surface-variant">${a}</span><span class="num text-on-surface text-right">${b}</span></div>`;
+    q('insp').innerHTML = `<div class="flex items-center justify-between mb-space-sm"><span class="font-headline-md text-headline-md">OBJ-${String(o.id).padStart(4, '0')}</span>${tag(o)}</div>`;
+    q('insp').append(wrap);
+    q('insp').insertAdjacentHTML('beforeend', `
+      ${kv('Size', int(o.px) + ' px @ 2.5 m')}${kv('Area', int(o.area_m2) + ' m²')}${kv('Bounding box (px)', o.bbox.join(', '))}
+      ${kv('Centroid', o.lat.toFixed(5) + '°N, ' + o.lon.toFixed(5) + '°E')}
+      ${kv('ρ (measurement-visible energy)', o.rho == null ? '—' : fix(o.rho, 3))}
+      ${kv('OBSERVED share of object', fix((1 - o.unsupported_fraction) * 100, 1) + ' %')}${kv('UNSUPPORTED share of object', fix(o.unsupported_fraction * 100, 1) + ' %')}
+      <p class="mt-space-sm">${o.px < 16 ? 'Smaller than one 10 m pixel (16 px): ρ is not meaningful for objects this small and they are excluded from the headline distribution.' : o.rho >= 0.65 ? 'Most of this object’s change energy is visible at 10 m, so its outline is largely supported by measurement.' : 'A large part of this object’s change energy lives at sub-10 m scale, so its exact shape is more model than measurement.'}</p>
+      <div class="mt-space-md flex gap-space-sm"><a class="btn" href="map-workspace.html?x=${o.cx}&y=${o.cy}&z=4"><span class="material-symbols-outlined text-[14px]">center_focus_strong</span>Focus on map</a></div>`);
+  }
+  ['fpx', 'frho', 'fsup', 'fsort'].forEach((id) => q(id).addEventListener('input', apply));
+  q('csv').addEventListener('click', () => {
+    const csv = 'object,px_2p5m,area_m2,rho,unsupported_fraction,lat,lon\n' + rows.map((o) => [o.id, o.px, o.area_m2, o.rho ?? '', o.unsupported_fraction, o.lat, o.lon].join(',')).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'trustsr_objects_filtered.csv'; a.click();
+  });
+  apply(); select(rows[0]);
+});
+</script>
+</body></html>

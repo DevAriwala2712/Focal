@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TrustSR · Exports</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/app.css"/><script src="assets/shell.js"></script></head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="exports">
+<main id="app" class="min-h-screen">
+  <div class="min-h-12 bg-surface-container-high border-b border-outline-variant flex flex-wrap items-center justify-between px-space-md py-space-xs gap-space-sm">
+    <div><div class="font-headline-sm text-headline-sm font-bold text-primary">Artifact register &amp; exports</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant">Files exactly as the run wrote them, with size and SHA-256 computed when this site was built</div></div>
+    <div id="pills" class="flex gap-space-xs"></div>
+  </div>
+  <div class="p-space-lg space-y-space-lg max-w-[1400px]">
+    <div class="banner px-space-md py-space-sm font-label-md text-label-md">These hashes let you check that a file has not changed since the site was built. They are <b>not</b> signatures and this is <b>not</b> a legal chain of custody. Every raster is a GeoTIFF in EPSG:32643 on the run’s 10 m grid or its exact ×4 refinement.</div>
+    <div id="groups" class="space-y-space-lg"></div>
+    <section class="grid grid-cols-1 xl:grid-cols-2 gap-space-lg">
+      <div class="border border-outline-variant bg-surface-container-low">
+        <div class="px-space-md py-space-sm bg-surface-container border-b border-outline-variant flex justify-between"><span class="font-label-md text-label-md font-bold text-primary uppercase tracking-wider">Verify from the repository root</span><button id="cp" class="btn ghost"><span class="material-symbols-outlined text-[14px]">content_copy</span>Copy</button></div>
+        <div class="p-space-md"><pre class="code" id="snip"></pre><p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm">Prints <span class="num">OK</span> for each file whose bytes match. <a class="underline" href="data/SHA256SUMS">Download SHA256SUMS</a>.</p></div>
+      </div>
+      <div class="border border-outline-variant bg-surface-container-low">
+        <div class="px-space-md py-space-sm bg-surface-container border-b border-outline-variant"><span class="font-label-md text-label-md font-bold text-primary uppercase tracking-wider">Provenance</span></div>
+        <div id="prov" class="p-space-md space-y-1 font-label-sm text-label-sm"></div>
+      </div>
+    </section>
+  </div>
+</main>
+<script>
+document.addEventListener('tsr-ready', (ev) => {
+  const { esc, int, bytes, chip } = TSR, s = ev.detail, q = (id) => document.getElementById(id);
+  const total = s.exports.reduce((a, e) => a + e.bytes, 0);
+  q('pills').innerHTML = chip('ok', '●', s.exports.length + ' artifacts') + chip('ref', '■', bytes(total) + ' total');
+  const groups = [...new Set(s.exports.map((e) => e.group))];
+  q('groups').innerHTML = groups.map((g, gi) => {
+    const items = s.exports.filter((e) => e.group === g), sz = items.reduce((a, e) => a + e.bytes, 0);
+    return `<section class="border border-outline-variant bg-surface-container-low">
+      <div class="px-space-md py-space-sm bg-surface-container border-b border-outline-variant flex justify-between"><span class="font-label-md text-label-md font-bold text-primary uppercase tracking-wider">GRP 0${gi + 1} · ${esc(g)}</span><span class="font-label-sm text-label-sm text-on-surface-variant">${items.length} artifacts · ${bytes(sz)}</span></div>
+      <div class="overflow-x-auto"><table class="tbl"><thead><tr><th>File</th><th>Description</th><th class="r">Size</th><th>SHA-256</th><th></th></tr></thead><tbody>${items.map((e) => `<tr><td><b>${esc(e.name)}</b><div class="text-on-surface-variant text-[10px]">${esc(e.path)}</div></td><td style="max-width:420px">${esc(e.desc)}</td><td class="r">${bytes(e.bytes)}</td><td class="num text-[10px] break-all" style="max-width:260px">${e.sha256}</td><td><a class="btn ghost" href="/files/${encodeURI(e.path)}" download><span class="material-symbols-outlined text-[14px]">download</span>Get</a></td></tr>`).join('')}</tbody></table></div></section>`;
+  }).join('');
+  q('snip').textContent = '# macOS\nshasum -a 256 -c demo/web/data/SHA256SUMS\n# Linux\nsha256sum -c demo/web/data/SHA256SUMS\n\n# rebuild this register from the run outputs\n.venv/bin/python scripts/build_web_data.py';
+  q('cp').onclick = () => navigator.clipboard && navigator.clipboard.writeText(q('snip').textContent);
+  const kv = (a, b) => `<div class="flex justify-between gap-2 border-b border-outline-variant py-0.5"><span class="text-on-surface-variant">${a}</span><span class="text-right break-all">${b}</span></div>`;
+  q('prov').innerHTML = kv('Config SHA-256', s.config_sha256) + kv('Model', esc(s.labels.model)) + kv('Gate', esc(s.labels.k)) + kv('Comparison', esc(s.labels.comparison)) +
+    kv('Pre items', Object.entries(s.item_ids).filter(([d]) => d !== s.post_date).map(([d, i]) => i.join(', ')).join('<br>')) + kv('Post item', s.item_ids[s.post_date].join(', ')) + kv('Built from', esc(s.built_from));
+});
+</script>
+</body></html>
