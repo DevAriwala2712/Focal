@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 
 from experiments import f13_a0_exchangeability as A0
+from experiments import f13_a3_sr_swap as A3
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -377,3 +378,104 @@ class TestA0VerdictRule:
 
     def test_a_ci_endpoint_exactly_at_zero_counts_as_including_zero(self):
         assert A0.a0_verdict((0.0, 0.03), (-0.01, 0.02)) == 'FALSE'
+
+
+# ================================================================ A3: SR ranking vs bilinear ranking ================================================================
+
+class TestPartialBlockMask:
+    def test_marks_only_blocks_with_0_lt_n_lt_16_expanded_to_2p5m(self):
+        n = np.array([[0, 16], [5, 16]])
+        m = A3.partial_block_mask(n)
+        assert m.shape == (8, 8)
+        expect = np.zeros((8, 8), bool); expect[4:8, 0:4] = True
+        assert np.array_equal(m, expect)
+
+    def test_n_of_one_and_fifteen_are_partial(self):
+        n = np.array([[1, 15]])
+        assert A3.partial_block_mask(n).all()
+
+
+class TestIoU:
+    def test_known_value_and_counts(self):
+        a = np.zeros((4, 4), bool); a[0, :] = True; a[1, :2] = True          # 6 px
+        b = np.zeros((4, 4), bool); b[0, :] = True; b[2, :3] = True          # 7 px, 4 shared
+        out = A3.iou(a, b, np.ones((4, 4), bool))
+        assert (out['intersection'], out['union']) == (4, 9)
+        assert out['iou'] == pytest.approx(4 / 9)
+
+    def test_domain_restricts_both_sets(self):
+        a = np.ones((2, 2), bool); b = np.ones((2, 2), bool)
+        dom = np.array([[True, False], [False, False]])
+        assert A3.iou(a, b, dom)['union'] == 1
+
+    def test_empty_union_is_nan_not_one(self):
+        z = np.zeros((2, 2), bool)
+        assert np.isnan(A3.iou(z, z, np.ones((2, 2), bool))['iou'])
+
+
+class TestBlockCountsAndMovement:
+    def test_equal_counts_pass_and_unequal_raise(self):
+        a = np.zeros((8, 8), bool); a[0, 0] = a[0, 1] = True
+        b = np.zeros((8, 8), bool); b[3, 3] = b[2, 2] = True                  # same block (0,0), same count, other pixels
+        A3.assert_equal_block_counts(a, b)
+        b[0, 0] = True
+        with pytest.raises(AssertionError):
+            A3.assert_equal_block_counts(a, b)
+
+    def test_moved_fraction(self):
+        a = np.zeros((4, 4), bool); a[0, 0] = a[0, 1] = True
+        assert A3.moved_fraction(a, a) == 0.0
+        b = np.zeros((4, 4), bool); b[3, 3] = b[3, 2] = True
+        assert A3.moved_fraction(a, b) == 1.0
+        c = np.zeros((4, 4), bool); c[0, 0] = c[3, 3] = True
+        assert A3.moved_fraction(a, c) == 0.5
+
+    def test_moved_fraction_of_empty_set_is_nan(self):
+        z = np.zeros((4, 4), bool)
+        assert np.isnan(A3.moved_fraction(z, z))
+
+
+class TestCentredBilinear:
+    def test_impulse_response_is_symmetric_about_the_block_centre(self):
+        a = np.zeros((6, 6)); a[2, 2] = 1.0
+        up = A3.centred_bilinear_upsample(a)
+        assert up.shape == (24, 24)
+        # block (2,2) covers sub-pixels 8..11; its centre lies between 9 and 10
+        assert up[9, 9] == pytest.approx(up[10, 10]) == pytest.approx(up[9, 10])
+        assert up[9, 9] == up.max()
+
+    def test_constant_field_stays_constant(self):
+        assert np.allclose(A3.centred_bilinear_upsample(np.full((5, 7), 0.3)), 0.3)
+
+    def test_gate_v2_bilinear_is_not_centred(self):
+        # documents WHY a centred arm is reported beside the prompt-specified gate_v2.bilinear_upsample:
+        # that function stretches the grid so a block's peak lands on a single sub-pixel (shifted half a sub-pixel)
+        from trustsr.gate_v2 import bilinear_upsample
+        a = np.zeros((6, 6)); a[2, 2] = 1.0
+        up = bilinear_upsample(a)
+        assert up[9, 9] != pytest.approx(up[10, 10])
+
+
+class TestBilinearRankingField:
+    def test_drop_is_pre_mean_minus_post_with_invalid_filled_by_zero(self):
+        pre = [np.full((4, 4), 0.8), np.full((4, 4), 0.6)]
+        post = np.full((4, 4), 0.5)
+        valid = np.ones((4, 4), bool); valid[0, 0] = False
+        d = A3.ndvi_drop_10m(pre, post, valid)
+        assert d[1, 1] == pytest.approx(0.2) and d[0, 0] == 0.0
+
+    def test_nan_ndvi_is_zero_filled(self):
+        pre = [np.full((2, 2), np.nan)]; post = np.full((2, 2), 0.5)
+        assert np.all(A3.ndvi_drop_10m(pre, post, np.ones((2, 2), bool)) == 0.0)
+
+
+class TestA3VerdictRule:
+    """yaml experiments.A3.keep_rule: TRUE IoU < 0.90; FALSE IoU >= 0.95; INCONCLUSIVE in between."""
+
+    def test_regions(self):
+        assert A3.a3_verdict(0.5) == 'TRUE'
+        assert A3.a3_verdict(0.8999) == 'TRUE'
+        assert A3.a3_verdict(0.90) == 'INCONCLUSIVE'
+        assert A3.a3_verdict(0.9499) == 'INCONCLUSIVE'
+        assert A3.a3_verdict(0.95) == 'FALSE'
+        assert A3.a3_verdict(1.0) == 'FALSE'

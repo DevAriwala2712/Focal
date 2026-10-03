@@ -1,0 +1,256 @@
+{
+  "evidence": "real",
+  "experiment_id": "A3",
+  "reproduction_gate": {
+    "class_map_identical_to_f7_state": true,
+    "f_effective_identical": true,
+    "nodata_identical": true,
+    "class_counts": {
+      "NO_CHANGE": 4733514,
+      "CORE": 17648,
+      "ALLOCATED": 239122,
+      "UNSUPPORTED": 46640,
+      "NO_DATA": 205956
+    },
+    "class_counts_f7_json": {
+      "NO_CHANGE": 4733514,
+      "CORE": 17648,
+      "ALLOCATED": 239122,
+      "UNSUPPORTED": 46640,
+      "NO_DATA": 205956
+    },
+    "class_counts_match": true,
+    "tau": 3.8891176504391876,
+    "tau_source": "experiments/results/f2.json tau.value (A0 regenerated it bit-identically)",
+    "n_class_map_px_differing": 0
+  },
+  "b9_guard": {
+    "bilinear_gate_v2_function": "accepted by assert_sr_score_is_not_replicated",
+    "bilinear_centred_sensitivity": "accepted by assert_sr_score_is_not_replicated"
+  },
+  "status": "PASS",
+  "verdict": "TRUE",
+  "rule_applied": {
+    "TRUE": "IoU < 0.90 (point estimate)",
+    "FALSE": "IoU >= 0.95 (point estimate)",
+    "INCONCLUSIVE": "0.90 <= IoU < 0.95",
+    "on_FALSE": "SR is decorative in production"
+  },
+  "preregistration": {
+    "sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+    "commit": "0978e8a924e9b104c50aac2a1db1c00a8d220718",
+    "experiment": "A3"
+  },
+  "verdict_basis": "whole-map IoU of CORE|ALLOCATED over valid 2.5 m px, arm bilinear_gate_v2_function, point estimate (yaml metrics.primary)",
+  "comparisons": {
+    "bilinear_gate_v2_function": {
+      "whole_map": {
+        "iou": 0.4901630781730602,
+        "intersection": 168920,
+        "union": 344620,
+        "n_a": 256770,
+        "n_b": 256770,
+        "ci": {
+          "estimate": 0.4901630781730602,
+          "lo": 0.4497479971805528,
+          "hi": 0.5300730996316598,
+          "numerator": 168920.0,
+          "denominator": 344620.0,
+          "blocks": 291,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "bootstrap_unit": "128 px (2.5 m) tiles with a non-empty union"
+      },
+      "partial_blocks_only": {
+        "iou": 0.46264511945977027,
+        "intersection": 151272,
+        "union": 326972,
+        "n_a": 239122,
+        "n_b": 239122,
+        "ci": {
+          "estimate": 0.46264511945977027,
+          "lo": 0.4306730655481101,
+          "hi": 0.4955161610076952,
+          "numerator": 151272.0,
+          "denominator": 326972.0,
+          "blocks": 291,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "bootstrap_unit": "128 px (2.5 m) tiles with a non-empty union"
+      },
+      "whole_map_inflation": {
+        "full_block_px": 17648,
+        "share_of_flagged_px": 0.06873077072866768,
+        "whole_minus_partial_iou": 0.027517958713289936
+      },
+      "block_census": {
+        "blocks_total": 327680,
+        "blocks_empty": 246131,
+        "blocks_full": 1103,
+        "blocks_partial": 80446,
+        "allocated_px_total": 256770,
+        "allocated_px_in_partial_blocks": 239122
+      },
+      "random_ranking_reference_partial_blocks": {
+        "expected_iou": 0.20438583264367266,
+        "definition": "analytic expectation if each partial block took a uniformly random subset of its n sub-pixels in BOTH maps: sum(n^2/16) / sum(2n - n^2/16). Context only; not a pre-registered comparator."
+      },
+      "moved": {
+        "fraction_of_all_allocated_px": 0.3421349846165829,
+        "fraction_of_allocated_px_in_partial_blocks": 0.36738568596783233,
+        "px_moved": 87850,
+        "allocated_px": 256770
+      },
+      "mapped_area": {
+        "px_a": 256770,
+        "px_b": 256770,
+        "difference_px": 0,
+        "difference_km2": 0.0,
+        "note": "zero by construction (round(16 f) sub-pixels per block in both arms); a plumbing check, not a finding"
+      }
+    },
+    "bilinear_centred_sensitivity": {
+      "whole_map": {
+        "iou": 0.58421278315405,
+        "intersection": 189379,
+        "union": 324161,
+        "n_a": 256770,
+        "n_b": 256770,
+        "ci": {
+          "estimate": 0.58421278315405,
+          "lo": 0.5500832692554867,
+          "hi": 0.6169605594165909,
+          "numerator": 189379.0,
+          "denominator": 324161.0,
+          "blocks": 291,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "bootstrap_unit": "128 px (2.5 m) tiles with a non-empty union"
+      },
+      "partial_blocks_only": {
+        "iou": 0.5602731368653205,
+        "intersection": 171731,
+        "union": 306513,
+        "n_a": 239122,
+        "n_b": 239122,
+        "ci": {
+          "estimate": 0.5602731368653205,
+          "lo": 0.5333140139435236,
+          "hi": 0.5864346992750371,
+          "numerator": 171731.0,
+          "denominator": 306513.0,
+          "blocks": 291,
+          "replicates": 2000,
+          "ci": 0.95,
+          "seed": 2024
+        },
+        "bootstrap_unit": "128 px (2.5 m) tiles with a non-empty union"
+      },
+      "whole_map_inflation": {
+        "full_block_px": 17648,
+        "share_of_flagged_px": 0.06873077072866768,
+        "whole_minus_partial_iou": 0.023939646288729466
+      },
+      "block_census": {
+        "blocks_total": 327680,
+        "blocks_empty": 246131,
+        "blocks_full": 1103,
+        "blocks_partial": 80446,
+        "allocated_px_total": 256770,
+        "allocated_px_in_partial_blocks": 239122
+      },
+      "random_ranking_reference_partial_blocks": {
+        "expected_iou": 0.20438583264367266,
+        "definition": "analytic expectation if each partial block took a uniformly random subset of its n sub-pixels in BOTH maps: sum(n^2/16) / sum(2n - n^2/16). Context only; not a pre-registered comparator."
+      },
+      "moved": {
+        "fraction_of_all_allocated_px": 0.2624566732873778,
+        "fraction_of_allocated_px_in_partial_blocks": 0.2818268498925235,
+        "px_moved": 67391,
+        "allocated_px": 256770
+      },
+      "mapped_area": {
+        "px_a": 256770,
+        "px_b": 256770,
+        "difference_px": 0,
+        "difference_km2": 0.0,
+        "note": "zero by construction (round(16 f) sub-pixels per block in both arms); a plumbing check, not a finding"
+      }
+    }
+  },
+  "measurements": [
+    {
+      "name": "IoU_SR_vs_bilinear_gate_v2_function_whole_map",
+      "estimate": 0.4901630781730602,
+      "numerator": 168920,
+      "denominator": 344620,
+      "lo": 0.4497479971805528,
+      "hi": 0.5300730996316598,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "IoU of CORE|ALLOCATED px"
+    },
+    {
+      "name": "IoU_SR_vs_bilinear_gate_v2_function_partial_blocks_only",
+      "estimate": 0.46264511945977027,
+      "numerator": 151272,
+      "denominator": 326972,
+      "lo": 0.4306730655481101,
+      "hi": 0.4955161610076952,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "IoU of CORE|ALLOCATED px"
+    },
+    {
+      "name": "IoU_SR_vs_bilinear_centred_sensitivity_whole_map",
+      "estimate": 0.58421278315405,
+      "numerator": 189379,
+      "denominator": 324161,
+      "lo": 0.5500832692554867,
+      "hi": 0.6169605594165909,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "IoU of CORE|ALLOCATED px"
+    },
+    {
+      "name": "IoU_SR_vs_bilinear_centred_sensitivity_partial_blocks_only",
+      "estimate": 0.5602731368653205,
+      "numerator": 171731,
+      "denominator": 306513,
+      "lo": 0.5333140139435236,
+      "hi": 0.5864346992750371,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "IoU of CORE|ALLOCATED px"
+    }
+  ],
+  "limitations": [
+    "Both maps come from gate v2, which FAILED its FAR keep rule (window FAR 0.0652 > 0.05, f2.json); A3 measures agreement between two rankings inside that gate, not accuracy against any truth (none exists for Wayanad).",
+    "The whole-map IoU the yaml uses is computed on flagged px only, so empty blocks contribute nothing; full blocks (n = 16) are identical under any ranking and do add to both numerator and denominator, so it is inflated by that share (full-block share of flagged px is in comparisons.*.block_census). The partial-block IoU (0 < n < 16) is reported beside it and is the informative number; it does not override the yaml verdict.",
+    "gate_v2.bilinear_upsample (named by the prompt) maps sub-pixel j to source coordinate j*(h-1)/(4h-1), which stretches the grid and shifts the field by up to ~1.5 sub-pixels toward the lower right; a pixel-centre-aligned bilinear arm is reported as a sensitivity. The verdict uses the prompt-specified function.",
+    "The bilinear field is the 10 m NDVI drop of the raw (un-normalised) bands, which is what the SR field is built from; invalid pixels are filled with 0 (F5 precedent), which only touches blocks adjacent to NO_DATA.",
+    "The mapped-area difference is zero by construction (block-sum); it is not evidence.",
+    "SR is the cached real tiled SEN2SR-lite dihedral stack (F7 verified it against a fresh run); no SR inference was run here."
+  ],
+  "experiment": "f13_a3",
+  "started_utc": "2026-10-03T06:29:11.080520+00:00",
+  "finished_utc": "2026-10-03T06:29:13.104746+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}
