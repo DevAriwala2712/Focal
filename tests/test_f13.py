@@ -16,6 +16,7 @@ from experiments import f13_a3_sr_swap as A3
 from experiments import f13_a4_degrade20m as A4
 from experiments import f13_a1_sr_vs_interpolation as A1
 from experiments import f13_a2_calibrated_fraction as A2
+from experiments import f13_b2_inventory_width as B2
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -781,3 +782,227 @@ class TestA2VerdictRule:
     def test_inconclusive_between(self):
         assert A2.a2_verdict(0.18, {'estimate': 0.02, 'lo': 0.01, 'hi': 0.03}) == 'INCONCLUSIVE'
         assert A2.a2_verdict(0.10, {'estimate': 0.01, 'lo': -0.001, 'hi': 0.02}) == 'INCONCLUSIVE'
+
+
+# ================================================================ PASS 3 — B2: inventory width share ================================================================
+
+def _gpkg_blob(geom, srs_id=4326, envelope=False):
+    import struct
+    from shapely import wkb
+    flags = 0b00000001 | (0b0010 if envelope else 0)             # little-endian; envelope indicator 1 = [minx,maxx,miny,maxy]
+    head = b'GP' + bytes([0, flags]) + struct.pack('<i', srs_id)
+    if envelope:
+        minx, miny, maxx, maxy = geom.bounds
+        head += struct.pack('<4d', minx, maxx, miny, maxy)
+    return head + wkb.dumps(geom, hex=False, byte_order=1)
+
+
+def _make_gpkg(path, geoms, table='colombia_landslides', srs_id=4326):
+    import sqlite3
+    con = sqlite3.connect(path)
+    con.execute('CREATE TABLE gpkg_contents (table_name TEXT, data_type TEXT, srs_id INTEGER, min_x REAL, min_y REAL, max_x REAL, max_y REAL)')
+    con.execute(f'CREATE TABLE {table} (fid INTEGER PRIMARY KEY, geom BLOB)')
+    con.execute('CREATE TABLE gpkg_geometry_columns (table_name TEXT, column_name TEXT, geometry_type_name TEXT, srs_id INTEGER)')
+    con.execute('INSERT INTO gpkg_contents VALUES (?,?,?,?,?,?,?)', (table, 'features', srs_id, 0, 0, 1, 1))
+    con.execute('INSERT INTO gpkg_geometry_columns VALUES (?,?,?,?)', (table, 'geom', 'MULTIPOLYGON', srs_id))
+    for i, g in enumerate(geoms):
+        con.execute(f'INSERT INTO {table} (fid, geom) VALUES (?,?)', (i + 1, _gpkg_blob(g, srs_id, envelope=(i % 2 == 0))))
+    con.commit(); con.close()
+
+
+class TestGpkgReader:
+    def test_parses_blobs_with_and_without_envelope(self):
+        from shapely.geometry import Polygon
+        poly = Polygon([(0, 0), (4, 0), (4, 3), (0, 3)])
+        for env in (False, True):
+            g = B2.parse_gpkg_geometry(_gpkg_blob(poly, envelope=env))
+            assert g.equals(poly) and g.area == 12.0
+
+    def test_rejects_an_empty_geometry_blob(self):
+        from shapely.geometry import Point
+        blob = bytearray(_gpkg_blob(Point(1, 2)))
+        blob[3] |= 0b00010000                                          # the 'empty' flag
+        with pytest.raises(ValueError):
+            B2.parse_gpkg_geometry(bytes(blob))
+
+    def test_rejects_non_gpkg_bytes(self):
+        with pytest.raises(ValueError):
+            B2.parse_gpkg_geometry(b'XX\x00\x01\x00\x00\x00\x00')
+
+    def test_reads_every_feature_with_its_srs(self, tmp_path):
+        from shapely.geometry import Polygon, MultiPolygon
+        geoms = [Polygon([(0, 0), (1, 0), (1, 1)]), MultiPolygon([Polygon([(5, 5), (6, 5), (6, 6)])]), Polygon([(9, 9), (10, 9), (10, 10)])]
+        p = tmp_path / 'inv.gpkg'; _make_gpkg(p, geoms)
+        out = B2.read_inventory(p, 'colombia_landslides')
+        assert out['srs_id'] == 4326 and len(out['geometries']) == 3
+        assert out['geometries'][0].equals(geoms[0])
+
+    def test_verify_inventory_reports_every_failed_check(self, tmp_path):
+        import hashlib
+        from shapely.geometry import Polygon
+        p = tmp_path / 'inv.gpkg'; _make_gpkg(p, [Polygon([(0, 0), (1, 0), (1, 1)])])
+        good = hashlib.sha256(p.read_bytes()).hexdigest()
+        assert B2.verify_inventory(p, good, 'colombia_landslides', 1)['ok'] is True
+        bad = B2.verify_inventory(p, '0' * 64, 'colombia_landslides', 838)
+        assert bad['ok'] is False and bad['checks']['sha256'] is False and bad['checks']['feature_count'] is False
+
+
+class TestNestedGrid:
+    def test_snapped_to_20m_and_nested_8_and_4(self):
+        g = B2.nested_grid((3.0, 5.0, 47.0, 61.0))
+        assert (g['x0'], g['y0']) == (0.0, 80.0)
+        assert g['shape'] == {2.5: (32, 24), 10.0: (8, 6), 20.0: (4, 3)}
+        assert g['transform'][2.5].a == 2.5 and g['transform'][2.5].e == -2.5 and g['transform'][2.5].c == g['x0']
+        assert g['transform'][20.0].c == g['x0'] and g['transform'][20.0].f == g['y0']
+
+    def test_origin_is_on_the_20m_lattice_even_when_a_10m_snap_would_not_be(self):
+        for b in [(13.0, 5.0, 47.0, 61.0), (-27.0, -9.0, 41.2, 19.9), (1234567.0 + 3, 2.0, 1234600.0, 31.0)]:
+            g = B2.nested_grid(b)
+            assert g['x0'] % 20 == 0 and g['y0'] % 20 == 0
+            assert g['x0'] <= b[0] and b[0] - g['x0'] < 20
+
+    def test_covers_the_bounds(self):
+        g = B2.nested_grid((-33.3, -7.7, 41.2, 19.9))
+        assert g['x0'] <= -33.3 and g['y0'] >= 19.9
+        assert g['x0'] + g['shape'][20.0][1] * 20 >= 41.2 and g['y0'] - g['shape'][20.0][0] * 20 <= -7.7
+
+
+class TestRasterise:
+    def test_pixel_centre_rule_on_nested_grids(self):
+        from shapely.geometry import box
+        g = B2.nested_grid((0.0, 0.0, 40.0, 40.0))
+        r = B2.rasterise([box(1, 21, 14, 34)], g)                    # a 13 m square, away from every pixel-centre boundary
+        assert int(r[2.5].sum()) == 36 and int(r[10.0].sum()) == 1 and int(r[20.0].sum()) == 1
+
+    def test_a_polygon_that_misses_every_pixel_centre_burns_nothing_at_that_resolution(self):
+        from shapely.geometry import box
+        g = B2.nested_grid((0.0, 0.0, 40.0, 40.0))
+        r = B2.rasterise([box(15, 21, 25, 31)], g)                   # 10 m square straddling two 20 m cells, centres at x = 10 and 30
+        assert int(r[20.0].sum()) == 0                               # all_touched=True would burn 2-4 px
+        assert int(r[2.5].sum()) == 16
+
+    def test_rasterisation_is_direct_not_a_downsample(self):
+        from shapely.geometry import box
+        g = B2.nested_grid((0.0, 0.0, 40.0, 40.0))
+        r = B2.rasterise([box(1, 21, 14, 34)], g)
+        coarse_from_fine = r[2.5].reshape(4, 4, 4, 4).any(axis=(1, 3))        # 16 x 16 px at 2.5 m -> 4 x 4 at 10 m
+        assert int(coarse_from_fine.sum()) > int(r[10.0].sum())
+
+
+class TestRasterIoU:
+    def test_nearest_upsampled_coarse_vs_fine(self):
+        fine = np.zeros((8, 8), bool); fine[0:4, 0:4] = True; fine[0:2, 4:6] = True       # 16 + 4 px
+        coarse = np.zeros((2, 2), bool); coarse[0, 0] = True                              # upsamples to the 4x4 block only
+        out = B2.raster_iou(coarse, fine, 4)
+        assert (out['intersection'], out['union']) == (16, 20) and out['iou'] == pytest.approx(0.8)
+
+    def test_identical_rasters_give_one(self):
+        a = np.zeros((4, 4), bool); a[1:3, 1:3] = True
+        assert B2.raster_iou(a, a, 1)['iou'] == 1.0
+
+
+class TestLocalThickness:
+    """Per-pixel local thickness = the diameter of the largest inscribed disk that covers the pixel, in pixels
+    (2 r - 1 with r the Euclidean distance to the background, as trustsr.alloc.component_width_m)."""
+
+    def test_strip_of_known_width_has_that_thickness_everywhere(self):
+        for w in (3, 7, 12):
+            m = np.zeros((40, 80), bool); m[10:10 + w, 5:75] = True
+            t = B2.local_thickness_px(m)
+            inner = t[10:10 + w, 15:65]
+            assert np.all(inner >= w - 1) and np.all(inner <= w + 1)            # +-1 px is the digital-disk ambiguity
+            assert t[~m].max() == 0
+
+    def test_odd_strip_widths_are_exact(self):
+        m = np.zeros((30, 60), bool); m[10:17, 5:55] = True                     # 7 px wide
+        assert np.all(B2.local_thickness_px(m)[10:17, 15:45] == 7.0)
+
+    def test_disk_thickness_is_its_diameter(self):
+        yy, xx = np.mgrid[-30:31, -30:31]
+        m = (yy ** 2 + xx ** 2) <= 20 ** 2
+        t = B2.local_thickness_px(m)
+        assert 39 <= t[30, 30] <= 41 and np.all(t[m] >= 39 - 1)                 # every pixel lies under the central disk
+
+    def test_l_shape_arms_have_the_arm_width_and_the_corner_is_at_most_a_bit_wider(self):
+        w = 9
+        m = np.zeros((60, 60), bool); m[40:40 + w, 5:55] = True; m[5:50, 5:5 + w] = True
+        t = B2.local_thickness_px(m)
+        assert t[44, 40] == w and t[20, 9] == w                                  # mid-arm pixels
+        assert w <= t[m].max() <= 1.25 * w + 1                                   # the corner junction admits a slightly larger disk
+
+    def test_matches_brute_force_on_random_blobs(self):
+        from scipy import ndimage
+        rng = np.random.default_rng(0)
+        for _ in range(3):
+            m = np.pad(ndimage.gaussian_filter(rng.random((20, 20)), 2) > 0.5, 3)   # blobs sit inside a background margin, as in the real raster
+            r = ndimage.distance_transform_edt(m)
+            brute = np.zeros(m.shape)
+            for qy, qx in zip(*np.nonzero(m)):
+                best = 0.0
+                for py, px in zip(*np.nonzero(m)):
+                    if np.hypot(qy - py, qx - px) <= r[py, px] + 1e-9:
+                        best = max(best, 2 * r[py, px] - 1)
+                brute[qy, qx] = best
+            assert np.allclose(B2.local_thickness_px(m), brute)
+
+    def test_empty_mask(self):
+        assert B2.local_thickness_px(np.zeros((5, 5), bool)).max() == 0
+
+
+class TestThinShare:
+    def test_area_share_below_threshold_in_metres(self):
+        thick = np.array([[0, 7, 7, 30], [0, 0, 30, 30]], float)            # px thickness
+        mask = thick > 0
+        s = B2.thin_share(thick, mask, px_m=2.5, threshold_m=20.0)          # 7 px = 17.5 m (<20), 30 px = 75 m
+        assert (s['thin_px'], s['area_px']) == (2, 5) and s['share'] == pytest.approx(0.4)
+
+    def test_threshold_is_strict(self):
+        thick = np.array([[8.0, 8.0]]); mask = thick > 0                    # exactly 20 m is not "< 20 m"
+        assert B2.thin_share(thick, mask, 2.5, 20.0)['thin_px'] == 0
+
+
+class TestB2VerdictRule:
+    """yaml B2.keep_rule: TRUE = thin share >= 0.30 AND IoU(10 m, 2.5 m) < 0.80; FALSE = share < 0.10 AND IoU >= 0.85."""
+
+    def test_regions(self):
+        assert B2.b2_verdict(0.30, 0.7999) == 'TRUE'
+        assert B2.b2_verdict(0.30, 0.80) == 'INCONCLUSIVE'
+        assert B2.b2_verdict(0.2999, 0.5) == 'INCONCLUSIVE'
+        assert B2.b2_verdict(0.0999, 0.85) == 'FALSE'
+        assert B2.b2_verdict(0.10, 0.9) == 'INCONCLUSIVE'
+        assert B2.b2_verdict(0.05, 0.8499) == 'INCONCLUSIVE'
+
+
+
+
+class TestB2AnalyseEndToEnd:
+    """A synthetic inventory with a hand-derived answer. Polygon edges are 1 m inside pixel-centre boundaries so the
+    pixel-centre rule is unambiguous:  strip x 1001..1011, y 5001..5401 (10 x 400 m = 4 x 160 px at 2.5 m = 640 px, thickness
+    4 px = 10 m < 20 m);  square x 2001..2199, y 5001..5199 (198 m = 80 x 80 px at 2.5 m = 6400 px, thick)."""
+
+    def _polys(self):
+        from shapely.geometry import box
+        return [box(1001, 5001, 1011, 5401), box(2001, 5001, 2199, 5199)]
+
+    def test_area_share_and_rasterisation_iou_match_the_geometry(self):
+        out = B2.analyse(self._polys(), {'replicates': 200, 'seed': 2024})
+        s = out['shares']['local_thickness']
+        assert s['area_px'] == 640 + 6400
+        # the strip is entirely thin; the square's four sharp corner tips are also covered only by small inscribed disks, so a
+        # few corner pixels are thin too (local thickness is a property of the covering disk, not of the polygon's side length)
+        assert 640 <= s['thin_px'] <= 640 + 4 * 6
+        assert s['share'] == pytest.approx(640 / 7040, abs=0.004)
+        # IoU is between RASTERS (nearest-upsampled coarse vs the 2.5 m raster), not against the polygon. The 2.5 m raster covers the
+        # strip at x 1000..1010 (4 px) and the square at 2000..2200: 4000 + 40000 m2. The 10 m raster covers exactly the same cells
+        # (IoU 1); the 20 m raster widens the strip to 1000..1020: 8000 + 40000 m2, so IoU = 44000 / 48000.
+        assert out['rasterisation_iou']['10.0']['iou'] == pytest.approx(1.0)
+        assert out['rasterisation_iou']['20.0']['iou'] == pytest.approx(44000 / 48000)
+        assert out['rasterisation_iou']['20.0']['iou'] < out['rasterisation_iou']['10.0']['iou']
+        assert out['connected_components_2p5m'] == 2
+
+    def test_a_polygon_thinner_than_a_coarse_pixel_is_lost_at_that_resolution(self):
+        from shapely.geometry import box
+        out = B2.analyse([box(1001, 5001, 1008, 5201)], {'replicates': 100, 'seed': 2024})     # 7 m x 200 m
+        assert out['rasterisation_iou']['20.0']['iou'] == 0.0           # no 20 m pixel centre falls inside: the feature is lost
+        assert out['rasterisation_iou']['10.0']['iou'] > 0.0
+        assert out['shares']['local_thickness']['share'] == 1.0

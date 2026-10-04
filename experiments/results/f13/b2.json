@@ -1,0 +1,50 @@
+{
+  "evidence": "real",
+  "experiment_id": "B2",
+  "inventory_check": {
+    "path": "data/risk-cache/labels/colombia.gpkg",
+    "ok": false,
+    "checks": {
+      "exists": false
+    },
+    "expected_sha256": "c55da5d5d5c72dd6eed2ad1173ce261a3b1eb4080b17b04ba7a49e1a2e04d29f",
+    "expected_table": "colombia_landslides",
+    "expected_features": 838
+  },
+  "search": {
+    "searched_roots": [
+      "/Users/devariwala/Desktop/Focal",
+      "/Users/devariwala/Desktop",
+      "/Users/devariwala"
+    ],
+    "expected_path": "/Users/devariwala/Desktop/Focal/data/risk-cache/labels/colombia.gpkg",
+    "gpkg_files_found": []
+  },
+  "status": "BLOCKED",
+  "verdict": "NOT_RUN",
+  "reason": "Colombia inventory not usable at data/risk-cache/labels/colombia.gpkg (checks: {'exists': False}); never downloaded. Searched ['/Users/devariwala/Desktop/Focal', '/Users/devariwala/Desktop', '/Users/devariwala'] (repo tree recursively, parent and home to depth 3, Library excluded): 0 .gpkg files found []. To run B2 place the file whose sha256 is c55da5d5...e04d29f at data/risk-cache/labels/colombia.gpkg.",
+  "interpretations": [],
+  "reproduction_check": null,
+  "measurements": [],
+  "limitations": [],
+  "fetch_log": {
+    "network": "none (B2 is labels only; the GeoPackage is never downloaded)",
+    "bytes_received": 0,
+    "items": []
+  },
+  "experiment": "f13_b2",
+  "started_utc": "2026-10-04T19:10:41.546877+00:00",
+  "finished_utc": "2026-10-04T19:10:41.917942+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}
