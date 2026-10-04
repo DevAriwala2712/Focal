@@ -18,6 +18,7 @@ from experiments import f13_a1_sr_vs_interpolation as A1
 from experiments import f13_a2_calibrated_fraction as A2
 from experiments import f13_b2_inventory_width as B2
 from experiments import f13_b1_cross_season_placebo as B1
+from experiments import f13_b3_harmonic_season as B3
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1048,6 +1049,187 @@ class TestB2VerdictRule:
         assert B2.b2_verdict(0.05, 0.8499) == 'INCONCLUSIVE'
 
 
+# ================================================================ PASS 3 — B3: harmonic seasonal model ================================================================
+
+class TestProcessingBaselineOffset:
+    @pytest.mark.parametrize('baseline,offset', [('02.12', 0.0), ('02.13', 0.0), ('03.00', 0.0), ('03.01', 0.0),
+                                                 ('04.00', -1000.0), ('04.01', -1000.0), ('05.00', -1000.0), ('05.11', -1000.0)])
+    def test_offset_by_baseline(self, baseline, offset):
+        assert B3.boa_offset(baseline) == offset
+
+    def test_unparseable_baseline_raises_instead_of_guessing(self):
+        for bad in (None, '', 'N0400', '4'):
+            with pytest.raises(ValueError):
+                B3.boa_offset(bad)
+
+    def test_reflectance_applies_the_item_offset_and_clips_at_zero(self):
+        dn = np.array([1000, 1500, 5000, 200], dtype=np.uint16)
+        assert np.allclose(B3.item_reflectance(dn, '04.00'), [0.0, 0.05, 0.4, 0.0])
+        assert np.allclose(B3.item_reflectance(dn, '03.00'), [0.1, 0.15, 0.5, 0.02])
+
+
+class TestNoStepAtTheBaselineChange:
+    """A stable surface (true reflectance B04 = 0.05, B08 = 0.40, NDVI 0.7778) observed before and after 2022-01-25."""
+    RED, NIR = 0.05, 0.40
+
+    def _series(self):
+        dates = ['2021-12-20', '2021-12-30', '2022-01-10', '2022-01-20', '2022-01-30', '2022-02-09', '2022-02-19']
+        out = []
+        for d in dates:
+            baseline = '04.00' if d >= '2022-01-25' else '03.01'
+            add = 1000 if baseline == '04.00' else 0                         # what ESA wrote into the DN
+            out.append({'date': d, 'baseline': baseline,
+                        'dn_red': np.array([self.RED * 10000 + add]), 'dn_nir': np.array([self.NIR * 10000 + add])})
+        return out
+
+    def test_corrected_ndvi_is_flat_through_2022_01_25(self):
+        nd = np.array([B3.item_ndvi(i['dn_red'], i['dn_nir'], i['baseline'], 0.05)[0] for i in self._series()])
+        assert np.allclose(nd, (self.NIR - self.RED) / (self.NIR + self.RED))
+        assert np.ptp(nd) < 1e-9
+
+    def test_the_same_series_without_the_correction_has_a_large_step(self):
+        # this is the trap the correction exists for: treating every item as baseline < 04.00
+        nd = np.array([B3.item_ndvi(i['dn_red'], i['dn_nir'], '03.01', 0.05)[0] for i in self._series()])
+        before, after = nd[:4].mean(), nd[4:].mean()
+        assert before - after > 0.2
+
+    def test_an_acquisition_on_the_change_date_belongs_to_the_after_side(self):
+        r = B3.step_report(['2022-01-24', '2022-01-25', '2022-01-26'], np.array([0.7, 0.4, 0.4]), '2022-01-25', days=30)
+        assert (r['n_before'], r['n_after']) == (1, 2) and r['step'] == pytest.approx(-0.3)
+
+    def test_step_report_compares_medians_in_the_30_days_either_side(self):
+        s = self._series()
+        dates = [i['date'] for i in s]
+        corrected = np.array([B3.item_ndvi(i['dn_red'], i['dn_nir'], i['baseline'], 0.05)[0] for i in s])
+        r = B3.step_report(dates, corrected, '2022-01-25', days=30)
+        assert r['n_before'] == 3 and r['n_after'] == 3          # 12-30, 01-10, 01-20 | 01-30, 02-09, 02-19 (12-20 is 36 d before)
+        assert abs(r['median_after'] - r['median_before']) < 1e-9 and abs(r['step']) < 1e-9
+
+
+class TestHarmonicModel:
+    def test_design_matrix_columns(self):
+        t = np.array([0.0, 91.3125, 182.625])                       # days
+        X = B3.design_matrix(t)
+        assert X.shape == (3, 6)
+        assert np.allclose(X[:, 0], 1) and np.allclose(X[:, 1], t / 365.25)
+        assert np.allclose(X[:, 2], np.cos(2 * np.pi * t / 365.25)) and np.allclose(X[:, 3], np.sin(2 * np.pi * t / 365.25))
+        assert np.allclose(X[:, 4], np.cos(4 * np.pi * t / 365.25)) and np.allclose(X[:, 5], np.sin(4 * np.pi * t / 365.25))
+
+    def test_fit_recovers_a_noiseless_harmonic_with_trend(self):
+        t = np.arange(0, 1500, 7.0)
+        truth = 0.55 + 0.03 * (t / 365.25) + 0.12 * np.cos(2 * np.pi * t / 365.25) - 0.05 * np.sin(2 * np.pi * t / 365.25) + 0.02 * np.cos(4 * np.pi * t / 365.25)
+        nd = np.broadcast_to(truth[:, None, None], (t.size, 2, 3)).copy()
+        valid = np.ones_like(nd, bool)
+        fit = B3.fit_harmonic(nd, valid, t, min_obs=12)
+        pred = B3.predict_harmonic(fit['coef'], np.array([1600.0]))[0]
+        expect = 0.55 + 0.03 * (1600 / 365.25) + 0.12 * np.cos(2 * np.pi * 1600 / 365.25) - 0.05 * np.sin(2 * np.pi * 1600 / 365.25) + 0.02 * np.cos(4 * np.pi * 1600 / 365.25)
+        assert np.allclose(pred, expect, atol=1e-8) and np.allclose(fit['resid_std'], 0, atol=1e-8)
+
+    def test_matches_numpy_lstsq_per_pixel_with_masks_and_residual_std_on_n_minus_6(self):
+        rng = np.random.default_rng(3)
+        t = np.sort(rng.uniform(0, 1800, 60))
+        nd = rng.normal(0.6, 0.1, (60, 3, 4))
+        valid = rng.random((60, 3, 4)) > 0.25
+        fit = B3.fit_harmonic(nd, valid, t, min_obs=12)
+        X = B3.design_matrix(t)
+        for i in range(3):
+            for j in range(4):
+                v = valid[:, i, j]
+                beta, *_ = np.linalg.lstsq(X[v], nd[v, i, j], rcond=None)
+                rss = ((nd[v, i, j] - X[v] @ beta) ** 2).sum()
+                assert np.allclose(fit['coef'][i, j], beta, atol=1e-8)
+                assert fit['resid_std'][i, j] == pytest.approx(np.sqrt(rss / (v.sum() - 6)), rel=1e-8)
+                assert fit['n_valid'][i, j] == v.sum()
+
+    def test_fewer_than_12_valid_observations_is_no_data(self):
+        t = np.arange(0, 400, 10.0)
+        nd = np.random.default_rng(0).normal(0.6, 0.05, (40, 1, 2))
+        valid = np.ones_like(nd, bool); valid[11:, 0, 1] = False        # pixel (0,1): only 11 valid
+        fit = B3.fit_harmonic(nd, valid, t, min_obs=12)
+        assert np.isfinite(fit['coef'][0, 0]).all() and not np.isfinite(fit['coef'][0, 1]).any()
+        assert np.isnan(fit['resid_std'][0, 1]) and fit['n_valid'][0, 1] == 11
+
+    def test_score_is_prediction_minus_observed_over_residual_std(self):
+        s = B3.harmonic_score(pred=np.array([0.7]), observed=np.array([0.4]), resid_std=np.array([0.1]))
+        assert s[0] == pytest.approx(3.0)                                # an NDVI drop scores positive
+
+    def test_pool_score_uses_ddof_1(self):
+        pool = np.array([[0.8], [0.6], [0.7]])[:, :, None]               # (3 dates, 1, 1)
+        s = B3.pool_score(pool, np.array([[0.5]]))
+        assert s[0, 0] == pytest.approx((0.7 - 0.5) / np.std([0.8, 0.6, 0.7], ddof=1))
+
+    def test_zero_pool_std_gives_no_score(self):
+        pool = np.full((2, 1, 1), 0.7)
+        assert not np.isfinite(B3.pool_score(pool, np.array([[0.5]]))).any()
+
+
+class TestMatchedThreshold:
+    def test_threshold_is_the_rth_largest_patch_maximum(self):
+        maxima = np.arange(1.0, 11.0)                                   # 10 patches, 1..10
+        thr = B3.matched_threshold(maxima, target_recall=0.8)
+        assert thr == 3.0                                               # 8 patches (3..10) are >= 3
+        assert B3.recall_at(maxima, thr) == 0.8 and B3.recall_at(maxima, thr + 1e-9) < 0.8
+
+    def test_ties_can_only_raise_recall_and_the_threshold_is_the_largest_that_meets_target(self):
+        maxima = np.array([1, 2, 2, 2, 2, 5, 6, 7, 8, 9.0])
+        thr = B3.matched_threshold(maxima, 0.8)
+        assert B3.recall_at(maxima, thr) >= 0.8
+        higher = maxima[maxima > thr]
+        assert len(higher) == 0 or B3.recall_at(maxima, higher.min()) < 0.8
+
+    def test_rounds_the_required_count_up_so_recall_never_falls_short(self):
+        maxima = np.arange(1.0, 8.0)                                  # n = 7: 0.8 * 7 = 5.6 -> need 6 patches
+        thr = B3.matched_threshold(maxima, 0.8)
+        assert thr == 2.0 and B3.recall_at(maxima, thr) == pytest.approx(6 / 7) and B3.recall_at(maxima, thr) >= 0.8
+
+    def test_strict_exceeds_variant_uses_the_next_lower_value_and_flags_exactly_r_patches(self):
+        maxima = np.arange(1.0, 11.0)                                   # 10 patches; r = 8
+        strict = B3.matched_threshold_strict(maxima, 0.8)
+        assert strict == 2.0                                            # score > 2 holds for patches 3..10 = 8 of them
+        assert np.mean(maxima > strict) == 0.8
+        assert strict < B3.matched_threshold(maxima, 0.8)               # a strict threshold sits below the >= one, so it flags more nulls
+
+    def test_target_not_reachable_raises(self):
+        with pytest.raises(ValueError):
+            B3.matched_threshold(np.array([np.nan, np.nan]), 0.8)
+
+    def test_uses_only_the_injected_positives(self):
+        # the null scores are not an argument: nothing about the null windows can enter the threshold
+        import inspect
+        assert list(inspect.signature(B3.matched_threshold).parameters) == ['patch_maxima', 'target_recall']
+
+
+class TestRelativeReduction:
+    def test_identical_arms_give_zero_and_halved_gives_half(self):
+        n = np.array([4., 6., 2., 8.]); d = np.array([40., 60., 20., 80.])
+        out = B3.relative_reduction(n, d, n, d)
+        assert out == 0.0
+        assert B3.relative_reduction(n, d, n / 2, d) == pytest.approx(0.5)
+
+    def test_undefined_when_the_pool_far_is_zero(self):
+        assert np.isnan(B3.relative_reduction(np.zeros(3), np.ones(3), np.ones(3), np.ones(3)))
+
+    def test_bootstrap_resamples_tiles_jointly_and_matches_brute_force(self):
+        rng = np.random.default_rng(1)
+        d = rng.integers(8, 14, 30).astype(float)
+        n_p = rng.binomial(d.astype(int), 0.10).astype(float)
+        n_h = rng.binomial(d.astype(int), 0.05).astype(float)
+        out = B3.relative_reduction_ci(n_p, d, n_h, d, replicates=40, seed=5, ci=0.95, return_draws=True)
+        idx = np.random.default_rng(5).integers(0, 30, size=(40, 30))[0]
+        brute = B3.relative_reduction(n_p[idx], d[idx], n_h[idx], d[idx])
+        assert out['draws'][0] == pytest.approx(brute) and out['estimate'] == pytest.approx(B3.relative_reduction(n_p, d, n_h, d))
+        assert out['lo'] <= out['estimate'] <= out['hi']
+
+
+class TestB3VerdictRule:
+    """yaml B3.keep_rule: TRUE reduction >= 0.30; FALSE < 0.10; INCONCLUSIVE between."""
+
+    def test_regions(self):
+        assert B3.b3_verdict(0.30) == 'TRUE' and B3.b3_verdict(0.9) == 'TRUE'
+        assert B3.b3_verdict(0.2999) == 'INCONCLUSIVE' and B3.b3_verdict(0.10) == 'INCONCLUSIVE'
+        assert B3.b3_verdict(0.0999) == 'FALSE' and B3.b3_verdict(-0.4) == 'FALSE'
+
+
 class TestB2AnalyseEndToEnd:
     """A synthetic inventory with a hand-derived answer. Polygon edges are 1 m inside pixel-centre boundaries so the
     pixel-centre rule is unambiguous:  strip x 1001..1011, y 5001..5401 (10 x 400 m = 4 x 160 px at 2.5 m = 640 px, thickness
@@ -1079,3 +1261,117 @@ class TestB2AnalyseEndToEnd:
         assert out['rasterisation_iou']['20.0']['iou'] == 0.0           # no 20 m pixel centre falls inside: the feature is lost
         assert out['rasterisation_iou']['10.0']['iou'] > 0.0
         assert out['shares']['local_thickness']['share'] == 1.0
+
+
+class TestB3ArchiveHelpers:
+    def test_crop_transform_shifts_the_origin_by_whole_pixels(self):
+        from affine import Affine
+        t = Affine(10, 0, 621400.0, 0, -10, 1275540.0)
+        c = B3.crop_transform(t, 256, 128)                              # rows 256.., cols 128..
+        assert (c.a, c.e) == (10, -10) and c.c == 621400.0 + 1280 and c.f == 1275540.0 - 2560
+
+    def test_mosaic_applies_each_items_own_baseline_offset(self):
+        h, w = 2, 4
+        take_a = np.zeros((h, w), bool); take_a[:, :2] = True             # old item (baseline 03.00) owns the left half
+        take_b = np.zeros((h, w), bool); take_b[:, 2:] = True             # new item (baseline 04.00) owns the right half
+        red_dn = lambda add: np.full((h, w), 500 + add, dtype=np.uint16)  # true reflectance 0.05
+        nir_dn = lambda add: np.full((h, w), 4000 + add, dtype=np.uint16)  # true reflectance 0.40
+        layers = [(red_dn(0), nir_dn(0), '03.00', take_a), (red_dn(1000), nir_dn(1000), '04.00', take_b)]
+        corr, unc, taken = B3.mosaic_ndvi(layers, 0.05)
+        true = (0.40 - 0.05) / (0.40 + 0.05)
+        assert taken.all() and np.allclose(corr, true)                    # the correction makes both halves agree
+        assert np.allclose(unc[:, :2], true) and np.all(unc[:, 2:] < true - 0.2)   # without it the 04.00 half is biased low
+
+    def test_mosaic_leaves_untaken_pixels_nan_and_the_first_item_wins_overlaps(self):
+        take_a = np.array([[True, True, False]]); take_b = np.array([[True, False, False]])
+        a = (np.array([[500, 500, 0]], dtype=np.uint16), np.array([[4000, 4000, 0]], dtype=np.uint16), '04.00', take_a)
+        b = (np.array([[2500, 0, 0]], dtype=np.uint16), np.array([[3000, 0, 0]], dtype=np.uint16), '04.00', take_b)
+        corr, _unc, taken = B3.mosaic_ndvi([a, b], 0.05)
+        assert taken.tolist() == [[True, True, False]]
+        assert np.isnan(corr[0, 2])
+
+    def test_first_item_wins_means_item_a_values_not_item_b(self):
+        take = np.array([[True]])
+        a = (np.array([[1500]], dtype=np.uint16), np.array([[5000]], dtype=np.uint16), '04.00', take)      # 0.05 / 0.40
+        b = (np.array([[2500]], dtype=np.uint16), np.array([[2600]], dtype=np.uint16), '04.00', take)      # different values
+        corr, _u, _t = B3.mosaic_ndvi([a, b], 0.05)
+        assert corr[0, 0] == pytest.approx((0.40 - 0.05) / (0.45))
+
+    def test_denominator_floor_gives_nan(self):
+        take = np.array([[True]])
+        corr, _u, taken = B3.mosaic_ndvi([(np.array([[1100]], dtype=np.uint16), np.array([[1200]], dtype=np.uint16), '04.00', take)], 0.05)
+        assert taken[0, 0] and np.isnan(corr[0, 0])                        # 0.01 + 0.02 < 0.05
+
+
+class TestStableStepCheck:
+    def _data(self):
+        rng = np.random.default_rng(0)
+        dates = ['2021-12-30', '2022-01-10', '2022-01-20', '2022-01-30', '2022-02-09', '2022-02-19', '2021-11-01']
+        n = len(dates)
+        truth = 0.75 + 0.01 * rng.standard_normal((6, 6))                   # stable surface
+        corr = np.stack([truth + 0.002 * rng.standard_normal((6, 6)) for _ in range(n)])
+        unc = corr.copy()
+        for i, d in enumerate(dates):
+            if d >= '2022-01-25':
+                unc[i] -= 0.25                                              # the uncorrected series steps down at the baseline change
+        valid = np.ones((n, 6, 6), bool)
+        return dates, corr, unc, valid
+
+    def test_corrected_has_no_step_and_uncorrected_has_a_large_one(self):
+        dates, corr, unc, valid = self._data()
+        r = B3.stable_step_check(dates, corr, unc, valid, np.zeros((6, 6), bool), '2022-01-25', days=30, min_date_valid_fraction=0.5)
+        assert abs(r['corrected']['step']) < 0.01 and r['uncorrected']['step'] < -0.2
+        assert r['n_dates_used'] == 6 and '2021-11-01' not in r['dates_used']      # 55 days before: outside the window
+
+    def test_window_edges_are_inclusive_at_exactly_30_days_either_side(self):
+        dates = ['2021-12-25', '2021-12-26', '2022-01-10', '2022-01-30', '2022-02-24', '2022-02-25']   # -31, -30, ..., +30, +31
+        n = len(dates)
+        corr = np.full((n, 2, 2), 0.75); unc = corr.copy(); valid = np.ones((n, 2, 2), bool)
+        r = B3.stable_step_check(dates, corr, unc, valid, np.zeros((2, 2), bool), '2022-01-25', days=30, min_date_valid_fraction=0.5)
+        assert r['dates_used'] == ['2021-12-26', '2022-01-10', '2022-01-30', '2022-02-24']
+
+    def test_dates_with_too_little_valid_data_are_listed_and_excluded(self):
+        dates, corr, unc, valid = self._data()
+        valid[2] = False                                                    # 2022-01-20 entirely cloudy
+        r = B3.stable_step_check(dates, corr, unc, valid, np.zeros((6, 6), bool), '2022-01-25', days=30, min_date_valid_fraction=0.5)
+        assert '2022-01-20' in r['dates_excluded_low_validity'] and '2022-01-20' not in r['dates_used']
+
+    def test_unstable_pixels_and_excluded_pixels_are_left_out_of_the_median(self):
+        dates, corr, unc, valid = self._data()
+        corr[:, 0, 0] += np.linspace(-0.5, 0.5, len(dates))                 # an unstable pixel
+        excl = np.zeros((6, 6), bool); excl[1, 1] = True
+        r = B3.stable_step_check(dates, corr, unc, valid, excl, '2022-01-25', days=30, min_date_valid_fraction=0.5)
+        assert r['n_stable_px'] == 36 - 2
+
+
+class TestPatchMaximaAndWindowCounts:
+    def test_patch_maxima_take_the_max_inside_each_patch_ignoring_nan(self):
+        s = np.full((32, 32), np.nan); s[2:12, 2:12] = 1.0; s[5, 5] = 9.0; s[16:26, 16:26] = 2.0
+        got = B3.patch_maxima(s, [(2, 2), (16, 16), (0, 20)], 10)
+        assert got[0] == 9.0 and got[1] == 2.0 and np.isnan(got[2])
+
+    def test_window_counts_per_tile_use_ge_and_valid_pixels_only(self):
+        s = np.full((64, 64), np.nan)                                         # 4 x 4 windows of 16 px = 2 x 2 tiles
+        s[0:16, 0:16] = 0.0; s[0, 0] = 5.0                                    # window (0,0): valid, flagged at thr 5 (>=)
+        s[0:16, 16:32] = 1.0                                                  # window (0,1): valid, not flagged
+        s[16:32, 0:16] = 7.0                                                  # window (1,0): flagged
+        split = np.array([[False, True], [True, False]])
+        num, den = B3.window_counts_per_tile(s, thr=5.0, tile_mask=np.ones((2, 2), bool), window_px=16)
+        # tile (0,0) holds windows (0,0) flagged, (0,1) valid not flagged, (1,0) flagged, (1,1) all-NaN = not valid
+        assert num.tolist() == [[2, 0], [0, 0]] and den.tolist() == [[3, 0], [0, 0]]
+        n2, d2 = B3.window_counts_per_tile(s, 5.0, split, 16)                  # tile (0,0) is not selected by this mask
+        assert int(n2.sum()) == 0 and int(d2.sum()) == 0
+
+    def test_tile_mask_selects_which_tiles_count(self):
+        s = np.full((64, 64), 9.0)                                            # every window valid and flagged
+        split = np.array([[True, False], [False, True]])
+        num, den = B3.window_counts_per_tile(s, 5.0, split, 16)
+        assert int(num.sum()) == 8 and int(den.sum()) == 8 and num[0, 1] == 0 and num[0, 0] == 4
+
+
+class TestFitDegenerateTime:
+    def test_all_observations_at_one_time_is_no_data_not_a_crash(self):
+        t = np.full(20, 100.0)
+        nd = np.random.default_rng(0).normal(0.6, 0.05, (20, 1, 1))
+        fit = B3.fit_harmonic(nd, np.ones_like(nd, bool), t, min_obs=12)
+        assert not np.isfinite(fit['coef']).any() and np.isnan(fit['resid_std'][0, 0])

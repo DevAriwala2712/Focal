@@ -1,0 +1,4977 @@
+{
+  "evidence": "real",
+  "experiment_id": "B3",
+  "fetch_log": {
+    "archive_window": [
+      "2019-01-01",
+      "2023-12-26"
+    ],
+    "target": "2023-12-27",
+    "crop": [
+      256,
+      896,
+      128,
+      640
+    ],
+    "byte_cap": 2000000000,
+    "bytes_received": 844597049,
+    "n_stac_items": 446,
+    "n_groups": 358,
+    "n_fetched": 277,
+    "n_skipped_no_valid_pixel": 81,
+    "stopped_at_group": null,
+    "complete": true,
+    "groups": [
+      {
+        "name": "2019-01-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190102T052219_R062_T43PFN_20201007T221302": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326584,
+        "valid_px_crop": 326307,
+        "bytes_on_disk": 2142144
+      },
+      {
+        "name": "2019-01-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190107T052211_R062_T43PFN_20201007T232804": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326572,
+        "valid_px_crop": 326232,
+        "bytes_on_disk": 2152240
+      },
+      {
+        "name": "2019-01-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190112T052159_R062_T43PFN_20201008T005754": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 90904,
+        "valid_px_crop": 90904,
+        "bytes_on_disk": 2174836
+      },
+      {
+        "name": "2019-01-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190117T052141_R062_T43PFN_20201008T021325": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 302224,
+        "valid_px_crop": 302208,
+        "bytes_on_disk": 2170630
+      },
+      {
+        "name": "2019-01-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190122T052119_R062_T43PFN_20201008T034347": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 320960,
+        "valid_px_crop": 320880,
+        "bytes_on_disk": 2183979
+      },
+      {
+        "name": "2019-01-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190127T052101_R062_T43PFN_20201008T045928": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 103480,
+        "valid_px_crop": 103480,
+        "bytes_on_disk": 2369256
+      },
+      {
+        "name": "2019-02-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190201T052039_R062_T43PFN_20201007T130915": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 167044,
+        "valid_px_crop": 167044,
+        "bytes_on_disk": 2341261
+      },
+      {
+        "name": "2019-02-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190206T052011_R062_T43PFN_20201007T142305": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 233976,
+        "valid_px_crop": 233974,
+        "bytes_on_disk": 2316356
+      },
+      {
+        "name": "2019-02-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190211T051939_R062_T43PFN_20201007T155543": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 154448,
+        "valid_px_crop": 154448,
+        "bytes_on_disk": 2384113
+      },
+      {
+        "name": "2019-02-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190216T051901_R062_T43PFN_20201007T171755": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 234880,
+        "valid_px_crop": 234880,
+        "bytes_on_disk": 2303521
+      },
+      {
+        "name": "2019-02-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190221T051839_R062_T43PFN_20201030T020753": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 318868,
+        "valid_px_crop": 318863,
+        "bytes_on_disk": 2199385
+      },
+      {
+        "name": "2019-02-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190226T051751_R062_T43PFN_20201007T204546": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326316,
+        "valid_px_crop": 326313,
+        "bytes_on_disk": 2194913
+      },
+      {
+        "name": "2019-03-03_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190303T051729_R062_T43PFN_20201030T112155": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 224796,
+        "valid_px_crop": 224796,
+        "bytes_on_disk": 2328198
+      },
+      {
+        "name": "2019-03-08_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190308T051651_R062_T43PFN_20201007T042157": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 270700,
+        "valid_px_crop": 270700,
+        "bytes_on_disk": 2292340
+      },
+      {
+        "name": "2019-03-13_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190313T051649_R062_T43PFN_20201007T061802": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326648,
+        "valid_px_crop": 326647,
+        "bytes_on_disk": 2199358
+      },
+      {
+        "name": "2019-03-18_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190318T051651_R062_T43PFN_20201007T074605": "02.12",
+          "S2A_MSIL2A_20190318T051651_R062_T43PFN_20221118T221849": "05.00"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326884,
+        "valid_px_crop": 326879,
+        "bytes_on_disk": 2203901
+      },
+      {
+        "name": "2019-03-23_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190323T051649_R062_T43PFN_20201007T094822": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326680,
+        "valid_px_crop": 326680,
+        "bytes_on_disk": 2204833
+      },
+      {
+        "name": "2019-03-28_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190328T051651_R062_T43PFN_20201007T113208": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327100,
+        "valid_px_crop": 327099,
+        "bytes_on_disk": 2213064
+      },
+      {
+        "name": "2019-04-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190402T051659_R062_T43PFN_20201006T212616": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 292312,
+        "valid_px_crop": 292312,
+        "bytes_on_disk": 2280269
+      },
+      {
+        "name": "2019-04-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190407T051651_R062_T43PFN_20201006T230911": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 323284,
+        "valid_px_crop": 323284,
+        "bytes_on_disk": 2225388
+      },
+      {
+        "name": "2019-04-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190412T051659_R062_T43PFN_20201007T011821": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327196,
+        "valid_px_crop": 327196,
+        "bytes_on_disk": 2201411
+      },
+      {
+        "name": "2019-04-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190417T051651_R062_T43PFN_20201007T030518": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 322944,
+        "valid_px_crop": 322944,
+        "bytes_on_disk": 2222485
+      },
+      {
+        "name": "2019-04-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190422T051659_R062_T43PFN_20201105T151308": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 163940,
+        "valid_px_crop": 163940,
+        "bytes_on_disk": 2203463
+      },
+      {
+        "name": "2019-04-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190427T051651_R062_T43PFN_20201105T195213": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 312976,
+        "valid_px_crop": 312976,
+        "bytes_on_disk": 2216902
+      },
+      {
+        "name": "2019-05-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190502T051659_R062_T43PFN_20201006T091215": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 31520,
+        "valid_px_crop": 31520,
+        "bytes_on_disk": 2307856
+      },
+      {
+        "name": "2019-05-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190507T051651_R062_T43PFN_20201006T110206": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 130628,
+        "valid_px_crop": 130628,
+        "bytes_on_disk": 2377080
+      },
+      {
+        "name": "2019-05-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190512T051659_R062_T43PFN_20201006T131827": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 317840,
+        "valid_px_crop": 317840,
+        "bytes_on_disk": 2199626
+      },
+      {
+        "name": "2019-05-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190517T051651_R062_T43PFN_20201006T151015": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 37564,
+        "valid_px_crop": 37564,
+        "bytes_on_disk": 2361241
+      },
+      {
+        "name": "2019-05-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190522T051659_R062_T43PFN_20201006T170922": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 83052,
+        "valid_px_crop": 83052,
+        "bytes_on_disk": 2289307
+      },
+      {
+        "name": "2019-05-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190527T051651_R062_T43PFN_20201006T185223": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 306836,
+        "valid_px_crop": 306836,
+        "bytes_on_disk": 2215715
+      },
+      {
+        "name": "2019-06-01_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190601T051659_R062_T43PFN_20201005T205038": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-06-06_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20190606T051651_R062_T43PFN_20201005T224139": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-06-11_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190611T051659_R062_T43PFN_20201106T010119": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-06-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190616T051651_R062_T43PFN_20201006T024751": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 2668,
+        "valid_px_crop": 2668,
+        "bytes_on_disk": 2373885
+      },
+      {
+        "name": "2019-06-21_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190621T051659_R062_T43PFN_20201006T050240": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-06-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190626T051701_R062_T43PFN_20201006T062920": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 72,
+        "valid_px_crop": 72,
+        "bytes_on_disk": 2046513
+      },
+      {
+        "name": "2019-07-01_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190701T051659_R062_T43PFN_20201005T075039": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-07-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190706T051701_R062_T43PFN_20201005T095822": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 8,
+        "valid_px_crop": 8,
+        "bytes_on_disk": 2068830
+      },
+      {
+        "name": "2019-07-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190711T051659_R062_T43PFN_20201005T123346": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 52592,
+        "valid_px_crop": 52592,
+        "bytes_on_disk": 2202712
+      },
+      {
+        "name": "2019-07-16_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20190716T051701_R062_T43PFN_20201005T144604": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-07-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190721T051659_R062_T43PFN_20201005T173508": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 4,
+        "valid_px_crop": 4,
+        "bytes_on_disk": 902068
+      },
+      {
+        "name": "2019-07-26_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20190726T051701_R062_T43PFN_20201106T015252": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-07-31_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190731T051659_R062_T43PFN_20201005T202509": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 42316,
+        "valid_px_crop": 42316,
+        "bytes_on_disk": 2325089
+      },
+      {
+        "name": "2019-08-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190805T051701_R062_T43PFN_20201004T203639": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 20,
+        "valid_px_crop": 20,
+        "bytes_on_disk": 1754438
+      },
+      {
+        "name": "2019-08-10_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190810T051659_R062_T43PFN_20201004T224558": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-08-15_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190815T051651_R062_T43PFN_20201005T003341": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 5216,
+        "valid_px_crop": 5216,
+        "bytes_on_disk": 2130802
+      },
+      {
+        "name": "2019-08-20_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20190820T051659_R062_T43PFN_20201005T024513": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-08-25_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20190825T051651_R062_T43PFN_20201005T043426": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-08-30_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190830T051659_R062_T43PFN_20201005T065551": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 28684,
+        "valid_px_crop": 28684,
+        "bytes_on_disk": 2127273
+      },
+      {
+        "name": "2019-09-04_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190904T051651_R062_T43PFN_20201004T090435": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 220,
+        "valid_px_crop": 220,
+        "bytes_on_disk": 503197
+      },
+      {
+        "name": "2019-09-09_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190909T051649_R062_T43PFN_20201004T111053": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 40708,
+        "valid_px_crop": 40708,
+        "bytes_on_disk": 2314886
+      },
+      {
+        "name": "2019-09-14_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20190914T051651_R062_T43PFN_20201004T125650": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 65448,
+        "valid_px_crop": 65448,
+        "bytes_on_disk": 2234459
+      },
+      {
+        "name": "2019-09-19_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190919T051649_R062_T43PFN_20201004T150020": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 4,
+        "valid_px_crop": 4,
+        "bytes_on_disk": 2180208
+      },
+      {
+        "name": "2019-09-29_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20190929T051649_R062_T43PFN_20201004T182933": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 30840,
+        "valid_px_crop": 30840,
+        "bytes_on_disk": 2340481
+      },
+      {
+        "name": "2019-10-04_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191004T051651_R062_T43PFN_20201003T222239": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 88504,
+        "valid_px_crop": 88504,
+        "bytes_on_disk": 2351574
+      },
+      {
+        "name": "2019-10-09_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191009T051719_R062_T43PFN_20201004T002523": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 103604,
+        "valid_px_crop": 103604,
+        "bytes_on_disk": 2375567
+      },
+      {
+        "name": "2019-10-14_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191014T051751_R062_T43PFN_20201004T020618": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 300884,
+        "valid_px_crop": 300883,
+        "bytes_on_disk": 2204098
+      },
+      {
+        "name": "2019-10-19_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20191019T051829_R062_T43PFN_20201004T040502": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-10-24_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20191024T051901_R062_T43PFN_20201004T053846": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-10-29_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20191029T051929_R062_T43PFN_20201004T072406": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-11-03_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191103T052001_R062_T43PFN_20201003T123300": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 207476,
+        "valid_px_crop": 207476,
+        "bytes_on_disk": 2264901
+      },
+      {
+        "name": "2019-11-08_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191108T052019_R062_T43PFN_20201003T142634": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 53580,
+        "valid_px_crop": 53580,
+        "bytes_on_disk": 2336321
+      },
+      {
+        "name": "2019-11-13_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191113T052051_R062_T43PFN_20201003T160002": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 53012,
+        "valid_px_crop": 53012,
+        "bytes_on_disk": 2336179
+      },
+      {
+        "name": "2019-11-18_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191118T052109_R062_T43PFN_20201003T174507": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 176696,
+        "valid_px_crop": 176696,
+        "bytes_on_disk": 2353540
+      },
+      {
+        "name": "2019-11-23_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191123T052131_R062_T43PFN_20201003T190841": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 211900,
+        "valid_px_crop": 211900,
+        "bytes_on_disk": 2315415
+      },
+      {
+        "name": "2019-11-28_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20191128T052149_R062_T43PFN_20201003T203044": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-12-03_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191203T052201_R062_T43PFN_20201003T000314": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 3324,
+        "valid_px_crop": 3324,
+        "bytes_on_disk": 2297259
+      },
+      {
+        "name": "2019-12-08_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191208T052209_R062_T43PFN_20201003T022146": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 285768,
+        "valid_px_crop": 285768,
+        "bytes_on_disk": 2229985
+      },
+      {
+        "name": "2019-12-13_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20191213T052221_R062_T43PFN_20201003T041805": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 309372,
+        "valid_px_crop": 309371,
+        "bytes_on_disk": 2157743
+      },
+      {
+        "name": "2019-12-18_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191218T052229_R062_T43PFN_20201003T063700": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326264,
+        "valid_px_crop": 326139,
+        "bytes_on_disk": 2135464
+      },
+      {
+        "name": "2019-12-23_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20191223T052221_R062_T43PFN_20201003T083226": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2019-12-28_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20191228T052229_R062_T43PFN_20201003T103800": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 313804,
+        "valid_px_crop": 313800,
+        "bytes_on_disk": 2172400
+      },
+      {
+        "name": "2020-01-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200102T052221_R062_T43PFN_20201002T215022": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 208888,
+        "valid_px_crop": 208888,
+        "bytes_on_disk": 2328179
+      },
+      {
+        "name": "2020-01-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200107T052209_R062_T43PFN_20201105T073917": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 306136,
+        "valid_px_crop": 306083,
+        "bytes_on_disk": 2172858
+      },
+      {
+        "name": "2020-01-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200112T052201_R062_T43PFN_20201002T173318": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326512,
+        "valid_px_crop": 326226,
+        "bytes_on_disk": 2152669
+      },
+      {
+        "name": "2020-01-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200117T052139_R062_T43PFN_20201002T195514": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 215332,
+        "valid_px_crop": 215332,
+        "bytes_on_disk": 2308189
+      },
+      {
+        "name": "2020-01-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200122T052111_R062_T43PFN_20201002T050041": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326660,
+        "valid_px_crop": 326401,
+        "bytes_on_disk": 2160521
+      },
+      {
+        "name": "2020-01-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200127T052059_R062_T43PFN_20201002T124614": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 325388,
+        "valid_px_crop": 325359,
+        "bytes_on_disk": 2169176
+      },
+      {
+        "name": "2020-02-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200201T052031_R062_T43PFN_20200930T072934": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 207032,
+        "valid_px_crop": 207032,
+        "bytes_on_disk": 2294539
+      },
+      {
+        "name": "2020-02-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200206T052009_R062_T43PFN_20201001T024316": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 220160,
+        "valid_px_crop": 220160,
+        "bytes_on_disk": 2297258
+      },
+      {
+        "name": "2020-02-11_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200211T051941_R062_T43PFN_20201001T164158": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326460,
+        "valid_px_crop": 326440,
+        "bytes_on_disk": 2180447
+      },
+      {
+        "name": "2020-02-16_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200216T051909_R062_T43PFN_20200929T113553": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 321732,
+        "valid_px_crop": 321732,
+        "bytes_on_disk": 2198871
+      },
+      {
+        "name": "2020-02-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200221T051831_R062_T43PFN_20200927T125442": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327092,
+        "valid_px_crop": 327016,
+        "bytes_on_disk": 2187944
+      },
+      {
+        "name": "2020-02-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200226T051759_R062_T43PFN_20200928T133814": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326696,
+        "valid_px_crop": 326696,
+        "bytes_on_disk": 2193772
+      },
+      {
+        "name": "2020-03-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200302T051721_R062_T43PFN_20200926T021720": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 8904,
+        "valid_px_crop": 8904,
+        "bytes_on_disk": 1758409
+      },
+      {
+        "name": "2020-03-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200307T051649_R062_T43PFN_20201003T214732": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 96440,
+        "valid_px_crop": 96440,
+        "bytes_on_disk": 2390311
+      },
+      {
+        "name": "2020-03-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200312T051651_R062_T43PFN_20201006T223948": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 121540,
+        "valid_px_crop": 121540,
+        "bytes_on_disk": 2394251
+      },
+      {
+        "name": "2020-03-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200317T051649_R062_T43PFN_20201010T112101": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 320196,
+        "valid_px_crop": 320196,
+        "bytes_on_disk": 2218886
+      },
+      {
+        "name": "2020-03-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200322T051651_R062_T43PFN_20201014T223942": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 213552,
+        "valid_px_crop": 213552,
+        "bytes_on_disk": 2351761
+      },
+      {
+        "name": "2020-03-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200327T051649_R062_T43PFN_20201027T114503": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 12328,
+        "valid_px_crop": 12328,
+        "bytes_on_disk": 2311165
+      },
+      {
+        "name": "2020-04-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200401T051651_R062_T43PFN_20200924T124710": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327460,
+        "valid_px_crop": 327445,
+        "bytes_on_disk": 2205005
+      },
+      {
+        "name": "2020-04-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200406T051649_R062_T43PFN_20200925T063902": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 31200,
+        "valid_px_crop": 31200,
+        "bytes_on_disk": 2363370
+      },
+      {
+        "name": "2020-04-11_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200411T051651_R062_T43PFN_20200923T011219": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 325888,
+        "valid_px_crop": 325888,
+        "bytes_on_disk": 2208789
+      },
+      {
+        "name": "2020-04-16_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200416T051649_R062_T43PFN_20200923T185616": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 251888,
+        "valid_px_crop": 251888,
+        "bytes_on_disk": 2310042
+      },
+      {
+        "name": "2020-04-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200421T051651_R062_T43PFN_20200921T113335": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 159896,
+        "valid_px_crop": 159896,
+        "bytes_on_disk": 2374145
+      },
+      {
+        "name": "2020-04-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200426T051649_R062_T43PFN_20200922T050604": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 122264,
+        "valid_px_crop": 122264,
+        "bytes_on_disk": 2388784
+      },
+      {
+        "name": "2020-05-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200501T051651_R062_T43PFN_20200920T003928": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 122868,
+        "valid_px_crop": 122868,
+        "bytes_on_disk": 2239715
+      },
+      {
+        "name": "2020-05-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200506T051649_R062_T43PFN_20200920T184044": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 192220,
+        "valid_px_crop": 192220,
+        "bytes_on_disk": 2290318
+      },
+      {
+        "name": "2020-05-11_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200511T051701_R062_T43PFN_20200917T175246": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-05-16_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200516T051649_R062_T43PFN_20200909T221004": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-05-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200521T051701_R062_T43PFN_20200910T100955": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 4544,
+        "valid_px_crop": 4544,
+        "bytes_on_disk": 2347700
+      },
+      {
+        "name": "2020-05-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200526T051649_R062_T43PFN_20200911T014755": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 77900,
+        "valid_px_crop": 77900,
+        "bytes_on_disk": 2387705
+      },
+      {
+        "name": "2020-05-31_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200531T051701_R062_T43PFN_20200919T105717": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 30768,
+        "valid_px_crop": 30768,
+        "bytes_on_disk": 2304853
+      },
+      {
+        "name": "2020-06-05_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200605T051649_R062_T43PFN_20200826T063426": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 5200,
+        "valid_px_crop": 5200,
+        "bytes_on_disk": 1930174
+      },
+      {
+        "name": "2020-06-10_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200610T051701_R062_T43PFN_20200826T195637": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 130492,
+        "valid_px_crop": 130492,
+        "bytes_on_disk": 2353582
+      },
+      {
+        "name": "2020-06-15_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200615T051659_R062_T43PFN_20200827T121340": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-06-20_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200620T051701_R062_T43PFN_20200909T011621": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 92,
+        "valid_px_crop": 92,
+        "bytes_on_disk": 2333185
+      },
+      {
+        "name": "2020-06-25_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200625T051659_R062_T43PFN_20200824T021620": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 38800,
+        "valid_px_crop": 38800,
+        "bytes_on_disk": 2236954
+      },
+      {
+        "name": "2020-06-30_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200630T051701_R062_T43PFN_20200824T155825": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-07-05_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200705T051649_R062_T43PFN_20200825T080442": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-07-10_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200710T051651_R062_T43PFN_20200912T161530": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-07-15_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200715T051649_R062_T43PFN_20200912T045555": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-07-20_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200720T051701_R062_T43PFN_20200816T194354": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 24544,
+        "valid_px_crop": 24544,
+        "bytes_on_disk": 2291875
+      },
+      {
+        "name": "2020-07-25_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200725T051649_R062_T43PFN_20210514T192534": "02.12",
+          "S2B_MSIL2A_20200725T051649_R062_T43PFN_20210515T055345": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 1268,
+        "valid_px_crop": 1268,
+        "bytes_on_disk": 2053335
+      },
+      {
+        "name": "2020-07-30_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200730T051701_R062_T43PFN_20200818T025707": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 26972,
+        "valid_px_crop": 26972,
+        "bytes_on_disk": 2338159
+      },
+      {
+        "name": "2020-08-04_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200804T051659_R062_T43PFN_20200816T034611": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-08-09_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200809T051701_R062_T43PFN_20200815T134623": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-08-14_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200814T051659_R062_T43PFN_20200816T062858": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 184,
+        "valid_px_crop": 184,
+        "bytes_on_disk": 1284151
+      },
+      {
+        "name": "2020-08-19_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200819T051701_R062_T43PFN_20200822T173359": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-08-24_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200824T051659_R062_T43PFN_20200827T164438": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 103436,
+        "valid_px_crop": 103436,
+        "bytes_on_disk": 2397161
+      },
+      {
+        "name": "2020-08-29_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200829T051701_R062_T43PFN_20200907T154846": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 214696,
+        "valid_px_crop": 214696,
+        "bytes_on_disk": 2335096
+      },
+      {
+        "name": "2020-09-03_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200903T051659_R062_T43PFN_20201029T013014": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 15640,
+        "valid_px_crop": 15640,
+        "bytes_on_disk": 2285033
+      },
+      {
+        "name": "2020-09-08_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200908T051651_R062_T43PFN_20200911T215200": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-09-13_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20200913T051649_R062_T43PFN_20201101T163312": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-09-18_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20200918T051701_R062_T43PFN_20200921T102556": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-09-23_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20200923T051649_R062_T43PFN_20200926T110820": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 51692,
+        "valid_px_crop": 51692,
+        "bytes_on_disk": 2249134
+      },
+      {
+        "name": "2020-09-28_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20200928T051701_R062_T43PFN_20201001T031338": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 57064,
+        "valid_px_crop": 57064,
+        "bytes_on_disk": 2367980
+      },
+      {
+        "name": "2020-10-08_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201008T051721_R062_T43PFN_20201010T103741": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 183304,
+        "valid_px_crop": 183304,
+        "bytes_on_disk": 2267979
+      },
+      {
+        "name": "2020-10-13_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20201013T051749_R062_T43PFN_20201021T004001": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-10-18_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201018T051831_R062_T43PFN_20201020T011231": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 28036,
+        "valid_px_crop": 28036,
+        "bytes_on_disk": 2337956
+      },
+      {
+        "name": "2020-10-23_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20201023T051859_R062_T43PFN_20201029T051700": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-10-28_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201028T051931_R062_T43PFN_20201101T060654": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 257860,
+        "valid_px_crop": 257860,
+        "bytes_on_disk": 2255809
+      },
+      {
+        "name": "2020-11-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201102T051959_R062_T43PFN_20201104T023103": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 4,
+        "valid_px_crop": 4,
+        "bytes_on_disk": 2290322
+      },
+      {
+        "name": "2020-11-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201107T052021_R062_T43PFN_20201109T025408": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 228204,
+        "valid_px_crop": 228204,
+        "bytes_on_disk": 2295500
+      },
+      {
+        "name": "2020-11-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201112T052049_R062_T43PFN_20201114T043645": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 214672,
+        "valid_px_crop": 214672,
+        "bytes_on_disk": 2327005
+      },
+      {
+        "name": "2020-11-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201117T052111_R062_T43PFN_20210421T022620": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 157508,
+        "valid_px_crop": 157507,
+        "bytes_on_disk": 2356596
+      },
+      {
+        "name": "2020-11-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201122T052119_R062_T43PFN_20201123T050403": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326944,
+        "valid_px_crop": 326833,
+        "bytes_on_disk": 2125918
+      },
+      {
+        "name": "2020-11-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201127T052151_R062_T43PFN_20201127T232046": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 307240,
+        "valid_px_crop": 307229,
+        "bytes_on_disk": 2165222
+      },
+      {
+        "name": "2020-12-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201202T052159_R062_T43PFN_20201220T005145": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 325164,
+        "valid_px_crop": 325150,
+        "bytes_on_disk": 2133626
+      },
+      {
+        "name": "2020-12-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201207T052211_R062_T43PFN_20201207T133417": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 10972,
+        "valid_px_crop": 10972,
+        "bytes_on_disk": 2158132
+      },
+      {
+        "name": "2020-12-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201212T052219_R062_T43PFN_20201213T091217": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 320504,
+        "valid_px_crop": 320477,
+        "bytes_on_disk": 2149000
+      },
+      {
+        "name": "2020-12-17_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20201217T052231_R062_T43PFN_20201220T120050": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2020-12-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20201222T052229_R062_T43PFN_20201223T200533": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326332,
+        "valid_px_crop": 326175,
+        "bytes_on_disk": 2143639
+      },
+      {
+        "name": "2020-12-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20201227T052231_R062_T43PFN_20201227T150829": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326388,
+        "valid_px_crop": 326056,
+        "bytes_on_disk": 2143751
+      },
+      {
+        "name": "2021-01-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210101T052219_R062_T43PFN_20210101T213805": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 132064,
+        "valid_px_crop": 132064,
+        "bytes_on_disk": 2264339
+      },
+      {
+        "name": "2021-01-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210106T052221_R062_T43PFN_20210106T211410": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 60672,
+        "valid_px_crop": 60672,
+        "bytes_on_disk": 2382130
+      },
+      {
+        "name": "2021-01-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210111T052159_R062_T43PFN_20210111T151913": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 14996,
+        "valid_px_crop": 14996,
+        "bytes_on_disk": 2205556
+      },
+      {
+        "name": "2021-01-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210116T052151_R062_T43PFN_20210124T113927": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 172980,
+        "valid_px_crop": 172980,
+        "bytes_on_disk": 2338362
+      },
+      {
+        "name": "2021-01-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210121T052119_R062_T43PFN_20210131T131723": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 253380,
+        "valid_px_crop": 253380,
+        "bytes_on_disk": 2252357
+      },
+      {
+        "name": "2021-01-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210126T052111_R062_T43PFN_20210126T184257": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326692,
+        "valid_px_crop": 326475,
+        "bytes_on_disk": 2139682
+      },
+      {
+        "name": "2021-01-31_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210131T052039_R062_T43PFN_20210202T115439": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 325416,
+        "valid_px_crop": 325416,
+        "bytes_on_disk": 2158204
+      },
+      {
+        "name": "2021-02-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210205T052011_R062_T43PFN_20210206T034629": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 324220,
+        "valid_px_crop": 324220,
+        "bytes_on_disk": 2161128
+      },
+      {
+        "name": "2021-02-10_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210210T051939_R062_T43PFN_20210211T214306": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326824,
+        "valid_px_crop": 326790,
+        "bytes_on_disk": 2154021
+      },
+      {
+        "name": "2021-02-15_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210215T051911_R062_T43PFN_20210215T200036": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 252292,
+        "valid_px_crop": 252292,
+        "bytes_on_disk": 2270369
+      },
+      {
+        "name": "2021-02-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210220T051839_R062_T43PFN_20210220T143503": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 299180,
+        "valid_px_crop": 299180,
+        "bytes_on_disk": 2238219
+      },
+      {
+        "name": "2021-02-25_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210225T051801_R062_T43PFN_20210225T143500": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 289500,
+        "valid_px_crop": 289500,
+        "bytes_on_disk": 2250532
+      },
+      {
+        "name": "2021-03-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210302T051729_R062_T43PFN_20210302T170237": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 322404,
+        "valid_px_crop": 322404,
+        "bytes_on_disk": 2185829
+      },
+      {
+        "name": "2021-03-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210307T051651_R062_T43PFN_20210307T185330": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327032,
+        "valid_px_crop": 327012,
+        "bytes_on_disk": 2177052
+      },
+      {
+        "name": "2021-03-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210312T051649_R062_T43PFN_20210312T154244": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 321544,
+        "valid_px_crop": 321544,
+        "bytes_on_disk": 2212509
+      },
+      {
+        "name": "2021-03-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210317T051651_R062_T43PFN_20210317T204546": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 326348,
+        "valid_px_crop": 326348,
+        "bytes_on_disk": 2186935
+      },
+      {
+        "name": "2021-03-22_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210322T051649_R062_T43PFN_20210323T001542": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-03-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210327T051651_R062_T43PFN_20210327T183928": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 322832,
+        "valid_px_crop": 322832,
+        "bytes_on_disk": 2214944
+      },
+      {
+        "name": "2021-04-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210401T051649_R062_T43PFN_20210405T232427": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 327336,
+        "valid_px_crop": 327335,
+        "bytes_on_disk": 2183939
+      },
+      {
+        "name": "2021-04-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210406T051651_R062_T43PFN_20210406T162504": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 318200,
+        "valid_px_crop": 318200,
+        "bytes_on_disk": 2212257
+      },
+      {
+        "name": "2021-04-11_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210411T051649_R062_T43PFN_20210524T194305": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-04-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210416T051641_R062_T43PFN_20210417T004855": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 281040,
+        "valid_px_crop": 281040,
+        "bytes_on_disk": 2273368
+      },
+      {
+        "name": "2021-04-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210421T051649_R062_T43PFN_20210422T054212": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 188860,
+        "valid_px_crop": 188860,
+        "bytes_on_disk": 2315011
+      },
+      {
+        "name": "2021-04-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210426T051651_R062_T43PFN_20210426T134744": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 301172,
+        "valid_px_crop": 301172,
+        "bytes_on_disk": 2241441
+      },
+      {
+        "name": "2021-05-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210501T051649_R062_T43PFN_20210501T163901": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 166532,
+        "valid_px_crop": 166532,
+        "bytes_on_disk": 2388378
+      },
+      {
+        "name": "2021-05-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210506T051651_R062_T43PFN_20210508T012758": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 9660,
+        "valid_px_crop": 9660,
+        "bytes_on_disk": 2369310
+      },
+      {
+        "name": "2021-05-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210511T051649_R062_T43PFN_20210511T201242": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 112,
+        "valid_px_crop": 112,
+        "bytes_on_disk": 2287425
+      },
+      {
+        "name": "2021-05-16_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210516T051651_R062_T43PFN_20210517T215012": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-05-21_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210521T051649_R062_T43PFN_20210521T201428": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-05-26_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210526T051651_R062_T43PFN_20210526T152622": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-05-31_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210531T051649_R062_T43PFN_20210531T153756": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 100720,
+        "valid_px_crop": 100720,
+        "bytes_on_disk": 2403684
+      },
+      {
+        "name": "2021-06-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210605T051651_R062_T43PFN_20210605T204655": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 68,
+        "valid_px_crop": 68,
+        "bytes_on_disk": 2028572
+      },
+      {
+        "name": "2021-06-10_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210610T051649_R062_T43PFN_20210611T061104": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 207332,
+        "valid_px_crop": 207332,
+        "bytes_on_disk": 2334897
+      },
+      {
+        "name": "2021-06-15_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210615T051651_R062_T43PFN_20210615T202209": "02.12"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-06-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210620T051649_R062_T43PFN_20210620T133206": "02.12"
+        },
+        "used_baselines": [
+          "02.12"
+        ],
+        "scl_valid_px_crop": 47332,
+        "valid_px_crop": 47332,
+        "bytes_on_disk": 2116284
+      },
+      {
+        "name": "2021-06-25_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210625T051651_R062_T43PFN_20210626T020859": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 236932,
+        "valid_px_crop": 236932,
+        "bytes_on_disk": 2327843
+      },
+      {
+        "name": "2021-06-30_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210630T051649_R062_T43PFN_20210701T033830": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 207536,
+        "valid_px_crop": 207536,
+        "bytes_on_disk": 2331983
+      },
+      {
+        "name": "2021-07-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210705T051651_R062_T43PFN_20210705T172544": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 157244,
+        "valid_px_crop": 157244,
+        "bytes_on_disk": 2322133
+      },
+      {
+        "name": "2021-07-10_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210710T051649_R062_T43PFN_20210710T171240": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-07-15_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210715T051651_R062_T43PFN_20210715T195026": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-07-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210720T051649_R062_T43PFN_20210720T152423": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 139540,
+        "valid_px_crop": 139540,
+        "bytes_on_disk": 2354049
+      },
+      {
+        "name": "2021-07-25_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210725T051651_R062_T43PFN_20210726T060322": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 20724,
+        "valid_px_crop": 20724,
+        "bytes_on_disk": 2241947
+      },
+      {
+        "name": "2021-07-30_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210730T051649_R062_T43PFN_20210730T163748": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 53236,
+        "valid_px_crop": 53236,
+        "bytes_on_disk": 2372146
+      },
+      {
+        "name": "2021-08-04_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210804T051651_R062_T43PFN_20210804T154520": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 16376,
+        "valid_px_crop": 16376,
+        "bytes_on_disk": 2056291
+      },
+      {
+        "name": "2021-08-09_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210809T051649_R062_T43PFN_20210809T144752": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 29776,
+        "valid_px_crop": 29776,
+        "bytes_on_disk": 2321750
+      },
+      {
+        "name": "2021-08-14_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210814T051651_R062_T43PFN_20210814T160707": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-08-19_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210819T051649_R062_T43PFN_20210819T170800": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-08-24_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20210824T051651_R062_T43PFN_20210824T153136": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 17572,
+        "valid_px_crop": 17572,
+        "bytes_on_disk": 2299179
+      },
+      {
+        "name": "2021-08-29_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210829T051649_R062_T43PFN_20210829T214508": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-03_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210903T051651_R062_T43PFN_20210903T120115": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-08_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210908T051649_R062_T43PFN_20210908T200100": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-13_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210913T051651_R062_T43PFN_20210913T195934": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-18_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20210918T051649_R062_T43PFN_20210918T172804": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-23_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20210923T051651_R062_T43PFN_20210923T203708": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-09-28_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20210928T051649_R062_T43PFN_20210928T214546": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 28192,
+        "valid_px_crop": 28192,
+        "bytes_on_disk": 2280712
+      },
+      {
+        "name": "2021-10-03_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211003T051701_R062_T43PFN_20211003T175508": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 8,
+        "valid_px_crop": 8,
+        "bytes_on_disk": 2260611
+      },
+      {
+        "name": "2021-10-08_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20211008T051709_R062_T43PFN_20211008T162353": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-10-13_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211013T051751_R062_T43PFN_20211013T195614": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 1700,
+        "valid_px_crop": 1700,
+        "bytes_on_disk": 1915725
+      },
+      {
+        "name": "2021-11-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211107T052019_R062_T43PFN_20211115T211155": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 640,
+        "valid_px_crop": 640,
+        "bytes_on_disk": 2311912
+      },
+      {
+        "name": "2021-11-12_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20211112T052051_R062_T43PFN_20211114T003325": "03.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2021-11-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211117T052109_R062_T43PFN_20211117T202006": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 7816,
+        "valid_px_crop": 7816,
+        "bytes_on_disk": 2287853
+      },
+      {
+        "name": "2021-11-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211122T052121_R062_T43PFN_20211122T193200": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 14892,
+        "valid_px_crop": 14892,
+        "bytes_on_disk": 2315002
+      },
+      {
+        "name": "2021-11-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211127T052139_R062_T43PFN_20211128T061907": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 280,
+        "valid_px_crop": 280,
+        "bytes_on_disk": 2261817
+      },
+      {
+        "name": "2021-12-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211202T052201_R062_T43PFN_20211202T180425": "03.00",
+          "S2A_MSIL2A_20211202T052201_R062_T43PFN_20230130T002030": "04.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 28152,
+        "valid_px_crop": 28152,
+        "bytes_on_disk": 2382701
+      },
+      {
+        "name": "2021-12-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211207T052209_R062_T43PFN_20211207T193839": "03.00",
+          "S2B_MSIL2A_20211207T052209_R062_T43PFN_20230129T210043": "04.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 101304,
+        "valid_px_crop": 101304,
+        "bytes_on_disk": 2372146
+      },
+      {
+        "name": "2021-12-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211212T052221_R062_T43PFN_20211212T215118": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 114236,
+        "valid_px_crop": 114233,
+        "bytes_on_disk": 2378941
+      },
+      {
+        "name": "2021-12-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211217T052219_R062_T43PFN_20211217T174547": "03.00",
+          "S2B_MSIL2A_20211217T052219_R062_T43PFN_20230129T052958": "04.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 325956,
+        "valid_px_crop": 325772,
+        "bytes_on_disk": 2123476
+      },
+      {
+        "name": "2021-12-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20211222T052231_R062_T43PFN_20211223T054657": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 219752,
+        "valid_px_crop": 219750,
+        "bytes_on_disk": 2290996
+      },
+      {
+        "name": "2021-12-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20211227T052229_R062_T43PFN_20211227T183814": "03.00",
+          "S2B_MSIL2A_20211227T052229_R062_T43PFN_20230125T153556": "04.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 325628,
+        "valid_px_crop": 325396,
+        "bytes_on_disk": 2134318
+      },
+      {
+        "name": "2022-01-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220101T052231_R062_T43PFN_20220102T025204": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 179972,
+        "valid_px_crop": 179972,
+        "bytes_on_disk": 2342281
+      },
+      {
+        "name": "2022-01-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220106T052209_R062_T43PFN_20220106T194209": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 324180,
+        "valid_px_crop": 323991,
+        "bytes_on_disk": 2143425
+      },
+      {
+        "name": "2022-01-11_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220111T052201_R062_T43PFN_20220112T075715": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 237980,
+        "valid_px_crop": 237980,
+        "bytes_on_disk": 2231191
+      },
+      {
+        "name": "2022-01-16_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220116T052149_R062_T43PFN_20220116T190359": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 159436,
+        "valid_px_crop": 159436,
+        "bytes_on_disk": 2359727
+      },
+      {
+        "name": "2022-01-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220121T052121_R062_T43PFN_20220122T015619": "03.00"
+        },
+        "used_baselines": [
+          "03.00"
+        ],
+        "scl_valid_px_crop": 325584,
+        "valid_px_crop": 325529,
+        "bytes_on_disk": 2156137
+      },
+      {
+        "name": "2022-01-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220126T052059_R062_T43PFN_20220211T172716": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 70100,
+        "valid_px_crop": 70100,
+        "bytes_on_disk": 2359434
+      },
+      {
+        "name": "2022-01-31_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220131T052041_R062_T43PFN_20220216T155526": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 72168,
+        "valid_px_crop": 72168,
+        "bytes_on_disk": 2350395
+      },
+      {
+        "name": "2022-02-05_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220205T052009_R062_T43PFN_20220219T004231": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 325764,
+        "valid_px_crop": 325717,
+        "bytes_on_disk": 2208998
+      },
+      {
+        "name": "2022-02-10_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220210T051941_R062_T43PFN_20220221T055109": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 299956,
+        "valid_px_crop": 299956,
+        "bytes_on_disk": 2226474
+      },
+      {
+        "name": "2022-02-15_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220215T051909_R062_T43PFN_20220223T124605": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 110824,
+        "valid_px_crop": 110824,
+        "bytes_on_disk": 2347509
+      },
+      {
+        "name": "2022-02-20_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220220T051841_R062_T43PFN_20220225T204703": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 256040,
+        "valid_px_crop": 256039,
+        "bytes_on_disk": 2269193
+      },
+      {
+        "name": "2022-02-25_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220225T051759_R062_T43PFN_20220301T210124": "04.00",
+          "S2B_MSIL2A_20220225T051759_R062_T43PFN_20240531T110215": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 326280,
+        "valid_px_crop": 326252,
+        "bytes_on_disk": 2213574
+      },
+      {
+        "name": "2022-03-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220302T051731_R062_T43PFN_20220304T025105": "04.00",
+          "S2A_MSIL2A_20220302T051731_R062_T43PFN_20240529T002750": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 4496,
+        "valid_px_crop": 4496,
+        "bytes_on_disk": 2050924
+      },
+      {
+        "name": "2022-03-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220307T051649_R062_T43PFN_20220307T160218": "04.00",
+          "S2B_MSIL2A_20220307T051649_R062_T43PFN_20240524T200103": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 326292,
+        "valid_px_crop": 326292,
+        "bytes_on_disk": 2224804
+      },
+      {
+        "name": "2022-03-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220312T051651_R062_T43PFN_20220312T202725": "04.00",
+          "S2A_MSIL2A_20220312T051651_R062_T43PFN_20240527T175129": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 326264,
+        "valid_px_crop": 326264,
+        "bytes_on_disk": 2220733
+      },
+      {
+        "name": "2022-03-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220317T051649_R062_T43PFN_20220317T144541": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 53892,
+        "valid_px_crop": 53892,
+        "bytes_on_disk": 2196322
+      },
+      {
+        "name": "2022-03-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220322T051651_R062_T43PFN_20220322T190411": "04.00",
+          "S2A_MSIL2A_20220322T051651_R062_T43PFN_20240530T090627": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 21412,
+        "valid_px_crop": 21412,
+        "bytes_on_disk": 2334779
+      },
+      {
+        "name": "2022-03-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220327T051649_R062_T43PFN_20220327T201641": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 145472,
+        "valid_px_crop": 145472,
+        "bytes_on_disk": 2317934
+      },
+      {
+        "name": "2022-04-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220401T051651_R062_T43PFN_20220401T161953": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 75140,
+        "valid_px_crop": 75140,
+        "bytes_on_disk": 2338469
+      },
+      {
+        "name": "2022-04-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220406T051649_R062_T43PFN_20220406T173132": "04.00",
+          "S2B_MSIL2A_20220406T051649_R062_T43PFN_20240527T212906": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 195492,
+        "valid_px_crop": 195492,
+        "bytes_on_disk": 2315767
+      },
+      {
+        "name": "2022-04-11_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220411T051651_R062_T43PFN_20220412T012723": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-04-16_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220416T051649_R062_T43PFN_20220416T144808": "04.00",
+          "S2B_MSIL2A_20220416T051649_R062_T43PFN_20240608T052502": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 221940,
+        "valid_px_crop": 221940,
+        "bytes_on_disk": 2297221
+      },
+      {
+        "name": "2022-04-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220421T051701_R062_T43PFN_20220421T215837": "04.00",
+          "S2A_MSIL2A_20220421T051701_R062_T43PFN_20240602T220008": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 220092,
+        "valid_px_crop": 220092,
+        "bytes_on_disk": 2292211
+      },
+      {
+        "name": "2022-04-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220426T051649_R062_T43PFN_20220427T023118": "04.00",
+          "S2B_MSIL2A_20220426T051649_R062_T43PFN_20240606T064019": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 129840,
+        "valid_px_crop": 129840,
+        "bytes_on_disk": 2355495
+      },
+      {
+        "name": "2022-05-01_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220501T051701_R062_T43PFN_20220501T231027": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 54656,
+        "valid_px_crop": 54656,
+        "bytes_on_disk": 2184333
+      },
+      {
+        "name": "2022-05-06_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220506T051649_R062_T43PFN_20220507T083845": "04.00",
+          "S2B_MSIL2A_20220506T051649_R062_T43PFN_20240628T221706": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 60012,
+        "valid_px_crop": 60012,
+        "bytes_on_disk": 2315932
+      },
+      {
+        "name": "2022-05-11_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220511T051651_R062_T43PFN_20220512T041514": "04.00",
+          "S2A_MSIL2A_20220511T051651_R062_T43PFN_20240616T003128": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-05-16_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220516T051649_R062_T43PFN_20220518T120124": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 4,
+        "valid_px_crop": 4,
+        "bytes_on_disk": 2261733
+      },
+      {
+        "name": "2022-05-21_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220521T051701_R062_T43PFN_20220522T112448": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 5216,
+        "valid_px_crop": 5216,
+        "bytes_on_disk": 1955508
+      },
+      {
+        "name": "2022-05-26_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220526T051649_R062_T43PFN_20220527T074354": "04.00",
+          "S2B_MSIL2A_20220526T051649_R062_T43PFN_20240614T175504": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 77684,
+        "valid_px_crop": 77684,
+        "bytes_on_disk": 2354657
+      },
+      {
+        "name": "2022-05-31_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220531T051701_R062_T43PFN_20220601T054218": "04.00",
+          "S2A_MSIL2A_20220531T051701_R062_T43PFN_20240614T023045": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-06-05_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220605T051649_R062_T43PFN_20220605T182511": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 74524,
+        "valid_px_crop": 74524,
+        "bytes_on_disk": 2323911
+      },
+      {
+        "name": "2022-06-10_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220610T051701_R062_T43PFN_20220611T013223": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-06-15_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220615T051659_R062_T43PFN_20220616T025538": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-06-20_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220620T051701_R062_T43PFN_20220621T124142": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 14884,
+        "valid_px_crop": 14884,
+        "bytes_on_disk": 2337239
+      },
+      {
+        "name": "2022-06-25_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220625T051659_R062_T43PFN_20220625T171521": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-06-30_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220630T051701_R062_T43PFN_20220630T224729": "04.00",
+          "S2A_MSIL2A_20220630T051701_R062_T43PFN_20240630T113701": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-07-05_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220705T051659_R062_T43PFN_20220707T021758": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 392,
+        "valid_px_crop": 392,
+        "bytes_on_disk": 1424320
+      },
+      {
+        "name": "2022-07-10_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220710T051701_R062_T43PFN_20220712T074114": "04.00",
+          "S2A_MSIL2A_20220710T051701_R062_T43PFN_20240714T011641": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-07-15_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220715T051659_R062_T43PFN_20220715T145539": "04.00",
+          "S2B_MSIL2A_20220715T051659_R062_T43PFN_20240712T071034": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-07-20_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220720T051701_R062_T43PFN_20220720T182625": "04.00",
+          "S2A_MSIL2A_20220720T051701_R062_T43PFN_20240718T021838": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-07-25_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220725T051659_R062_T43PFN_20220726T204205": "04.00",
+          "S2B_MSIL2A_20220725T051659_R062_T43PFN_20240714T044453": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 4376,
+        "valid_px_crop": 4376,
+        "bytes_on_disk": 2224190
+      },
+      {
+        "name": "2022-07-30_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220730T051701_R062_T43PFN_20220731T091750": "04.00",
+          "S2A_MSIL2A_20220730T051701_R062_T43PFN_20240716T142111": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 211848,
+        "valid_px_crop": 211848,
+        "bytes_on_disk": 2314861
+      },
+      {
+        "name": "2022-08-04_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220804T051659_R062_T43PFN_20220804T153434": "04.00",
+          "S2B_MSIL2A_20220804T051659_R062_T43PFN_20240709T042431": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-08-09_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220809T051701_R062_T43PFN_20220810T200556": "04.00",
+          "S2A_MSIL2A_20220809T051701_R062_T43PFN_20240711T213933": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-08-14_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220814T051659_R062_T43PFN_20220814T124706": "04.00",
+          "S2B_MSIL2A_20220814T051659_R062_T43PFN_20240708T035149": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-08-19_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220819T051701_R062_T43PFN_20220819T183622": "04.00",
+          "S2A_MSIL2A_20220819T051701_R062_T43PFN_20240720T025705": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 2064,
+        "valid_px_crop": 2064,
+        "bytes_on_disk": 2309288
+      },
+      {
+        "name": "2022-08-24_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20220824T051649_R062_T43PFN_20220825T025133": "04.00",
+          "S2B_MSIL2A_20220824T051649_R062_T43PFN_20240704T164052": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-08-29_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220829T051701_R062_T43PFN_20220830T232637": "04.00",
+          "S2A_MSIL2A_20220829T051701_R062_T43PFN_20240703T091804": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-09-03_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220903T051649_R062_T43PFN_20220903T143853": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 3828,
+        "valid_px_crop": 3828,
+        "bytes_on_disk": 2340298
+      },
+      {
+        "name": "2022-09-08_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220908T051701_R062_T43PFN_20220908T161846": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-09-13_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220913T051649_R062_T43PFN_20220913T155651": "04.00",
+          "S2B_MSIL2A_20220913T051649_R062_T43PFN_20240726T121647": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 1436,
+        "valid_px_crop": 1436,
+        "bytes_on_disk": 2267660
+      },
+      {
+        "name": "2022-09-18_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20220918T051701_R062_T43PFN_20220918T224119": "04.00",
+          "S2A_MSIL2A_20220918T051701_R062_T43PFN_20240729T191940": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 4228,
+        "valid_px_crop": 4228,
+        "bytes_on_disk": 2294567
+      },
+      {
+        "name": "2022-09-23_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20220923T051649_R062_T43PFN_20220923T183531": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 66232,
+        "valid_px_crop": 66232,
+        "bytes_on_disk": 2364981
+      },
+      {
+        "name": "2022-09-28_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20220928T051701_R062_T43PFN_20220928T222115": "04.00",
+          "S2A_MSIL2A_20220928T051701_R062_T43PFN_20240730T213659": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-10-08_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221008T051721_R062_T43PFN_20221008T181849": "04.00",
+          "S2A_MSIL2A_20221008T051721_R062_T43PFN_20240725T073545": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 44492,
+        "valid_px_crop": 44492,
+        "bytes_on_disk": 2184056
+      },
+      {
+        "name": "2022-10-13_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20221013T051749_R062_T43PFN_20221013T161812": "04.00",
+          "S2B_MSIL2A_20221013T051749_R062_T43PFN_20240723T151658": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 54416,
+        "valid_px_crop": 54416,
+        "bytes_on_disk": 2365036
+      },
+      {
+        "name": "2022-10-18_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221018T051821_R062_T43PFN_20221018T172854": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 11044,
+        "valid_px_crop": 11044,
+        "bytes_on_disk": 2329520
+      },
+      {
+        "name": "2022-10-23_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20221023T051849_R062_T43PFN_20221023T235718": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 133920,
+        "valid_px_crop": 133920,
+        "bytes_on_disk": 2346685
+      },
+      {
+        "name": "2022-10-28_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221028T051931_R062_T43PFN_20221028T170043": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 74344,
+        "valid_px_crop": 74344,
+        "bytes_on_disk": 2353844
+      },
+      {
+        "name": "2022-11-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20221102T051949_R062_T43PFN_20221102T230030": "04.00",
+          "S2B_MSIL2A_20221102T051949_R062_T43PFN_20240803T192759": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 192988,
+        "valid_px_crop": 192955,
+        "bytes_on_disk": 2294783
+      },
+      {
+        "name": "2022-11-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221107T052021_R062_T43PFN_20221107T222708": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 80100,
+        "valid_px_crop": 80100,
+        "bytes_on_disk": 2372438
+      },
+      {
+        "name": "2022-11-12_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20221112T052049_R062_T43PFN_20221112T190119": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-11-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221117T052111_R062_T43PFN_20221117T215745": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 145860,
+        "valid_px_crop": 145860,
+        "bytes_on_disk": 2304887
+      },
+      {
+        "name": "2022-11-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20221122T052119_R062_T43PFN_20221122T153952": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 214388,
+        "valid_px_crop": 214388,
+        "bytes_on_disk": 2243148
+      },
+      {
+        "name": "2022-11-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221127T052151_R062_T43PFN_20221201T033224": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 9100,
+        "valid_px_crop": 9100,
+        "bytes_on_disk": 2350457
+      },
+      {
+        "name": "2022-12-02_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20221202T052159_R062_T43PFN_20221203T190404": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-12-07_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20221207T052211_R062_T43PFN_20221208T050245": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-12-12_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20221212T052219_R062_T43PFN_20221212T185405": "04.00"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2022-12-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221217T052231_R062_T43PFN_20221217T234127": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 321020,
+        "valid_px_crop": 320973,
+        "bytes_on_disk": 2187640
+      },
+      {
+        "name": "2022-12-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20221222T052229_R062_T43PFN_20221224T005604": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 325760,
+        "valid_px_crop": 325608,
+        "bytes_on_disk": 2190840
+      },
+      {
+        "name": "2022-12-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20221227T052231_R062_T43PFN_20221227T141148": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 158924,
+        "valid_px_crop": 158924,
+        "bytes_on_disk": 2290320
+      },
+      {
+        "name": "2023-01-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230101T052229_R062_T43PFN_20230101T183621": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 318316,
+        "valid_px_crop": 318251,
+        "bytes_on_disk": 2206360
+      },
+      {
+        "name": "2023-01-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20230106T153256": "04.00",
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20240809T130314": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 324172,
+        "valid_px_crop": 324155,
+        "bytes_on_disk": 2195471
+      },
+      {
+        "name": "2023-01-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20230111T220739": "04.00",
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20240813T053234": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 324824,
+        "valid_px_crop": 324678,
+        "bytes_on_disk": 2198672
+      },
+      {
+        "name": "2023-01-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230116T052151_R062_T43PFN_20230116T150643": "04.00",
+          "S2A_MSIL2A_20230116T052151_R062_T43PFN_20240811T030821": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 81568,
+        "valid_px_crop": 81568,
+        "bytes_on_disk": 2193038
+      },
+      {
+        "name": "2023-01-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230121T052129_R062_T43PFN_20230122T181103": "04.00",
+          "S2B_MSIL2A_20230121T052129_R062_T43PFN_20240806T223644": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 268392,
+        "valid_px_crop": 268392,
+        "bytes_on_disk": 2208770
+      },
+      {
+        "name": "2023-01-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230126T052111_R062_T43PFN_20230127T073821": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 230032,
+        "valid_px_crop": 230032,
+        "bytes_on_disk": 2199903
+      },
+      {
+        "name": "2023-01-31_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230131T052039_R062_T43PFN_20230131T232546": "04.00",
+          "S2B_MSIL2A_20230131T052039_R062_T43PFN_20240811T061901": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-02-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230205T052011_R062_T43PFN_20230206T024226": "04.00",
+          "S2A_MSIL2A_20230205T052011_R062_T43PFN_20240817T043838": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 310180,
+        "valid_px_crop": 310180,
+        "bytes_on_disk": 2221077
+      },
+      {
+        "name": "2023-02-10_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230210T051949_R062_T43PFN_20230210T201625": "04.00",
+          "S2B_MSIL2A_20230210T051949_R062_T43PFN_20240813T085451": "05.10"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 324836,
+        "valid_px_crop": 324834,
+        "bytes_on_disk": 2210706
+      },
+      {
+        "name": "2023-02-15_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230215T051911_R062_T43PFN_20230215T165652": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 325660,
+        "valid_px_crop": 325650,
+        "bytes_on_disk": 2211457
+      },
+      {
+        "name": "2023-02-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230220T051839_R062_T43PFN_20230222T222802": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 89488,
+        "valid_px_crop": 89488,
+        "bytes_on_disk": 2365626
+      },
+      {
+        "name": "2023-02-25_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230225T051801_R062_T43PFN_20230228T162423": "04.00"
+        },
+        "used_baselines": [
+          "04.00"
+        ],
+        "scl_valid_px_crop": 326412,
+        "valid_px_crop": 326383,
+        "bytes_on_disk": 2217237
+      },
+      {
+        "name": "2023-03-02_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230302T051729_R062_T43PFN_20230302T103639": "05.09",
+          "S2B_MSIL2A_20230302T051729_R062_T43PFN_20240822T234845": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 326160,
+        "valid_px_crop": 326159,
+        "bytes_on_disk": 2229410
+      },
+      {
+        "name": "2023-03-07_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230307T051651_R062_T43PFN_20230307T104245": "05.09",
+          "S2A_MSIL2A_20230307T051651_R062_T43PFN_20240820T175656": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 7240,
+        "valid_px_crop": 7240,
+        "bytes_on_disk": 2184613
+      },
+      {
+        "name": "2023-03-12_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230312T051659_R062_T43PFN_20230312T112121": "05.09",
+          "S2B_MSIL2A_20230312T051659_R062_T43PFN_20240818T143446": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 326636,
+        "valid_px_crop": 326607,
+        "bytes_on_disk": 2223477
+      },
+      {
+        "name": "2023-03-17_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230317T051651_R062_T43PFN_20230317T103157": "05.09",
+          "S2A_MSIL2A_20230317T051651_R062_T43PFN_20240830T023937": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 36628,
+        "valid_px_crop": 36628,
+        "bytes_on_disk": 2397673
+      },
+      {
+        "name": "2023-03-22_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230322T051659_R062_T43PFN_20230322T112250": "05.09",
+          "S2B_MSIL2A_20230322T051659_R062_T43PFN_20240827T072230": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 326704,
+        "valid_px_crop": 326704,
+        "bytes_on_disk": 2223935
+      },
+      {
+        "name": "2023-03-27_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230327T051651_R062_T43PFN_20230327T101515": "05.09",
+          "S2A_MSIL2A_20230327T051651_R062_T43PFN_20240830T220612": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 265128,
+        "valid_px_crop": 265128,
+        "bytes_on_disk": 2270251
+      },
+      {
+        "name": "2023-04-01_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230401T051659_R062_T43PFN_20230401T112213": "05.09",
+          "S2B_MSIL2A_20230401T051659_R062_T43PFN_20240827T180629": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 243460,
+        "valid_px_crop": 243460,
+        "bytes_on_disk": 2292683
+      },
+      {
+        "name": "2023-04-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230406T051651_R062_T43PFN_20230406T122025": "05.09",
+          "S2A_MSIL2A_20230406T051651_R062_T43PFN_20240827T022814": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 94608,
+        "valid_px_crop": 94608,
+        "bytes_on_disk": 2375328
+      },
+      {
+        "name": "2023-04-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230411T051649_R062_T43PFN_20230411T113951": "05.09",
+          "S2B_MSIL2A_20230411T051649_R062_T43PFN_20240827T014719": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 273148,
+        "valid_px_crop": 273148,
+        "bytes_on_disk": 2266284
+      },
+      {
+        "name": "2023-04-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230416T051651_R062_T43PFN_20230416T112732": "05.09",
+          "S2A_MSIL2A_20230416T051651_R062_T43PFN_20240901T155652": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 321756,
+        "valid_px_crop": 321727,
+        "bytes_on_disk": 2240785
+      },
+      {
+        "name": "2023-04-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230421T051649_R062_T43PFN_20230421T122054": "05.09",
+          "S2B_MSIL2A_20230421T051649_R062_T43PFN_20240902T023432": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 23540,
+        "valid_px_crop": 23540,
+        "bytes_on_disk": 2380146
+      },
+      {
+        "name": "2023-04-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230426T051651_R062_T43PFN_20230426T193548": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 9344,
+        "valid_px_crop": 9344,
+        "bytes_on_disk": 2365013
+      },
+      {
+        "name": "2023-05-01_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230501T051649_R062_T43PFN_20230711T213548": "05.09",
+          "S2B_MSIL2A_20230501T051649_R062_T43PFN_20240831T111929": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-05-06_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230506T051651_R062_T43PFN_20230506T103833": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 78240,
+        "valid_px_crop": 78240,
+        "bytes_on_disk": 2381025
+      },
+      {
+        "name": "2023-05-11_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230511T051649_R062_T43PFN_20230511T112445": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 236268,
+        "valid_px_crop": 236268,
+        "bytes_on_disk": 2259094
+      },
+      {
+        "name": "2023-05-16_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230516T051651_R062_T43PFN_20230516T130304": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 265284,
+        "valid_px_crop": 265284,
+        "bytes_on_disk": 2253514
+      },
+      {
+        "name": "2023-05-21_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230521T051659_R062_T43PFN_20230521T102618": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 184976,
+        "valid_px_crop": 184976,
+        "bytes_on_disk": 2327443
+      },
+      {
+        "name": "2023-05-26_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230526T051651_R062_T43PFN_20230526T114322": "05.09",
+          "S2A_MSIL2A_20230526T051651_R062_T43PFN_20240907T051137": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 6092,
+        "valid_px_crop": 6092,
+        "bytes_on_disk": 1731893
+      },
+      {
+        "name": "2023-05-31_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230531T051659_R062_T43PFN_20230531T112252": "05.09",
+          "S2B_MSIL2A_20230531T051659_R062_T43PFN_20240908T040401": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-06-05_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230605T051651_R062_T43PFN_20230605T105005": "05.09",
+          "S2A_MSIL2A_20230605T051651_R062_T43PFN_20240911T104143": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 68720,
+        "valid_px_crop": 68720,
+        "bytes_on_disk": 2376955
+      },
+      {
+        "name": "2023-06-10_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230610T051659_R062_T43PFN_20230610T102748": "05.09",
+          "S2B_MSIL2A_20230610T051659_R062_T43PFN_20240909T041258": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 200,
+        "valid_px_crop": 200,
+        "bytes_on_disk": 1802326
+      },
+      {
+        "name": "2023-06-15_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230615T051651_R062_T43PFN_20230615T133010": "05.09",
+          "S2A_MSIL2A_20230615T051651_R062_T43PFN_20240911T095235": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 500,
+        "valid_px_crop": 500,
+        "bytes_on_disk": 2104250
+      },
+      {
+        "name": "2023-06-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230620T051659_R062_T43PFN_20230620T112802": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 320,
+        "valid_px_crop": 320,
+        "bytes_on_disk": 2265377
+      },
+      {
+        "name": "2023-06-25_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20230625T051651_R062_T43PFN_20230625T114439": "05.09"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-06-30_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230630T051659_R062_T43PFN_20230630T111438": "05.09",
+          "S2B_MSIL2A_20230630T051659_R062_T43PFN_20241012T035232": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 40940,
+        "valid_px_crop": 40940,
+        "bytes_on_disk": 2363784
+      },
+      {
+        "name": "2023-07-05_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20230705T051651_R062_T43PFN_20230705T121219": "05.09"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-07-10_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230710T051659_R062_T43PFN_20230710T150606": "05.09",
+          "S2B_MSIL2A_20230710T051659_R062_T43PFN_20241020T202946": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-07-15_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230715T051651_R062_T43PFN_20230715T111221": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 35288,
+        "valid_px_crop": 35288,
+        "bytes_on_disk": 2328744
+      },
+      {
+        "name": "2023-07-20_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230720T051659_R062_T43PFN_20230720T111026": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 936,
+        "valid_px_crop": 936,
+        "bytes_on_disk": 2065882
+      },
+      {
+        "name": "2023-07-25_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20230725T051651_R062_T43PFN_20230725T113239": "05.09",
+          "S2A_MSIL2A_20230725T051651_R062_T43PFN_20241014T023859": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-07-30_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230730T051659_R062_T43PFN_20230730T105231": "05.09",
+          "S2B_MSIL2A_20230730T051659_R062_T43PFN_20241019T203531": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 188,
+        "valid_px_crop": 188,
+        "bytes_on_disk": 2290211
+      },
+      {
+        "name": "2023-08-04_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230804T051651_R062_T43PFN_20230804T122817": "05.09",
+          "S2A_MSIL2A_20230804T051651_R062_T43PFN_20241026T185709": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 18040,
+        "valid_px_crop": 18040,
+        "bytes_on_disk": 2351418
+      },
+      {
+        "name": "2023-08-09_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230809T051659_R062_T43PFN_20230809T102234": "05.09",
+          "S2B_MSIL2A_20230809T051659_R062_T43PFN_20241016T112741": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 16884,
+        "valid_px_crop": 16884,
+        "bytes_on_disk": 2300004
+      },
+      {
+        "name": "2023-08-14_Sentinel-2A_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2A_MSIL2A_20230814T051701_R062_T43PFN_20230814T121616": "05.09",
+          "S2A_MSIL2A_20230814T051701_R062_T43PFN_20241018T115937": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-08-19_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230819T051659_R062_T43PFN_20230819T123437": "05.09",
+          "S2B_MSIL2A_20230819T051659_R062_T43PFN_20241017T145814": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 96,
+        "valid_px_crop": 96,
+        "bytes_on_disk": 1864234
+      },
+      {
+        "name": "2023-08-24_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230824T051701_R062_T43PFN_20230824T120951": "05.09",
+          "S2A_MSIL2A_20230824T051701_R062_T43PFN_20230824T131445": "05.09",
+          "S2A_MSIL2A_20230824T051701_R062_T43PFN_20240912T205502": "05.10",
+          "S2A_MSIL2A_20230824T051701_R062_T43PFN_20241019T011933": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 22432,
+        "valid_px_crop": 22432,
+        "bytes_on_disk": 2180493
+      },
+      {
+        "name": "2023-08-29_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230829T051659_R062_T43PFN_20230829T121657": "05.09",
+          "S2B_MSIL2A_20230829T051659_R062_T43PFN_20241017T003914": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 305224,
+        "valid_px_crop": 305224,
+        "bytes_on_disk": 2208546
+      },
+      {
+        "name": "2023-09-03_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230903T051701_R062_T43PFN_20230903T131556": "05.09",
+          "S2A_MSIL2A_20230903T051701_R062_T43PFN_20241104T051726": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 3824,
+        "valid_px_crop": 3824,
+        "bytes_on_disk": 2342634
+      },
+      {
+        "name": "2023-09-08_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230908T051659_R062_T43PFN_20230908T121552": "05.09",
+          "S2B_MSIL2A_20230908T051659_R062_T43PFN_20241104T062141": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-09-13_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230913T051651_R062_T43PFN_20230913T134550": "05.09",
+          "S2A_MSIL2A_20230913T051651_R062_T43PFN_20241105T155441": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 1420,
+        "valid_px_crop": 1420,
+        "bytes_on_disk": 2107932
+      },
+      {
+        "name": "2023-09-18_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20230918T051659_R062_T43PFN_20230918T123111": "05.09",
+          "S2B_MSIL2A_20230918T051659_R062_T43PFN_20241104T152724": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 2756,
+        "valid_px_crop": 2756,
+        "bytes_on_disk": 2047869
+      },
+      {
+        "name": "2023-09-23_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20230923T051651_R062_T43PFN_20230923T112233": "05.09",
+          "S2A_MSIL2A_20230923T051651_R062_T43PFN_20241106T011411": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 41532,
+        "valid_px_crop": 41532,
+        "bytes_on_disk": 2363652
+      },
+      {
+        "name": "2023-09-28_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20230928T051649_R062_T43PFN_20230928T115424": "05.09"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-10-03_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231003T051651_R062_T43PFN_20231003T130413": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 39584,
+        "valid_px_crop": 39584,
+        "bytes_on_disk": 2381937
+      },
+      {
+        "name": "2023-10-08_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231008T051709_R062_T43PFN_20231008T111739": "05.09",
+          "S2B_MSIL2A_20231008T051709_R062_T43PFN_20241028T024930": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 116180,
+        "valid_px_crop": 116180,
+        "bytes_on_disk": 2355186
+      },
+      {
+        "name": "2023-10-13_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231013T051741_R062_T43PFN_20231013T104032": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 261612,
+        "valid_px_crop": 261612,
+        "bytes_on_disk": 2233687
+      },
+      {
+        "name": "2023-10-18_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231018T051819_R062_T43PFN_20231018T111806": "05.09",
+          "S2B_MSIL2A_20231018T051819_R062_T43PFN_20241107T132649": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 239336,
+        "valid_px_crop": 239336,
+        "bytes_on_disk": 2263658
+      },
+      {
+        "name": "2023-10-23_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231023T051851_R062_T43PFN_20231023T103011": "05.09",
+          "S2A_MSIL2A_20231023T051851_R062_T43PFN_20241103T000103": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 232672,
+        "valid_px_crop": 232672,
+        "bytes_on_disk": 2300091
+      },
+      {
+        "name": "2023-10-28_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231028T051919_R062_T43PFN_20231028T093227": "05.09",
+          "S2B_MSIL2A_20231028T051919_R062_T43PFN_20241107T165628": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 22016,
+        "valid_px_crop": 22016,
+        "bytes_on_disk": 2342407
+      },
+      {
+        "name": "2023-11-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231102T051951_R062_T43PFN_20231102T115042": "05.09",
+          "S2A_MSIL2A_20231102T051951_R062_T43PFN_20241028T214724": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 130224,
+        "valid_px_crop": 130224,
+        "bytes_on_disk": 2357711
+      },
+      {
+        "name": "2023-11-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231107T052019_R062_T43PFN_20231107T091147": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 272732,
+        "valid_px_crop": 272732,
+        "bytes_on_disk": 2273629
+      },
+      {
+        "name": "2023-11-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231112T052041_R062_T43PFN_20231112T094528": "05.09",
+          "S2A_MSIL2A_20231112T052041_R062_T43PFN_20241025T104503": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 54556,
+        "valid_px_crop": 54556,
+        "bytes_on_disk": 2143547
+      },
+      {
+        "name": "2023-11-17_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231117T052109_R062_T43PFN_20231117T094622": "05.09",
+          "S2B_MSIL2A_20231117T052109_R062_T43PFN_20241102T220343": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 91780,
+        "valid_px_crop": 91780,
+        "bytes_on_disk": 2349016
+      },
+      {
+        "name": "2023-11-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231122T052121_R062_T43PFN_20231122T092244": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 175140,
+        "valid_px_crop": 175140,
+        "bytes_on_disk": 2307917
+      },
+      {
+        "name": "2023-11-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231127T052139_R062_T43PFN_20231127T091805": "05.09",
+          "S2B_MSIL2A_20231127T052139_R062_T43PFN_20241109T223304": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 187872,
+        "valid_px_crop": 187872,
+        "bytes_on_disk": 2305900
+      },
+      {
+        "name": "2023-12-02_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231202T052151_R062_T43PFN_20231202T092054": "05.09"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 146128,
+        "valid_px_crop": 146117,
+        "bytes_on_disk": 2307008
+      },
+      {
+        "name": "2023-12-07_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231207T052209_R062_T43PFN_20231207T091620": "05.09",
+          "S2B_MSIL2A_20231207T052209_R062_T43PFN_20241031T220714": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 46688,
+        "valid_px_crop": 46688,
+        "bytes_on_disk": 2376812
+      },
+      {
+        "name": "2023-12-12_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231212T052221_R062_T43PFN_20231213T030840": "05.09",
+          "S2A_MSIL2A_20231212T052221_R062_T43PFN_20241019T213134": "05.10"
+        },
+        "used_baselines": [
+          "05.09"
+        ],
+        "scl_valid_px_crop": 237956,
+        "valid_px_crop": 237956,
+        "bytes_on_disk": 2278654
+      },
+      {
+        "name": "2023-12-17_Sentinel-2B_62",
+        "status": "skipped_no_valid_pixel_in_crop",
+        "items": {
+          "S2B_MSIL2A_20231217T052229_R062_T43PFN_20231220T060912": "05.10"
+        },
+        "used_baselines": null,
+        "scl_valid_px_crop": 0,
+        "valid_px_crop": null,
+        "bytes_on_disk": null
+      },
+      {
+        "name": "2023-12-22_Sentinel-2A_62",
+        "status": "fetched",
+        "items": {
+          "S2A_MSIL2A_20231222T052231_R062_T43PFN_20231222T093744": "05.10"
+        },
+        "used_baselines": [
+          "05.10"
+        ],
+        "scl_valid_px_crop": 41512,
+        "valid_px_crop": 41512,
+        "bytes_on_disk": 2198102
+      },
+      {
+        "name": "2023-12-27_Sentinel-2B_62",
+        "status": "fetched",
+        "items": {
+          "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447": "05.10"
+        },
+        "used_baselines": [
+          "05.10"
+        ],
+        "scl_valid_px_crop": 325956,
+        "valid_px_crop": 325779,
+        "bytes_on_disk": 2186941
+      }
+    ]
+  },
+  "radiometry_check": {
+    "offset_rule": "boa_offset(s2:processing_baseline): -1000 for baseline >= 04.00, else 0, applied per item before reflectance and NDVI",
+    "implementation": "experiments/f13_b3_harmonic_season.py item_reflectance / mosaic_ndvi (the repo's fetch.reflectance applies one global -1000 and read_bands refuses baselines < 04.00, so it cannot serve a 2019-2023 archive)",
+    "items_by_baseline_used": {
+      "02.12": 142,
+      "03.00": 27,
+      "04.00": 57,
+      "05.09": 49,
+      "05.10": 1
+    },
+    "first_observation_with_baseline_ge_04.00": "2022-01-26",
+    "stable_pixel_step_at_2022_01_25": {
+      "change_date": "2022-01-25",
+      "days": 30,
+      "n_stable_px": 20032,
+      "n_dates_used": 8,
+      "dates_used": [
+        "2021-12-27",
+        "2022-01-01",
+        "2022-01-06",
+        "2022-01-11",
+        "2022-01-21",
+        "2022-02-05",
+        "2022-02-10",
+        "2022-02-20"
+      ],
+      "dates_excluded_low_validity": [
+        "2022-01-16",
+        "2022-01-26",
+        "2022-01-31",
+        "2022-02-15"
+      ],
+      "median_ndvi_per_date": {
+        "corrected": {
+          "2021-12-27": 0.8223909437656403,
+          "2022-01-01": 0.7658665478229523,
+          "2022-01-06": 0.8104422390460968,
+          "2022-01-11": 0.7773043811321259,
+          "2022-01-21": 0.835398256778717,
+          "2022-02-05": 0.8354453146457672,
+          "2022-02-10": 0.7444768846035004,
+          "2022-02-20": 0.7794427573680878
+        },
+        "uncorrected": {
+          "2021-12-27": 0.8223909437656403,
+          "2022-01-01": 0.7658665478229523,
+          "2022-01-06": 0.8104422390460968,
+          "2022-01-11": 0.7773043811321259,
+          "2022-01-21": 0.835398256778717,
+          "2022-02-05": 0.4893786609172821,
+          "2022-02-10": 0.44611474871635437,
+          "2022-02-20": 0.46685419976711273
+        }
+      },
+      "corrected": {
+        "change_date": "2022-01-25",
+        "days": 30,
+        "n_before": 5,
+        "n_after": 3,
+        "median_before": 0.8104422390460968,
+        "median_after": 0.7794427573680878,
+        "step": -0.030999481678009033
+      },
+      "uncorrected": {
+        "change_date": "2022-01-25",
+        "days": 30,
+        "n_before": 5,
+        "n_after": 3,
+        "median_before": 0.8104422390460968,
+        "median_after": 0.46685419976711273,
+        "step": -0.34358803927898407
+      }
+    },
+    "unit_test": "tests/test_f13.py::TestNoStepAtTheBaselineChange (stable synthetic series: flat when corrected, step > 0.2 when not)"
+  },
+  "status": "PASS",
+  "verdict": "TRUE",
+  "rule_applied": {
+    "TRUE": "relative FAR reduction >= 0.30",
+    "FALSE": "relative FAR reduction < 0.10",
+    "INCONCLUSIVE": "0.10 <= reduction < 0.30"
+  },
+  "preregistration": {
+    "sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+    "commit": "0978e8a924e9b104c50aac2a1db1c00a8d220718",
+    "experiment": "B3"
+  },
+  "verdict_basis": "relative FAR reduction (FAR_pool - FAR_harmonic) / FAR_pool at matched recall, point estimate, test-split windows",
+  "thresholds": {
+    "matched_ge_rth_largest_patch_maximum": {
+      "harmonic": 2.23171401045655,
+      "pool": 58.20264681997172
+    },
+    "sensitivity_strict_exceeds": {
+      "harmonic": 2.224213356961183,
+      "pool": 48.83039932349001
+    }
+  },
+  "far": {
+    "harmonic": {
+      "test": {
+        "estimate": 0.01524390243902439,
+        "lo": 0.0029583616972997506,
+        "hi": 0.03254437869822485,
+        "numerator": 5.0,
+        "denominator": 328.0,
+        "blocks": 91,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "all_windows": {
+        "numerator": 11.0,
+        "denominator": 657.0,
+        "estimate": 0.0167427701674277
+      }
+    },
+    "pool": {
+      "test": {
+        "estimate": 0.039634146341463415,
+        "lo": 0.013024095882402081,
+        "hi": 0.07076923076923076,
+        "numerator": 13.0,
+        "denominator": 328.0,
+        "blocks": 91,
+        "replicates": 2000,
+        "ci": 0.95,
+        "seed": 2024
+      },
+      "all_windows": {
+        "numerator": 29.0,
+        "denominator": 657.0,
+        "estimate": 0.0441400304414003
+      }
+    }
+  },
+  "recall": {
+    "harmonic": {
+      "0.15": {
+        "recall": 0.08,
+        "patches": 50,
+        "flagged": 4,
+        "ci": {
+          "estimate": 0.08,
+          "lo": 0.0,
+          "hi": 0.17307692307692307,
+          "numerator": 4.0,
+          "denominator": 50.0
+        }
+      },
+      "0.3": {
+        "recall": 0.8,
+        "patches": 50,
+        "flagged": 40,
+        "ci": {
+          "estimate": 0.8,
+          "lo": 0.6666666666666666,
+          "hi": 0.9130434782608695,
+          "numerator": 40.0,
+          "denominator": 50.0
+        }
+      },
+      "0.5": {
+        "recall": 1.0,
+        "patches": 50,
+        "flagged": 50,
+        "ci": {
+          "estimate": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "numerator": 50.0,
+          "denominator": 50.0
+        }
+      }
+    },
+    "pool": {
+      "0.15": {
+        "recall": 0.64,
+        "patches": 50,
+        "flagged": 32,
+        "ci": {
+          "estimate": 0.64,
+          "lo": 0.48936170212765956,
+          "hi": 0.7843867334167706,
+          "numerator": 32.0,
+          "denominator": 50.0
+        }
+      },
+      "0.3": {
+        "recall": 0.8,
+        "patches": 50,
+        "flagged": 40,
+        "ci": {
+          "estimate": 0.8,
+          "lo": 0.6665178571428574,
+          "hi": 0.9259259259259259,
+          "numerator": 40.0,
+          "denominator": 50.0
+        }
+      },
+      "0.5": {
+        "recall": 0.9,
+        "patches": 50,
+        "flagged": 45,
+        "ci": {
+          "estimate": 0.9,
+          "lo": 0.7884308510638298,
+          "hi": 0.9807692307692307,
+          "numerator": 45.0,
+          "denominator": 50.0
+        }
+      }
+    }
+  },
+  "relative_reduction": {
+    "estimate": 0.6153846153846154,
+    "lo": 0.0,
+    "hi": 0.9474999999999998,
+    "replicates": 2000,
+    "replicates_undefined": 1,
+    "seed": 2024,
+    "ci": 0.95,
+    "n_tiles": 91,
+    "far_pool": 0.039634146341463415,
+    "far_alt": 0.01524390243902439,
+    "numerator_pool": 13.0,
+    "denominator_pool": 328.0,
+    "numerator_alt": 5.0,
+    "denominator_alt": 328.0
+  },
+  "sensitivity_strict_exceeds": {
+    "relative_reduction": {
+      "estimate": 0.7058823529411765,
+      "lo": 0.3333333333333333,
+      "hi": 0.9583333333333334,
+      "replicates": 2000,
+      "replicates_undefined": 0,
+      "seed": 2024,
+      "ci": 0.95,
+      "n_tiles": 91,
+      "far_pool": 0.051829268292682924,
+      "far_alt": 0.01524390243902439,
+      "numerator_pool": 17.0,
+      "denominator_pool": 328.0,
+      "numerator_alt": 5.0,
+      "denominator_alt": 328.0
+    },
+    "far": {
+      "harmonic": 0.01524390243902439,
+      "pool": 0.051829268292682924
+    },
+    "note": "window flagged iff score > threshold with the threshold at the (r+1)-th largest patch maximum; flags more null windows than the >= reading"
+  },
+  "archive_diagnostics": {
+    "training_observations": 276,
+    "by_year": {
+      "2019": 57,
+      "2020": 56,
+      "2021": 51,
+      "2022": 51,
+      "2023": 61
+    },
+    "pixels_with_harmonic_fit": 327680,
+    "crop_px": 327680,
+    "n_valid_obs_per_pixel_quantiles": {
+      "0.05": 107.0,
+      "0.5": 134.0,
+      "0.95": 159.0
+    },
+    "median_resid_std": 0.1311665076400324,
+    "common_valid_px": 151750,
+    "common_valid_windows": 328,
+    "pool_dates": [
+      "2023-01-01",
+      "2023-01-06",
+      "2023-01-11"
+    ],
+    "target": "2023-12-27",
+    "patches": 50
+  },
+  "measurements": [
+    {
+      "name": "relative_FAR_reduction_harmonic_vs_pool",
+      "estimate": 0.6153846153846154,
+      "numerator": 8.0,
+      "denominator": 328.0,
+      "lo": 0.0,
+      "hi": 0.9474999999999998,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "(FAR_pool - FAR_harmonic) / FAR_pool at matched patch recall 0.80 (0.30 drop), test-split windows",
+      "far_pool": 0.039634146341463415,
+      "far_harmonic": 0.01524390243902439,
+      "flagged_pool": 13.0,
+      "flagged_harmonic": 5.0,
+      "valid_windows": 328.0,
+      "thresholds": {
+        "harmonic": 2.23171401045655,
+        "pool": 58.20264681997172
+      }
+    },
+    {
+      "name": "window_FAR_test_harmonic",
+      "estimate": 0.01524390243902439,
+      "numerator": 5.0,
+      "denominator": 328.0,
+      "lo": 0.0029583616972997506,
+      "hi": 0.03254437869822485,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows with >= 1 px score >= threshold",
+      "threshold": 2.23171401045655,
+      "recall_by_drop": {
+        "0.15": 0.08,
+        "0.3": 0.8,
+        "0.5": 1.0
+      }
+    },
+    {
+      "name": "window_FAR_test_pool",
+      "estimate": 0.039634146341463415,
+      "numerator": 13.0,
+      "denominator": 328.0,
+      "lo": 0.013024095882402081,
+      "hi": 0.07076923076923076,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows with >= 1 px score >= threshold",
+      "threshold": 58.20264681997172,
+      "recall_by_drop": {
+        "0.15": 0.64,
+        "0.3": 0.8,
+        "0.5": 0.9
+      }
+    }
+  ],
+  "interpretations": [
+    "Harmonic model: per-pixel OLS of NDVI on [1, t/365.25, cos/sin(2 pi k t/365.25), k = 1, 2] over every valid archive observation dated 2019-01-01..2023-12-26 (the Jan 2023 pool dates are among them); residual std on n - 6 degrees of freedom; < 12 valid observations or an ill-conditioned normal matrix -> NO_DATA.",
+    "Pool baseline = the clear January 2023 dates B1 accepted (2023-01-01, 01-06, 01-11), taken from the archive's own corrected NDVI so both methods share one radiometric product.",
+    "Both methods are scored on a COMMON valid mask: target valid, all pool dates valid, a finite harmonic fit, outside the disks and footprint; windows are valid if they hold a finite score, so the FAR denominators are identical.",
+    "Matched power: 50 injected patches (10 x 10 px) in valid test-split windows, ONE set of positions shared by all three drops; NDVI falls by exactly the drop; each method's threshold is the r-th largest patch maximum at the 0.30 drop, r = ceil(0.8 n), so patch recall at 0.30 is >= 0.80 by construction (in-sample). Null windows never enter the threshold.",
+    "Reading of the yaml's \"exceeds\": the main result flags score >= threshold (the supremum reading); a strict > threshold at the next-lower patch maximum is reported as a labelled sensitivity.",
+    "CI: block bootstrap over test-split tiles (32 x 32 px at 10 m = 128 px at 2.5 m), 2000 reps, seed 2024, resampling the SAME tiles for both methods with each method's threshold held fixed.",
+    "FAR is the test-split window FAR (windows with >= 1 flagged px / valid windows); the all-window FAR is secondary.",
+    "The target 2023-12-27 is excluded from the fit; the stable-pixel check uses pixels valid on every used date within 30 days of 2022-01-25 (dates with < 50 % valid crop pixels listed and left out) and NDVI std <= 0.05."
+  ],
+  "limitations": [
+    "One target date, one tile, one 640 x 512 crop; a single pool of three dates against a model fitted on 2019-2023, so the FAR rests on one realisation of the null per method.",
+    "The null windows contain whatever real change happened between the baselines and 2023-12-27 (it is not a verified no-change scene); both methods share it.",
+    "Matching uses 50 patches, so the threshold is the 40th largest of 50 maxima and recall steps are 0.02.",
+    "The pool method uses three dates (pool std ddof 1 from three samples is very noisy), which is the yaml's baseline; a longer pool would change its null FAR.",
+    "Reprocessed duplicate items (baseline 05.xx, 2024) exist for some acquisitions; the original item is mosaicked first, as in the existing fetch path."
+  ],
+  "runtime_seconds": 4.5,
+  "reproduction_check": null,
+  "experiment": "f13_b3",
+  "started_utc": "2026-10-04T19:51:09.731010+00:00",
+  "finished_utc": "2026-10-04T19:51:14.231816+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}
