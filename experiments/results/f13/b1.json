@@ -1,0 +1,973 @@
+{
+  "evidence": "real",
+  "experiment_id": "B1",
+  "reproduction_check": {
+    "rule_10m": {
+      "measured": [
+        11.0,
+        1962.0
+      ],
+      "target": [
+        11.0,
+        1962.0
+      ],
+      "estimate": 0.0056065239551478085,
+      "target_estimate": 0.0056065239551478085,
+      "folds": 6,
+      "pass": true
+    },
+    "gate_v2": {
+      "tau_measured": 3.8891176504391876,
+      "tau_target": 3.8891176504391876,
+      "test_window_far_measured": [
+        64.0,
+        981.0
+      ],
+      "test_window_far_target": [
+        64.0,
+        981.0
+      ],
+      "pass": true
+    },
+    "pass": true
+  },
+  "fetch_log": {
+    "windows": {
+      "pre_window_2023_01": [
+        "2023-01-01",
+        "2023-01-31"
+      ],
+      "post_date": [
+        "2023-12-27",
+        "2023-12-27"
+      ]
+    },
+    "rule": {
+      "max_cloud_shadow_pct": 10,
+      "min_coverage_pct": 99,
+      "function": "experiments.x6_season_latency.clear_dates_in_window"
+    },
+    "stac_items": {
+      "pre_window_2023_01": {
+        "2023-01-01|Sentinel-2B|62": [
+          {
+            "id": "S2B_MSIL2A_20230101T052229_R062_T43PFN_20230101T183621",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-01T05:22:29.024000Z"
+          }
+        ],
+        "2023-01-06|Sentinel-2A|62": [
+          {
+            "id": "S2A_MSIL2A_20230106T052211_R062_T43PFN_20230106T153256",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-06T05:22:11.024000Z"
+          },
+          {
+            "id": "S2A_MSIL2A_20230106T052211_R062_T43PFN_20240809T130314",
+            "processing_baseline": "05.10",
+            "datetime": "2023-01-06T05:22:11.024000Z"
+          }
+        ],
+        "2023-01-11|Sentinel-2B|62": [
+          {
+            "id": "S2B_MSIL2A_20230111T052159_R062_T43PFN_20230111T220739",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-11T05:21:59.024000Z"
+          },
+          {
+            "id": "S2B_MSIL2A_20230111T052159_R062_T43PFN_20240813T053234",
+            "processing_baseline": "05.10",
+            "datetime": "2023-01-11T05:21:59.024000Z"
+          }
+        ],
+        "2023-01-16|Sentinel-2A|62": [
+          {
+            "id": "S2A_MSIL2A_20230116T052151_R062_T43PFN_20230116T150643",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-16T05:21:51.024000Z"
+          },
+          {
+            "id": "S2A_MSIL2A_20230116T052151_R062_T43PFN_20240811T030821",
+            "processing_baseline": "05.10",
+            "datetime": "2023-01-16T05:21:51.024000Z"
+          }
+        ],
+        "2023-01-21|Sentinel-2B|62": [
+          {
+            "id": "S2B_MSIL2A_20230121T052129_R062_T43PFN_20230122T181103",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-21T05:21:29.024000Z"
+          },
+          {
+            "id": "S2B_MSIL2A_20230121T052129_R062_T43PFN_20240806T223644",
+            "processing_baseline": "05.10",
+            "datetime": "2023-01-21T05:21:29.024000Z"
+          }
+        ],
+        "2023-01-26|Sentinel-2A|62": [
+          {
+            "id": "S2A_MSIL2A_20230126T052111_R062_T43PFN_20230127T073821",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-26T05:21:11.024000Z"
+          }
+        ],
+        "2023-01-31|Sentinel-2B|62": [
+          {
+            "id": "S2B_MSIL2A_20230131T052039_R062_T43PFN_20230131T232546",
+            "processing_baseline": "04.00",
+            "datetime": "2023-01-31T05:20:39.024000Z"
+          },
+          {
+            "id": "S2B_MSIL2A_20230131T052039_R062_T43PFN_20240811T061901",
+            "processing_baseline": "05.10",
+            "datetime": "2023-01-31T05:20:39.024000Z"
+          }
+        ]
+      },
+      "post_date": {
+        "2023-12-27|Sentinel-2B|62": [
+          {
+            "id": "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447",
+            "processing_baseline": "05.10",
+            "datetime": "2023-12-27T05:22:29.024000Z"
+          }
+        ]
+      }
+    },
+    "dates": {
+      "2023-01-01": {
+        "items": [
+          "S2B_MSIL2A_20230101T052229_R062_T43PFN_20230101T183621"
+        ],
+        "baselines": [
+          "04.00"
+        ],
+        "file": "data/experiments-cache/f13/wayanad_s2/2023-01-01.npz",
+        "bytes_on_disk": 5782580,
+        "sha256": "9e5f677ef2d8c924ac663d59125da7dac0c7906fb20fae263a90e747b441be19"
+      },
+      "2023-01-06": {
+        "items": [
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20230106T153256",
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20240809T130314"
+        ],
+        "baselines": [
+          "04.00",
+          "05.10"
+        ],
+        "file": "data/experiments-cache/f13/wayanad_s2/2023-01-06.npz",
+        "bytes_on_disk": 5695692,
+        "sha256": "2c6128e419caf2ca70e6dd45b4e82e882ba4c563f0d969a5f0cce1286c19515e"
+      },
+      "2023-01-11": {
+        "items": [
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20230111T220739",
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20240813T053234"
+        ],
+        "baselines": [
+          "04.00",
+          "05.10"
+        ],
+        "file": "data/experiments-cache/f13/wayanad_s2/2023-01-11.npz",
+        "bytes_on_disk": 5747070,
+        "sha256": "f47ca54999b7ecfe6cb24228377d518c957231277a91fcd16b0a306490d078d7"
+      },
+      "2023-12-27": {
+        "items": [
+          "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447"
+        ],
+        "baselines": [
+          "05.10"
+        ],
+        "file": "data/experiments-cache/f13/wayanad_s2/2023-12-27.npz",
+        "bytes_on_disk": 5696372,
+        "sha256": "c07317e55bd1ccb94e5e1fece672fbf8f84ea3720326da5510d5bdd0dbd353d2"
+      },
+      "2024-01-16": {
+        "file": "data/experiments-cache/f13/wayanad_s2/2024-01-16.npz",
+        "copied_from": "data/experiments-cache/wayanad_evidence/2024-01-16.npz",
+        "bytes_on_disk": 5674735,
+        "sha256": "9e07cbc596ad9428dfeff36ddd0958de18f6a24d8a65697d727bb1d2a700872b",
+        "items": null,
+        "baselines": null
+      },
+      "2024-01-21": {
+        "file": "data/experiments-cache/f13/wayanad_s2/2024-01-21.npz",
+        "copied_from": "data/experiments-cache/wayanad_evidence/2024-01-21.npz",
+        "bytes_on_disk": 5727421,
+        "sha256": "df20330c24f966dd7738f268149467ed60e366336ce10e72507e4863b7ef5e82",
+        "items": null,
+        "baselines": null
+      },
+      "2024-01-26": {
+        "file": "data/experiments-cache/f13/wayanad_s2/2024-01-26.npz",
+        "copied_from": "data/experiments-cache/wayanad_evidence/2024-01-26.npz",
+        "bytes_on_disk": 5709640,
+        "sha256": "710feca4e16b8646b669a07e1978afc6eb9547f799a2d37085ce7cb91c480437",
+        "items": null,
+        "baselines": null
+      }
+    },
+    "bytes_received": 50852697,
+    "byte_cap": 300000000
+  },
+  "dates_table": {
+    "pre_window_2023_01": [
+      {
+        "date": "2023-01-01",
+        "cloud_shadow_pct_aoi": 3.8158416748046875,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2B_MSIL2A_20230101T052229_R062_T43PFN_20230101T183621"
+        ],
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "date": "2023-01-06",
+        "cloud_shadow_pct_aoi": 2.6714324951171875,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20230106T153256",
+          "S2A_MSIL2A_20230106T052211_R062_T43PFN_20240809T130314"
+        ],
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "date": "2023-01-11",
+        "cloud_shadow_pct_aoi": 1.5537261962890625,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20230111T220739",
+          "S2B_MSIL2A_20230111T052159_R062_T43PFN_20240813T053234"
+        ],
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "date": "2023-01-16",
+        "cloud_shadow_pct_aoi": 72.43194580078125,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2A_MSIL2A_20230116T052151_R062_T43PFN_20230116T150643",
+          "S2A_MSIL2A_20230116T052151_R062_T43PFN_20240811T030821"
+        ],
+        "accepted": false,
+        "reason": "cloud+shadow 72.43194580078125 % > 10 %"
+      },
+      {
+        "date": "2023-01-21",
+        "cloud_shadow_pct_aoi": 25.204849243164062,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2B_MSIL2A_20230121T052129_R062_T43PFN_20230122T181103",
+          "S2B_MSIL2A_20230121T052129_R062_T43PFN_20240806T223644"
+        ],
+        "accepted": false,
+        "reason": "cloud+shadow 25.204849243164062 % > 10 %"
+      },
+      {
+        "date": "2023-01-26",
+        "cloud_shadow_pct_aoi": 27.399826049804688,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2A_MSIL2A_20230126T052111_R062_T43PFN_20230127T073821"
+        ],
+        "accepted": false,
+        "reason": "cloud+shadow 27.399826049804688 % > 10 %"
+      },
+      {
+        "date": "2023-01-31",
+        "cloud_shadow_pct_aoi": 99.94888305664062,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2B_MSIL2A_20230131T052039_R062_T43PFN_20230131T232546",
+          "S2B_MSIL2A_20230131T052039_R062_T43PFN_20240811T061901"
+        ],
+        "accepted": false,
+        "reason": "cloud+shadow 99.94888305664062 % > 10 %"
+      }
+    ],
+    "post_date": [
+      {
+        "date": "2023-12-27",
+        "cloud_shadow_pct_aoi": 1.026153564453125,
+        "coverage_pct": 100.0,
+        "item_ids": [
+          "S2B_MSIL2A_20231227T052229_R062_T43PFN_20231227T091447"
+        ],
+        "accepted": true,
+        "reason": null
+      }
+    ]
+  },
+  "comparisons": {
+    "primary_non_event": {
+      "name": "primary_non_event",
+      "pre_dates": [
+        "2023-01-01",
+        "2023-01-06",
+        "2023-01-11"
+      ],
+      "post_date": "2023-12-27",
+      "n_pre": 3,
+      "valid_px_2p5m": 2428016,
+      "windows_valid": 657,
+      "rule_10m": {
+        "far_test": {
+          "window": {
+            "estimate": 0.027439024390243903,
+            "lo": 0.009145646452665135,
+            "hi": 0.05001865671641781,
+            "numerator": 9.0,
+            "denominator": 328.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.0004216407094104936,
+            "lo": 0.00010285673394096663,
+            "hi": 0.0008231871058249887,
+            "numerator": 512.0,
+            "denominator": 1214304.0,
+            "blocks": 91
+          }
+        },
+        "far_all_windows": {
+          "window": {
+            "estimate": 0.0243531202435312,
+            "lo": 0.011665080709735091,
+            "hi": 0.03957684129805847,
+            "numerator": 16.0,
+            "denominator": 657.0,
+            "blocks": 182,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.00042833325645300524,
+            "lo": 0.0001857889767481059,
+            "hi": 0.0007072917423150449,
+            "numerator": 1040.0,
+            "denominator": 2428016.0,
+            "blocks": 182
+          }
+        },
+        "within_season": {
+          "estimate": 0.0056065239551478085,
+          "lo": 0.002006999422753962,
+          "hi": 0.010736333610531435,
+          "numerator": 11,
+          "denominator": 1962,
+          "source": "f1.json gates.rule_10m.test_split.pooled_window_far"
+        },
+        "power": {
+          "0.15": {
+            "drop": 0.15,
+            "recall": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 50.0,
+              "blocks": 36,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 0,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 0.0,
+            "denominator_excluding_those": 50
+          },
+          "0.3": {
+            "drop": 0.3,
+            "recall": {
+              "estimate": 0.86,
+              "lo": 0.7539959016393444,
+              "hi": 0.9591836734693877,
+              "numerator": 43.0,
+              "denominator": 50.0,
+              "blocks": 38,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 43,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 0.86,
+            "denominator_excluding_those": 50
+          },
+          "0.5": {
+            "drop": 0.5,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 50
+          }
+        },
+        "vacuous_zero_power": false,
+        "verdict": "TRUE"
+      },
+      "gate_v2": {
+        "status": "ok",
+        "tau": 3.8891176504391876,
+        "lam": 0.0,
+        "endmember_ndvi_low": 0.25,
+        "endmember_counts": {
+          "e_v": 562453,
+          "e_b": 301
+        },
+        "far_test": {
+          "window": {
+            "estimate": 0.6798780487804879,
+            "lo": 0.6230529595015576,
+            "hi": 0.7353933933933934,
+            "numerator": 223.0,
+            "denominator": 328.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.018080315967006613,
+            "lo": 0.015167968376245585,
+            "hi": 0.021323730898326936,
+            "numerator": 21955.0,
+            "denominator": 1214304.0,
+            "blocks": 91
+          }
+        },
+        "far_all_windows": {
+          "window": {
+            "estimate": 0.6514459665144596,
+            "lo": 0.6089487345879299,
+            "hi": 0.6959794457285131,
+            "numerator": 428.0,
+            "denominator": 657.0,
+            "blocks": 182,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.01765927407397645,
+            "lo": 0.015488954198422764,
+            "hi": 0.02011455803475535,
+            "numerator": 42877.0,
+            "denominator": 2428016.0,
+            "blocks": 182
+          }
+        },
+        "within_season": {
+          "estimate": 0.0652395514780836,
+          "lo": 0.04780674254466574,
+          "hi": 0.08498175581546036,
+          "numerator": 64,
+          "denominator": 981,
+          "source": "f2.json keep_rule.window_far_test"
+        },
+        "fast_path_equals_real_gate_window_map": true,
+        "n_pre": 3,
+        "n_pre_at_tau_calibration": 2,
+        "sigma_f_ratio_calibration_over_production": {
+          "measured_median": 1.0606601717798212,
+          "closed_form": 1.0606601717798212
+        },
+        "sigma_f_note": "recorded, not corrected (F7 precedent): the production score runs hotter than tau was calibrated for when n_pre > 2",
+        "class_counts": {
+          "NO_CHANGE": 2385139,
+          "CORE": 0,
+          "ALLOCATED": 42877,
+          "UNSUPPORTED": 0,
+          "NO_DATA": 2814864
+        },
+        "windows_detected": 428,
+        "power": {
+          "0.15": {
+            "drop": 0.15,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 36,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 35,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 15
+          },
+          "0.3": {
+            "drop": 0.3,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 38,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 33,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 17
+          },
+          "0.5": {
+            "drop": 0.5,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 32,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 18
+          }
+        },
+        "vacuous_zero_power": false,
+        "verdict": "TRUE"
+      }
+    },
+    "secondary_proxy": {
+      "name": "secondary_proxy",
+      "pre_dates": [
+        "2024-01-16",
+        "2024-01-21",
+        "2024-01-26"
+      ],
+      "post_date": "2023-12-27",
+      "n_pre": 3,
+      "valid_px_2p5m": 2404752,
+      "windows_valid": 654,
+      "rule_10m": {
+        "far_test": {
+          "window": {
+            "estimate": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "numerator": 0.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "numerator": 0.0,
+            "denominator": 1205440.0,
+            "blocks": 91
+          }
+        },
+        "far_all_windows": {
+          "window": {
+            "estimate": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "numerator": 0.0,
+            "denominator": 654.0,
+            "blocks": 182,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "numerator": 0.0,
+            "denominator": 2404752.0,
+            "blocks": 182
+          }
+        },
+        "within_season": {
+          "estimate": 0.0056065239551478085,
+          "lo": 0.002006999422753962,
+          "hi": 0.010736333610531435,
+          "numerator": 11,
+          "denominator": 1962,
+          "source": "f1.json gates.rule_10m.test_split.pooled_window_far"
+        },
+        "power": {
+          "0.15": {
+            "drop": 0.15,
+            "recall": {
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0,
+              "numerator": 0.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 0,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 0.0,
+            "denominator_excluding_those": 50
+          },
+          "0.3": {
+            "drop": 0.3,
+            "recall": {
+              "estimate": 0.18,
+              "lo": 0.07407407407407407,
+              "hi": 0.2978723404255319,
+              "numerator": 9.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 9,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 0.18,
+            "denominator_excluding_those": 50
+          },
+          "0.5": {
+            "drop": 0.5,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 40,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 0,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 50
+          }
+        },
+        "vacuous_zero_power": false,
+        "verdict": "INCONCLUSIVE"
+      },
+      "gate_v2": {
+        "status": "ok",
+        "tau": 3.8891176504391876,
+        "lam": 0.0,
+        "endmember_ndvi_low": 0.3,
+        "endmember_counts": {
+          "e_v": 178141,
+          "e_b": 332
+        },
+        "far_test": {
+          "window": {
+            "estimate": 0.3211009174311927,
+            "lo": 0.24924012158054712,
+            "hi": 0.39170154140322705,
+            "numerator": 105.0,
+            "denominator": 327.0,
+            "blocks": 91,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.019683269179718608,
+            "lo": 0.014860069804626116,
+            "hi": 0.02487103876614965,
+            "numerator": 23727.0,
+            "denominator": 1205440.0,
+            "blocks": 91
+          }
+        },
+        "far_all_windows": {
+          "window": {
+            "estimate": 0.3195718654434251,
+            "lo": 0.2729911719664895,
+            "hi": 0.3647280519733727,
+            "numerator": 209.0,
+            "denominator": 654.0,
+            "blocks": 182,
+            "replicates": 2000,
+            "seed": 2024
+          },
+          "pixel": {
+            "estimate": 0.019466040572998795,
+            "lo": 0.016201879486064028,
+            "hi": 0.02280961012096682,
+            "numerator": 46811.0,
+            "denominator": 2404752.0,
+            "blocks": 182
+          }
+        },
+        "within_season": {
+          "estimate": 0.0652395514780836,
+          "lo": 0.04780674254466574,
+          "hi": 0.08498175581546036,
+          "numerator": 64,
+          "denominator": 981,
+          "source": "f2.json keep_rule.window_far_test"
+        },
+        "fast_path_equals_real_gate_window_map": true,
+        "n_pre": 3,
+        "n_pre_at_tau_calibration": 2,
+        "sigma_f_ratio_calibration_over_production": {
+          "measured_median": 1.0606601717798212,
+          "closed_form": 1.0606601717798212
+        },
+        "sigma_f_note": "recorded, not corrected (F7 precedent): the production score runs hotter than tau was calibrated for when n_pre > 2",
+        "class_counts": {
+          "NO_CHANGE": 2357941,
+          "CORE": 0,
+          "ALLOCATED": 46811,
+          "UNSUPPORTED": 0,
+          "NO_DATA": 2838128
+        },
+        "windows_detected": 209,
+        "power": {
+          "0.15": {
+            "drop": 0.15,
+            "recall": {
+              "estimate": 0.98,
+              "lo": 0.9347826086956522,
+              "hi": 1.0,
+              "numerator": 49.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 49,
+            "patches_already_positive_without_injection": 21,
+            "recall_excluding_those": 0.9655172413793104,
+            "denominator_excluding_those": 29
+          },
+          "0.3": {
+            "drop": 0.3,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 37,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 14,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 36
+          },
+          "0.5": {
+            "drop": 0.5,
+            "recall": {
+              "estimate": 1.0,
+              "lo": 1.0,
+              "hi": 1.0,
+              "numerator": 50.0,
+              "denominator": 50.0,
+              "blocks": 40,
+              "replicates": 2000,
+              "ci": 0.95,
+              "seed": 2024
+            },
+            "patches": 50,
+            "flagged": 50,
+            "patches_already_positive_without_injection": 17,
+            "recall_excluding_those": 1.0,
+            "denominator_excluding_those": 33
+          }
+        },
+        "vacuous_zero_power": false,
+        "verdict": "TRUE"
+      }
+    }
+  },
+  "status": "PASS",
+  "verdict": "TRUE",
+  "verdicts_by_comparison_and_gate": {
+    "primary_non_event": {
+      "gate_v2": "TRUE",
+      "rule_10m": "TRUE"
+    },
+    "secondary_proxy": {
+      "gate_v2": "TRUE",
+      "rule_10m": "INCONCLUSIVE"
+    }
+  },
+  "rule_applied": {
+    "gate_v2": {
+      "TRUE": "window FAR >= 0.1304791029561672 (2 x 0.0652395514780836)",
+      "FALSE": "window FAR inside [0.04780674254466574, 0.08498175581546036]",
+      "INCONCLUSIVE": "any other value"
+    },
+    "rule_10m": {
+      "TRUE": "window FAR >= 0.011213047910295617 (2 x 0.0056065239551478085)",
+      "FALSE": "window FAR inside [0.002006999422753962, 0.010736333610531435]",
+      "INCONCLUSIVE": "any other value"
+    },
+    "memo_parenthetical_note": "the memo's '(>= 0.10)' is quoted for provenance only and is not applied"
+  },
+  "preregistration": {
+    "sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+    "commit": "0978e8a924e9b104c50aac2a1db1c00a8d220718",
+    "experiment": "B1"
+  },
+  "verdict_basis": "B1 overall = gate_v2 on primary_non_event, test-split window FAR vs 2 x its own within-season estimate (f2.json); rule_10m is judged against 2 x 0.0056065 (f1.json). The memo's (>= 0.10) is not applied.",
+  "measurements": [
+    {
+      "name": "window_FAR_test_gate_v2_primary_non_event",
+      "estimate": 0.6798780487804879,
+      "numerator": 223.0,
+      "denominator": 328.0,
+      "lo": 0.6230529595015576,
+      "hi": 0.7353933933933934,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows (test split, odd tiles) with >= 1 flagged px",
+      "verdict": "TRUE",
+      "within_season_estimate": 0.0652395514780836,
+      "true_threshold": 0.1304791029561672,
+      "recall_by_drop": {
+        "0.15": 1.0,
+        "0.3": 1.0,
+        "0.5": 1.0
+      },
+      "vacuous": false
+    },
+    {
+      "name": "window_FAR_test_rule_10m_primary_non_event",
+      "estimate": 0.027439024390243903,
+      "numerator": 9.0,
+      "denominator": 328.0,
+      "lo": 0.009145646452665135,
+      "hi": 0.05001865671641781,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows (test split, odd tiles) with >= 1 flagged px",
+      "verdict": "TRUE",
+      "within_season_estimate": 0.0056065239551478085,
+      "true_threshold": 0.011213047910295617,
+      "recall_by_drop": {
+        "0.15": 0.0,
+        "0.3": 0.86,
+        "0.5": 1.0
+      },
+      "vacuous": false
+    },
+    {
+      "name": "window_FAR_test_gate_v2_secondary_proxy",
+      "estimate": 0.3211009174311927,
+      "numerator": 105.0,
+      "denominator": 327.0,
+      "lo": 0.24924012158054712,
+      "hi": 0.39170154140322705,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows (test split, odd tiles) with >= 1 flagged px",
+      "verdict": "TRUE",
+      "within_season_estimate": 0.0652395514780836,
+      "true_threshold": 0.1304791029561672,
+      "recall_by_drop": {
+        "0.15": 0.98,
+        "0.3": 1.0,
+        "0.5": 1.0
+      },
+      "vacuous": false
+    },
+    {
+      "name": "window_FAR_test_rule_10m_secondary_proxy",
+      "estimate": 0.0,
+      "numerator": 0.0,
+      "denominator": 327.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "replicates": 2000,
+      "seed": 2024,
+      "unit": "fraction of valid 160 m windows (test split, odd tiles) with >= 1 flagged px",
+      "verdict": "INCONCLUSIVE",
+      "within_season_estimate": 0.0056065239551478085,
+      "true_threshold": 0.011213047910295617,
+      "recall_by_drop": {
+        "0.15": 0.0,
+        "0.3": 0.18,
+        "0.5": 1.0
+      },
+      "vacuous": false
+    }
+  ],
+  "interpretations": [
+    "Per-gate TRUE threshold = 2 x that gate's committed within-season test window FAR (human decision b1_threshold_reading); FALSE = inside that gate's within-season CI endpoints included; anything else INCONCLUSIVE. The memo's (>= 0.10) is not used.",
+    "Verdict number = window FAR on the TEST split (odd 128 px tiles) with a 2000-rep tile block bootstrap (seed 2024); the all-window FAR is secondary.",
+    "gate_v2 follows F7's deployment path rather than F2's fold path: endmembers estimated from the pre dates only over the whole AOI outside the disks and footprint (F2.endmember_ceiling_table), stable-pixel mask from the pre dates only (NDVI std <= 0.05), F3 per-band median-offset normalisation, tau fixed at f2.json tau.value, lambda 0.",
+    "No SR is used: apply_gate_v2 needs a ranking field, so the pixel-centre-aligned bilinear field of the 10 m NDVI drop is passed; it changes only WHICH sub-pixels inside a flagged block are marked, never the window flags or the FAR (asserted: the fast score > tau & flaggable window map equals the real gate's).",
+    "Both gates score the same valid pixels (SCL validity on every date, union the 1500 m disks and footprint); asserted equal.",
+    "Power: 50 patches (10 x 10 px at 10 m) per drop in distinct valid test-split windows, same seeds and positions for both gates; drops are injected into the post image's B04/B08 (NDVI falls by exactly the drop, B04+B08 preserved); rule_10m is re-evaluated on the injected 10 m NDVI drop, gate_v2 after re-running F3 normalisation and unmixing.",
+    "Patch recall counts patches whose window/pixels the gate flags, including ones already positive without injection; recall excluding those is reported beside it.",
+    "The post date is itself required to pass the x6 clear rule (cloud+shadow <= 10 %, coverage >= 99 %) and the pre dates are the accepted January 2023 dates only; n_pre therefore differs from tau's calibration n_pre = 2 and the sigma_f ratio is recorded, not corrected.",
+    "Duplicate STAC items for one acquisition (original baseline 04.00 and a 2024 reprocessing at 05.10) are mosaicked by the existing read_bands logic: first valid item in id order wins, which is the original; both carry the same -1000 offset."
+  ],
+  "limitations": [
+    "One non-event year (2023), one tile, one crop; the cross-season comparison is a single pair per pre-date set, not an ensemble.",
+    "A December 2023 post image is compared with January 2023 pre dates, so a one-year interval, regrowth and interannual weather are all inside the \"null\".",
+    "tau was calibrated at n_pre = 2 on within-season folds; with more pre dates sigma_f is smaller and the production score runs hotter (recorded).",
+    "The within-season references are the committed f1/f2 estimates; their own sampling error is in their CIs, not folded into the verdict thresholds.",
+    "The primary comparison changes season, year, n_pre (3 vs the calibration 2) and the endmembers (estimated from the January 2023 dates) at once; the secondary proxy keeps F2's own January 2024 endmember configuration (e_b ceiling 0.30, 332 px) and changes season/direction only, so it is the cleaner seasonal read. Its post date precedes its pre dates in time, exactly as the yaml names it.",
+    "The post image is processing baseline 05.10 while the pre dates are 04.00 (originals); both use the same -1000 offset but a baseline-related radiometric difference cannot be excluded and is inside the cross-season gap.",
+    "gate_v2 recall is inflated by windows that were already false alarms (see patches_already_positive_without_injection); recall excluding them is reported and is on a small denominator.",
+    "Bytes: fetch_log.bytes_received is the byte total of the run that fetched the band data (50,852,697 B for 4 band reads plus the audit); an earlier standalone run of the same audit of the same two windows, whose SCL arrays are cached and reused, received a further 1,131,524 B. Total about 51.98 MB against a 300 MB cap."
+  ],
+  "runtime_seconds": 8.7,
+  "experiment": "f13_b1",
+  "started_utc": "2026-10-04T19:20:57.317093+00:00",
+  "finished_utc": "2026-10-04T19:21:06.001521+00:00",
+  "config_sha256": "84beef1cebb14dae451ca0220b301924f817e5dd21f5a6dc308a7a762a68dad7",
+  "config_file": "configs/f13_discovery.yaml",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.15",
+    "numpy": "2.2.6",
+    "torch": "2.8.0",
+    "pinned_torch": null,
+    "torch_matches_pin": true,
+    "cuda_available": false
+  }
+}

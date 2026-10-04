@@ -17,6 +17,7 @@ from experiments import f13_a4_degrade20m as A4
 from experiments import f13_a1_sr_vs_interpolation as A1
 from experiments import f13_a2_calibrated_fraction as A2
 from experiments import f13_b2_inventory_width as B2
+from experiments import f13_b1_cross_season_placebo as B1
 from experiments import f13_common as C
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -784,6 +785,80 @@ class TestA2VerdictRule:
         assert A2.a2_verdict(0.10, {'estimate': 0.01, 'lo': -0.001, 'hi': 0.02}) == 'INCONCLUSIVE'
 
 
+# ================================================================ PASS 3 — B1: cross-season placebo ================================================================
+
+class TestCandidateTable:
+    ROWS = [
+        {'date': '2023-01-05', 'cloud_shadow_pct_aoi': 2.0, 'coverage_pct': 100.0, 'item_ids': ['a']},
+        {'date': '2023-01-10', 'cloud_shadow_pct_aoi': 10.0, 'coverage_pct': 99.0, 'item_ids': ['b']},     # both thresholds exactly met
+        {'date': '2023-01-15', 'cloud_shadow_pct_aoi': 10.01, 'coverage_pct': 100.0, 'item_ids': ['c']},   # just too cloudy
+        {'date': '2023-01-20', 'cloud_shadow_pct_aoi': 1.0, 'coverage_pct': 98.99, 'item_ids': ['d']},     # just too little coverage
+        {'date': '2023-01-20', 'cloud_shadow_pct_aoi': 60.0, 'coverage_pct': 100.0, 'item_ids': ['e']},    # worse duplicate of the same date
+        {'date': '2023-02-03', 'cloud_shadow_pct_aoi': 0.0, 'coverage_pct': 100.0, 'item_ids': ['f']},     # outside the window
+    ]
+
+    def test_uses_the_x6_rule_inclusive_thresholds_and_window(self):
+        t = B1.candidate_table(self.ROWS, '2023-01-01', '2023-01-31', 10, 99)
+        assert [r['date'] for r in t] == ['2023-01-05', '2023-01-10', '2023-01-15', '2023-01-20']
+        assert [r['accepted'] for r in t] == [True, True, False, False]
+
+    def test_every_rejection_names_its_reason_and_every_row_carries_its_numbers(self):
+        t = {r['date']: r for r in B1.candidate_table(self.ROWS, '2023-01-01', '2023-01-31', 10, 99)}
+        assert 'cloud' in t['2023-01-15']['reason'] and '10.01' in t['2023-01-15']['reason']
+        assert 'coverage' in t['2023-01-20']['reason'] and '98.99' in t['2023-01-20']['reason']
+        assert t['2023-01-05']['reason'] is None and t['2023-01-05']['cloud_shadow_pct_aoi'] == 2.0
+
+    def test_uses_the_best_acquisition_of_a_date(self):
+        t = {r['date']: r for r in B1.candidate_table(self.ROWS, '2023-01-01', '2023-01-31', 10, 99)}
+        assert t['2023-01-20']['cloud_shadow_pct_aoi'] == 1.0      # the 60 % duplicate is not what is reported
+
+    def test_the_post_date_goes_through_the_same_rule(self):
+        t = B1.candidate_table([{'date': '2023-12-27', 'cloud_shadow_pct_aoi': 30.0, 'coverage_pct': 100.0, 'item_ids': ['p']}],
+                               '2023-12-27', '2023-12-27', 10, 99)
+        assert t[0]['accepted'] is False
+
+
+class TestB1VerdictRule:
+    """yaml B1.keep_rule per gate: TRUE if FAR >= 2 x that gate's own within-season FAR; FALSE if inside its within-season CI."""
+    GATE = {'estimate': 0.0652395514780836, 'lo': 0.04780674254466574, 'hi': 0.08498175581546036}
+    RULE = {'estimate': 0.0056065239551478085, 'lo': 0.002006999422753962, 'hi': 0.010736333610531435}
+
+    def test_thresholds_are_twice_the_committed_within_season_estimates_not_the_memos_0p10(self):
+        assert B1.true_threshold(self.GATE) == pytest.approx(0.1304791029561672)
+        assert B1.true_threshold(self.RULE) == pytest.approx(0.011213047910295617)
+
+    def test_regions_for_gate_v2(self):
+        assert B1.b1_gate_verdict(0.1304791029561672, self.GATE) == 'TRUE'          # at the threshold counts
+        assert B1.b1_gate_verdict(0.13, self.GATE) == 'INCONCLUSIVE'                # the memo's 0.10 / just below 2x is not TRUE
+        assert B1.b1_gate_verdict(0.10, self.GATE) == 'INCONCLUSIVE'
+        assert B1.b1_gate_verdict(0.0652, self.GATE) == 'FALSE'
+        assert B1.b1_gate_verdict(0.0478067425, self.GATE) == 'INCONCLUSIVE'        # just below the CI
+        assert B1.b1_gate_verdict(0.04780674254466574, self.GATE) == 'FALSE'        # CI endpoints are inside
+        assert B1.b1_gate_verdict(0.08498175581546036, self.GATE) == 'FALSE'
+        assert B1.b1_gate_verdict(0.0851, self.GATE) == 'INCONCLUSIVE'
+
+    def test_regions_for_rule_10m(self):
+        assert B1.b1_gate_verdict(0.0113, self.RULE) == 'TRUE'
+        assert B1.b1_gate_verdict(0.0108, self.RULE) == 'INCONCLUSIVE'
+        assert B1.b1_gate_verdict(0.0056, self.RULE) == 'FALSE'
+        assert B1.b1_gate_verdict(0.0, self.RULE) == 'INCONCLUSIVE'
+
+    def test_overall_verdict_is_gate_v2_on_the_primary_comparison(self):
+        per = {'primary_non_event': {'gate_v2': 'FALSE', 'rule_10m': 'TRUE'}, 'secondary_proxy': {'gate_v2': 'TRUE', 'rule_10m': 'TRUE'}}
+        assert B1.b1_overall(per) == 'FALSE'
+
+
+class TestSigmaRatioAndZeroPower:
+    def test_sigma_f_ratio_matches_the_closed_form(self):
+        # sigma_f = sqrt(Var(a) (1/n_pre + 1)) -> sigma_f(2) / sigma_f(n) = sqrt(1.5 / (1/n + 1))
+        assert B1.sigma_f_ratio_closed_form(2) == pytest.approx(1.0)
+        assert B1.sigma_f_ratio_closed_form(3) == pytest.approx(1.0606601717798212)   # F7's measured ratio
+
+    def test_zero_power_rule(self):
+        assert B1.is_vacuous({'0.15': 0.2, '0.3': 0.1, '0.5': 0.0}) is True
+        assert B1.is_vacuous({'0.15': 0.0, '0.3': 0.0, '0.5': 0.01}) is False
+
+
 # ================================================================ PASS 3 — B2: inventory width share ================================================================
 
 def _gpkg_blob(geom, srs_id=4326, envelope=False):
@@ -971,8 +1046,6 @@ class TestB2VerdictRule:
         assert B2.b2_verdict(0.0999, 0.85) == 'FALSE'
         assert B2.b2_verdict(0.10, 0.9) == 'INCONCLUSIVE'
         assert B2.b2_verdict(0.05, 0.8499) == 'INCONCLUSIVE'
-
-
 
 
 class TestB2AnalyseEndToEnd:
