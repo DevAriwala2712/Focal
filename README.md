@@ -1,8 +1,6 @@
-<p align="center">
-  <img src="docs/assets/logo.svg" alt="TrustSR logo" width="112">
-</p>
-
-<h1 align="center">TrustSR</h1>
+<h1 align="center">
+  <img src="docs/assets/logo.svg" alt="" height="52" align="center">&nbsp;TrustSR
+</h1>
 
 <p align="center">
   <b>Sentinel-2 super-resolution (10 m → 2.5 m, ×4) with a trust gate for landslide change detection.</b><br>

@@ -1,23 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="t">
-  <title id="t">TrustSR mark: one 10 m pixel split into 4×4 sub-pixels inside a shield</title>
-  <style>
-    .shield { fill: #10233f; }
-    .cell { fill: #e8eef7; }
-    .line { stroke: #10233f; }
-    @media (prefers-color-scheme: dark) {
-      .shield { fill: #f0efec; }
-      .cell { fill: #1f3a5f; }
-      .line { stroke: #f0efec; }
-    }
-  </style>
-  <path class="shield" d="M64 6 L114 21 V60 C114 92 92 113 64 123 C36 113 14 92 14 60 V21 Z"/>
-  <g transform="translate(32 30)">
-    <rect class="cell" width="64" height="64" rx="5"/>
-    <rect x="16" y="16" width="32" height="16" fill="#e34948"/>
-    <rect x="32" y="32" width="16" height="16" fill="#e34948"/>
-    <rect x="16" y="32" width="16" height="16" fill="#eda100"/>
-    <rect x="48" y="32" width="16" height="16" fill="#eda100"/>
-    <rect x="32" y="48" width="16" height="16" fill="#eda100"/>
-    <path class="line" d="M16 0V64M32 0V64M48 0V64M0 16H64M0 32H64M0 48H64" stroke-width="1.6" opacity="0.5" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t">
+  <title id="t">TrustSR mark: 4x4 sub-pixels of one 10 m pixel; red observed, amber inferred, hollow unsupported</title>
+  <style>.d{fill:#10233f}.o{stroke:#10233f}@media (prefers-color-scheme:dark){.d{fill:#e8eef7}.o{stroke:#e8eef7}}</style>
+  <rect class="o" x="10" y="10" width="108" height="108" rx="18" fill="none" stroke-width="5"/>
+  <g class="d">
+    <circle cx="34" cy="34" r="7"/><circle cx="54" cy="34" r="7"/><circle cx="74" cy="34" r="7"/><circle cx="94" cy="34" r="7"/>
+    <circle cx="34" cy="54" r="7"/><circle cx="94" cy="54" r="7"/>
+    <circle cx="34" cy="74" r="7"/><circle cx="94" cy="74" r="7"/>
+    <circle cx="34" cy="94" r="7"/><circle cx="54" cy="94" r="7"/><circle cx="94" cy="94" r="7"/>
   </g>
+  <circle cx="54" cy="54" r="7" fill="#e34948"/><circle cx="74" cy="54" r="7" fill="#e34948"/><circle cx="74" cy="74" r="7" fill="#e34948"/>
+  <circle cx="54" cy="74" r="7" fill="#eda100"/>
+  <circle class="o" cx="74" cy="94" r="5.5" fill="none" stroke-width="2.5"/>
 </svg>
