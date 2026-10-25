@@ -7,14 +7,16 @@
   Every reported change is labelled <i>observed</i> or <i>model-inferred</i>, because an invented edge looks like damage.
 </p>
 
+<!-- badges:start -->
 <p align="center">
-  <img alt="Phase 0" src="https://img.shields.io/badge/Phase%200-3%20of%205%20pass-orange">
-  <img alt="Experiments" src="https://img.shields.io/badge/experiments%20F1–F7-4%20of%206%20pass-orange">
-  <img alt="Phase 1" src="https://img.shields.io/badge/Phase%201%20pipeline-not%20started-lightgrey">
-  <img alt="Demo" src="https://img.shields.io/badge/demo-not%20built-lightgrey">
-  <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-blue">
-  <img alt="Event" src="https://img.shields.io/badge/showcase-Wayanad%2030%20Jul%202024-red">
+  <a href="RISK_REPORT.md"><img alt="Phase 0: 3 of 5 pass" src="https://img.shields.io/badge/Phase%200-3%20of%205%20pass-orange"></a>
+  <a href="RESULTS_V2.md"><img alt="experiments F1–F7: 4 of 6 pass" src="https://img.shields.io/badge/experiments%20F1%E2%80%93F7-4%20of%206%20pass-orange"></a>
+  <a href="trustsr/"><img alt="Phase 1 modules: not started" src="https://img.shields.io/badge/Phase%201%20modules-not%20started-lightgrey"></a>
+  <a href="demo/"><img alt="demo: not built" src="https://img.shields.io/badge/demo-not%20built-lightgrey"></a>
+  <a href="requirements-phase0.txt"><img alt="python: 3.10+" src="https://img.shields.io/badge/python-3.10%2B-blue"></a>
+  <a href="risk/results/r2.json"><img alt="showcase: Wayanad 30 Jul 2024" src="https://img.shields.io/badge/showcase-Wayanad%2030%20Jul%202024-red"></a>
 </p>
+<!-- badges:end -->
 
 <p align="center">
   <img src="docs/media/wayanad_hero.png" alt="Wayanad landslide: 10 m before, 10 m after, 2.5 m super-resolved after, and trust-gate classes with observed change in red">
@@ -125,7 +127,7 @@ Design detail: [docs/TRUSTSR_ARCHITECTURE.md](docs/TRUSTSR_ARCHITECTURE.md).
 | `experiments/` | Experiment runners (E1–E8, F1–F11) and `experiments/results/` (JSON and reports). `INVALIDATED.md` lists quarantined runs |
 | `configs/` | Pre-registered YAML configs. Every threshold lives here |
 | `tests/` | CPU pytest suite |
-| `scripts/` | CLI entry points: `make_figures.py`, `make_hero.py`, `capture_screenshots.py` |
+| `scripts/` | CLI entry points: `make_figures.py`, `make_hero.py`, `update_badges.py`, `capture_screenshots.py` |
 | `demo/` | Demo asset exporter. The Streamlit app is not built yet |
 | `pitch/` | Claims registry generated from result JSONs, for the jury deck |
 | `notebooks/` | Colab fine-tuning notebook |
