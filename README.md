@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/assets/logo.svg" alt="" height="52" align="center">&nbsp;TrustSR
+  <img src="docs/assets/trustsr-mark.svg" alt="" height="40" align="absmiddle"> TrustSR
 </h1>
 
 <p align="center">
