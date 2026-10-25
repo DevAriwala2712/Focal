@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" alt="TrustSR" width="460">
+  <img src="docs/assets/logo.svg" alt="TrustSR logo" width="112">
 </p>
+
+<h1 align="center">TrustSR</h1>
 
 <p align="center">
   <b>Sentinel-2 super-resolution (10 m → 2.5 m, ×4) with a trust gate for landslide change detection.</b><br>
@@ -14,6 +16,11 @@
   <img alt="Demo" src="https://img.shields.io/badge/demo-not%20built-lightgrey">
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-blue">
   <img alt="Event" src="https://img.shields.io/badge/showcase-Wayanad%2030%20Jul%202024-red">
+</p>
+
+<p align="center">
+  <img src="docs/media/wayanad_hero.png" alt="Wayanad landslide: 10 m before, 10 m after, 2.5 m super-resolved after, and trust-gate classes with observed change in red">
+  <br><sub>Wayanad, real Sentinel-2 data: before (mean of three Jan 2024 dates) → after (6 Dec 2024) → 2.5 m SR → trust gate. Pretrained SEN2SR-lite, k = 2.0 not yet calibrated. <a href="#media">More media ↓</a></sub>
 </p>
 
 ---
@@ -79,6 +86,19 @@ model's training data.
 > ⚠ This map comes from gate v2, which **failed** its false-alarm rule, and from *pretrained* (not fine-tuned)
 > SEN2SR-lite. It shows what this configuration produces, not a validated damage map.
 
+## Media
+
+| | |
+|---|---|
+| **Wayanad evidence board** (full resolution, 4 panels with legends)<br>[`experiments/wayanad_evidence/outputs/figure.png`](experiments/wayanad_evidence/outputs/figure.png) | **Gate v2 close-up** (SR NDVI drop, 10 m parent, 2.5 m classes)<br>[`experiments/results/f7_wow_figure.png`](experiments/results/f7_wow_figure.png) |
+| <img src="experiments/wayanad_evidence/outputs/figure.png" width="420" alt="Wayanad evidence board"> | <img src="experiments/results/f7_wow_figure.png" width="420" alt="Gate v2 close-up"> |
+
+**Web demo screenshots.** The eight-screen web demo is on the `experiments/f13-discovery` branch (`demo/web/`). To
+capture screenshots, run the demo, then run `python scripts/capture_screenshots.py`. They land in
+`docs/media/screenshots/`. Add them here with `<img src="docs/media/screenshots/demo.png">`.
+
+Regenerate all media with `python scripts/make_figures.py && python scripts/make_hero.py`.
+
 ## How it works
 
 ```
@@ -107,11 +127,11 @@ Design detail: [docs/TRUSTSR_ARCHITECTURE.md](docs/TRUSTSR_ARCHITECTURE.md).
 | `experiments/` | Experiment runners (E1–E8, F1–F11) and `experiments/results/` (JSON and reports). `INVALIDATED.md` lists quarantined runs |
 | `configs/` | Pre-registered YAML configs. Every threshold lives here |
 | `tests/` | CPU pytest suite |
-| `scripts/` | CLI entry points (`make_figures.py`) |
+| `scripts/` | CLI entry points: `make_figures.py`, `make_hero.py`, `capture_screenshots.py` |
 | `demo/` | Demo asset exporter. The Streamlit app is not built yet |
 | `pitch/` | Claims registry generated from result JSONs, for the jury deck |
 | `notebooks/` | Colab fine-tuning notebook |
-| `docs/` | Design, ADRs, sources, plans, figures (`docs/assets/`), superseded material (`docs/archive/`) |
+| `docs/` | Design, ADRs, sources, plans, logo and charts (`docs/assets/`), images and screenshots (`docs/media/`), superseded material (`docs/archive/`) |
 
 ## Quick start (Phase 0)
 
