@@ -1,7 +1,7 @@
 # TrustSR architecture and decision record (playbook pass 2)
 
 Status: **Proposed**, 2026-09-29. Deciders: the team (human sign-off required on ADR-001 and ADR-002, which touch AGENTS.md).
-Authority order is unchanged: [AGENTS.md](../../AGENTS.md) and the [NTRO statement](../problem_statement.md) define the task; [RISK_REPORT.md](../../RISK_REPORT.md) holds measured results; [playbook_strategy.md](../playbook_strategy.md) is the first playbook pass. This document adds new external research, one new synthetic probe, and five decisions. Nothing here is a measured pass for R1–R5, and no Phase 1 module is claimed.
+Authority order is unchanged: [AGENTS.md](../AGENTS.md) and the [NTRO statement](problem_statement.md) define the task; [RISK_REPORT.md](../RISK_REPORT.md) holds measured results; [playbook_strategy.md](playbook_strategy.md) is the first playbook pass. This document adds new external research, one new synthetic probe, and five decisions. Nothing here is a measured pass for R1–R5, and no Phase 1 module is claimed.
 
 ## 1. What changed since the first playbook pass
 
@@ -12,7 +12,7 @@ Authority order is unchanged: [AGENTS.md](../../AGENTS.md) and the [NTRO stateme
 | At least five public repositories target SIH26142. They build: Swin2SR/BSRGAN or EDSR, MC-dropout uncertainty, FastAPI + React/Three.js dashboards, multi-model PSNR benchmarks; one reads "SRM" as sub-pixel land-cover mapping. | Repositories above plus [DEEPSRM-SIH26142](https://github.com/sanjai-k-oss/DEEPSRM-SIH26142), [sih-satellite](https://github.com/tWiLighT-xY91/sih-satellite), [rohithkumar505](https://github.com/rohithkumar505/SIH26142-Deep-Learning-Based-Super-Resolution-Mapping-SRM). | This is playbook p.13's "what will everyone else build". Nobody found so far gates a downstream decision on the original 10 m signal. The wedge holds; the dashboard is not a differentiator. |
 | Theory now backs the trust gate. For decoders whose output is consistent with the low-resolution input, a hallucinated detail must be almost invisible in the measurement; whether a building is intact or damaged can be undecidable from Sentinel-2 alone. | Iagaru, Gottschling, Garnier, Hansen, [arXiv 2605.13146](https://arxiv.org/abs/2605.13146) (May 2026), Prop. 3.1 and §5.4 (Sentinel-2 ×4 experiments). | SEN2SR's Fourier hard constraint enforces low-frequency consistency. So a change that does not show at 10 m lies in the region where any consistent model may invent or erase it. The parent-pixel rule is the right test, not an ad-hoc heuristic. See ADR-003. |
 | NRSC (ISRO) reported the Wayanad main scarp at about **86,000 m²** and a debris flow of about **8 km** along the Mundakkai river; post-event mapping used RISAT SAR the day after. | NRSC statements reported by [India TV](https://www.indiatvnews.com/news/india/wayanad-landslides-isro-releases-picture-of-86-000-square-meters-land-devastation-2024-08-02-944846) and [Asianet](https://newsable.asianetnews.com/india/wayanad-landslides-isro-s-satellite-image-show-extent-of-damage-crown-of-1550m-debris-travelled-8km-along-snt-shkvt4). | 86,000 m² = **860** Sentinel-2 10 m pixels = **13,760** pixels at 2.5 m. A scale sanity check for the Wayanad view, not ground truth (scarp ≠ vegetation-loss footprint). ISRO itself used radar because optical was clouded: that is the honest "why optical is late" line. |
-| R2's own data shows partly clear post-event dates well before 6 December. | [r2_acquisitions.json](../../risk/results/r2_acquisitions.json): AOI cloud+shadow 76.4% (13 Aug), **57.5% (18 Aug)**, 85.4% (23 Aug), 76.5% (2 Sep), **43.4% (12 Sep)**, 43.7% (27 Oct). | The 129-day gap comes from an AOI-level 10% rule. TrustSR already classifies cloud per pixel as NO_DATA, so the right question is whether the *scar* was clear, not the whole 10 km square. See ADR-002. |
+| R2's own data shows partly clear post-event dates well before 6 December. | [r2_acquisitions.json](../risk/results/r2_acquisitions.json): AOI cloud+shadow 76.4% (13 Aug), **57.5% (18 Aug)**, 85.4% (23 Aug), 76.5% (2 Sep), **43.4% (12 Sep)**, 43.7% (27 Oct). | The 129-day gap comes from an AOI-level 10% rule. TrustSR already classifies cloud per pixel as NO_DATA, so the right question is whether the *scar* was clear, not the whole 10 km square. See ADR-002. |
 
 ## 2. Playbook questions, answered with evidence
 
@@ -45,7 +45,7 @@ flowchart LR
   D --> V[offline demo viewer<br/>optional one-tile live run]
 ```
 
-The module contracts in [project_blueprint.md](../project_blueprint.md) stand. This document changes four things: the tiler geometry (ADR-001), how dates are selected (ADR-002), one added diagnostic (ADR-003), and the delivery shape at the finale (ADR-004).
+The module contracts in [project_blueprint.md](project_blueprint.md) stand. This document changes four things: the tiler geometry (ADR-001), how dates are selected (ADR-002), one added diagnostic (ADR-003), and the delivery shape at the finale (ADR-004).
 
 Compute budget from measured latency. R1 measured 0.1208 s per native tile on the RTX 4050. A 1000 × 1000 px (10 × 10 km) AOI at stride 96 needs 11 × 11 = 121 tiles; eight dihedral runs make 968 forward passes, about **2 minutes per date**. Thirteen dates (12 pre + 1 post) take about **25 minutes** of GPU time, excluding I/O and blending. This is an estimate from a synthetic-input benchmark, not a measured end-to-end run. It says the full ensemble is feasible offline, and that the finale live run should be one tile or a parent-first subset.
 
@@ -58,7 +58,7 @@ Compute budget from measured latency. R1 measured 0.1208 s per native tile on th
 ### Context
 The pinned `HardConstraint` multiplies by a stored 512 × 512 frequency mask, so only 128 px inputs work (R1: 64 and 512 fail). AGENTS.md requires halving the tile on CUDA OOM down to 64 px. R1 measured **128 MiB reserved** at 128 px, batch 1: 3.1% of the 4 GiB budget. Upstream source ([tricks.py](https://github.com/ESAOpenSR/SEN2SR/blob/8e21bb669bcc6e8eb953a1fb24dfc5bb59dc18a4/sen2sr/models/tricks.py)) shows how such masks are built: one of four families (ideal, Butterworth, Gaussian, sigmoid) with radius `min(h/2, w/2) // scale`, which is 64 for a 512 output. The loaded mask's family has not been identified; HF downloads were blocked in this session.
 
-The constraint is a global FFT on each tile, so it treats the tile as periodic. The synthetic probe [experiments/probes/fft_edge_probe.py](../../experiments/probes/fft_edge_probe.py) re-implements that math in NumPy and compares two tile grids offset by half a tile (synthetic scene, not the pinned weights):
+The constraint is a global FFT on each tile, so it treats the tile as periodic. The synthetic probe [experiments/probes/fft_edge_probe.py](../experiments/probes/fft_edge_probe.py) re-implements that math in NumPy and compares two tile grids offset by half a tile (synthetic scene, not the pinned weights):
 
 | Distance from tile edge (2.5 m px) | Ideal mask, p99 \|Δ\| between grids | Gaussian mask, p99 \|Δ\| |
 | --- | --- | --- |
@@ -167,7 +167,7 @@ Covers a likely jury question in one slide. No new model.
 ## 4. Evaluation contract additions
 
 - Report the Wayanad OBSERVED and OBSERVED∪INFERRED areas next to the NRSC 86,000 m² scarp and 8 km flow length, as a **scale check**. State that the definitions differ and that the NRSC figure is not a TrustSR label.
-- Keep the two honest baselines from [landscape.md](../landscape.md): 10 m change rule and bicubic 2.5 m. Add "ungated 2.5 m SR" so UNSUPPORTED suppression is visible as a number.
+- Keep the two honest baselines from [landscape.md](landscape.md): 10 m change rule and bicubic 2.5 m. Add "ungated 2.5 m SR" so UNSUPPORTED suppression is visible as a number.
 - For the seam test (E2), set tolerances from the E1 mask-family result, not before it.
 
 ## 5. Work order by risk (playbook p.16)
@@ -180,7 +180,7 @@ Covers a likely jury question in one slide. No new model.
 | 4 | No labels to calibrate k | Inspect GLaD4CD members, licence, mask meaning | ~2 GB download | honest F1 |
 | 5 | Memory claim | E4 allocator-capped full-AOI run | Local GPU | 4 GiB statement |
 
-Then Phase 1 increments as in the blueprint. Experiments E1–E8 are specified in the project's six-laws prompt; E9 and the E1 step 0 are added in [agent brief addendum](../agent_briefs/six_laws_addendum.md).
+Then Phase 1 increments as in the blueprint. Experiments E1–E8 are specified in the project's six-laws prompt; E9 and the E1 step 0 are added in [agent brief addendum](six_laws_addendum.md).
 
 ## 6. Open questions for the team
 

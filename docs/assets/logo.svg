@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+  <title id="t">TrustSR mark: one 10 m pixel split into 4×4 sub-pixels inside a shield</title>
+  <style>
+    .shield { fill: #10233f; }
+    .cell { fill: #e8eef7; }
+    .line { stroke: #10233f; }
+    @media (prefers-color-scheme: dark) {
+      .shield { fill: #f0efec; }
+      .cell { fill: #1f3a5f; }
+      .line { stroke: #f0efec; }
+    }
+  </style>
+  <path class="shield" d="M64 6 L114 21 V60 C114 92 92 113 64 123 C36 113 14 92 14 60 V21 Z"/>
+  <g transform="translate(32 30)">
+    <rect class="cell" width="64" height="64" rx="5"/>
+    <rect x="16" y="16" width="32" height="16" fill="#e34948"/>
+    <rect x="32" y="32" width="16" height="16" fill="#e34948"/>
+    <rect x="16" y="32" width="16" height="16" fill="#eda100"/>
+    <rect x="48" y="32" width="16" height="16" fill="#eda100"/>
+    <rect x="32" y="48" width="16" height="16" fill="#eda100"/>
+    <path class="line" d="M16 0V64M32 0V64M48 0V64M0 16H64M0 32H64M0 48H64" stroke-width="1.6" opacity="0.5" fill="none"/>
+  </g>
+</svg>
