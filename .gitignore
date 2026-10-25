@@ -19,3 +19,6 @@ experiments/wayanad_evidence/outputs/sr_*.tif
 experiments/wayanad_evidence/outputs/*.tif.aux.xml
 experiments/wayanad_evidence/outputs/parent_drop.tif
 experiments/wayanad_evidence/outputs/ndvi_*_2p5m.tif
+
+# macOS
+.DS_Store

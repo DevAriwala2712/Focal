@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="140" viewBox="0 0 520 140" role="img" aria-labelledby="t d">
+  <title id="t">TrustSR</title>
+  <desc id="d">A shield holding one 10 m pixel split into a 4×4 grid of 2.5 m pixels; observed change in red, model-inferred change in amber.</desc>
+  <style>
+    .ink { fill: #10233f; }
+    .sub { fill: #52514e; }
+    .shield { fill: #10233f; }
+    .cell { fill: #e8eef7; }
+    .grid { stroke: #10233f; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #f0efec; }
+      .sub { fill: #c3c2b7; }
+      .shield { fill: #f0efec; }
+      .cell { fill: #1f3a5f; }
+      .grid { stroke: #f0efec; }
+    }
+  </style>
+  <!-- shield -->
+  <path class="shield" d="M70 10 L122 26 V66 C122 98 99 120 70 131 C41 120 18 98 18 66 V26 Z"/>
+  <!-- one 10 m parent pixel, subdivided 4x4 into 2.5 m pixels -->
+  <g transform="translate(38 36)">
+    <rect class="cell" x="0" y="0" width="64" height="64" rx="4"/>
+    <!-- observed (red) and inferred (amber) sub-pixels -->
+    <rect x="16" y="16" width="16" height="16" fill="#e34948"/>
+    <rect x="32" y="16" width="16" height="16" fill="#e34948"/>
+    <rect x="32" y="32" width="16" height="16" fill="#e34948"/>
+    <rect x="48" y="32" width="16" height="16" fill="#eda100"/>
+    <rect x="16" y="32" width="16" height="16" fill="#eda100"/>
+    <rect x="32" y="48" width="16" height="16" fill="#eda100"/>
+    <g class="grid" stroke-width="1.6" fill="none" opacity="0.55">
+      <path d="M16 0V64M32 0V64M48 0V64M0 16H64M0 32H64M0 48H64"/>
+    </g>
+    <rect x="0" y="0" width="64" height="64" rx="4" fill="none" class="grid" stroke-width="3"/>
+  </g>
+  <!-- wordmark -->
+  <text x="148" y="82" class="ink" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="-1.5">Trust<tspan fill="#2a78d6">SR</tspan></text>
+  <text x="151" y="113" class="sub" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="500" letter-spacing="0.4">Super-resolution you can audit · 10 m → 2.5 m</text>
+</svg>

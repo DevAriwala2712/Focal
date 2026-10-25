@@ -17,7 +17,7 @@ Checked 2026-09-26. “Accessible” means the page/source was retrieved, not th
 
 ## NTRO and project brief
 
-- [Full local problem statement](problem_statement.md): exact copy of ../problem_statement.md supplied in the workspace. Official SIH problem ID and canonical statement URL are not yet supplied/verified; do not claim independent authentication.
+- [Full local problem statement](problem_statement.md): exact copy of the problem statement originally supplied at the repository root. Official SIH problem ID and canonical statement URL are not yet supplied/verified; do not claim independent authentication.
 - [Brief's video](https://www.youtube.com/watch?v=cQoHSStTEdM) and [brief's data browser](https://browser.dataspace.copernicus.eu): preserved from the supplied statement; video contents were not reviewed.
 - [Project instructions](../AGENTS.md): scope, AOI centre, phase gate and tests. Hardware description updated to the measured RTX 4050; 4 GB compatibility requirement retained.
 
